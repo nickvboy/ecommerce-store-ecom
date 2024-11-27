@@ -153,13 +153,27 @@ function ProductDetail() {
             
             {/* Reviews */}
             <div className="flex items-center space-x-2 mb-4">
-              <div className="flex">
+              <div className="flex relative">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <StarIcon 
                     key={star}
-                    className={`h-5 w-5 ${star <= 4 ? 'text-primary-100' : 'text-bg-300'}`}
+                    className={`h-5 w-5 ${star <= 4 
+                      ? 'fill-transparent' 
+                      : 'text-bg-300'}`}
+                    style={star <= 4 ? {
+                      fill: 'url(#star-gradient)'
+                    } : {}}
                   />
                 ))}
+                {/* Define the gradient */}
+                <svg width="0" height="0" className="absolute">
+                  <defs>
+                    <linearGradient id="star-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="#ff983f" /> {/* primary-200 */}
+                      <stop offset="100%" stopColor="#f1690e" /> {/* primary-100 */}
+                    </linearGradient>
+                  </defs>
+                </svg>
               </div>
               <span className="text-text-200">730 reviews</span>
             </div>
@@ -199,25 +213,39 @@ function ProductDetail() {
             </div>
 
             {/* Quantity and Add to Cart */}
-            <div className="flex items-center space-x-4 mb-8">
-              <div className="flex items-center bg-[#1A1A1A] border border-text-100">
-                <button 
-                  onClick={() => handleQuantityChange(-1)}
-                  className="px-4 py-2 text-text-100 hover:text-primary-100 font-bold"
-                >
-                  -
-                </button>
-                <span className="px-4 py-2 text-text-100 border-l border-r border-text-100">
-                  {quantity}
-                </span>
-                <button 
-                  onClick={() => handleQuantityChange(1)}
-                  className="px-4 py-2 text-text-100 hover:text-primary-100 font-bold"
-                >
-                  +
-                </button>
+            <div className="flex items-end justify-between mb-8">
+              <div className="flex flex-col">
+                <span className="text-sm font-medium mb-2 text-center">QUANTITY</span>
+                <div className="flex items-center bg-[#1A1A1A] border border-text-100 rounded-lg overflow-hidden">
+                  <button 
+                    onClick={() => handleQuantityChange(-1)}
+                    className="px-4 py-2 text-text-100 hover:text-primary-100 font-bold"
+                  >
+                    -
+                  </button>
+                  <span className="px-4 py-2 text-text-100 border-l border-r border-text-100">
+                    {quantity}
+                  </span>
+                  <button 
+                    onClick={() => handleQuantityChange(1)}
+                    className="px-4 py-2 text-text-100 hover:text-primary-100 font-bold"
+                  >
+                    +
+                  </button>
+                </div>
               </div>
-              <Button className="px-8 bg-gradient-to-r from-primary-100 to-primary-200 hover:from-primary-200 hover:to-primary-100 text-white py-2">
+              
+              <Button 
+                className="px-12 bg-gradient-to-r from-primary-100 to-primary-200 
+                  hover:from-primary-200 hover:to-primary-100 text-white py-2 rounded-lg
+                  transform transition-all duration-200 ease-in-out
+                  hover:scale-105 hover:shadow-lg hover:shadow-primary-100/50
+                  active:scale-95 relative
+                  after:absolute after:inset-0 after:rounded-lg
+                  after:shadow-[0_0_15px_3px] after:shadow-primary-100/30
+                  after:transition-opacity after:duration-200
+                  after:opacity-0 hover:after:opacity-100"
+              >
                 ADD TO CART
               </Button>
             </div>
