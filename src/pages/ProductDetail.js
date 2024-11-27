@@ -222,11 +222,14 @@ function ProductDetail() {
                 )}
               </div>
 
-              {/* Add Size Selector here */}
-              <SizeSelector 
-                selectedSize={selectedSize}
-                onSizeChange={setSelectedSize}
-              />
+              {/* Only render SizeSelector if product has sizes */}
+              {product.sizes && product.sizes.length > 0 && (
+                <SizeSelector 
+                  selectedSize={selectedSize}
+                  onSizeChange={setSelectedSize}
+                  availableSizes={product.sizes}  // Pass available sizes from product
+                />
+              )}
 
               {/* Material Selection */}
               <div className="mb-6">

@@ -58,11 +58,30 @@ exports.getProductById = async (req, res) => {
 // Create new product
 exports.createProduct = async (req, res) => {
   try {
-    const product = new Product(req.body);
+    const {
+      name,
+      description,
+      price,
+      originalPrice,
+      category,
+      stock,
+      sizes
+    } = req.body;
+
+    const product = new Product({
+      name,
+      description,
+      price,
+      originalPrice,
+      category,
+      stock,
+      sizes: sizes || []
+    });
+
     const savedProduct = await product.save();
     res.status(201).json(savedProduct);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 

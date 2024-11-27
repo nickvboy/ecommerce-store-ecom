@@ -88,7 +88,7 @@ class ProductDashboard:
         logging.debug('Creating treeview columns')
         self.tree = ttk.Treeview(main_frame, columns=(
             "id", "name", "category", "price", "original_price", 
-            "stock", "rating", "reviews"
+            "stock", "sizes", "rating", "reviews"
         ), show="headings")
         
         # Define column headings and widths
@@ -99,6 +99,7 @@ class ProductDashboard:
             "price": {"text": "Price", "width": 100},
             "original_price": {"text": "Original Price", "width": 100},
             "stock": {"text": "Stock", "width": 80},
+            "sizes": {"text": "Sizes", "width": 100},
             "rating": {"text": "Rating", "width": 100},
             "reviews": {"text": "Reviews", "width": 80}
         }
@@ -352,6 +353,7 @@ class ProductDashboard:
                     f"${product['price']:.2f}",
                     f"${product['originalPrice']:.2f}" if product.get('originalPrice') else "-",
                     product['stock'],
+                    ", ".join(product.get('sizes', [])) or "-",
                     f"{rating_display} ({rating:.1f})",
                     product.get('reviewStats', {}).get('totalReviews', 0)
                 ))
@@ -407,6 +409,52 @@ class ProductDashboard:
             categories = ["EDC Gear", "Tools", "Pens", "Accessories", "Bundles", "Other"]
             fields['category'] = ttk.Combobox(category_frame, values=categories, state="readonly")
             fields['category'].pack(side=tk.LEFT, expand=True, fill=tk.X, padx=(10, 0))
+            
+            # Has Sizes checkbox
+            has_sizes_frame = ttk.Frame(info_frame)
+            has_sizes_frame.pack(fill=tk.X, pady=5)
+            ttk.Label(has_sizes_frame, text="Has Sizes", width=15).pack(side=tk.LEFT)
+            has_sizes_var = tk.BooleanVar(value=False)
+            ttk.Checkbutton(
+                has_sizes_frame,
+                variable=has_sizes_var,
+                command=lambda: toggle_size_frame(has_sizes_var.get())
+            ).pack(side=tk.LEFT, padx=(10, 0))
+            
+            # Size Selection frame (for clothing/wearable items)
+            size_frame = ttk.Frame(info_frame)
+            
+            def toggle_size_frame(show):
+                """Toggle visibility of size selection frame"""
+                if show:
+                    size_frame.pack(fill=tk.X, pady=5)
+                else:
+                    size_frame.pack_forget()
+            
+            # Initially hide size frame
+            toggle_size_frame(False)
+            
+            ttk.Label(size_frame, text="Sizes", width=15).pack(side=tk.LEFT)
+            
+            # Create a frame for the checkboxes
+            sizes_checkbox_frame = ttk.Frame(size_frame)
+            sizes_checkbox_frame.pack(side=tk.LEFT, fill=tk.X, padx=(10, 0))
+            
+            # Available sizes
+            available_sizes = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL']
+            size_vars = {}
+            
+            # Create checkboxes for each size
+            for i, size in enumerate(available_sizes):
+                var = tk.BooleanVar()
+                size_vars[size] = var
+                ttk.Checkbutton(
+                    sizes_checkbox_frame,
+                    text=size,
+                    variable=var
+                ).grid(row=0, column=i, padx=5)
+            
+            fields['sizes'] = size_vars  # Add to fields dictionary
             
             # Description field
             description_frame = ttk.Frame(info_frame)
@@ -498,6 +546,10 @@ class ProductDashboard:
                         'price': float(fields['price'].get()),
                         'stock': int(fields['stock'].get())
                     }
+                    
+                    # Only include sizes if enabled
+                    if has_sizes_var.get():
+                        data['sizes'] = [size for size, var in fields['sizes'].items() if var.get()]
                     
                     # Add optional original price if provided
                     if fields['originalPrice'].get().strip():
