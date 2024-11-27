@@ -7,7 +7,7 @@ const { faker } = require('@faker-js/faker');
 const connectDB = require('../config/db');
 
 // Define the generateReviews function before using it
-const generateReviews = (count = 5) => {
+const generateReviews = (count = 60) => {
   const reviews = [];
   const ratingWeights = {
     5: 0.4,
@@ -16,6 +16,46 @@ const generateReviews = (count = 5) => {
     2: 0.07,
     1: 0.03
   };
+
+  const reviewTemplates = [
+    "Absolutely {adjective}! {feature} is {quality}.",
+    "The {feature} is {quality}. {conclusion}",
+    "{timeOwned} and {experience}.",
+    "Purchased for {useCase} and {conclusion}.",
+    "{quality} product overall. {feature} {experience}."
+  ];
+
+  const adjectives = ["amazing", "fantastic", "outstanding", "excellent", "incredible", "superb"];
+  const features = ["build quality", "design", "functionality", "durability", "performance", "material"];
+  const qualities = ["top-notch", "exceptional", "impressive", "remarkable", "solid", "premium"];
+  const experiences = [
+    "exceeded my expectations",
+    "couldn't be happier",
+    "very satisfied with the purchase",
+    "works perfectly for my needs",
+    "definitely worth the investment"
+  ];
+  const timeOwned = [
+    "Been using for several months",
+    "Had it for a year now",
+    "Using it daily for weeks",
+    "Recently purchased",
+    "Been testing for a while"
+  ];
+  const useCases = [
+    "everyday carry",
+    "professional use",
+    "outdoor activities",
+    "office work",
+    "travel companion"
+  ];
+  const conclusions = [
+    "highly recommend it",
+    "exactly what I was looking for",
+    "great value for money",
+    "would buy again",
+    "perfect for my needs"
+  ];
 
   for (let i = 0; i < count; i++) {
     const random = Math.random();
@@ -29,12 +69,22 @@ const generateReviews = (count = 5) => {
       }
     }
 
+    // Generate more varied review content
+    const template = reviewTemplates[Math.floor(Math.random() * reviewTemplates.length)]
+      .replace("{adjective}", adjectives[Math.floor(Math.random() * adjectives.length)])
+      .replace("{feature}", features[Math.floor(Math.random() * features.length)])
+      .replace("{quality}", qualities[Math.floor(Math.random() * qualities.length)])
+      .replace("{experience}", experiences[Math.floor(Math.random() * experiences.length)])
+      .replace("{timeOwned}", timeOwned[Math.floor(Math.random() * timeOwned.length)])
+      .replace("{useCase}", useCases[Math.floor(Math.random() * useCases.length)])
+      .replace("{conclusion}", conclusions[Math.floor(Math.random() * conclusions.length)]);
+
     reviews.push({
       userName: faker.person.fullName(),
       location: `${faker.location.city()}, ${faker.location.countryCode()}`,
       rating,
-      title: faker.lorem.words(3),
-      content: faker.lorem.paragraph(),
+      title: faker.commerce.productAdjective() + " " + features[Math.floor(Math.random() * features.length)],
+      content: template,
       likes: faker.number.int({ min: 0, max: 100 }),
       dislikes: faker.number.int({ min: 0, max: 10 }),
       date: faker.date.past({ years: 1 })
