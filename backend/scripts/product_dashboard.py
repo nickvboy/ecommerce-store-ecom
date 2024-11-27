@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk, messagebox
+from tkinter import ttk, messagebox, simpledialog
 import requests
 from decimal import Decimal
 import logging
@@ -67,9 +67,9 @@ class ProductDashboard:
             logging.debug('Creating pagination frame')
             self.setup_pagination_frame(main_frame)
             
-            # Add refresh button
-            logging.debug('Creating refresh button')
-            self.setup_refresh_button(main_frame)
+            # Add buttons frame
+            logging.debug('Creating buttons frame')
+            self.setup_buttons_frame(main_frame)
             
             # Configure grid weights
             logging.debug('Configuring grid weights')
@@ -181,14 +181,26 @@ class ProductDashboard:
         items_per_page_combo.grid(row=0, column=4, padx=5)
         items_per_page_combo.bind('<<ComboboxSelected>>', self.on_items_per_page_change)
 
-    def setup_refresh_button(self, main_frame):
-        """Create and configure the refresh button"""
+    def setup_buttons_frame(self, main_frame):
+        """Create and configure the buttons frame"""
+        buttons_frame = ttk.Frame(main_frame)
+        buttons_frame.grid(row=3, column=0, pady=10)
+        
+        # Add Product button
+        self.add_product_button = ttk.Button(
+            buttons_frame,
+            text="Add Product",
+            command=self.show_add_product_dialog
+        )
+        self.add_product_button.grid(row=0, column=0, padx=5)
+        
+        # Refresh button (moved from setup_refresh_button)
         self.refresh_button = ttk.Button(
-            main_frame, 
-            text="Refresh Data", 
+            buttons_frame,
+            text="Refresh Data",
             command=self.fetch_products
         )
-        self.refresh_button.grid(row=3, column=0, pady=10)
+        self.refresh_button.grid(row=0, column=1, padx=5)
 
     def fetch_products(self):
         """Fetch products from the API with pagination"""
@@ -350,6 +362,202 @@ class ProductDashboard:
             error_msg = f'Error updating UI: {str(e)}'
             logging.error(error_msg, exc_info=True)
             messagebox.showerror("Error", error_msg)
+
+    def show_add_product_dialog(self):
+        """Show dialog for adding a new product"""
+        logging.info('Showing add product dialog')
+        try:
+            # Create a new top-level window
+            dialog = tk.Toplevel(self.root)
+            dialog.title("Add New Product")
+            dialog.geometry("500x700")
+            dialog.transient(self.root)
+            
+            # Main container with padding
+            main_container = ttk.Frame(dialog, padding="20")
+            main_container.pack(fill=tk.BOTH, expand=True)
+            
+            # Title
+            title_frame = ttk.Frame(main_container)
+            title_frame.pack(fill=tk.X, pady=(0, 20))
+            ttk.Label(
+                title_frame,
+                text="Add New Product",
+                font=('Helvetica', 14, 'bold')
+            ).pack()
+            
+            # Product Information Section
+            info_frame = ttk.LabelFrame(main_container, text="Product Information", padding="10")
+            info_frame.pack(fill=tk.X, pady=(0, 15))
+            
+            # Create form fields
+            fields = {}
+            
+            # Name field
+            name_frame = ttk.Frame(info_frame)
+            name_frame.pack(fill=tk.X, pady=5)
+            ttk.Label(name_frame, text="Name *", width=15).pack(side=tk.LEFT)
+            fields['name'] = ttk.Entry(name_frame)
+            fields['name'].pack(side=tk.LEFT, expand=True, fill=tk.X, padx=(10, 0))
+            
+            # Category field with predefined options
+            category_frame = ttk.Frame(info_frame)
+            category_frame.pack(fill=tk.X, pady=5)
+            ttk.Label(category_frame, text="Category *", width=15).pack(side=tk.LEFT)
+            categories = ["EDC Gear", "Tools", "Pens", "Accessories", "Bundles", "Other"]
+            fields['category'] = ttk.Combobox(category_frame, values=categories, state="readonly")
+            fields['category'].pack(side=tk.LEFT, expand=True, fill=tk.X, padx=(10, 0))
+            
+            # Description field
+            description_frame = ttk.Frame(info_frame)
+            description_frame.pack(fill=tk.X, pady=5)
+            ttk.Label(description_frame, text="Description *", width=15).pack(side=tk.LEFT)
+            fields['description'] = tk.Text(description_frame, height=4, wrap=tk.WORD)
+            fields['description'].pack(side=tk.LEFT, expand=True, fill=tk.X, padx=(10, 0))
+            
+            # Pricing Section
+            pricing_frame = ttk.LabelFrame(main_container, text="Pricing", padding="10")
+            pricing_frame.pack(fill=tk.X, pady=(0, 15))
+            
+            # Price field
+            price_frame = ttk.Frame(pricing_frame)
+            price_frame.pack(fill=tk.X, pady=5)
+            ttk.Label(price_frame, text="Price ($) *", width=15).pack(side=tk.LEFT)
+            fields['price'] = ttk.Entry(price_frame)
+            fields['price'].pack(side=tk.LEFT, expand=True, fill=tk.X, padx=(10, 0))
+            
+            # Original Price field
+            original_price_frame = ttk.Frame(pricing_frame)
+            original_price_frame.pack(fill=tk.X, pady=5)
+            ttk.Label(original_price_frame, text="Original Price ($)", width=15).pack(side=tk.LEFT)
+            fields['originalPrice'] = ttk.Entry(original_price_frame)
+            fields['originalPrice'].pack(side=tk.LEFT, expand=True, fill=tk.X, padx=(10, 0))
+            
+            # Inventory Section
+            inventory_frame = ttk.LabelFrame(main_container, text="Inventory", padding="10")
+            inventory_frame.pack(fill=tk.X, pady=(0, 15))
+            
+            # Stock field
+            stock_frame = ttk.Frame(inventory_frame)
+            stock_frame.pack(fill=tk.X, pady=5)
+            ttk.Label(stock_frame, text="Stock *", width=15).pack(side=tk.LEFT)
+            fields['stock'] = ttk.Entry(stock_frame)
+            fields['stock'].pack(side=tk.LEFT, expand=True, fill=tk.X, padx=(10, 0))
+            
+            def validate_fields():
+                """Validate form fields"""
+                errors = []
+                
+                # Required fields
+                if not fields['name'].get().strip():
+                    errors.append("Name is required")
+                if not fields['category'].get():
+                    errors.append("Category is required")
+                if not fields['description'].get("1.0", tk.END).strip():
+                    errors.append("Description is required")
+                
+                # Numeric validations
+                try:
+                    price = float(fields['price'].get())
+                    if price <= 0:
+                        errors.append("Price must be greater than 0")
+                except ValueError:
+                    errors.append("Price must be a valid number")
+                
+                try:
+                    if fields['originalPrice'].get().strip():
+                        original_price = float(fields['originalPrice'].get())
+                        if original_price <= 0:
+                            errors.append("Original price must be greater than 0")
+                except ValueError:
+                    errors.append("Original price must be a valid number")
+                
+                try:
+                    stock = int(fields['stock'].get())
+                    if stock < 0:
+                        errors.append("Stock cannot be negative")
+                except ValueError:
+                    errors.append("Stock must be a valid number")
+                
+                return errors
+            
+            def submit():
+                """Handle form submission"""
+                try:
+                    # Validate fields
+                    errors = validate_fields()
+                    if errors:
+                        messagebox.showerror("Validation Error", "\n".join(errors))
+                        return
+                    
+                    # Collect data
+                    data = {
+                        'name': fields['name'].get().strip(),
+                        'category': fields['category'].get(),
+                        'description': fields['description'].get("1.0", tk.END).strip(),
+                        'price': float(fields['price'].get()),
+                        'stock': int(fields['stock'].get())
+                    }
+                    
+                    # Add optional original price if provided
+                    if fields['originalPrice'].get().strip():
+                        data['originalPrice'] = float(fields['originalPrice'].get())
+                    
+                    # Make API request
+                    response = requests.post(
+                        'http://localhost:5000/api/products',
+                        json=data
+                    )
+                    
+                    if response.status_code == 201:
+                        messagebox.showinfo("Success", "Product added successfully!")
+                        dialog.destroy()
+                        self.fetch_products()  # Refresh the product list
+                    else:
+                        messagebox.showerror("Error", f"Failed to add product: {response.text}")
+                
+                except Exception as e:
+                    logging.error(f"Error adding product: {str(e)}", exc_info=True)
+                    messagebox.showerror("Error", f"Failed to add product: {str(e)}")
+            
+            # Buttons frame
+            buttons_frame = ttk.Frame(main_container)
+            buttons_frame.pack(fill=tk.X, pady=(0, 10))
+            
+            # Cancel button
+            ttk.Button(
+                buttons_frame,
+                text="Cancel",
+                command=dialog.destroy
+            ).pack(side=tk.RIGHT, padx=5)
+            
+            # Submit button
+            ttk.Button(
+                buttons_frame,
+                text="Add Product",
+                command=submit,
+                style="Accent.TButton"  # Custom style for primary action
+            ).pack(side=tk.RIGHT)
+            
+            # Create custom style for the primary button
+            style = ttk.Style()
+            style.configure("Accent.TButton", background="#007bff")
+            
+            # Center the dialog on the screen
+            dialog.update_idletasks()
+            width = dialog.winfo_width()
+            height = dialog.winfo_height()
+            x = (dialog.winfo_screenwidth() // 2) - (width // 2)
+            y = (dialog.winfo_screenheight() // 2) - (height // 2)
+            dialog.geometry(f'{width}x{height}+{x}+{y}')
+            
+            # Make dialog modal
+            dialog.grab_set()
+            dialog.focus_set()
+            
+        except Exception as e:
+            logging.error(f"Error showing add product dialog: {str(e)}", exc_info=True)
+            messagebox.showerror("Error", f"Failed to show add product dialog: {str(e)}")
 
 def main():
     try:

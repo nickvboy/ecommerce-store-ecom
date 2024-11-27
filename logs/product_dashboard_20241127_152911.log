@@ -1,0 +1,118 @@
+2024-11-27 15:29:11,552 - INFO - Logging initialized
+2024-11-27 15:29:11,552 - INFO - Starting Product Dashboard application
+2024-11-27 15:29:12,021 - INFO - Initializing ProductDashboard
+2024-11-27 15:29:12,043 - INFO - Performing initial data fetch
+2024-11-27 15:29:12,043 - INFO - Fetching products from API - Page 1
+2024-11-27 15:29:12,043 - INFO - API Request Details:
+2024-11-27 15:29:12,044 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-27 15:29:12,044 - INFO -   Method: GET
+2024-11-27 15:29:12,044 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-27 15:29:16,151 - ERROR - Connection error: HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /api/products?page=1&limit=10 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000211ED273148>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+Traceback (most recent call last):
+  File "C:\Users\nickv\.conda\envs\carlabox\lib\site-packages\urllib3\connection.py", line 207, in _new_conn
+    socket_options=self.socket_options,
+  File "C:\Users\nickv\.conda\envs\carlabox\lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\nickv\.conda\envs\carlabox\lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\nickv\.conda\envs\carlabox\lib\site-packages\urllib3\connectionpool.py", line 803, in urlopen
+    **response_kw,
+  File "C:\Users\nickv\.conda\envs\carlabox\lib\site-packages\urllib3\connectionpool.py", line 505, in _make_request
+    enforce_content_length=enforce_content_length,
+  File "C:\Users\nickv\.conda\envs\carlabox\lib\site-packages\urllib3\connection.py", line 395, in request
+    self.endheaders()
+  File "C:\Users\nickv\.conda\envs\carlabox\lib\http\client.py", line 1276, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\nickv\.conda\envs\carlabox\lib\http\client.py", line 1036, in _send_output
+    self.send(msg)
+  File "C:\Users\nickv\.conda\envs\carlabox\lib\http\client.py", line 976, in send
+    self.connect()
+  File "C:\Users\nickv\.conda\envs\carlabox\lib\site-packages\urllib3\connection.py", line 243, in connect
+    self.sock = self._new_conn()
+  File "C:\Users\nickv\.conda\envs\carlabox\lib\site-packages\urllib3\connection.py", line 220, in _new_conn
+    ) from e
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x00000211ED273148>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\nickv\.conda\envs\carlabox\lib\site-packages\requests\adapters.py", line 497, in send
+    chunked=chunked,
+  File "C:\Users\nickv\.conda\envs\carlabox\lib\site-packages\urllib3\connectionpool.py", line 846, in urlopen
+    method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "C:\Users\nickv\.conda\envs\carlabox\lib\site-packages\urllib3\util\retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /api/products?page=1&limit=10 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000211ED273148>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:/Users/nickv/Downloads/tester/ecommerce-store-ecom/backend/scripts/product_dashboard.py", line 212, in fetch_products
+    response = requests.get(base_url, params=params)
+  File "C:\Users\nickv\.conda\envs\carlabox\lib\site-packages\requests\api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "C:\Users\nickv\.conda\envs\carlabox\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\nickv\.conda\envs\carlabox\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\nickv\.conda\envs\carlabox\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\nickv\.conda\envs\carlabox\lib\site-packages\requests\adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /api/products?page=1&limit=10 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000211ED273148>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+2024-11-27 15:29:16,224 - ERROR - Request Details:
+2024-11-27 15:29:16,224 - ERROR -   URL: http://localhost:5000/api/products
+2024-11-27 15:29:16,224 - ERROR -   Parameters: {'page': 1, 'limit': 10}
+2024-11-27 15:29:17,767 - INFO - Product fetch operation completed
+2024-11-27 15:29:17,767 - INFO - Application initialized. Log file: logs/product_dashboard_20241127_152911.log
+2024-11-27 15:29:17,767 - INFO - Starting main loop
+2024-11-27 15:29:51,907 - INFO - Fetching products from API - Page 1
+2024-11-27 15:29:51,907 - INFO - API Request Details:
+2024-11-27 15:29:51,908 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-27 15:29:51,908 - INFO -   Method: GET
+2024-11-27 15:29:51,908 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-27 15:29:51,957 - INFO - API Response Details:
+2024-11-27 15:29:51,957 - INFO -   Status Code: 200
+2024-11-27 15:29:51,958 - INFO -   Response Time: 0.047 seconds
+2024-11-27 15:29:51,958 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-27 15:29:51,959 - INFO - Pagination Details:
+2024-11-27 15:29:51,959 - INFO -   Total Products: Not specified
+2024-11-27 15:29:51,959 - INFO -   Current Page: 1
+2024-11-27 15:29:51,959 - INFO -   Total Pages: 5
+2024-11-27 15:29:51,959 - INFO -   Items Per Page: 10
+2024-11-27 15:29:51,959 - INFO - Products Summary:
+2024-11-27 15:29:51,960 - INFO -   Products Retrieved: 10
+2024-11-27 15:29:51,960 - INFO -   Categories Present: Bundles, Accessories, Tools, EDC Gear, Pens
+2024-11-27 15:29:51,960 - INFO -   Price Range: $23.00 - $203.00
+2024-11-27 15:29:51,960 - INFO - Successfully fetched and processed product data
+2024-11-27 15:29:51,960 - INFO - Updating UI with fetched products
+2024-11-27 15:29:51,961 - INFO - UI update completed successfully
+2024-11-27 15:29:51,962 - INFO - Product fetch operation completed
+2024-11-27 15:29:55,980 - INFO - Items per page changed
+2024-11-27 15:29:55,980 - INFO - Fetching products from API - Page 1
+2024-11-27 15:29:55,980 - INFO - API Request Details:
+2024-11-27 15:29:55,980 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-27 15:29:55,981 - INFO -   Method: GET
+2024-11-27 15:29:55,981 - INFO -   Parameters: {'page': 1, 'limit': 20}
+2024-11-27 15:29:56,022 - INFO - API Response Details:
+2024-11-27 15:29:56,022 - INFO -   Status Code: 200
+2024-11-27 15:29:56,022 - INFO -   Response Time: 0.039 seconds
+2024-11-27 15:29:56,023 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-27 15:29:56,023 - INFO - Pagination Details:
+2024-11-27 15:29:56,023 - INFO -   Total Products: Not specified
+2024-11-27 15:29:56,024 - INFO -   Current Page: 1
+2024-11-27 15:29:56,024 - INFO -   Total Pages: 3
+2024-11-27 15:29:56,024 - INFO -   Items Per Page: 20
+2024-11-27 15:29:56,024 - INFO - Products Summary:
+2024-11-27 15:29:56,025 - INFO -   Products Retrieved: 20
+2024-11-27 15:29:56,025 - INFO -   Categories Present: Bundles, Accessories, Tools, EDC Gear, Pens
+2024-11-27 15:29:56,025 - INFO -   Price Range: $21.00 - $208.00
+2024-11-27 15:29:56,025 - INFO - Successfully fetched and processed product data
+2024-11-27 15:29:56,026 - INFO - Updating UI with fetched products
+2024-11-27 15:29:56,027 - INFO - UI update completed successfully
+2024-11-27 15:29:56,027 - INFO - Product fetch operation completed
