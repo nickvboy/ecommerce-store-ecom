@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowLeftIcon, StarIcon, ChevronUpIcon, ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
 import { Button } from "../components/ui/button";
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "../components/ui/collapsible";
+import ReviewSummary from '../components/ReviewSummary';
 
 function ProductDetail() {
   const [quantity, setQuantity] = useState(1);
@@ -288,6 +289,19 @@ function ProductDetail() {
             </div>
           </div>
         </div>
+      </div>
+      
+      {/* Add the ReviewSummary component after the collapsible sections */}
+      <div className="mt-12 border-t border-bg-300">
+        <ReviewSummary reviews={[
+          // Temporary mock data - will be replaced with real data later
+          { rating: 5, comment: "Great product!" },
+          { rating: 5, comment: "Love it!" },
+          { rating: 4, comment: "Pretty good" },
+          { rating: 4, comment: "Nice quality" },
+          { rating: 3, comment: "It's okay" },
+          // ... add more mock reviews as needed
+        ]} />
       </div>
     </div>
   );

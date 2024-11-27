@@ -21,7 +21,7 @@ function ProductCard({ product }) {
       </div>
 
       {/* Product Info */}
-      <div className="mt-4 space-y-2">
+      <div className="mt-4 space-y-2 flex flex-col items-center text-center">
         <div className="flex items-center space-x-2">
           <div className="flex">
             {[1, 2, 3, 4, 5].map((star) => (
@@ -40,7 +40,7 @@ function ProductCard({ product }) {
           </span>
         </div>
 
-        <h3 className="font-bold text-text-100">{product.name}</h3>
+        <h3 className="font-bold text-text-100 px-2">{product.name}</h3>
         
         <div className="flex items-center space-x-2">
           {product.originalPrice && (
