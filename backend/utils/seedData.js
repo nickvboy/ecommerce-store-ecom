@@ -6,8 +6,22 @@ const { faker } = require('@faker-js/faker');
 
 const connectDB = require('../config/db');
 
+// Helper function to generate normally distributed random numbers
+const normalDistribution = (mean, stdDev) => {
+  // Box-Muller transform
+  const u1 = Math.random();
+  const u2 = Math.random();
+  const z = Math.sqrt(-2.0 * Math.log(u1)) * Math.cos(2.0 * Math.PI * u2);
+  return Math.round(z * stdDev + mean);
+};
+
 // Define the generateReviews function before using it
-const generateReviews = (count = 60) => {
+const generateReviews = (baseCount = 60) => {
+  // Generate a random count with normal distribution
+  // mean = baseCount, standard deviation = baseCount/3
+  // Ensure minimum of 5 reviews
+  const count = Math.max(5, normalDistribution(baseCount, baseCount/3));
+  
   const reviews = [];
   const ratingWeights = {
     5: 0.4,
@@ -22,39 +36,73 @@ const generateReviews = (count = 60) => {
     "The {feature} is {quality}. {conclusion}",
     "{timeOwned} and {experience}.",
     "Purchased for {useCase} and {conclusion}.",
-    "{quality} product overall. {feature} {experience}."
+    "{quality} product overall. {feature} {experience}.",
+    "As a {useCase} enthusiast, {experience}.",
+    "After {timeOwned}, I can say {conclusion}.",
+    "The {feature} really {quality}. {experience}.",
+    "Perfect for {useCase}! {conclusion}",
+    "Compared to others, this {feature} is {adjective}."
   ];
 
-  const adjectives = ["amazing", "fantastic", "outstanding", "excellent", "incredible", "superb"];
-  const features = ["build quality", "design", "functionality", "durability", "performance", "material"];
-  const qualities = ["top-notch", "exceptional", "impressive", "remarkable", "solid", "premium"];
+  const adjectives = [
+    "amazing", "fantastic", "outstanding", "excellent", "incredible", "superb",
+    "brilliant", "remarkable", "exceptional", "magnificent", "stellar", "impressive"
+  ];
+  const features = [
+    "build quality", "design", "functionality", "durability", "performance", "material",
+    "craftsmanship", "finish", "ergonomics", "balance", "precision", "reliability"
+  ];
+  const qualities = [
+    "top-notch", "exceptional", "impressive", "remarkable", "solid", "premium",
+    "outstanding", "superior", "excellent", "first-rate", "unmatched", "phenomenal"
+  ];
   const experiences = [
     "exceeded my expectations",
     "couldn't be happier",
     "very satisfied with the purchase",
     "works perfectly for my needs",
-    "definitely worth the investment"
+    "definitely worth the investment",
+    "it's become my daily favorite",
+    "I'm thoroughly impressed",
+    "it's a game changer",
+    "it's exceeded all my requirements",
+    "I'm completely satisfied"
   ];
   const timeOwned = [
     "Been using for several months",
     "Had it for a year now",
     "Using it daily for weeks",
     "Recently purchased",
-    "Been testing for a while"
+    "Been testing for a while",
+    "After six months of use",
+    "Three months in",
+    "Two weeks of daily use",
+    "After extensive testing",
+    "Following months of regular use"
   ];
   const useCases = [
     "everyday carry",
     "professional use",
     "outdoor activities",
     "office work",
-    "travel companion"
+    "travel companion",
+    "EDC enthusiast",
+    "collector",
+    "minimalist",
+    "professional writer",
+    "design professional"
   ];
   const conclusions = [
     "highly recommend it",
     "exactly what I was looking for",
     "great value for money",
     "would buy again",
-    "perfect for my needs"
+    "perfect for my needs",
+    "exceeded my expectations",
+    "worth every penny",
+    "couldn't be happier",
+    "best purchase this year",
+    "absolutely love it"
   ];
 
   for (let i = 0; i < count; i++) {

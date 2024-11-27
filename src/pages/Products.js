@@ -68,29 +68,21 @@ function Products() {
         {/* Filter Sidebar */}
         <aside className="w-64 space-y-6">
           {/* Price Range Filter */}
-          <Collapsible defaultOpen>
-            <CollapsibleTrigger className="flex justify-between items-center w-full p-4 bg-bg-200 rounded-lg group">
-              <h3 className="text-lg font-bold">Price Range</h3>
-              <ChevronDownIcon className="w-5 h-5 transition-transform duration-200 group-data-[state=open]:rotate-180" />
-            </CollapsibleTrigger>
-            <CollapsibleContent className="pt-4">
-              <PriceRangeSlider
-                min={0}
-                max={500}
-                onChange={handlePriceRangeChange}
-              />
-            </CollapsibleContent>
-          </Collapsible>
+          <div className="space-y-4">
+            <h3 className="text-lg font-bold">Price Range</h3>
+            <PriceRangeSlider
+              min={0}
+              max={500}
+              onChange={handlePriceRangeChange}
+            />
+          </div>
 
           {/* Categories Filter */}
-          <Collapsible defaultOpen>
-            <CollapsibleTrigger className="flex justify-between items-center w-full p-4 bg-bg-200 rounded-lg group">
-              <h3 className="text-lg font-bold">Categories</h3>
-              <ChevronDownIcon className="w-5 h-5 transition-transform duration-200 group-data-[state=open]:rotate-180" />
-            </CollapsibleTrigger>
-            <CollapsibleContent className="pt-4 space-y-2">
+          <div className="space-y-4">
+            <h3 className="text-lg font-bold">Categories</h3>
+            <div className="space-y-2">
               {["Pens", "Tools", "EDC Gear", "Accessories", "Bundles"].map((category) => (
-                <label key={category} className="flex items-center space-x-2 px-4">
+                <label key={category} className="flex items-center space-x-2">
                   <Checkbox
                     checked={filters.categories.includes(category)}
                     onCheckedChange={() => handleCategoryChange(category)}
@@ -98,18 +90,15 @@ function Products() {
                   <span className="text-text-200">{category}</span>
                 </label>
               ))}
-            </CollapsibleContent>
-          </Collapsible>
+            </div>
+          </div>
 
           {/* Materials Filter */}
-          <Collapsible defaultOpen>
-            <CollapsibleTrigger className="flex justify-between items-center w-full p-4 bg-bg-200 rounded-lg group">
-              <h3 className="text-lg font-bold">Materials</h3>
-              <ChevronDownIcon className="w-5 h-5 transition-transform duration-200 group-data-[state=open]:rotate-180" />
-            </CollapsibleTrigger>
-            <CollapsibleContent className="pt-4 space-y-2">
+          <div className="space-y-4">
+            <h3 className="text-lg font-bold">Materials</h3>
+            <div className="space-y-2">
               {["Titanium", "Brass", "Copper", "Carbon Fiber", "Stainless Steel"].map((material) => (
-                <label key={material} className="flex items-center space-x-2 px-4">
+                <label key={material} className="flex items-center space-x-2">
                   <Checkbox
                     checked={filters.materials.includes(material)}
                     onCheckedChange={() => {
@@ -124,8 +113,8 @@ function Products() {
                   <span className="text-text-200">{material}</span>
                 </label>
               ))}
-            </CollapsibleContent>
-          </Collapsible>
+            </div>
+          </div>
         </aside>
 
         {/* Product Grid */}
