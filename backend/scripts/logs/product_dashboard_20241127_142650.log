@@ -1,0 +1,12 @@
+2024-11-27 14:26:50,680 - INFO - Logging initialized
+2024-11-27 14:26:50,680 - INFO - Starting Product Dashboard application
+2024-11-27 14:26:50,778 - INFO - Initializing ProductDashboard
+2024-11-27 14:26:50,800 - ERROR - Error during initialization: 'ProductDashboard' object has no attribute 'refresh_button'
+Traceback (most recent call last):
+  File "C:\Users\nickv\Downloads\tester\ecommerce-store\backend\scripts\product_dashboard.py", line 71, in __init__
+    self.refresh_button.grid(row=3, column=0, pady=10)  # Move refresh button below pagination
+    ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ProductDashboard' object has no attribute 'refresh_button'
+2024-11-27 14:26:52,639 - INFO - Application initialized. Log file: logs/product_dashboard_20241127_142650.log
+2024-11-27 14:26:52,640 - INFO - Starting main loop
+2024-11-27 14:28:27,548 - INFO - Application shutting down
