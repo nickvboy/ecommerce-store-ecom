@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { StarIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { StarIcon as StarIconSolid } from '@heroicons/react/24/solid';
+import ReviewCard from './ReviewCard';
 
 function ReviewSummary({ reviews }) {
   const [searchQuery, setSearchQuery] = useState('');
@@ -76,6 +77,12 @@ function ReviewSummary({ reviews }) {
                    focus:ring-2 focus:ring-primary-100"
         />
         <MagnifyingGlassIcon className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-text-200" />
+      </div>
+
+      {/* Review Cards */}
+      <div className="mt-12 space-y-4">
+        <ReviewCard />
+        <ReviewCard />
       </div>
     </div>
   );
