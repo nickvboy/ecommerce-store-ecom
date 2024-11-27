@@ -12,6 +12,7 @@ import { Button } from "../components/ui/button";
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "../components/ui/collapsible";
 import ReviewSummary from '../components/ReviewSummary';
 import { API_BASE_URL } from '../lib/utils';
+import SizeSelector from '../components/SizeSelector';
 
 function ProductDetail() {
   const { id: productId } = useParams();
@@ -20,6 +21,7 @@ function ProductDetail() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [scrollPosition, setScrollPosition] = useState(0);
   const [product, setProduct] = useState(null);
+  const [selectedSize, setSelectedSize] = useState('L');
 
   const images = [
     { id: 1, color: 'bg-blue-500' },
@@ -219,6 +221,12 @@ function ProductDetail() {
                   <span className="bg-white text-black px-2 py-1 rounded text-sm font-bold">SALE</span>
                 )}
               </div>
+
+              {/* Add Size Selector here */}
+              <SizeSelector 
+                selectedSize={selectedSize}
+                onSizeChange={setSelectedSize}
+              />
 
               {/* Material Selection */}
               <div className="mb-6">
