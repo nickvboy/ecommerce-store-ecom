@@ -1,22 +1,49 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { StarIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { StarIcon as StarIconSolid } from '@heroicons/react/24/solid';
 import ReviewCard from './ReviewCard';
+import { API_BASE_URL } from '../lib/utils';
 
-function ReviewSummary({ reviews }) {
+function ReviewSummary({ productId }) {
+  const [reviews, setReviews] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   
-  // Calculate average rating
-  const averageRating = reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length;
-  
-  // Calculate rating distribution
+  const fetchReviews = useCallback(async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/products/${productId}/reviews`);
+      if (!response.ok) throw new Error('Failed to fetch reviews');
+      const data = await response.json();
+      setReviews(data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  }, [productId]);
+
+  useEffect(() => {
+    fetchReviews();
+  }, [fetchReviews]);
+
+  const filteredReviews = reviews.filter(review =>
+    review.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    review.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    review.userName.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  // Calculate average rating and distribution based on filteredReviews
+  const averageRating = filteredReviews.length > 0
+    ? filteredReviews.reduce((acc, review) => acc + review.rating, 0) / filteredReviews.length
+    : 0;
+
   const distribution = Array(5).fill(0);
-  reviews.forEach(review => {
-    distribution[5 - review.rating]++;
+  filteredReviews.forEach(review => {
+    distribution[review.rating - 1]++;
   });
-  
-  // Calculate percentages for bars
-  const percentages = distribution.map(count => (count / reviews.length) * 100);
+
+  const percentages = distribution.map(count => (filteredReviews.length > 0 ? (count / filteredReviews.length) * 100 : 0));
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
@@ -42,7 +69,7 @@ function ReviewSummary({ reviews }) {
             {averageRating.toFixed(2)} out of 5
           </p>
           <p className="text-text-200 text-base">
-            {reviews.length} total reviews
+            {filteredReviews.length} total reviews
           </p>
         </div>
 
@@ -81,8 +108,17 @@ function ReviewSummary({ reviews }) {
 
       {/* Review Cards */}
       <div className="mt-12 space-y-4">
-        <ReviewCard />
-        <ReviewCard />
+        {loading ? (
+          <p className="text-text-200">Loading reviews...</p>
+        ) : error ? (
+          <p className="text-red-500">Error: {error}</p>
+        ) : filteredReviews.length > 0 ? (
+          filteredReviews.map(review => (
+            <ReviewCard key={review._id} review={review} />
+          ))
+        ) : (
+          <p className="text-text-200">No reviews found.</p>
+        )}
       </div>
     </div>
   );

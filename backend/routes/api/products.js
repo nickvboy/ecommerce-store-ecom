@@ -8,6 +8,7 @@ const {
   deleteProduct,
   filterProducts
 } = require('../../controllers/productController');
+const reviewController = require('../../controllers/reviewController');
 
 router.route('/')
   .get(getProducts)
@@ -20,5 +21,10 @@ router.route('/:id')
   .get(getProductById)
   .put(updateProduct)
   .delete(deleteProduct);
+
+// Review routes
+router.get('/:productId/reviews', reviewController.getProductReviews);
+router.post('/:productId/reviews', reviewController.createReview);
+router.patch('/reviews/:reviewId/likes', reviewController.updateReviewLikes);
 
 module.exports = router; 

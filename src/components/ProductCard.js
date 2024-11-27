@@ -18,6 +18,17 @@ function ProductCard({ product }) {
             </span>
           </div>
         )}
+        <div className="flex items-center mt-2">
+          {[1, 2, 3, 4, 5].map((star) => (
+            <StarIcon 
+              key={star}
+              className={`h-4 w-4 ${star <= Math.floor(product.reviewStats.averageRating) ? 'text-primary-100' : 'text-bg-300'}`}
+            />
+          ))}
+          <span className="text-sm text-text-200 ml-2">
+            ({product.reviewStats.totalReviews})
+          </span>
+        </div>
       </div>
 
       {/* Product Info */}

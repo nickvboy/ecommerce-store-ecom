@@ -1,7 +1,42 @@
 import { StarIcon } from '@heroicons/react/24/solid';
 import { UserIcon, HandThumbUpIcon, HandThumbDownIcon } from '@heroicons/react/24/outline';
+import { useState } from 'react';
+import { API_BASE_URL } from '../lib/utils';
 
-function ReviewCard() {
+function ReviewCard({ review }) {
+  const [likes, setLikes] = useState(review.likes);
+  const [dislikes, setDislikes] = useState(review.dislikes);
+
+  const handleLike = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/products/${review.product}/reviews/${review._id}/likes`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'like' })
+      });
+      if (!response.ok) throw new Error('Failed to like review');
+      const updatedReview = await response.json();
+      setLikes(updatedReview.likes);
+    } catch (error) {
+      console.error('Error liking review:', error);
+    }
+  };
+
+  const handleDislike = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/products/${review.product}/reviews/${review._id}/likes`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'dislike' })
+      });
+      if (!response.ok) throw new Error('Failed to dislike review');
+      const updatedReview = await response.json();
+      setDislikes(updatedReview.dislikes);
+    } catch (error) {
+      console.error('Error disliking review:', error);
+    }
+  };
+
   return (
     <div className="border border-bg-300 rounded-lg p-4">
       <div className="flex flex-col">
@@ -13,8 +48,8 @@ function ReviewCard() {
             </div>
             {/* Name and Location under profile */}
             <div className="mt-2">
-              <p className="font-bold text-text-100 text-sm">John D.</p>
-              <p className="text-sm text-text-200">Florida, US</p>
+              <p className="font-bold text-text-100 text-sm">{review.userName}</p>
+              <p className="text-sm text-text-200">{review.location}</p>
             </div>
           </div>
 
@@ -24,31 +59,31 @@ function ReviewCard() {
               {[1, 2, 3, 4, 5].map((star) => (
                 <StarIcon 
                   key={star}
-                  className="h-4 w-4 text-primary-100"
+                  className={`h-4 w-4 ${star <= review.rating ? 'text-primary-100' : 'text-bg-300'}`}
                 />
               ))}
             </div>
-            <h3 className="text-text-100">Great product!</h3>
+            <h3 className="text-text-100">{review.title}</h3>
 
             {/* Review Text */}
             <p className="text-sm text-text-200 mt-2">
-              This pen exceeded my expectations. The build quality is outstanding and it writes smoothly.
+              {review.content}
             </p>
           </div>
 
           {/* Date */}
-          <span className="text-sm text-text-200 ml-4">03/14/2024</span>
+          <span className="text-sm text-text-200 ml-4">{new Date(review.date).toLocaleDateString()}</span>
         </div>
 
         {/* Like/Dislike Row */}
         <div className="flex justify-end gap-2 mt-4">
-          <button className="flex items-center gap-1 text-text-200 hover:text-primary-100">
+          <button onClick={handleLike} className="flex items-center gap-1 text-text-200 hover:text-primary-100">
             <HandThumbUpIcon className="h-5 w-5" />
-            <span className="text-sm">12</span>
+            <span className="text-sm">{likes}</span>
           </button>
-          <button className="flex items-center gap-1 text-text-200 hover:text-primary-100">
+          <button onClick={handleDislike} className="flex items-center gap-1 text-text-200 hover:text-primary-100">
             <HandThumbDownIcon className="h-5 w-5" />
-            <span className="text-sm">1</span>
+            <span className="text-sm">{dislikes}</span>
           </button>
         </div>
       </div>
