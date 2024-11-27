@@ -2,10 +2,14 @@ import { useState } from 'react';
 import { Slider } from "../components/ui/slider";
 
 function PriceRangeSlider({ min, max, onChange }) {
-  const [value, setValue] = useState([min, max]);
+  const [localValue, setLocalValue] = useState([min, max]);
 
   const handleValueChange = (newValue) => {
-    setValue(newValue);
+    setLocalValue(newValue);
+  };
+
+  const handleValueCommit = (newValue) => {
+    setLocalValue(newValue);
     onChange(newValue);
   };
 
@@ -15,28 +19,37 @@ function PriceRangeSlider({ min, max, onChange }) {
         <div className="flex items-center">
           <input 
             type="number" 
-            value={value[0]}
-            onChange={(e) => handleValueChange([parseInt(e.target.value), value[1]])}
+            value={localValue[0]}
+            onChange={(e) => {
+              const newValue = [parseInt(e.target.value), localValue[1]];
+              setLocalValue(newValue);
+              onChange(newValue);
+            }}
             className="w-16 bg-bg-200 text-text-100 text-sm border-none focus:ring-0"
           />
         </div>
         <div className="flex items-center">
           <input 
             type="number"
-            value={value[1]}
-            onChange={(e) => handleValueChange([value[0], parseInt(e.target.value)])}
+            value={localValue[1]}
+            onChange={(e) => {
+              const newValue = [localValue[0], parseInt(e.target.value)];
+              setLocalValue(newValue);
+              onChange(newValue);
+            }}
             className="w-16 bg-bg-200 text-text-100 text-sm border-none focus:ring-0"
           />
         </div>
       </div>
       
       <Slider
-        defaultValue={value}
+        defaultValue={localValue}
         max={max}
         min={min}
         step={1}
-        value={value}
+        value={localValue}
         onValueChange={handleValueChange}
+        onValueCommit={handleValueCommit}
         className="[&_[role=slider]]:bg-text-100"
       />
     </div>
