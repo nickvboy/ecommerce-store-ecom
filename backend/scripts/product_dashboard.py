@@ -28,6 +28,9 @@ def setup_logging():
     logging.info('Logging initialized')
     return log_filename
 
+# Add this near the top of the file with other imports
+API_BASE_URL = 'http://localhost:5000/api'
+
 class ProductDashboard:
     def __init__(self, root):
         logging.info('Initializing ProductDashboard')
@@ -39,6 +42,12 @@ class ProductDashboard:
         self.current_page = 1
         self.items_per_page = 10
         self.total_pages = 1
+        
+        # Add selection tracking
+        self.selected_items = set()
+        
+        # Store the API base URL as instance variable
+        self.api_base_url = API_BASE_URL
         
         try:
             # Configure style
@@ -87,12 +96,21 @@ class ProductDashboard:
         """Set up the treeview widget"""
         logging.debug('Creating treeview columns')
         self.tree = ttk.Treeview(main_frame, columns=(
-            "id", "name", "category", "price", "original_price", 
-            "stock", "sizes", "rating", "reviews"
-        ), show="headings")
+            "mongo_id",  # Hidden column for full MongoDB ObjectId
+            "id",        # Display ID
+            "name", 
+            "category", 
+            "price", 
+            "original_price", 
+            "stock", 
+            "sizes", 
+            "rating", 
+            "reviews"
+        ), show="headings", selectmode="extended")
         
         # Define column headings and widths
         columns_config = {
+            "mongo_id": {"text": "MongoDB ID", "width": 0},  # Hidden column
             "id": {"text": "ID", "width": 100},
             "name": {"text": "Name", "width": 250},
             "category": {"text": "Category", "width": 100},
@@ -108,6 +126,13 @@ class ProductDashboard:
             logging.debug(f'Configuring column: {col}')
             self.tree.heading(col, text=config["text"])
             self.tree.column(col, width=config["width"])
+            
+            # Hide the MongoDB ID column
+            if col == "mongo_id":
+                self.tree.column(col, width=0, stretch=False)
+        
+        # Bind selection event
+        self.tree.bind('<<TreeviewSelect>>', self.on_select)
     
     def add_scrollbar(self, main_frame):
         """Add scrollbar to treeview"""
@@ -187,21 +212,29 @@ class ProductDashboard:
         buttons_frame = ttk.Frame(main_frame)
         buttons_frame.grid(row=3, column=0, pady=10)
         
-        # Add Product button
+        # Delete Selected button
+        self.delete_button = ttk.Button(
+            buttons_frame,
+            text="Delete Selected",
+            command=self.delete_selected_products,
+            state='disabled'  # Initially disabled
+        )
+        self.delete_button.grid(row=0, column=0, padx=5)
+        
+        # Existing buttons
         self.add_product_button = ttk.Button(
             buttons_frame,
             text="Add Product",
             command=self.show_add_product_dialog
         )
-        self.add_product_button.grid(row=0, column=0, padx=5)
+        self.add_product_button.grid(row=0, column=1, padx=5)
         
-        # Refresh button (moved from setup_refresh_button)
         self.refresh_button = ttk.Button(
             buttons_frame,
             text="Refresh Data",
             command=self.fetch_products
         )
-        self.refresh_button.grid(row=0, column=1, padx=5)
+        self.refresh_button.grid(row=0, column=2, padx=5)
 
     def fetch_products(self):
         """Fetch products from the API with pagination"""
@@ -346,8 +379,10 @@ class ProductDashboard:
                 rating = product.get('reviewStats', {}).get('averageRating', 0)
                 rating_display = "★" * int(rating) + "☆" * (5 - int(rating))
                 
-                self.tree.insert("", tk.END, values=(
-                    str(product['_id'])[-6:],
+                # Create a hidden column to store the full MongoDB ObjectId
+                item = self.tree.insert("", tk.END, values=(
+                    product['_id'],  # Hidden full MongoDB ObjectId
+                    str(product['_id'])[-6:],  # Displayed shortened ID
                     product['name'],
                     product['category'],
                     f"${product['price']:.2f}",
@@ -610,6 +645,93 @@ class ProductDashboard:
         except Exception as e:
             logging.error(f"Error showing add product dialog: {str(e)}", exc_info=True)
             messagebox.showerror("Error", f"Failed to show add product dialog: {str(e)}")
+
+    def on_select(self, event):
+        """Handle selection changes"""
+        self.selected_items = set(self.tree.selection())
+        # Enable/disable delete button based on selection
+        self.delete_button.config(
+            state='normal' if self.selected_items else 'disabled'
+        )
+        logging.debug(f'Selected items: {len(self.selected_items)}')
+
+    def delete_selected_products(self):
+        """Delete selected products"""
+        if not self.selected_items:
+            return
+
+        # Confirm deletion
+        count = len(self.selected_items)
+        if not messagebox.askyesno(
+            "Confirm Deletion",
+            f"Are you sure you want to delete {count} selected product{'s' if count > 1 else ''}?"
+        ):
+            return
+
+        logging.info(f'Attempting to delete {count} products')
+        
+        success_count = 0
+        failed_ids = []
+
+        try:
+            for item_id in self.selected_items:
+                # Get the full MongoDB ObjectId from the hidden column
+                values = self.tree.item(item_id)['values']
+                mongo_id = values[0]  # Get the full MongoDB ObjectId from first column
+                
+                logging.debug(f'Deleting product with MongoDB ID: {mongo_id}')
+                
+                try:
+                    response = requests.delete(
+                        f'{self.api_base_url}/products/{mongo_id}',
+                        timeout=5
+                    )
+                    
+                    if response.status_code == 200:
+                        success_count += 1
+                        logging.info(f'Successfully deleted product {mongo_id}')
+                    else:
+                        failed_ids.append(mongo_id)
+                        logging.error(
+                            f'Failed to delete product {mongo_id}. '
+                            f'Status: {response.status_code}. '
+                            f'Response: {response.text}'
+                        )
+                
+                except requests.RequestException as e:
+                    failed_ids.append(mongo_id)
+                    logging.error(f'Error deleting product {mongo_id}: {str(e)}')
+
+            # Show result message
+            if success_count == count:
+                messagebox.showinfo(
+                    "Success",
+                    f"Successfully deleted {success_count} product{'s' if success_count > 1 else ''}"
+                )
+            elif success_count > 0:
+                messagebox.showwarning(
+                    "Partial Success",
+                    f"Deleted {success_count} product{'s' if success_count > 1 else ''}, "
+                    f"but failed to delete {len(failed_ids)} product{'s' if len(failed_ids) > 1 else ''}"
+                )
+            else:
+                messagebox.showerror(
+                    "Error",
+                    "Failed to delete any products"
+                )
+
+            # Refresh the product list
+            self.fetch_products()
+            
+        except Exception as e:
+            error_msg = f'Error during bulk deletion: {str(e)}'
+            logging.error(error_msg, exc_info=True)
+            messagebox.showerror("Error", error_msg)
+        
+        finally:
+            # Clear selection
+            self.selected_items.clear()
+            self.delete_button.config(state='disabled')
 
 def main():
     try:

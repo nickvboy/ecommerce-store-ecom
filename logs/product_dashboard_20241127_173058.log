@@ -1,0 +1,54 @@
+2024-11-27 17:30:58,566 - INFO - Logging initialized
+2024-11-27 17:30:58,566 - INFO - Starting Product Dashboard application
+2024-11-27 17:30:58,638 - INFO - Initializing ProductDashboard
+2024-11-27 17:30:58,660 - INFO - Performing initial data fetch
+2024-11-27 17:30:58,660 - INFO - Fetching products from API - Page 1
+2024-11-27 17:30:58,660 - INFO - API Request Details:
+2024-11-27 17:30:58,661 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-27 17:30:58,661 - INFO -   Method: GET
+2024-11-27 17:30:58,661 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-27 17:30:58,681 - INFO - API Response Details:
+2024-11-27 17:30:58,681 - INFO -   Status Code: 200
+2024-11-27 17:30:58,682 - INFO -   Response Time: 0.015 seconds
+2024-11-27 17:30:58,682 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-27 17:30:58,682 - INFO - Pagination Details:
+2024-11-27 17:30:58,682 - INFO -   Total Products: Not specified
+2024-11-27 17:30:58,682 - INFO -   Current Page: 1
+2024-11-27 17:30:58,683 - INFO -   Total Pages: 6
+2024-11-27 17:30:58,683 - INFO -   Items Per Page: 10
+2024-11-27 17:30:58,683 - INFO - Products Summary:
+2024-11-27 17:30:58,683 - INFO -   Products Retrieved: 10
+2024-11-27 17:30:58,683 - INFO -   Categories Present: EDC Gear, Tools, Pens, Bundles, Accessories
+2024-11-27 17:30:58,684 - INFO -   Price Range: $2.00 - $183.80
+2024-11-27 17:30:58,684 - INFO - Successfully fetched and processed product data
+2024-11-27 17:30:58,684 - INFO - Updating UI with fetched products
+2024-11-27 17:30:58,685 - INFO - UI update completed successfully
+2024-11-27 17:30:58,685 - INFO - Product fetch operation completed
+2024-11-27 17:30:58,686 - INFO - Application initialized. Log file: logs/product_dashboard_20241127_173058.log
+2024-11-27 17:30:58,686 - INFO - Starting main loop
+2024-11-27 17:31:05,295 - INFO - Attempting to delete 3 products
+2024-11-27 17:31:05,307 - ERROR - Failed to delete product 4dd0f1. Status: 500. Response: {"message":"Cast to ObjectId failed for value \"4dd0f1\" (type string) at path \"_id\" for model \"Product\""}
+2024-11-27 17:31:05,312 - ERROR - Failed to delete product 8f46e2. Status: 500. Response: {"message":"Cast to ObjectId failed for value \"8f46e2\" (type string) at path \"_id\" for model \"Product\""}
+2024-11-27 17:31:05,317 - ERROR - Failed to delete product 8f43a6. Status: 500. Response: {"message":"Cast to ObjectId failed for value \"8f43a6\" (type string) at path \"_id\" for model \"Product\""}
+2024-11-27 17:31:12,133 - INFO - Fetching products from API - Page 1
+2024-11-27 17:31:12,133 - INFO - API Request Details:
+2024-11-27 17:31:12,133 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-27 17:31:12,134 - INFO -   Method: GET
+2024-11-27 17:31:12,134 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-27 17:31:12,158 - INFO - API Response Details:
+2024-11-27 17:31:12,158 - INFO -   Status Code: 200
+2024-11-27 17:31:12,158 - INFO -   Response Time: 0.022 seconds
+2024-11-27 17:31:12,158 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-27 17:31:12,158 - INFO - Pagination Details:
+2024-11-27 17:31:12,159 - INFO -   Total Products: Not specified
+2024-11-27 17:31:12,159 - INFO -   Current Page: 1
+2024-11-27 17:31:12,159 - INFO -   Total Pages: 6
+2024-11-27 17:31:12,159 - INFO -   Items Per Page: 10
+2024-11-27 17:31:12,159 - INFO - Products Summary:
+2024-11-27 17:31:12,159 - INFO -   Products Retrieved: 10
+2024-11-27 17:31:12,159 - INFO -   Categories Present: EDC Gear, Tools, Pens, Bundles, Accessories
+2024-11-27 17:31:12,160 - INFO -   Price Range: $2.00 - $183.80
+2024-11-27 17:31:12,160 - INFO - Successfully fetched and processed product data
+2024-11-27 17:31:12,160 - INFO - Updating UI with fetched products
+2024-11-27 17:31:12,161 - INFO - UI update completed successfully
+2024-11-27 17:31:12,162 - INFO - Product fetch operation completed

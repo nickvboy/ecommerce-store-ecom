@@ -1,14 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import ProductCard from '../components/ProductCard';
 import PriceRangeSlider from '../components/PriceRangeSlider';
 import { Button } from "../components/ui/button";
 import { Checkbox } from "../components/ui/checkbox";
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "../components/ui/collapsible";
 import { ChevronDownIcon } from '@heroicons/react/24/solid';
+import { useInView } from 'react-intersection-observer';
 
 function Products() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [hasMore, setHasMore] = useState(true);
+  const [page, setPage] = useState(1);
   const [filters, setFilters] = useState({
     categories: [],
     priceRange: { min: 0, max: 500 },
@@ -17,12 +20,14 @@ function Products() {
   });
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
 
-  useEffect(() => {
-    fetchProducts();
-  }, [filters]);
+  const { ref: loadMoreRef, inView } = useInView({
+    threshold: 0.1,
+    delay: 100
+  });
 
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     try {
+      setLoading(true);
       const response = await fetch('http://localhost:5000/api/products/filter', {
         method: 'POST',
         headers: {
@@ -30,18 +35,39 @@ function Products() {
         },
         body: JSON.stringify({
           ...filters,
-          page: 1,
-          limit: 50
+          page,
+          limit: 12
         }),
       });
       const data = await response.json();
-      setProducts(data.products);
+      
+      setProducts(prev => page === 1 ? data.products : [...prev, ...data.products]);
+      setHasMore(data.products.length > 0);
       setLoading(false);
     } catch (error) {
       console.error('Error fetching products:', error);
       setLoading(false);
     }
-  };
+  }, [filters, page]);
+
+  useEffect(() => {
+    setProducts([]);
+    setPage(1);
+    setHasMore(true);
+  }, [filters]);
+
+  useEffect(() => {
+    if (page === 1) {
+      fetchProducts();
+    }
+  }, [fetchProducts, page]);
+
+  useEffect(() => {
+    if (inView && !loading && hasMore) {
+      setPage(prev => prev + 1);
+      fetchProducts();
+    }
+  }, [inView, loading, hasMore, fetchProducts]);
 
   const handlePriceRangeChange = (newRange) => {
     setFilters(prev => ({
@@ -119,15 +145,24 @@ function Products() {
 
         {/* Product Grid */}
         <div className="flex-1">
-          {loading ? (
-            <div>Loading...</div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {products.map((product) => (
-                <ProductCard key={product._id} product={product} />
-              ))}
-            </div>
-          )}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {products.map((product) => (
+              <ProductCard key={product._id} product={product} />
+            ))}
+          </div>
+
+          <div ref={loadMoreRef} className="mt-8 text-center">
+            {loading && (
+              <div className="flex justify-center items-center space-x-2">
+                <div className="w-4 h-4 rounded-full bg-primary-100 animate-bounce" />
+                <div className="w-4 h-4 rounded-full bg-primary-100 animate-bounce [animation-delay:-.3s]" />
+                <div className="w-4 h-4 rounded-full bg-primary-100 animate-bounce [animation-delay:-.5s]" />
+              </div>
+            )}
+            {!hasMore && products.length > 0 && (
+              <p className="text-text-200">No more products to load</p>
+            )}
+          </div>
         </div>
       </div>
     </div>

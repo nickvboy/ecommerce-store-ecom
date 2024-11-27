@@ -1,0 +1,34 @@
+2024-11-27 17:29:36,772 - INFO - Logging initialized
+2024-11-27 17:29:36,772 - INFO - Starting Product Dashboard application
+2024-11-27 17:29:36,870 - INFO - Initializing ProductDashboard
+2024-11-27 17:29:36,897 - INFO - Performing initial data fetch
+2024-11-27 17:29:36,897 - INFO - Fetching products from API - Page 1
+2024-11-27 17:29:36,897 - INFO - API Request Details:
+2024-11-27 17:29:36,898 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-27 17:29:36,898 - INFO -   Method: GET
+2024-11-27 17:29:36,898 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-27 17:29:36,966 - INFO - API Response Details:
+2024-11-27 17:29:36,967 - INFO -   Status Code: 200
+2024-11-27 17:29:36,967 - INFO -   Response Time: 0.064 seconds
+2024-11-27 17:29:36,967 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-27 17:29:36,968 - INFO - Pagination Details:
+2024-11-27 17:29:36,968 - INFO -   Total Products: Not specified
+2024-11-27 17:29:36,968 - INFO -   Current Page: 1
+2024-11-27 17:29:36,968 - INFO -   Total Pages: 6
+2024-11-27 17:29:36,969 - INFO -   Items Per Page: 10
+2024-11-27 17:29:36,969 - INFO - Products Summary:
+2024-11-27 17:29:36,969 - INFO -   Products Retrieved: 10
+2024-11-27 17:29:36,969 - INFO -   Categories Present: Bundles, EDC Gear, Accessories, Pens, Tools
+2024-11-27 17:29:36,969 - INFO -   Price Range: $2.00 - $183.80
+2024-11-27 17:29:36,969 - INFO - Successfully fetched and processed product data
+2024-11-27 17:29:36,970 - INFO - Updating UI with fetched products
+2024-11-27 17:29:36,970 - INFO - UI update completed successfully
+2024-11-27 17:29:36,970 - INFO - Product fetch operation completed
+2024-11-27 17:29:36,971 - INFO - Application initialized. Log file: logs/product_dashboard_20241127_172936.log
+2024-11-27 17:29:36,971 - INFO - Starting main loop
+2024-11-27 17:29:47,035 - INFO - Attempting to delete 3 products
+2024-11-27 17:29:47,035 - ERROR - Error during bulk deletion: name 'API_BASE_URL' is not defined
+Traceback (most recent call last):
+  File "c:/Users/nickv/Downloads/tester/ecommerce-store-ecom/backend/scripts/product_dashboard.py", line 665, in delete_selected_products
+    f'{API_BASE_URL}/products/{product_id}',
+NameError: name 'API_BASE_URL' is not defined

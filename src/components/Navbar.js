@@ -76,20 +76,20 @@ function Navbar() {
 
   return (
     <nav className="bg-bg-100 text-text-100 sticky top-0 z-50">
-      <div className="flex justify-between items-center h-16 px-4 md:px-8 lg:px-[72px]">
+      <div className="flex justify-between items-center h-20 px-6 md:px-10 lg:px-[88px]">
         {/* Mobile Menu Button */}
         <button 
           className="lg:hidden text-text-100 hover:text-primary-100"
           onClick={() => setIsMobileMenuOpen(true)}
         >
-          <Bars3Icon className="h-6 w-6" />
+          <Bars3Icon className="h-8 w-8" />
         </button>
 
         {/* Logo */}
         <Link to="/" className="text-xl font-bold text-primary-100">
           <svg
-            width="40"
-            height="40"
+            width="48"
+            height="48"
             viewBox="0 0 40 40"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -117,8 +117,8 @@ function Navbar() {
             />
           </svg>
           <svg
-            width="32"
-            height="32"
+            width="40"
+            height="40"
             viewBox="0 0 40 40"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -148,39 +148,39 @@ function Navbar() {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center justify-center flex-1 space-x-12">
-          <Link to="/" className="font-bold relative group text-sm tracking-wide">
+        <div className="hidden lg:flex items-center justify-center flex-1 space-x-16">
+          <Link to="/" className="font-bold relative group text-base tracking-wide">
             <span className="hover:text-primary-100 transition-colors">Home</span>
             <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary-100 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
           </Link>
-          <Link to="/gear" className="font-bold relative group text-sm tracking-wide">
+          <Link to="/gear" className="font-bold relative group text-base tracking-wide">
             <span className="hover:text-primary-100 transition-colors">Gear</span>
             <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary-100 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
           </Link>
-          <Link to="/clothing" className="font-bold relative group text-sm tracking-wide">
+          <Link to="/clothing" className="font-bold relative group text-base tracking-wide">
             <span className="hover:text-primary-100 transition-colors">Clothing</span>
             <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary-100 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
           </Link>
-          <Link to="/products" className="font-bold relative group text-sm tracking-wide">
+          <Link to="/products" className="font-bold relative group text-base tracking-wide">
             <span className="hover:text-primary-100 transition-colors">All Products</span>
             <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary-100 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
           </Link>
-          <Link to="/bfcm" className="font-bold relative group text-sm tracking-wide">
+          <Link to="/bfcm" className="font-bold relative group text-base tracking-wide">
             <span className="hover:text-primary-100 transition-colors">BFCM</span>
             <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary-100 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
           </Link>
         </div>
         
         {/* Icons */}
-        <div className="flex items-center space-x-4 md:space-x-6">
+        <div className="flex items-center space-x-6 md:space-x-8">
           <button className="hidden md:block hover:text-primary-100 transition-colors">
-            <MagnifyingGlassIcon className="h-5 w-5" />
+            <MagnifyingGlassIcon className="h-7 w-7" />
           </button>
           <button className="hidden md:block hover:text-primary-100 transition-colors">
-            <UserIcon className="h-5 w-5" />
+            <UserIcon className="h-7 w-7" />
           </button>
           <button className="hover:text-primary-100 transition-colors">
-            <ShoppingCartIcon className="h-5 w-5" />
+            <ShoppingCartIcon className="h-7 w-7" />
           </button>
         </div>
       </div>
