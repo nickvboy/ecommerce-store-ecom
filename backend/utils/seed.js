@@ -1,13 +1,14 @@
+const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '../.env') });
-const { seedDB } = require('./seedData');
-const { seedImages } = require('./seedImages');
+const seedProducts = require('./seedProducts');
+const seedReviews = require('./seedReviews');
+const seedImages = require('./seedImages');
 
 async function seed() {
     try {
-        // First seed the products and reviews
-        await seedDB();
-        
-        // Then seed the images
+        // Seed everything in sequence
+        await seedProducts();
+        await seedReviews();
         await seedImages();
         
         console.log('All seeding completed successfully');
@@ -18,4 +19,8 @@ async function seed() {
     }
 }
 
-seed(); 
+if (require.main === module) {
+    seed();
+}
+
+module.exports = seed; 
