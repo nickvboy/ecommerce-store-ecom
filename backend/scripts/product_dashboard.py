@@ -5,6 +5,12 @@ from decimal import Decimal
 import logging
 import os
 from datetime import datetime
+import cloudinary
+import cloudinary.uploader
+from tkinter import filedialog
+from PIL import Image, ImageTk
+from dotenv import load_dotenv
+import time
 
 # Configure logging
 def setup_logging():
@@ -31,6 +37,15 @@ def setup_logging():
 # Add this near the top of the file with other imports
 API_BASE_URL = 'http://localhost:5000/api'
 
+# After API_BASE_URL definition
+load_dotenv()
+cloudinary.config(
+    cloud_name=os.getenv('CLOUDINARY_CLOUD_NAME'),
+    api_key=os.getenv('CLOUDINARY_API_KEY'),
+    api_secret=os.getenv('CLOUDINARY_API_SECRET'),
+    secure=True
+)
+
 class ProductDashboard:
     def __init__(self, root):
         logging.info('Initializing ProductDashboard')
@@ -48,6 +63,8 @@ class ProductDashboard:
         
         # Store the API base URL as instance variable
         self.api_base_url = API_BASE_URL
+        
+        self.selected_images = []  # Add this to track selected images
         
         try:
             # Configure style
@@ -217,24 +234,43 @@ class ProductDashboard:
             buttons_frame,
             text="Delete Selected",
             command=self.delete_selected_products,
-            state='disabled'  # Initially disabled
+            state='disabled'
         )
         self.delete_button.grid(row=0, column=0, padx=5)
         
-        # Existing buttons
+        # Edit button
+        self.edit_button = ttk.Button(
+            buttons_frame,
+            text="Edit Product",
+            command=self.show_edit_product_dialog,
+            state='disabled'  # Enable only when one product selected
+        )
+        self.edit_button.grid(row=0, column=1, padx=5)
+        
+        # Upload Image button
+        self.upload_image_button = ttk.Button(
+            buttons_frame,
+            text="Upload Images",
+            command=self.show_image_upload_dialog,
+            state='disabled'
+        )
+        self.upload_image_button.grid(row=0, column=2, padx=5)
+        
+        # Add Product button
         self.add_product_button = ttk.Button(
             buttons_frame,
             text="Add Product",
             command=self.show_add_product_dialog
         )
-        self.add_product_button.grid(row=0, column=1, padx=5)
+        self.add_product_button.grid(row=0, column=3, padx=5)
         
+        # Refresh button
         self.refresh_button = ttk.Button(
             buttons_frame,
             text="Refresh Data",
             command=self.fetch_products
         )
-        self.refresh_button.grid(row=0, column=2, padx=5)
+        self.refresh_button.grid(row=0, column=4, padx=5)
 
     def fetch_products(self):
         """Fetch products from the API with pagination"""
@@ -527,52 +563,156 @@ class ProductDashboard:
             fields['stock'] = ttk.Entry(stock_frame)
             fields['stock'].pack(side=tk.LEFT, expand=True, fill=tk.X, padx=(10, 0))
             
-            def validate_fields():
-                """Validate form fields"""
-                errors = []
-                
-                # Required fields
-                if not fields['name'].get().strip():
-                    errors.append("Name is required")
-                if not fields['category'].get():
-                    errors.append("Category is required")
-                if not fields['description'].get("1.0", tk.END).strip():
-                    errors.append("Description is required")
-                
-                # Numeric validations
-                try:
-                    price = float(fields['price'].get())
-                    if price <= 0:
-                        errors.append("Price must be greater than 0")
-                except ValueError:
-                    errors.append("Price must be a valid number")
-                
-                try:
-                    if fields['originalPrice'].get().strip():
-                        original_price = float(fields['originalPrice'].get())
-                        if original_price <= 0:
-                            errors.append("Original price must be greater than 0")
-                except ValueError:
-                    errors.append("Original price must be a valid number")
-                
-                try:
-                    stock = int(fields['stock'].get())
-                    if stock < 0:
-                        errors.append("Stock cannot be negative")
-                except ValueError:
-                    errors.append("Stock must be a valid number")
-                
-                return errors
+            # Add Images Section after Inventory Section
+            images_frame = ttk.LabelFrame(main_container, text="Images", padding="10")
+            images_frame.pack(fill=tk.X, pady=(0, 15))
             
+            # Existing Images List
+            existing_images_frame = ttk.Frame(images_frame)
+            existing_images_frame.pack(fill=tk.X, pady=5)
+            
+            ttk.Label(existing_images_frame, text="Current Images:").pack(anchor=tk.W)
+            
+            # Listbox for existing images
+            existing_images_list = tk.Listbox(existing_images_frame, height=4)
+            existing_images_list.pack(fill=tk.X, expand=True)
+            
+            # Populate existing images
+            for image in product.get('images', []):
+                existing_images_list.insert(tk.END, f"Image {image.get('order', 0) + 1}")
+            
+            # Image control buttons
+            image_controls_frame = ttk.Frame(images_frame)
+            image_controls_frame.pack(fill=tk.X, pady=5)
+            
+            def move_image_up():
+                sel = existing_images_list.curselection()
+                if sel and sel[0] > 0:
+                    idx = sel[0]
+                    # Swap images in product data
+                    product['images'][idx], product['images'][idx-1] = \
+                        product['images'][idx-1], product['images'][idx]
+                    # Update display
+                    existing_images_list.delete(0, tk.END)
+                    for image in product['images']:
+                        existing_images_list.insert(tk.END, f"Image {image.get('order', 0) + 1}")
+                    existing_images_list.selection_set(idx-1)
+
+            def move_image_down():
+                sel = existing_images_list.curselection()
+                if sel and sel[0] < existing_images_list.size() - 1:
+                    idx = sel[0]
+                    # Swap images in product data
+                    product['images'][idx], product['images'][idx+1] = \
+                        product['images'][idx+1], product['images'][idx]
+                    # Update display
+                    existing_images_list.delete(0, tk.END)
+                    for image in product['images']:
+                        existing_images_list.insert(tk.END, f"Image {image.get('order', 0) + 1}")
+                    existing_images_list.selection_set(idx+1)
+
+            def delete_image():
+                sel = existing_images_list.curselection()
+                if sel:
+                    idx = sel[0]
+                    if messagebox.askyesno("Confirm Delete", "Delete selected image?"):
+                        # Remove from product data
+                        del product['images'][idx]
+                        # Update display
+                        existing_images_list.delete(idx)
+
+            # Image control buttons
+            ttk.Button(
+                image_controls_frame,
+                text="Move Up",
+                command=move_image_up
+            ).pack(side=tk.LEFT, padx=5)
+            
+            ttk.Button(
+                image_controls_frame,
+                text="Move Down",
+                command=move_image_down
+            ).pack(side=tk.LEFT, padx=5)
+            
+            ttk.Button(
+                image_controls_frame,
+                text="Delete",
+                command=delete_image
+            ).pack(side=tk.LEFT, padx=5)
+
+            # New Images Section
+            new_images_frame = ttk.Frame(images_frame)
+            new_images_frame.pack(fill=tk.X, pady=5)
+            
+            ttk.Label(new_images_frame, text="New Images:").pack(anchor=tk.W)
+            
+            # List for new images
+            new_images_list = tk.Listbox(new_images_frame, height=4)
+            new_images_list.pack(fill=tk.X, expand=True)
+
+            def add_new_images():
+                files = filedialog.askopenfilenames(
+                    title="Select Images",
+                    filetypes=[("Image files", "*.png *.jpg *.jpeg *.gif *.bmp")]
+                )
+                for file in files:
+                    new_images_list.insert(tk.END, os.path.basename(file))
+                    self.selected_images.append(file)
+
+            def remove_new_image():
+                sel = new_images_list.curselection()
+                if sel:
+                    idx = sel[0]
+                    new_images_list.delete(idx)
+                    self.selected_images.pop(idx)
+
+            # New images buttons
+            new_images_buttons = ttk.Frame(images_frame)
+            new_images_buttons.pack(fill=tk.X, pady=5)
+            
+            ttk.Button(
+                new_images_buttons,
+                text="Add New Images",
+                command=add_new_images
+            ).pack(side=tk.LEFT, padx=5)
+            
+            ttk.Button(
+                new_images_buttons,
+                text="Remove Selected",
+                command=remove_new_image
+            ).pack(side=tk.LEFT, padx=5)
+
+            def upload_images():
+                uploaded_urls = []
+                for image_path in self.selected_images:
+                    try:
+                        # Add timestamp to upload request
+                        result = cloudinary.uploader.upload(
+                            image_path,
+                            timestamp=int(time.time())  # Add current timestamp
+                        )
+                        uploaded_urls.append({
+                            'url': result['secure_url']
+                        })
+                    except Exception as e:
+                        logging.error(f"Failed to upload image {image_path}: {str(e)}")
+                        raise e
+                return uploaded_urls
+
             def submit():
                 """Handle form submission"""
                 try:
                     # Validate fields
-                    errors = validate_fields()
+                    errors = self.validate_fields(fields)
                     if errors:
                         messagebox.showerror("Validation Error", "\n".join(errors))
                         return
                     
+                    # Upload images first
+                    image_urls = []
+                    if self.selected_images:
+                        image_urls = upload_images()
+
                     # Collect data
                     data = {
                         'name': fields['name'].get().strip(),
@@ -582,27 +722,41 @@ class ProductDashboard:
                         'stock': int(fields['stock'].get())
                     }
                     
-                    # Only include sizes if enabled
-                    if has_sizes_var.get():
-                        data['sizes'] = [size for size, var in fields['sizes'].items() if var.get()]
-                    
-                    # Add optional original price if provided
+                    # Add optional fields
                     if fields['originalPrice'].get().strip():
                         data['originalPrice'] = float(fields['originalPrice'].get())
-                    
-                    # Make API request
+                    if has_sizes_var.get():
+                        data['sizes'] = [size for size, var in fields['sizes'].items() if var.get()]
+
+                    # Create product
                     response = requests.post(
-                        'http://localhost:5000/api/products',
+                        f'{API_BASE_URL}/products',
                         json=data
                     )
-                    
+
                     if response.status_code == 201:
+                        product_data = response.json()
+                        
+                        # If we have images, add them to the product
+                        if image_urls:
+                            image_response = requests.post(
+                                f'{API_BASE_URL}/products/{product_data["_id"]}/images',
+                                json={'images': image_urls}
+                            )
+                            
+                            if not image_response.ok:
+                                logging.error(f"Failed to add images: {image_response.text}")
+                                messagebox.showwarning(
+                                    "Warning",
+                                    "Product created but failed to add images"
+                                )
+
                         messagebox.showinfo("Success", "Product added successfully!")
                         dialog.destroy()
-                        self.fetch_products()  # Refresh the product list
+                        self.fetch_products()
                     else:
                         messagebox.showerror("Error", f"Failed to add product: {response.text}")
-                
+
                 except Exception as e:
                     logging.error(f"Error adding product: {str(e)}", exc_info=True)
                     messagebox.showerror("Error", f"Failed to add product: {str(e)}")
@@ -649,10 +803,14 @@ class ProductDashboard:
     def on_select(self, event):
         """Handle selection changes"""
         self.selected_items = set(self.tree.selection())
-        # Enable/disable delete button based on selection
-        self.delete_button.config(
-            state='normal' if self.selected_items else 'disabled'
-        )
+        # Enable/disable buttons based on selection
+        has_selection = len(self.selected_items) > 0
+        single_selection = len(self.selected_items) == 1
+        
+        self.delete_button.config(state='normal' if has_selection else 'disabled')
+        self.upload_image_button.config(state='normal' if single_selection else 'disabled')
+        self.edit_button.config(state='normal' if single_selection else 'disabled')
+        
         logging.debug(f'Selected items: {len(self.selected_items)}')
 
     def delete_selected_products(self):
@@ -732,6 +890,563 @@ class ProductDashboard:
             # Clear selection
             self.selected_items.clear()
             self.delete_button.config(state='disabled')
+
+    def show_edit_product_dialog(self):
+        """Show dialog for editing an existing product"""
+        if not self.selected_items or len(self.selected_items) > 1:
+            messagebox.showwarning("Warning", "Please select exactly one product to edit")
+            return
+        
+        try:
+            # Get selected product data
+            item_id = list(self.selected_items)[0]
+            values = self.tree.item(item_id)['values']
+            product_id = values[0]  # MongoDB ID from first column
+            
+            # Fetch full product data
+            response = requests.get(f'{self.api_base_url}/products/{product_id}')
+            if not response.ok:
+                raise Exception(f"Failed to fetch product: {response.text}")
+            
+            product = response.json()
+            
+            # Create edit dialog
+            dialog = tk.Toplevel(self.root)
+            dialog.title("Edit Product")
+            dialog.geometry("500x700")
+            dialog.transient(self.root)
+            
+            # Main container with padding
+            main_container = ttk.Frame(dialog, padding="20")
+            main_container.pack(fill=tk.BOTH, expand=True)
+            
+            # Create form fields
+            fields = {}
+            
+            # Name field
+            name_frame = ttk.Frame(main_container)
+            name_frame.pack(fill=tk.X, pady=5)
+            ttk.Label(name_frame, text="Name *", width=15).pack(side=tk.LEFT)
+            fields['name'] = ttk.Entry(name_frame)
+            fields['name'].pack(side=tk.LEFT, expand=True, fill=tk.X, padx=(10, 0))
+            
+            # Category field with predefined options
+            category_frame = ttk.Frame(main_container)
+            category_frame.pack(fill=tk.X, pady=5)
+            ttk.Label(category_frame, text="Category *", width=15).pack(side=tk.LEFT)
+            categories = ["EDC Gear", "Tools", "Pens", "Accessories", "Bundles", "Other"]
+            fields['category'] = ttk.Combobox(category_frame, values=categories, state="readonly")
+            fields['category'].pack(side=tk.LEFT, expand=True, fill=tk.X, padx=(10, 0))
+            
+            # Has Sizes checkbox
+            has_sizes_frame = ttk.Frame(main_container)
+            has_sizes_frame.pack(fill=tk.X, pady=5)
+            ttk.Label(has_sizes_frame, text="Has Sizes", width=15).pack(side=tk.LEFT)
+            has_sizes_var = tk.BooleanVar(value=False)
+            ttk.Checkbutton(
+                has_sizes_frame,
+                variable=has_sizes_var,
+                command=lambda: toggle_size_frame(has_sizes_var.get())
+            ).pack(side=tk.LEFT, padx=(10, 0))
+            
+            # Size Selection frame (for clothing/wearable items)
+            size_frame = ttk.Frame(main_container)
+            
+            def toggle_size_frame(show):
+                """Toggle visibility of size selection frame"""
+                if show:
+                    size_frame.pack(fill=tk.X, pady=5)
+                else:
+                    size_frame.pack_forget()
+            
+            # Initially hide size frame
+            toggle_size_frame(False)
+            
+            ttk.Label(size_frame, text="Sizes", width=15).pack(side=tk.LEFT)
+            
+            # Create a frame for the checkboxes
+            sizes_checkbox_frame = ttk.Frame(size_frame)
+            sizes_checkbox_frame.pack(side=tk.LEFT, fill=tk.X, padx=(10, 0))
+            
+            # Available sizes
+            available_sizes = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL']
+            size_vars = {}
+            
+            # Create checkboxes for each size
+            for i, size in enumerate(available_sizes):
+                var = tk.BooleanVar()
+                size_vars[size] = var
+                ttk.Checkbutton(
+                    sizes_checkbox_frame,
+                    text=size,
+                    variable=var
+                ).grid(row=0, column=i, padx=5)
+            
+            fields['sizes'] = size_vars  # Add to fields dictionary
+            
+            # Description field
+            description_frame = ttk.Frame(main_container)
+            description_frame.pack(fill=tk.X, pady=5)
+            ttk.Label(description_frame, text="Description *", width=15).pack(side=tk.LEFT)
+            fields['description'] = tk.Text(description_frame, height=4, wrap=tk.WORD)
+            fields['description'].pack(side=tk.LEFT, expand=True, fill=tk.X, padx=(10, 0))
+            
+            # Pricing Section
+            pricing_frame = ttk.LabelFrame(main_container, text="Pricing", padding="10")
+            pricing_frame.pack(fill=tk.X, pady=(0, 15))
+            
+            # Price field
+            price_frame = ttk.Frame(pricing_frame)
+            price_frame.pack(fill=tk.X, pady=5)
+            ttk.Label(price_frame, text="Price ($) *", width=15).pack(side=tk.LEFT)
+            fields['price'] = ttk.Entry(price_frame)
+            fields['price'].pack(side=tk.LEFT, expand=True, fill=tk.X, padx=(10, 0))
+            
+            # Original Price field
+            original_price_frame = ttk.Frame(pricing_frame)
+            original_price_frame.pack(fill=tk.X, pady=5)
+            ttk.Label(original_price_frame, text="Original Price ($)", width=15).pack(side=tk.LEFT)
+            fields['originalPrice'] = ttk.Entry(original_price_frame)
+            fields['originalPrice'].pack(side=tk.LEFT, expand=True, fill=tk.X, padx=(10, 0))
+            
+            # Inventory Section
+            inventory_frame = ttk.LabelFrame(main_container, text="Inventory", padding="10")
+            inventory_frame.pack(fill=tk.X, pady=(0, 15))
+            
+            # Stock field
+            stock_frame = ttk.Frame(inventory_frame)
+            stock_frame.pack(fill=tk.X, pady=5)
+            ttk.Label(stock_frame, text="Stock *", width=15).pack(side=tk.LEFT)
+            fields['stock'] = ttk.Entry(stock_frame)
+            fields['stock'].pack(side=tk.LEFT, expand=True, fill=tk.X, padx=(10, 0))
+            
+            # Populate fields with existing data
+            fields['name'].insert(0, product['name'])
+            fields['category'].set(product['category'])
+            fields['description'].insert("1.0", product['description'])
+            fields['price'].insert(0, str(product['price']))
+            if product.get('originalPrice'):
+                fields['originalPrice'].insert(0, str(product['originalPrice']))
+            fields['stock'].insert(0, str(product['stock']))
+            
+            # Set size checkboxes if product has sizes
+            if product.get('sizes'):
+                has_sizes_var.set(True)
+                for size, var in fields['sizes'].items():
+                    var.set(size in product['sizes'])
+            
+            # Images Section
+            images_frame = ttk.LabelFrame(main_container, text="Images", padding="10")
+            images_frame.pack(fill=tk.X, pady=(0, 15))
+            
+            # Existing Images List
+            existing_images_frame = ttk.Frame(images_frame)
+            existing_images_frame.pack(fill=tk.X, pady=5)
+            
+            ttk.Label(existing_images_frame, text="Current Images:").pack(anchor=tk.W)
+            
+            # Listbox for existing images
+            existing_images_list = tk.Listbox(existing_images_frame, height=4)
+            existing_images_list.pack(fill=tk.X, expand=True)
+            
+            # Populate existing images
+            for image in product.get('images', []):
+                existing_images_list.insert(tk.END, f"Image {image.get('order', 0) + 1}")
+            
+            # Image control buttons
+            image_controls_frame = ttk.Frame(images_frame)
+            image_controls_frame.pack(fill=tk.X, pady=5)
+            
+            def move_image_up():
+                sel = existing_images_list.curselection()
+                if sel and sel[0] > 0:
+                    idx = sel[0]
+                    # Swap images in product data
+                    product['images'][idx], product['images'][idx-1] = \
+                        product['images'][idx-1], product['images'][idx]
+                    # Update display
+                    existing_images_list.delete(0, tk.END)
+                    for image in product['images']:
+                        existing_images_list.insert(tk.END, f"Image {image.get('order', 0) + 1}")
+                    existing_images_list.selection_set(idx-1)
+
+            def move_image_down():
+                sel = existing_images_list.curselection()
+                if sel and sel[0] < existing_images_list.size() - 1:
+                    idx = sel[0]
+                    # Swap images in product data
+                    product['images'][idx], product['images'][idx+1] = \
+                        product['images'][idx+1], product['images'][idx]
+                    # Update display
+                    existing_images_list.delete(0, tk.END)
+                    for image in product['images']:
+                        existing_images_list.insert(tk.END, f"Image {image.get('order', 0) + 1}")
+                    existing_images_list.selection_set(idx+1)
+
+            def delete_image():
+                sel = existing_images_list.curselection()
+                if sel:
+                    idx = sel[0]
+                    if messagebox.askyesno("Confirm Delete", "Delete selected image?"):
+                        # Remove from product data
+                        del product['images'][idx]
+                        # Update display
+                        existing_images_list.delete(idx)
+
+            # Image control buttons
+            ttk.Button(
+                image_controls_frame,
+                text="Move Up",
+                command=move_image_up
+            ).pack(side=tk.LEFT, padx=5)
+            
+            ttk.Button(
+                image_controls_frame,
+                text="Move Down",
+                command=move_image_down
+            ).pack(side=tk.LEFT, padx=5)
+            
+            ttk.Button(
+                image_controls_frame,
+                text="Delete",
+                command=delete_image
+            ).pack(side=tk.LEFT, padx=5)
+
+            # New Images Section
+            new_images_frame = ttk.Frame(images_frame)
+            new_images_frame.pack(fill=tk.X, pady=5)
+            
+            ttk.Label(new_images_frame, text="New Images:").pack(anchor=tk.W)
+            
+            # List for new images
+            new_images_list = tk.Listbox(new_images_frame, height=4)
+            new_images_list.pack(fill=tk.X, expand=True)
+
+            def add_new_images():
+                files = filedialog.askopenfilenames(
+                    title="Select Images",
+                    filetypes=[("Image files", "*.png *.jpg *.jpeg *.gif *.bmp")]
+                )
+                for file in files:
+                    new_images_list.insert(tk.END, os.path.basename(file))
+                    self.selected_images.append(file)
+
+            def remove_new_image():
+                sel = new_images_list.curselection()
+                if sel:
+                    idx = sel[0]
+                    new_images_list.delete(idx)
+                    self.selected_images.pop(idx)
+
+            # New images buttons
+            new_images_buttons = ttk.Frame(images_frame)
+            new_images_buttons.pack(fill=tk.X, pady=5)
+            
+            ttk.Button(
+                new_images_buttons,
+                text="Add New Images",
+                command=add_new_images
+            ).pack(side=tk.LEFT, padx=5)
+            
+            ttk.Button(
+                new_images_buttons,
+                text="Remove Selected",
+                command=remove_new_image
+            ).pack(side=tk.LEFT, padx=5)
+
+            def upload_images():
+                uploaded_urls = []
+                for image_path in self.selected_images:
+                    try:
+                        # Add timestamp to upload request
+                        result = cloudinary.uploader.upload(
+                            image_path,
+                            timestamp=int(time.time())  # Add current timestamp
+                        )
+                        uploaded_urls.append({
+                            'url': result['secure_url']
+                        })
+                    except Exception as e:
+                        logging.error(f"Failed to upload image {image_path}: {str(e)}")
+                        raise e
+                return uploaded_urls
+
+            def submit():
+                try:
+                    # Validate fields
+                    errors = self.validate_fields(fields)
+                    if errors:
+                        messagebox.showerror("Validation Error", "\n".join(errors))
+                        return
+                    
+                    # Handle image reordering if changed
+                    if product.get('images'):
+                        reorder_response = requests.patch(
+                            f'{self.api_base_url}/products/{product_id}/images/reorder',
+                            json={
+                                'imageOrders': [
+                                    {'id': img['_id'], 'order': idx}
+                                    for idx, img in enumerate(product['images'])
+                                ]
+                            }
+                        )
+                        if not reorder_response.ok:
+                            logging.error(f"Failed to reorder images: {reorder_response.text}")
+
+                    # Upload any new images
+                    if self.selected_images:
+                        image_urls = upload_images()
+                        if image_urls:
+                            image_response = requests.post(
+                                f'{self.api_base_url}/products/{product_id}/images',
+                                json={'images': image_urls}
+                            )
+                            if not image_response.ok:
+                                logging.error(f"Failed to add new images: {image_response.text}")
+
+                    # Collect data
+                    data = {
+                        'name': fields['name'].get().strip(),
+                        'category': fields['category'].get(),
+                        'description': fields['description'].get("1.0", tk.END).strip(),
+                        'price': float(fields['price'].get()),
+                        'stock': int(fields['stock'].get())
+                    }
+                    
+                    # Add optional fields
+                    if fields['originalPrice'].get().strip():
+                        data['originalPrice'] = float(fields['originalPrice'].get())
+                    if has_sizes_var.get():
+                        data['sizes'] = [size for size, var in fields['sizes'].items() if var.get()]
+                    
+                    # Update product
+                    response = requests.put(
+                        f'{self.api_base_url}/products/{product_id}',
+                        json=data
+                    )
+                    
+                    if response.ok:
+                        messagebox.showinfo("Success", "Product updated successfully!")
+                        dialog.destroy()
+                        self.fetch_products()
+                    else:
+                        messagebox.showerror("Error", f"Failed to update product: {response.text}")
+                    
+                except Exception as e:
+                    logging.error(f"Error updating product: {str(e)}", exc_info=True)
+                    messagebox.showerror("Error", f"Failed to update product: {str(e)}")
+            
+            # Buttons frame
+            buttons_frame = ttk.Frame(main_container)
+            buttons_frame.pack(fill=tk.X, pady=(0, 10))
+            
+            # Cancel button
+            ttk.Button(
+                buttons_frame,
+                text="Cancel",
+                command=dialog.destroy
+            ).pack(side=tk.RIGHT, padx=5)
+            
+            # Submit button
+            ttk.Button(
+                buttons_frame,
+                text="Update Product",
+                command=submit,
+                style="Accent.TButton"  # Custom style for primary action
+            ).pack(side=tk.RIGHT)
+            
+            # Create custom style for the primary button
+            style = ttk.Style()
+            style.configure("Accent.TButton", background="#007bff")
+            
+            # Center the dialog on the screen
+            dialog.update_idletasks()
+            width = dialog.winfo_width()
+            height = dialog.winfo_height()
+            x = (dialog.winfo_screenwidth() // 2) - (width // 2)
+            y = (dialog.winfo_screenheight() // 2) - (height // 2)
+            dialog.geometry(f'{width}x{height}+{x}+{y}')
+            
+            # Make dialog modal
+            dialog.grab_set()
+            dialog.focus_set()
+            
+        except Exception as e:
+            logging.error(f"Error showing edit dialog: {str(e)}", exc_info=True)
+            messagebox.showerror("Error", f"Failed to show edit dialog: {str(e)}")
+
+    def show_image_upload_dialog(self):
+        """Show dialog for uploading images to an existing product"""
+        if not self.selected_items or len(self.selected_items) > 1:
+            messagebox.showwarning("Warning", "Please select exactly one product to add images")
+            return
+        
+        try:
+            # Get selected product data
+            item_id = list(self.selected_items)[0]
+            values = self.tree.item(item_id)['values']
+            product_id = values[0]  # MongoDB ID from first column
+            
+            dialog = tk.Toplevel(self.root)
+            dialog.title("Upload Images")
+            dialog.geometry("500x400")
+            dialog.transient(self.root)
+            
+            # Main container
+            main_container = ttk.Frame(dialog, padding="20")
+            main_container.pack(fill=tk.BOTH, expand=True)
+            
+            # Image preview frame
+            preview_frame = ttk.Frame(main_container)
+            preview_frame.pack(fill=tk.X, pady=5)
+            
+            # List to store image paths and previews
+            image_listbox = tk.Listbox(preview_frame, height=10)
+            image_listbox.pack(fill=tk.BOTH, expand=True)
+            
+            def add_images():
+                files = filedialog.askopenfilenames(
+                    title="Select Images",
+                    filetypes=[("Image files", "*.png *.jpg *.jpeg *.gif *.bmp")]
+                )
+                for file in files:
+                    image_listbox.insert(tk.END, os.path.basename(file))
+                    self.selected_images.append(file)
+
+            def remove_selected_image():
+                selection = image_listbox.curselection()
+                if selection:
+                    idx = selection[0]
+                    image_listbox.delete(idx)
+                    self.selected_images.pop(idx)
+
+            def upload_images():
+                uploaded_urls = []
+                for image_path in self.selected_images:
+                    try:
+                        result = cloudinary.uploader.upload(
+                            image_path,
+                            timestamp=int(time.time())
+                        )
+                        uploaded_urls.append({
+                            'url': result['secure_url']
+                        })
+                    except Exception as e:
+                        logging.error(f"Failed to upload image {image_path}: {str(e)}")
+                        raise e
+                return uploaded_urls
+
+            def submit():
+                try:
+                    if not self.selected_images:
+                        messagebox.showwarning("Warning", "Please select images to upload")
+                        return
+                    
+                    # Upload images
+                    image_urls = upload_images()
+                    
+                    # Add images to product
+                    response = requests.post(
+                        f'{self.api_base_url}/products/{product_id}/images',
+                        json={'images': image_urls}
+                    )
+                    
+                    if response.ok:
+                        messagebox.showinfo("Success", "Images uploaded successfully!")
+                        dialog.destroy()
+                        self.fetch_products()  # Refresh product list
+                    else:
+                        messagebox.showerror("Error", f"Failed to add images: {response.text}")
+                    
+                except Exception as e:
+                    logging.error(f"Error uploading images: {str(e)}", exc_info=True)
+                    messagebox.showerror("Error", f"Failed to upload images: {str(e)}")
+
+            # Buttons frame
+            buttons_frame = ttk.Frame(main_container)
+            buttons_frame.pack(fill=tk.X, pady=10)
+            
+            ttk.Button(
+                buttons_frame,
+                text="Add Images",
+                command=add_images
+            ).pack(side=tk.LEFT, padx=5)
+            
+            ttk.Button(
+                buttons_frame,
+                text="Remove Selected",
+                command=remove_selected_image
+            ).pack(side=tk.LEFT, padx=5)
+            
+            # Submit/Cancel frame
+            submit_frame = ttk.Frame(main_container)
+            submit_frame.pack(fill=tk.X, pady=(10, 0))
+            
+            ttk.Button(
+                submit_frame,
+                text="Cancel",
+                command=dialog.destroy
+            ).pack(side=tk.RIGHT, padx=5)
+            
+            ttk.Button(
+                submit_frame,
+                text="Upload",
+                command=submit,
+                style="Accent.TButton"
+            ).pack(side=tk.RIGHT, padx=5)
+            
+            # Center dialog
+            dialog.update_idletasks()
+            width = dialog.winfo_width()
+            height = dialog.winfo_height()
+            x = (dialog.winfo_screenwidth() // 2) - (width // 2)
+            y = (dialog.winfo_screenheight() // 2) - (height // 2)
+            dialog.geometry(f'{width}x{height}+{x}+{y}')
+            
+            # Make dialog modal
+            dialog.grab_set()
+            dialog.focus_set()
+            
+        except Exception as e:
+            logging.error(f"Error showing image upload dialog: {str(e)}", exc_info=True)
+            messagebox.showerror("Error", f"Failed to show image upload dialog: {str(e)}")
+
+    def validate_fields(self, fields):
+        """Validate form fields"""
+        errors = []
+        
+        # Required fields
+        if not fields['name'].get().strip():
+            errors.append("Name is required")
+        if not fields['category'].get():
+            errors.append("Category is required")
+        if not fields['description'].get("1.0", tk.END).strip():
+            errors.append("Description is required")
+        
+        # Numeric validations
+        try:
+            price = float(fields['price'].get())
+            if price <= 0:
+                errors.append("Price must be greater than 0")
+        except ValueError:
+            errors.append("Price must be a valid number")
+        
+        try:
+            if fields['originalPrice'].get().strip():
+                original_price = float(fields['originalPrice'].get())
+                if original_price <= 0:
+                    errors.append("Original price must be greater than 0")
+        except ValueError:
+            errors.append("Original price must be a valid number")
+        
+        try:
+            stock = int(fields['stock'].get())
+            if stock < 0:
+                errors.append("Stock cannot be negative")
+        except ValueError:
+            errors.append("Stock must be a valid number")
+        
+        return errors
 
 def main():
     try:

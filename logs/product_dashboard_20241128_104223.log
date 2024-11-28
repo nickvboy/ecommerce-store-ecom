@@ -1,0 +1,49 @@
+2024-11-28 10:42:23,998 - INFO - Logging initialized
+2024-11-28 10:42:23,998 - INFO - Starting Product Dashboard application
+2024-11-28 10:42:24,083 - INFO - Initializing ProductDashboard
+2024-11-28 10:42:24,108 - INFO - Performing initial data fetch
+2024-11-28 10:42:24,109 - INFO - Fetching products from API - Page 1
+2024-11-28 10:42:24,109 - INFO - API Request Details:
+2024-11-28 10:42:24,109 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-28 10:42:24,109 - INFO -   Method: GET
+2024-11-28 10:42:24,109 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-28 10:42:24,146 - INFO - API Response Details:
+2024-11-28 10:42:24,146 - INFO -   Status Code: 200
+2024-11-28 10:42:24,146 - INFO -   Response Time: 0.033 seconds
+2024-11-28 10:42:24,146 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-28 10:42:24,147 - INFO - Pagination Details:
+2024-11-28 10:42:24,147 - INFO -   Total Products: Not specified
+2024-11-28 10:42:24,147 - INFO -   Current Page: 1
+2024-11-28 10:42:24,147 - INFO -   Total Pages: 6
+2024-11-28 10:42:24,147 - INFO -   Items Per Page: 10
+2024-11-28 10:42:24,148 - INFO - Products Summary:
+2024-11-28 10:42:24,148 - INFO -   Products Retrieved: 10
+2024-11-28 10:42:24,148 - INFO -   Categories Present: Accessories, Tools, Bundles, Pens, EDC Gear
+2024-11-28 10:42:24,148 - INFO -   Price Range: $28.42 - $179.00
+2024-11-28 10:42:24,148 - INFO - Successfully fetched and processed product data
+2024-11-28 10:42:24,148 - INFO - Updating UI with fetched products
+2024-11-28 10:42:24,149 - INFO - UI update completed successfully
+2024-11-28 10:42:24,150 - INFO - Product fetch operation completed
+2024-11-28 10:42:24,150 - INFO - Application initialized. Log file: logs/product_dashboard_20241128_104223.log
+2024-11-28 10:42:24,151 - INFO - Starting main loop
+2024-11-28 10:42:26,116 - INFO - Showing add product dialog
+2024-11-28 10:42:49,545 - ERROR - Failed to upload image C:/Users/nickv/Pictures/day_dry.png: Unknown API key your_actual_api_key
+2024-11-28 10:42:49,545 - ERROR - Error adding product: Unknown API key your_actual_api_key
+Traceback (most recent call last):
+  File "c:\Users\nickv\Downloads\tester\ecommerce-store-ecom\backend\scripts\product_dashboard.py", line 657, in submit
+    image_urls = upload_images()
+                 ^^^^^^^^^^^^^^^
+  File "c:\Users\nickv\Downloads\tester\ecommerce-store-ecom\backend\scripts\product_dashboard.py", line 605, in upload_images
+    raise e
+  File "c:\Users\nickv\Downloads\tester\ecommerce-store-ecom\backend\scripts\product_dashboard.py", line 596, in upload_images
+    result = cloudinary.uploader.upload(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nickv\AppData\Roaming\Python\Python312\site-packages\cloudinary\uploader.py", line 45, in upload
+    return call_cacheable_api("upload", params, file=file, **options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nickv\AppData\Roaming\Python\Python312\site-packages\cloudinary\uploader.py", line 462, in call_cacheable_api
+    result = call_api(action, params, http_headers, return_error, unsigned, file, timeout, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nickv\AppData\Roaming\Python\Python312\site-packages\cloudinary\uploader.py", line 527, in call_api
+    raise Error(result["error"]["message"])
+cloudinary.exceptions.Error: Unknown API key your_actual_api_key
