@@ -231,4 +231,50 @@ exports.reorderProductImages = async (req, res) => {
   }
 };
 
+// Update the searchProducts function
+exports.searchProducts = async (req, res) => {
+  try {
+    const { q } = req.query;
+    console.log('Search query received:', q);
+    
+    if (!q || q.length < 2) {
+      console.log('Query too short');
+      return res.json({ products: [] });
+    }
+
+    // Create a regex for title matching (case insensitive)
+    const titleRegex = new RegExp(q, 'i');
+    console.log('Title regex:', titleRegex);
+
+    // Simplified query to debug
+    const searchQuery = {
+      name: titleRegex
+    };
+
+    console.log('Search query:', JSON.stringify(searchQuery, null, 2));
+
+    // Execute search
+    const products = await Product.find(searchQuery)
+      .select('name price images category stock reviewStats')
+      .limit(10);
+
+    console.log('Found products:', products.length);
+    console.log('Product names:', products.map(p => p.name));
+
+    // Ensure we're sending JSON
+    res.setHeader('Content-Type', 'application/json');
+    res.json({
+      products,
+      total: products.length
+    });
+
+  } catch (error) {
+    console.error('Search error:', error);
+    res.status(500).json({ 
+      message: error.message,
+      error: process.env.NODE_ENV === 'development' ? error : undefined
+    });
+  }
+};
+
 // Other controller methods... 

@@ -1,30 +1,23 @@
 const express = require('express');
 const router = express.Router();
-const {
-  getProducts,
-  getProductById,
-  createProduct,
-  updateProduct,
-  deleteProduct,
-  filterProducts
-} = require('../../controllers/productController');
-const reviewController = require('../../controllers/reviewController');
+const Product = require('../../models/Product');
 
-router.route('/')
-  .get(getProducts)
-  .post(createProduct);
+// Get all products for search
+router.get('/', async (req, res) => {
+  try {
+    const products = await Product.find()
+      .select('name price images _id')
+      .limit(100); // Adjust limit as needed
+    
+    res.json({ products });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
-router.route('/filter')
-  .post(filterProducts);
-
-router.route('/:id')
-  .get(getProductById)
-  .put(updateProduct)
-  .delete(deleteProduct);
-
-// Review routes
-router.get('/:productId/reviews', reviewController.getProductReviews);
-router.post('/:productId/reviews', reviewController.createReview);
-router.patch('/reviews/:reviewId/likes', reviewController.updateReviewLikes);
+// Other routes...
+router.get('/:id', async (req, res) => {
+  // ... your existing route
+});
 
 module.exports = router; 

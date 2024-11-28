@@ -7,6 +7,7 @@ import {
   Bars3Icon, 
   XMarkIcon 
 } from '@heroicons/react/24/outline';
+import SearchOverlay from './SearchOverlay';
 
 function MobileMenu({ isOpen, onClose }) {
   return (
@@ -73,6 +74,7 @@ function MobileMenu({ isOpen, onClose }) {
 
 function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   return (
     <nav className="bg-bg-100 text-text-100 sticky top-0 z-50">
@@ -173,7 +175,10 @@ function Navbar() {
         
         {/* Icons */}
         <div className="flex items-center space-x-6 md:space-x-8">
-          <button className="hidden md:block hover:text-primary-100 transition-colors">
+          <button 
+            className="hidden md:block hover:text-primary-100 transition-colors"
+            onClick={() => setIsSearchOpen(true)}
+          >
             <MagnifyingGlassIcon className="h-7 w-7" />
           </button>
           <button className="hidden md:block hover:text-primary-100 transition-colors">
@@ -187,6 +192,12 @@ function Navbar() {
 
       {/* Mobile Menu */}
       <MobileMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
+
+      {/* SearchOverlay */}
+      <SearchOverlay 
+        isOpen={isSearchOpen} 
+        onClose={() => setIsSearchOpen(false)} 
+      />
     </nav>
   );
 }

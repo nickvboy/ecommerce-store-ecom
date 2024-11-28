@@ -4,44 +4,31 @@ const productSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    trim: true
+    text: true
   },
   description: {
     type: String,
-    required: true
+    required: true,
+    text: true
   },
   price: {
     type: Number,
-    required: true
+    required: true,
+    index: true
   },
-  originalPrice: {
-    type: Number
-  },
+  originalPrice: Number,
   category: {
     type: String,
-    required: true
+    required: true,
+    index: true
   },
-  images: [{
-    url: {
-      type: String,
-      required: true
-    },
-    order: {
-      type: Number,
-      default: 0
-    }
-  }],
-  rating: {
-    type: Number,
-    default: 0
-  },
-  reviews: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Review'
+  tags: [{
+    type: String,
+    text: true
   }],
   specifications: {
     materials: [{
-      name: String,
+      name: { type: String, text: true },
       description: String
     }],
     dimensions: {
@@ -51,92 +38,107 @@ const productSchema = new mongoose.Schema({
       weight: Number
     }
   },
-  variants: [{
-    name: { type: String },
-    type: { type: String },
-    options: [{
-      value: { type: String },
-      available: { type: Boolean },
-      priceModifier: { type: Number }
-    }]
+  images: [{
+    url: String,
+    order: Number
   }],
   stock: {
     type: Number,
-    required: true
+    default: 0,
+    index: true
   },
-  tags: [String],
-  featured: {
-    type: Boolean,
-    default: false
+  reviewStats: {
+    averageRating: { type: Number, default: 0, index: true },
+    totalReviews: { type: Number, default: 0 }
   },
   createdAt: {
     type: Date,
-    default: Date.now
-  },
-  reviewStats: {
-    averageRating: { type: Number, default: 0 },
-    totalReviews: { type: Number, default: 0 },
-    ratingDistribution: {
-      5: { type: Number, default: 0 },
-      4: { type: Number, default: 0 },
-      3: { type: Number, default: 0 },
-      2: { type: Number, default: 0 },
-      1: { type: Number, default: 0 }
-    }
-  },
-  sizes: {
-    type: [String],
-    enum: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
-    default: []
+    default: Date.now,
+    index: true
   }
 });
 
-// Add indexes for common queries
-productSchema.index({ name: 'text', description: 'text' });
-productSchema.index({ category: 1 });
-productSchema.index({ price: 1 });
-productSchema.index({ rating: -1 });
+// Create compound text index with weights
+productSchema.index({
+  name: 'text',
+  description: 'text',
+  'specifications.materials.name': 'text',
+  tags: 'text',
+  category: 'text'
+}, {
+  weights: {
+    name: 15,
+    description: 3,
+    category: 2,
+    tags: 1,
+    'specifications.materials.name': 1
+  },
+  name: "ProductSearchIndex"
+});
 
-// Method to update review statistics
-productSchema.methods.updateReviewStats = async function() {
-  const Review = mongoose.model('Review');
-  const reviews = await Review.find({ product: this._id });
-  
-  if (reviews.length === 0) {
-    this.reviewStats = {
-      averageRating: 0,
-      totalReviews: 0,
-      ratingDistribution: { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 }
-    };
-  } else {
-    const total = reviews.reduce((acc, review) => acc + review.rating, 0);
-    const averageRating = parseFloat((total / reviews.length).toFixed(2));
-    const ratingDistribution = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
-    
-    reviews.forEach(review => {
-      ratingDistribution[review.rating]++;
-    });
-    
-    this.reviewStats = {
-      averageRating,
-      totalReviews: reviews.length,
-      ratingDistribution
-    };
+// Add partial index for active products
+productSchema.index(
+  { stock: 1 },
+  { 
+    partialFilterExpression: { stock: { $gt: 0 } },
+    name: "InStockIndex"
   }
-  
-  await this.save();
-};
+);
 
-// Add method to reorder images
-productSchema.methods.reorderImages = async function(imageOrders) {
-  // imageOrders should be an array of { id, order } objects
-  this.images = this.images.map(img => ({
-    ...img,
-    order: imageOrders.find(o => o.id === img._id.toString())?.order ?? img.order
-  })).sort((a, b) => a.order - b.order);
-  
-  await this.save();
-  return this.images;
+// Add method to search products
+productSchema.statics.searchProducts = async function(query, options = {}) {
+  const {
+    limit = 10,
+    page = 1,
+    minPrice,
+    maxPrice,
+    category,
+    inStock
+  } = options;
+
+  // Build search criteria
+  const searchCriteria = {
+    $or: [
+      { name: { $regex: query, $options: 'i' } },  // Primary title search
+      { $text: { $search: query } }                // Fallback full-text search
+    ]
+  };
+
+  // Add filters
+  if (minPrice || maxPrice) {
+    searchCriteria.price = {};
+    if (minPrice) searchCriteria.price.$gte = Number(minPrice);
+    if (maxPrice) searchCriteria.price.$lte = Number(maxPrice);
+  }
+  if (category) {
+    searchCriteria.category = category;
+  }
+  if (inStock) {
+    searchCriteria.stock = { $gt: 0 };
+  }
+
+  try {
+    const products = await this.find(searchCriteria)
+      .select('name price images category stock reviewStats')
+      .sort({ 
+        score: { $meta: 'textScore' },
+        'reviewStats.averageRating': -1
+      })
+      .skip((page - 1) * limit)
+      .limit(limit);
+
+    const total = await this.countDocuments(searchCriteria);
+
+    return {
+      products,
+      total,
+      totalPages: Math.ceil(total / limit),
+      currentPage: page
+    };
+  } catch (error) {
+    console.error('Search error:', error);
+    throw error;
+  }
 };
 
 module.exports = mongoose.model('Product', productSchema); 
