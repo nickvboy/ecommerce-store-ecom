@@ -7,6 +7,7 @@ import {
   Bars3Icon, 
   XMarkIcon 
 } from '@heroicons/react/24/outline';
+import SearchOverlay from './SearchOverlay';
 
 function MobileMenu({ isOpen, onClose }) {
   return (
@@ -73,117 +74,129 @@ function MobileMenu({ isOpen, onClose }) {
 
 function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   return (
-    <nav className="bg-bg-100 text-text-100 sticky top-0 z-50">
-      <div className="flex justify-between items-center h-20 px-6 md:px-10 lg:px-[88px]">
-        {/* Mobile Menu Button */}
-        <button 
-          className="lg:hidden text-text-100 hover:text-primary-100"
-          onClick={() => setIsMobileMenuOpen(true)}
-        >
-          <Bars3Icon className="h-8 w-8" />
-        </button>
-
-        {/* Logo */}
-        <Link to="/" className="text-xl font-bold text-primary-100">
-          <svg
-            width="48"
-            height="48"
-            viewBox="0 0 40 40"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="hover:scale-105 transition-transform hidden lg:block"
+    <nav className="bg-bg-100 border-b border-bg-300">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-20 px-6 md:px-10 lg:px-[88px]">
+          {/* Mobile Menu Button */}
+          <button 
+            className="lg:hidden text-text-100 hover:text-primary-100"
+            onClick={() => setIsMobileMenuOpen(true)}
           >
-            <path
-              d="M20 4L4 12L20 20L36 12L20 4Z"
-              fill="#FF6600"
-              className="animate-pulse"
-            />
-            <path
-              d="M4 20L20 28L36 20"
-              stroke="#FF6600"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M4 28L20 36L36 28"
-              stroke="#FF6600"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              opacity="0.5"
-            />
-          </svg>
-          <svg
-            width="40"
-            height="40"
-            viewBox="0 0 40 40"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="lg:hidden"
-          >
-            <path
-              d="M20 4L4 12L20 20L36 12L20 4Z"
-              fill="#FF6600"
-              className="animate-pulse"
-            />
-            <path
-              d="M4 20L20 28L36 20"
-              stroke="#FF6600"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M4 28L20 36L36 28"
-              stroke="#FF6600"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              opacity="0.5"
-            />
-          </svg>
-        </Link>
+            <Bars3Icon className="h-8 w-8" />
+          </button>
 
-        {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center justify-center flex-1 space-x-16">
-          <Link to="/" className="font-bold relative group text-base tracking-wide">
-            <span className="hover:text-primary-100 transition-colors">Home</span>
-            <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary-100 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
+          {/* Logo */}
+          <Link to="/" className="text-xl font-bold text-primary-100">
+            <svg
+              width="48"
+              height="48"
+              viewBox="0 0 40 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="hover:scale-105 transition-transform hidden lg:block"
+            >
+              <path
+                d="M20 4L4 12L20 20L36 12L20 4Z"
+                fill="#FF6600"
+                className="animate-pulse"
+              />
+              <path
+                d="M4 20L20 28L36 20"
+                stroke="#FF6600"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M4 28L20 36L36 28"
+                stroke="#FF6600"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                opacity="0.5"
+              />
+            </svg>
+            <svg
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="lg:hidden"
+            >
+              <path
+                d="M20 4L4 12L20 20L36 12L20 4Z"
+                fill="#FF6600"
+                className="animate-pulse"
+              />
+              <path
+                d="M4 20L20 28L36 20"
+                stroke="#FF6600"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M4 28L20 36L36 28"
+                stroke="#FF6600"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                opacity="0.5"
+              />
+            </svg>
           </Link>
-          <Link to="/gear" className="font-bold relative group text-base tracking-wide">
-            <span className="hover:text-primary-100 transition-colors">Gear</span>
-            <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary-100 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
-          </Link>
-          <Link to="/clothing" className="font-bold relative group text-base tracking-wide">
-            <span className="hover:text-primary-100 transition-colors">Clothing</span>
-            <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary-100 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
-          </Link>
-          <Link to="/products" className="font-bold relative group text-base tracking-wide">
-            <span className="hover:text-primary-100 transition-colors">All Products</span>
-            <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary-100 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
-          </Link>
-          <Link to="/bfcm" className="font-bold relative group text-base tracking-wide">
-            <span className="hover:text-primary-100 transition-colors">BFCM</span>
-            <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary-100 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
-          </Link>
-        </div>
-        
-        {/* Icons */}
-        <div className="flex items-center space-x-6 md:space-x-8">
-          <button className="hidden md:block hover:text-primary-100 transition-colors">
-            <MagnifyingGlassIcon className="h-7 w-7" />
-          </button>
-          <button className="hidden md:block hover:text-primary-100 transition-colors">
-            <UserIcon className="h-7 w-7" />
-          </button>
-          <button className="hover:text-primary-100 transition-colors">
-            <ShoppingCartIcon className="h-7 w-7" />
-          </button>
+
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center justify-center flex-1 space-x-16">
+            <Link to="/" className="font-bold relative group text-base tracking-wide">
+              <span className="hover:text-primary-100 transition-colors">Home</span>
+              <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary-100 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
+            </Link>
+            <Link to="/gear" className="font-bold relative group text-base tracking-wide">
+              <span className="hover:text-primary-100 transition-colors">Gear</span>
+              <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary-100 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
+            </Link>
+            <Link to="/clothing" className="font-bold relative group text-base tracking-wide">
+              <span className="hover:text-primary-100 transition-colors">Clothing</span>
+              <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary-100 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
+            </Link>
+            <Link to="/products" className="font-bold relative group text-base tracking-wide">
+              <span className="hover:text-primary-100 transition-colors">All Products</span>
+              <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary-100 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
+            </Link>
+            <Link to="/bfcm" className="font-bold relative group text-base tracking-wide">
+              <span className="hover:text-primary-100 transition-colors">BFCM</span>
+              <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary-100 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
+            </Link>
+          </div>
+          
+          {/* Icons */}
+          <div className="flex items-center space-x-6 md:space-x-8">
+            <button 
+              className="hidden md:block hover:text-primary-100 transition-colors"
+              onClick={() => setIsSearchOpen(true)}
+            >
+              <MagnifyingGlassIcon className="h-7 w-7" />
+            </button>
+            <button className="hidden md:block hover:text-primary-100 transition-colors">
+              <UserIcon className="h-7 w-7" />
+            </button>
+            <button className="hover:text-primary-100 transition-colors">
+              <ShoppingCartIcon className="h-7 w-7" />
+            </button>
+          </div>
         </div>
       </div>
+
+      {/* Add the SearchOverlay component */}
+      <SearchOverlay 
+        isOpen={isSearchOpen} 
+        onClose={() => setIsSearchOpen(false)} 
+      />
 
       {/* Mobile Menu */}
       <MobileMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
