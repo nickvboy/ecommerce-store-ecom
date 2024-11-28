@@ -22,6 +22,7 @@ function ProductDetail() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [product, setProduct] = useState(null);
   const [selectedSize, setSelectedSize] = useState('L');
+  const [loadedImages, setLoadedImages] = useState([]);
 
   const images = [
     { id: 1, color: 'bg-blue-500' },
@@ -64,6 +65,36 @@ function ProductDetail() {
     fetchProduct();
   }, [fetchProduct]); // Now fetchProduct is a stable dependency
 
+  // Add image preloading
+  useEffect(() => {
+    if (product?.images) {
+      product.images.forEach(img => {
+        const image = new Image();
+        image.src = img.url;
+        image.onload = () => {
+          setLoadedImages(prev => [...prev, img.url]);
+        };
+      });
+    }
+  }, [product]);
+
+  // Add reordering function
+  const handleReorderImages = async (newOrder) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/products/${productId}/images/reorder`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ imageOrders: newOrder })
+      });
+      
+      if (!response.ok) throw new Error('Failed to reorder images');
+      const updatedImages = await response.json();
+      setProduct(prev => ({ ...prev, images: updatedImages }));
+    } catch (error) {
+      console.error('Error reordering images:', error);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#1A1A1A] text-text-100 py-8">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
@@ -82,13 +113,21 @@ function ProductDetail() {
               {/* Mobile Carousel */}
               <div className="md:hidden relative w-full">
                 <div className="relative rounded-lg overflow-hidden">
-                  <div 
-                    className={`w-full aspect-square ${images[currentImageIndex].color} rounded-lg`}
-                  />
+                  {loadedImages.includes(product.images[currentImageIndex]?.url) ? (
+                    <img 
+                      src={product.images[currentImageIndex]?.url}
+                      alt={`${product.name} - Image ${currentImageIndex + 1}`}
+                      className="w-full aspect-square object-cover rounded-lg"
+                    />
+                  ) : (
+                    <div className="w-full aspect-square bg-bg-300 animate-pulse rounded-lg" />
+                  )}
                   
                   {/* Navigation Arrows */}
                   <button 
-                    onClick={() => setCurrentImageIndex(prev => prev === 0 ? images.length - 1 : prev - 1)}
+                    onClick={() => setCurrentImageIndex(prev => 
+                      prev === 0 ? product.images.length - 1 : prev - 1
+                    )}
                     className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
                     aria-label="Previous image"
                   >
@@ -96,7 +135,9 @@ function ProductDetail() {
                   </button>
                   
                   <button 
-                    onClick={() => setCurrentImageIndex(prev => prev === images.length - 1 ? 0 : prev + 1)}
+                    onClick={() => setCurrentImageIndex(prev => 
+                      prev === product.images.length - 1 ? 0 : prev + 1
+                    )}
                     className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
                     aria-label="Next image"
                   >
@@ -105,7 +146,7 @@ function ProductDetail() {
 
                   {/* Image Indicators */}
                   <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2">
-                    {images.map((_, index) => (
+                    {product.images.map((_, index) => (
                       <button
                         key={index}
                         onClick={() => setCurrentImageIndex(index)}
@@ -126,53 +167,36 @@ function ProductDetail() {
               <div className="hidden md:flex gap-4 w-full">
                 {/* Thumbnails */}
                 <div className="relative w-20">
-                  {/* Scroll Up Button */}
-                  <button 
-                    onClick={() => handleScroll('up')}
-                    className="absolute -top-2 left-1/2 -translate-x-1/2 z-10 text-text-200 hover:text-primary-100"
-                    disabled={scrollPosition === 0}
-                  >
-                    <ChevronUpIcon className="h-6 w-6" />
-                  </button>
-
-                  {/* Thumbnails Container */}
-                  <div className="h-[400px] overflow-hidden relative">
-                    <div 
-                      className="absolute w-full transition-transform duration-300 py-2"
-                      style={{ transform: `translateY(-${scrollPosition}px)` }}
+                  {product.images.map((image, index) => (
+                    <button
+                      key={image._id}
+                      onClick={() => setCurrentImageIndex(index)}
+                      className="relative w-full aspect-square mb-2"
                     >
-                      {images.map((image, index) => (
-                        <button
-                          key={image.id}
-                          onClick={() => setCurrentImageIndex(index)}
-                          className={`w-full aspect-square mb-4 rounded-lg overflow-hidden 
-                            ${currentImageIndex === index 
-                              ? 'ring-2 ring-primary-100' 
-                              : 'opacity-50 hover:opacity-75'}`}
-                        >
-                          <div className={`w-full h-full ${image.color} rounded-lg`} />
-                        </button>
-                      ))}
-                      {/* Add extra padding at bottom for scrolling */}
-                      <div className="h-20"></div>
-                    </div>
-                  </div>
-
-                  {/* Scroll Down Button */}
-                  <button 
-                    onClick={() => handleScroll('down')}
-                    className="absolute -bottom-2 left-1/2 -translate-x-1/2 z-10 text-text-200 hover:text-primary-100"
-                    disabled={scrollPosition >= (images.length * 80) - 320}
-                  >
-                    <ChevronDownIcon className="h-6 w-6" />
-                  </button>
+                      {loadedImages.includes(image.url) ? (
+                        <img 
+                          src={image.url}
+                          alt={`Product thumbnail ${index + 1}`}
+                          className="w-full h-full object-cover rounded"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-bg-300 animate-pulse rounded" />
+                      )}
+                    </button>
+                  ))}
                 </div>
 
                 {/* Main Image */}
                 <div className="flex-1 rounded-lg overflow-hidden">
-                  <div 
-                    className={`w-full aspect-square ${images[currentImageIndex].color} rounded-lg`}
-                  />
+                  {loadedImages.includes(product.images[currentImageIndex]?.url) ? (
+                    <img 
+                      src={product.images[currentImageIndex]?.url}
+                      alt={product.name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-bg-300 animate-pulse" />
+                  )}
                 </div>
               </div>
             </div>

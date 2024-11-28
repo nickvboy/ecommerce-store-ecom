@@ -186,4 +186,49 @@ exports.filterProducts = async (req, res) => {
   }
 };
 
+// Add images to product
+exports.addProductImages = async (req, res) => {
+  try {
+    const { productId } = req.params;
+    const { images } = req.body; // Array of { url, order? }
+    
+    const product = await Product.findById(productId);
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
+    // Add new images with orders
+    const currentMaxOrder = Math.max(...product.images.map(img => img.order), -1);
+    const newImages = images.map((img, idx) => ({
+      url: img.url,
+      order: img.order ?? currentMaxOrder + idx + 1
+    }));
+
+    product.images.push(...newImages);
+    await product.save();
+
+    res.json(product.images);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Reorder product images
+exports.reorderProductImages = async (req, res) => {
+  try {
+    const { productId } = req.params;
+    const { imageOrders } = req.body; // Array of { id, order }
+    
+    const product = await Product.findById(productId);
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
+    const reorderedImages = await product.reorderImages(imageOrders);
+    res.json(reorderedImages);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 // Other controller methods... 
