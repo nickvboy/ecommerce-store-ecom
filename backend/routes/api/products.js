@@ -6,7 +6,9 @@ const {
   createProduct,
   updateProduct,
   deleteProduct,
-  filterProducts
+  filterProducts,
+  addProductImages,
+  reorderProductImages
 } = require('../../controllers/productController');
 const reviewController = require('../../controllers/reviewController');
 
@@ -21,6 +23,10 @@ router.route('/:id')
   .get(getProductById)
   .put(updateProduct)
   .delete(deleteProduct);
+
+// Image routes
+router.post('/:productId/images', addProductImages);
+router.patch('/:productId/images/reorder', reorderProductImages);
 
 // Review routes
 router.get('/:productId/reviews', reviewController.getProductReviews);
