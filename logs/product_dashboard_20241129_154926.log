@@ -1,0 +1,35 @@
+2024-11-29 15:49:26,534 - INFO - Logging initialized
+2024-11-29 15:49:26,534 - INFO - Starting Product Dashboard application
+2024-11-29 15:49:26,632 - INFO - Initializing ProductDashboard
+2024-11-29 15:49:26,674 - INFO - Performing initial data fetch
+2024-11-29 15:49:26,674 - INFO - Fetching products from API - Page 1
+2024-11-29 15:49:26,675 - INFO - API Request Details:
+2024-11-29 15:49:26,675 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-29 15:49:26,675 - INFO -   Method: GET
+2024-11-29 15:49:26,676 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-29 15:49:26,713 - INFO - API Response Details:
+2024-11-29 15:49:26,714 - INFO -   Status Code: 200
+2024-11-29 15:49:26,714 - INFO -   Response Time: 0.034 seconds
+2024-11-29 15:49:26,714 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-29 15:49:26,715 - INFO - Pagination Details:
+2024-11-29 15:49:26,715 - INFO -   Total Products: Not specified
+2024-11-29 15:49:26,716 - INFO -   Current Page: 1
+2024-11-29 15:49:26,716 - INFO -   Total Pages: 5
+2024-11-29 15:49:26,716 - INFO -   Items Per Page: 10
+2024-11-29 15:49:26,716 - INFO - Products Summary:
+2024-11-29 15:49:26,717 - INFO -   Products Retrieved: 10
+2024-11-29 15:49:26,717 - INFO -   Categories Present: EDC Gear, Tools, Bundles, Pens
+2024-11-29 15:49:26,717 - INFO -   Price Range: $37.00 - $192.00
+2024-11-29 15:49:26,718 - INFO - Successfully fetched and processed product data
+2024-11-29 15:49:26,718 - INFO - Updating UI with fetched products
+2024-11-29 15:49:26,719 - INFO - UI update completed successfully
+2024-11-29 15:49:26,719 - INFO - Product fetch operation completed
+2024-11-29 15:49:26,720 - INFO - Application initialized. Log file: logs/product_dashboard_20241129_154926.log
+2024-11-29 15:49:26,720 - INFO - Starting main loop
+2024-11-29 15:49:30,020 - INFO - Showing add product dialog
+2024-11-29 15:49:30,060 - ERROR - Error showing add dialog: name 'product' is not defined
+Traceback (most recent call last):
+  File "c:\Users\nickv\Downloads\tester\ecommerce-store-ecom\backend\scripts\product_dashboard.py", line 581, in show_add_product_dialog
+    for image in product.get('images', []):
+                 ^^^^^^^
+NameError: name 'product' is not defined

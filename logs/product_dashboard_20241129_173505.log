@@ -1,0 +1,9 @@
+2024-11-29 17:35:05,250 - INFO - Logging initialized
+2024-11-29 17:35:05,251 - INFO - Starting Product Dashboard application
+2024-11-29 17:35:05,346 - INFO - Initializing ProductDashboard
+2024-11-29 17:35:05,373 - INFO - Performing initial data fetch
+2024-11-29 17:35:05,374 - INFO - Fetching products from API - Page 1
+2024-11-29 17:35:05,374 - INFO - API Request Details:
+2024-11-29 17:35:05,374 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-29 17:35:05,375 - INFO -   Method: GET
+2024-11-29 17:35:05,375 - INFO -   Parameters: {'page': 1, 'limit': 10}

@@ -1,0 +1,57 @@
+2024-11-29 16:37:27,314 - INFO - Logging initialized
+2024-11-29 16:37:27,314 - INFO - Starting Product Dashboard application
+2024-11-29 16:37:27,412 - INFO - Initializing ProductDashboard
+2024-11-29 16:37:27,452 - INFO - Performing initial data fetch
+2024-11-29 16:37:27,452 - INFO - Fetching products from API - Page 1
+2024-11-29 16:37:27,453 - INFO - API Request Details:
+2024-11-29 16:37:27,453 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-29 16:37:27,453 - INFO -   Method: GET
+2024-11-29 16:37:27,453 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-29 16:37:27,476 - INFO - API Response Details:
+2024-11-29 16:37:27,476 - INFO -   Status Code: 200
+2024-11-29 16:37:27,476 - INFO -   Response Time: 0.019 seconds
+2024-11-29 16:37:27,476 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-29 16:37:27,477 - INFO - Pagination Details:
+2024-11-29 16:37:27,477 - INFO -   Total Products: Not specified
+2024-11-29 16:37:27,477 - INFO -   Current Page: 1
+2024-11-29 16:37:27,477 - INFO -   Total Pages: 6
+2024-11-29 16:37:27,477 - INFO -   Items Per Page: 10
+2024-11-29 16:37:27,477 - INFO - Products Summary:
+2024-11-29 16:37:27,478 - INFO -   Products Retrieved: 10
+2024-11-29 16:37:27,478 - INFO -   Categories Present: Tools, Pens, Bundles, EDC Gear
+2024-11-29 16:37:27,478 - INFO -   Price Range: $53.00 - $3065.00
+2024-11-29 16:37:27,478 - INFO - Successfully fetched and processed product data
+2024-11-29 16:37:27,478 - INFO - Updating UI with fetched products
+2024-11-29 16:37:27,480 - INFO - UI update completed successfully
+2024-11-29 16:37:27,480 - INFO - Product fetch operation completed
+2024-11-29 16:37:27,480 - INFO - Application initialized. Log file: logs/product_dashboard_20241129_163727.log
+2024-11-29 16:37:27,481 - INFO - Starting main loop
+2024-11-29 16:37:29,560 - INFO - Showing add product dialog
+2024-11-29 16:38:27,496 - INFO - Fetching products from API - Page 1
+2024-11-29 16:38:27,497 - INFO - API Request Details:
+2024-11-29 16:38:27,497 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-29 16:38:27,497 - INFO -   Method: GET
+2024-11-29 16:38:27,497 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-29 16:38:27,512 - INFO - API Response Details:
+2024-11-29 16:38:27,512 - INFO -   Status Code: 200
+2024-11-29 16:38:27,512 - INFO -   Response Time: 0.013 seconds
+2024-11-29 16:38:27,513 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-29 16:38:27,513 - INFO - Pagination Details:
+2024-11-29 16:38:27,514 - INFO -   Total Products: Not specified
+2024-11-29 16:38:27,514 - INFO -   Current Page: 1
+2024-11-29 16:38:27,514 - INFO -   Total Pages: 6
+2024-11-29 16:38:27,514 - INFO -   Items Per Page: 10
+2024-11-29 16:38:27,515 - INFO - Products Summary:
+2024-11-29 16:38:27,515 - INFO -   Products Retrieved: 10
+2024-11-29 16:38:27,515 - INFO -   Categories Present: Tools, Pens, EDC Gear, Bundles
+2024-11-29 16:38:27,515 - INFO -   Price Range: $53.00 - $3065.00
+2024-11-29 16:38:27,515 - INFO - Successfully fetched and processed product data
+2024-11-29 16:38:27,515 - INFO - Updating UI with fetched products
+2024-11-29 16:38:27,516 - INFO - UI update completed successfully
+2024-11-29 16:38:27,516 - INFO - Product fetch operation completed
+2024-11-29 16:38:53,790 - ERROR - Error showing edit dialog: name 'add_images' is not defined
+Traceback (most recent call last):
+  File "c:\Users\nickv\Downloads\tester\ecommerce-store-ecom\backend\scripts\product_dashboard.py", line 971, in show_edit_product_dialog
+    command=add_images,
+            ^^^^^^^^^^
+NameError: name 'add_images' is not defined
