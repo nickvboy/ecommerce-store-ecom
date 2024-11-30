@@ -4,6 +4,7 @@ const seedUsers = require('./seedUsers');
 const seedProducts = require('./seedProducts');
 const seedReviews = require('./seedReviews');
 const seedImages = require('./seedImages');
+const seedOrders = require('./seedOrders');
 
 async function seed() {
     try {
@@ -15,6 +16,10 @@ async function seed() {
         await seedProducts();
         await seedReviews();
         await seedImages();
+        
+        // Finally seed orders
+        await seedOrders();
+        console.log('Order seeding completed');
         
         console.log('All seeding completed successfully');
         process.exit(0);
