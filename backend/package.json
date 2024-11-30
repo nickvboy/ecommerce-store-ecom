@@ -10,7 +10,8 @@
     "seed:users": "node utils/seedUsers.js",
     "seed:products": "node utils/seedProducts.js",
     "seed:reviews": "node utils/seedReviews.js",
-    "seed:images": "node utils/seedImages.js"
+    "seed:images": "node utils/seedImages.js",
+    "seed:orders": "node utils/seedOrders.js"
   },
   "dependencies": {
     "@faker-js/faker": "^9.2.0",

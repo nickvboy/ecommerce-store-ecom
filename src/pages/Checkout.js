@@ -8,13 +8,17 @@ function Checkout() {
   const navigate = useNavigate();
   const { cartItems, createOrder } = useCart();
   const [paymentMethod, setPaymentMethod] = useState('card');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [formData, setFormData] = useState({
     email: '',
     firstName: '',
     lastName: '',
     address: '',
     city: '',
-    postalCode: ''
+    state: '',
+    postalCode: '',
+    country: 'United States'
   });
   
   const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
@@ -28,23 +32,47 @@ function Checkout() {
       ...prev,
       [name]: value
     }));
+    // Clear error when user starts typing
+    if (error) setError(null);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError(null);
     
-    const orderData = {
-      ...formData,
-      paymentMethod,
-      subtotal,
-      shipping,
-      tax,
-      total
-    };
+    try {
+      const orderData = {
+        ...formData,
+        paymentMethod,
+        subtotal,
+        shipping,
+        tax,
+        total
+      };
 
-    const order = createOrder(orderData);
-    navigate('/order-success', { state: { order } });
+      const order = await createOrder(orderData);
+      navigate('/order-success', { state: { order } });
+    } catch (error) {
+      setError(error.message || 'Failed to create order. Please try again.');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } finally {
+      setLoading(false);
+    }
   };
+
+  if (cartItems.length === 0) {
+    return (
+      <div className="min-h-screen bg-[#1A1A1A] text-text-100 py-8">
+        <div className="max-w-2xl mx-auto px-4 text-center">
+          <h1 className="text-2xl font-bold mb-4">Your cart is empty</h1>
+          <Link to="/products" className="text-primary-100 hover:underline">
+            Continue Shopping
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#1A1A1A] text-text-100 py-8">
@@ -56,6 +84,12 @@ function Checkout() {
           <ArrowLeftIcon className="h-4 w-4 mr-2" />
           BACK TO CART
         </Link>
+
+        {error && (
+          <div className="mb-6 p-4 bg-red-500/10 border border-red-500 rounded-lg text-red-500">
+            {error}
+          </div>
+        )}
 
         <form onSubmit={handleSubmit}>
           <div className="grid md:grid-cols-12 gap-8">
@@ -74,8 +108,10 @@ function Checkout() {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
+                      disabled={loading}
                       className="w-full px-4 py-2 bg-[#1A1A1A] border border-gray-800 rounded-md 
-                               text-text-100 focus:outline-none focus:ring-2 focus:ring-primary-100"
+                               text-text-100 focus:outline-none focus:ring-2 focus:ring-primary-100
+                               disabled:opacity-50 disabled:cursor-not-allowed"
                       placeholder="Enter your email"
                     />
                   </div>
@@ -95,8 +131,10 @@ function Checkout() {
                       value={formData.firstName}
                       onChange={handleInputChange}
                       required
+                      disabled={loading}
                       className="w-full px-4 py-2 bg-[#1A1A1A] border border-gray-800 rounded-md 
-                               text-text-100 focus:outline-none focus:ring-2 focus:ring-primary-100"
+                               text-text-100 focus:outline-none focus:ring-2 focus:ring-primary-100
+                               disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                   </div>
                   <div>
@@ -109,8 +147,10 @@ function Checkout() {
                       value={formData.lastName}
                       onChange={handleInputChange}
                       required
+                      disabled={loading}
                       className="w-full px-4 py-2 bg-[#1A1A1A] border border-gray-800 rounded-md 
-                               text-text-100 focus:outline-none focus:ring-2 focus:ring-primary-100"
+                               text-text-100 focus:outline-none focus:ring-2 focus:ring-primary-100
+                               disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                   </div>
                   <div className="col-span-2">
@@ -123,8 +163,10 @@ function Checkout() {
                       value={formData.address}
                       onChange={handleInputChange}
                       required
+                      disabled={loading}
                       className="w-full px-4 py-2 bg-[#1A1A1A] border border-gray-800 rounded-md 
-                               text-text-100 focus:outline-none focus:ring-2 focus:ring-primary-100"
+                               text-text-100 focus:outline-none focus:ring-2 focus:ring-primary-100
+                               disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                   </div>
                   <div>
@@ -137,8 +179,10 @@ function Checkout() {
                       value={formData.city}
                       onChange={handleInputChange}
                       required
+                      disabled={loading}
                       className="w-full px-4 py-2 bg-[#1A1A1A] border border-gray-800 rounded-md 
-                               text-text-100 focus:outline-none focus:ring-2 focus:ring-primary-100"
+                               text-text-100 focus:outline-none focus:ring-2 focus:ring-primary-100
+                               disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                   </div>
                   <div>
@@ -151,8 +195,39 @@ function Checkout() {
                       value={formData.postalCode}
                       onChange={handleInputChange}
                       required
+                      disabled={loading}
                       className="w-full px-4 py-2 bg-[#1A1A1A] border border-gray-800 rounded-md 
-                               text-text-100 focus:outline-none focus:ring-2 focus:ring-primary-100"
+                               text-text-100 focus:outline-none focus:ring-2 focus:ring-primary-100
+                               disabled:opacity-50 disabled:cursor-not-allowed"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-text-200 mb-1">
+                      State
+                    </label>
+                    <input
+                      type="text"
+                      name="state"
+                      value={formData.state}
+                      onChange={handleInputChange}
+                      required
+                      disabled={loading}
+                      className="w-full px-4 py-2 bg-[#1A1A1A] border border-gray-800 rounded-md 
+                               text-text-100 focus:outline-none focus:ring-2 focus:ring-primary-100
+                               disabled:opacity-50 disabled:cursor-not-allowed"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-text-200 mb-1">
+                      Country
+                    </label>
+                    <input
+                      type="text"
+                      name="country"
+                      value={formData.country}
+                      disabled={true}
+                      className="w-full px-4 py-2 bg-[#1A1A1A] border border-gray-800 rounded-md 
+                               text-text-100 opacity-50 cursor-not-allowed"
                     />
                   </div>
                 </div>
@@ -164,11 +239,12 @@ function Checkout() {
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('card')}
+                    disabled={loading}
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-md border ${
                       paymentMethod === 'card'
                         ? 'border-primary-100 bg-[#1A1A1A]'
                         : 'border-gray-800 hover:border-gray-700'
-                    }`}
+                    } ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
                   >
                     <CreditCardIcon className="h-6 w-6" />
                     <span>Credit Card</span>
@@ -176,11 +252,12 @@ function Checkout() {
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('shop')}
+                    disabled={loading}
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-md border ${
                       paymentMethod === 'shop'
                         ? 'border-primary-100 bg-[#1A1A1A]'
                         : 'border-gray-800 hover:border-gray-700'
-                    }`}
+                    } ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
                   >
                     <BuildingStorefrontIcon className="h-6 w-6" />
                     <span>Shop Pay</span>
@@ -246,9 +323,11 @@ function Checkout() {
 
                 <Button 
                   type="submit"
-                  className="w-full mt-6 bg-[#FF6600] hover:bg-[#FF7719] text-white py-3 rounded-md"
+                  disabled={loading}
+                  className={`w-full mt-6 bg-[#FF6600] hover:bg-[#FF7719] text-white py-3 rounded-md
+                    ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
-                  Place Order
+                  {loading ? 'Processing...' : 'Place Order'}
                 </Button>
               </div>
             </div>

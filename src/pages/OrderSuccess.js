@@ -49,7 +49,7 @@ function OrderSuccess() {
                 </div>
                 <div>
                   <p className="text-text-200">Date</p>
-                  <p className="font-medium">{new Date().toLocaleDateString()}</p>
+                  <p className="font-medium">{new Date(order.date).toLocaleDateString()}</p>
                 </div>
               </div>
 
@@ -68,6 +68,15 @@ function OrderSuccess() {
                       <p className="font-medium">${(item.price * item.quantity).toFixed(2)}</p>
                     </div>
                   ))}
+                </div>
+              </div>
+
+              <div>
+                <h3 className="font-medium mb-2">Shipping Address</h3>
+                <div className="text-text-200">
+                  <p>{order.shippingAddress.street}</p>
+                  <p>{order.shippingAddress.city}, {order.shippingAddress.state} {order.shippingAddress.zipCode}</p>
+                  <p>{order.shippingAddress.country}</p>
                 </div>
               </div>
 
