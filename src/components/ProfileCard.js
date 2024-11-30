@@ -10,10 +10,10 @@ import {
 } from '@heroicons/react/24/outline';
 import { useUser } from '../contexts/UserContext';
 
-function ProfileCard({ isOpen, onClose }) {
-  const { user, signOut } = useUser();
+function ProfileCard() {
+  const { user, signOut, isProfileCardOpen, closeProfileCard } = useUser();
 
-  if (!isOpen) return null;
+  if (!isProfileCardOpen) return null;
 
   return (
     <div className="absolute right-1/2 translate-x-1/2 top-[calc(100%+1rem)] w-64 rounded-lg bg-bg-100 border border-bg-300 shadow-xl z-50">

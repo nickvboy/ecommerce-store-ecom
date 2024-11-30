@@ -20,6 +20,9 @@ export function UserProvider({ children }) {
     return anonymousUser;
   });
 
+  // Add state for profile card
+  const [isProfileCardOpen, setIsProfileCardOpen] = useState(false);
+
   const updateUser = (userData) => {
     setUser(userData);
     localStorage.setItem('user', JSON.stringify(userData));
@@ -36,8 +39,21 @@ export function UserProvider({ children }) {
     localStorage.setItem('user', JSON.stringify(anonymousUser));
   };
 
+  // Add methods to control profile card
+  const openProfileCard = () => setIsProfileCardOpen(true);
+  const closeProfileCard = () => setIsProfileCardOpen(false);
+  const toggleProfileCard = () => setIsProfileCardOpen(prev => !prev);
+
   return (
-    <UserContext.Provider value={{ user, updateUser, signOut }}>
+    <UserContext.Provider value={{ 
+      user, 
+      updateUser, 
+      signOut,
+      isProfileCardOpen,
+      openProfileCard,
+      closeProfileCard,
+      toggleProfileCard
+    }}>
       {children}
     </UserContext.Provider>
   );

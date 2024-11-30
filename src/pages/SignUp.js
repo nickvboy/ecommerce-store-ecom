@@ -13,6 +13,7 @@ function SignUp() {
     email: '',
     username: '',
     password: '',
+    address: ''
   });
 
   useEffect(() => {
@@ -65,37 +66,36 @@ function SignUp() {
       </div>
 
       {/* Frosted Glass Effect Container */}
-      <div className={`fixed left-0 w-[480px] z-[9999] h-screen overflow-y-auto scrollbar-hide transition-transform duration-500 ${
+      <div className={`fixed top-20 left-0 w-full lg:w-[480px] z-[30] h-[calc(100vh-80px)] overflow-y-auto scrollbar-hide transition-transform duration-500 ${
         showContent ? 'translate-x-0' : '-translate-x-full'
       }`}>
         {/* Solid background with gradient */}
-        <div className="absolute inset-0 w-[480px]">
-          <div className="w-full h-full bg-bg-100/90 relative">
-            {/* Right-side gradient */}
+        <div className="absolute inset-0 w-full lg:w-[480px]">
+          <div className="w-full h-full bg-bg-100/95 backdrop-blur-sm relative">
+            {/* Right-side gradient - only show on desktop */}
             <div 
-              className="absolute inset-y-0 left-full w-[480px]"
+              className="absolute inset-y-0 left-full w-[480px] hidden lg:block"
               style={{
                 background: 'linear-gradient(90deg, rgba(26, 26, 26, 0.98) 0%, rgba(26, 26, 26, 0.2) 50%, transparent 100%)'
               }}
             />
-            <div className="absolute inset-0 backdrop-blur-xl" />
           </div>
         </div>
 
         {/* Content with fade-in */}
-        <div className={`relative z-[1000] p-12 pt-28 flex flex-col min-h-screen transition-opacity duration-500 ${
+        <div className={`relative z-[1000] p-6 md:p-8 flex flex-col h-full transition-opacity duration-500 ${
           showContent ? 'opacity-100' : 'opacity-0'
         }`}>
-          <div className="flex-1">
+          <div className="flex-1 max-w-[480px] mx-auto w-full">
             <Link 
               to="/" 
-              className="inline-flex items-center text-text-200 hover:text-primary-100 mb-12"
+              className="inline-flex items-center text-text-200 hover:text-primary-100 mb-8 md:mb-12"
             >
               <ArrowLeftIcon className="h-4 w-4 mr-2" />
               Back to Home
             </Link>
 
-            <h1 className="text-3xl font-bold text-text-100 mb-3">Welcome!</h1>
+            <h1 className="text-2xl md:text-3xl font-bold text-text-100 mb-3">Welcome!</h1>
             <p className="text-text-200 mb-8">
               Create an account to view awesome content and support your favorite creator today!
             </p>
@@ -164,6 +164,23 @@ function SignUp() {
                     )}
                   </button>
                 </div>
+              </div>
+
+              <div>
+                <label htmlFor="address" className="block text-sm font-medium text-text-100 mb-2">
+                  Address
+                </label>
+                <textarea
+                  id="address"
+                  name="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                  rows="3"
+                  className="w-full px-4 py-3 rounded-lg bg-bg-200/50 border border-bg-300 text-text-100 
+                    focus:outline-none focus:ring-2 focus:ring-primary-100 focus:border-transparent
+                    placeholder-text-200 backdrop-blur-sm resize-none"
+                  placeholder="Enter your address"
+                />
               </div>
 
               <div className="text-sm text-text-200">

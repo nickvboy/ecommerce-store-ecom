@@ -9,6 +9,7 @@ import {
 } from '@heroicons/react/24/outline';
 import SearchOverlay from './SearchOverlay';
 import ProfileCard from './ProfileCard';
+import { useUser } from '../contexts/UserContext';
 
 function MobileMenu({ isOpen, onClose }) {
   return (
@@ -76,29 +77,62 @@ function MobileMenu({ isOpen, onClose }) {
 function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [visible, setVisible] = useState(true);
   const location = useLocation();
+  const { toggleProfileCard, closeProfileCard } = useUser();
 
-  // Determine if we're on the signup page
   const isSignUpPage = location.pathname === '/signup';
 
+  // Close profile card when navigating to signup page
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (isProfileOpen && !event.target.closest('.profile-container')) {
-        setIsProfileOpen(false);
+    if (isSignUpPage) {
+      closeProfileCard();
+    }
+  }, [isSignUpPage, closeProfileCard]);
+
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    const updateNavbar = () => {
+      const scrollY = window.scrollY;
+      
+      // Show navbar if we're at the top
+      if (scrollY < 50) {
+        setVisible(true);
+      } else {
+        // If we're scrolling down, hide the navbar
+        // If we're scrolling up, show the navbar
+        setVisible(lastScrollY > scrollY);
+      }
+      
+      lastScrollY = scrollY;
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateNavbar);
+        ticking = true;
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [isProfileOpen]);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
-    <nav className={`fixed w-full top-0 ${
-      isSignUpPage 
-        ? 'z-[40] bg-bg-100/80 backdrop-blur-md' 
-        : 'z-[50] bg-bg-100/95 backdrop-blur-sm'
-    }`}>
+    <nav 
+      className={`fixed w-full top-0 transform transition-transform duration-300 ease-in-out
+        ${!visible ? '-translate-y-full' : 'translate-y-0'}
+        ${location.pathname === '/' && window.scrollY < 50 
+          ? 'bg-transparent' 
+          : 'bg-bg-100/95 backdrop-blur-sm'
+        }
+        ${isSignUpPage ? 'z-[40]' : 'z-[50]'}
+      `}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20 px-6 md:px-10 lg:px-8">
           {/* Mobile Menu Button */}
@@ -206,14 +240,11 @@ function Navbar() {
             <div className="relative profile-container">
               <button 
                 className="hidden md:block hover:text-primary-100 transition-colors"
-                onClick={() => setIsProfileOpen(!isProfileOpen)}
+                onClick={toggleProfileCard}
               >
                 <UserIcon className="h-7 w-7" />
               </button>
-              <ProfileCard 
-                isOpen={isProfileOpen} 
-                onClose={() => setIsProfileOpen(false)} 
-              />
+              <ProfileCard />
             </div>
             <button className="hover:text-primary-100 transition-colors">
               <ShoppingCartIcon className="h-7 w-7" />
