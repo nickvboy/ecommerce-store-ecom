@@ -238,8 +238,8 @@ function ProductDetail() {
                   <svg width="0" height="0" className="absolute">
                     <defs>
                       <linearGradient id="star-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#ff983f" /> {/* primary-200 */}
-                        <stop offset="100%" stopColor="#f1690e" /> {/* primary-100 */}
+                        <stop offset="0%" className="primary-100" stopColor="var(--primary-100)" />
+                        <stop offset="100%" className="primary-200" stopColor="var(--primary-200)" />
                       </linearGradient>
                     </defs>
                   </svg>
