@@ -13,6 +13,8 @@ import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "../componen
 import ReviewSummary from '../components/ReviewSummary';
 import { API_BASE_URL } from '../lib/utils';
 import SizeSelector from '../components/SizeSelector';
+import AddToCartNotification from '../components/AddToCartNotification';
+import { useCart } from '../contexts/CartContext';
 
 function ProductDetail() {
   const { id: productId } = useParams();
@@ -23,6 +25,8 @@ function ProductDetail() {
   const [product, setProduct] = useState(null);
   const [selectedSize, setSelectedSize] = useState('L');
   const [loadedImages, setLoadedImages] = useState([]);
+  const [showNotification, setShowNotification] = useState(false);
+  const { addToCart } = useCart();
 
   const images = [
     { id: 1, color: 'bg-blue-500' },
@@ -93,6 +97,13 @@ function ProductDetail() {
     } catch (error) {
       console.error('Error reordering images:', error);
     }
+  };
+
+  // Add function to handle adding to cart
+  const handleAddToCart = () => {
+    addToCart(product, quantity, selectedSize);
+    setShowNotification(true);
+    setTimeout(() => setShowNotification(false), 3000);
   };
 
   return (
@@ -306,16 +317,12 @@ function ProductDetail() {
                 </div>
                 
                 <Button 
-                  onClick={() => alert('Added to cart!')}
+                  onClick={handleAddToCart}
                   className="px-12 bg-gradient-to-r from-primary-100 to-primary-200 
                     hover:from-primary-200 hover:to-primary-100 text-white py-2 rounded-lg
                     transform transition-all duration-200 ease-in-out
                     hover:scale-105 hover:shadow-lg hover:shadow-primary-100/50
-                    active:scale-95 relative
-                    after:absolute after:inset-0 after:rounded-lg
-                    after:shadow-[0_0_15px_3px] after:shadow-primary-100/30
-                    after:transition-opacity after:duration-200
-                    after:opacity-0 hover:after:opacity-100"
+                    active:scale-95"
                 >
                   ADD TO CART
                 </Button>
@@ -372,6 +379,12 @@ function ProductDetail() {
           <ReviewSummary productId={product._id} />
         </div>
       )}
+
+      {/* Add notification */}
+      <AddToCartNotification 
+        show={showNotification}
+        onClose={() => setShowNotification(false)}
+      />
     </div>
   );
 }

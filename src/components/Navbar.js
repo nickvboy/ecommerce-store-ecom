@@ -10,6 +10,8 @@ import {
 import SearchOverlay from './SearchOverlay';
 import ProfileCard from './ProfileCard';
 import { useUser } from '../contexts/UserContext';
+import CartOverlay from './CartOverlay';
+import { useCart } from '../contexts/CartContext';
 
 function MobileMenu({ isOpen, onClose }) {
   return (
@@ -81,6 +83,8 @@ function Navbar() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const location = useLocation();
   const { toggleProfileCard, closeProfileCard } = useUser();
+  const { cartItems } = useCart();
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   // Check if current page is signup
   const isSignUpPage = location.pathname === '/signup';
@@ -238,8 +242,17 @@ function Navbar() {
               </button>
               <ProfileCard />
             </div>
-            <button className="hover:text-primary-100 transition-colors">
+            <button 
+              className="hover:text-primary-100 transition-colors relative"
+              onClick={() => setIsCartOpen(true)}
+            >
               <ShoppingCartIcon className="h-7 w-7" />
+              {cartItems.length > 0 && (
+                <span className="absolute -top-2 -right-2 h-5 w-5 rounded-full bg-primary-100 
+                  flex items-center justify-center text-xs text-white font-medium">
+                  {cartItems.length}
+                </span>
+              )}
             </button>
           </div>
         </div>
@@ -253,6 +266,12 @@ function Navbar() {
 
       {/* Mobile Menu */}
       <MobileMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
+
+      {/* Add CartOverlay */}
+      <CartOverlay
+        isOpen={isCartOpen}
+        onClose={() => setIsCartOpen(false)}
+      />
     </nav>
   );
 }
