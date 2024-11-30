@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { 
   ShoppingCartIcon, 
   MagnifyingGlassIcon, 
@@ -8,6 +8,7 @@ import {
   XMarkIcon 
 } from '@heroicons/react/24/outline';
 import SearchOverlay from './SearchOverlay';
+import ProfileCard from './ProfileCard';
 
 function MobileMenu({ isOpen, onClose }) {
   return (
@@ -75,11 +76,31 @@ function MobileMenu({ isOpen, onClose }) {
 function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const location = useLocation();
+
+  // Determine if we're on the signup page
+  const isSignUpPage = location.pathname === '/signup';
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isProfileOpen && !event.target.closest('.profile-container')) {
+        setIsProfileOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isProfileOpen]);
 
   return (
-    <nav className="bg-bg-100 border-b border-bg-300">
+    <nav className={`fixed w-full top-0 ${
+      isSignUpPage 
+        ? 'z-[40] bg-bg-100/80 backdrop-blur-md' 
+        : 'z-[50] bg-bg-100/95 backdrop-blur-sm'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20 px-6 md:px-10 lg:px-[88px]">
+        <div className="flex justify-between items-center h-20 px-6 md:px-10 lg:px-8">
           {/* Mobile Menu Button */}
           <button 
             className="lg:hidden text-text-100 hover:text-primary-100"
@@ -182,9 +203,18 @@ function Navbar() {
             >
               <MagnifyingGlassIcon className="h-7 w-7" />
             </button>
-            <button className="hidden md:block hover:text-primary-100 transition-colors">
-              <UserIcon className="h-7 w-7" />
-            </button>
+            <div className="relative profile-container">
+              <button 
+                className="hidden md:block hover:text-primary-100 transition-colors"
+                onClick={() => setIsProfileOpen(!isProfileOpen)}
+              >
+                <UserIcon className="h-7 w-7" />
+              </button>
+              <ProfileCard 
+                isOpen={isProfileOpen} 
+                onClose={() => setIsProfileOpen(false)} 
+              />
+            </div>
             <button className="hover:text-primary-100 transition-colors">
               <ShoppingCartIcon className="h-7 w-7" />
             </button>

@@ -58,8 +58,27 @@ module.exports = {
         slideDown: 'slideDown 300ms ease-out',
         slideUp: 'slideUp 300ms ease-out',
       },
+      backdropBlur: {
+        '5xl': '100px',
+        // Add any custom values you need
+      }
     },
   },
-  plugins: [],
+  plugins: [
+    function({ addUtilities }) {
+      addUtilities({
+        '.scrollbar-hide': {
+          /* IE and Edge */
+          '-ms-overflow-style': 'none',
+          /* Firefox */
+          'scrollbar-width': 'none',
+          /* Safari and Chrome */
+          '&::-webkit-scrollbar': {
+            display: 'none'
+          }
+        }
+      })
+    }
+  ],
 }
 
