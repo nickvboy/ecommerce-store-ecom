@@ -10,6 +10,7 @@ import Settings from './pages/Settings';
 import SignUp from './pages/SignUp';
 import { CartProvider } from './contexts/CartContext';
 import Checkout from './pages/Checkout';
+import OrderSuccess from './pages/OrderSuccess';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
                   <Route path="/settings" element={<Settings />} />
                   <Route path="/signup" element={<SignUp />} />
                   <Route path="/checkout" element={<Checkout />} />
+                  <Route path="/order-success" element={<OrderSuccess />} />
                 </Routes>
               </div>
             </div>
