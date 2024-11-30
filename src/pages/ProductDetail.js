@@ -23,7 +23,7 @@ function ProductDetail() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [scrollPosition, setScrollPosition] = useState(0);
   const [product, setProduct] = useState(null);
-  const [selectedSize, setSelectedSize] = useState('L');
+  const [selectedSize, setSelectedSize] = useState(null);
   const [loadedImages, setLoadedImages] = useState([]);
   const [showNotification, setShowNotification] = useState(false);
   const { addToCart } = useCart();
@@ -101,7 +101,13 @@ function ProductDetail() {
 
   // Add function to handle adding to cart
   const handleAddToCart = () => {
-    addToCart(product, quantity, selectedSize);
+    // Only add size to cart if product has sizes and one is selected
+    const cartItem = {
+      ...product,
+      quantity,
+      ...(product.sizes && product.sizes.length > 0 && selectedSize && { selectedSize })
+    };
+    addToCart(cartItem);
     setShowNotification(true);
     setTimeout(() => setShowNotification(false), 3000);
   };

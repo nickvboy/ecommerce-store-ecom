@@ -6,8 +6,13 @@ const CartContext = createContext();
 
 export function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState(() => {
-    const savedCart = localStorage.getItem('cart');
-    return savedCart ? JSON.parse(savedCart) : [];
+    try {
+      const savedCart = localStorage.getItem('cart');
+      return savedCart && savedCart !== 'undefined' ? JSON.parse(savedCart) : [];
+    } catch (error) {
+      console.error('Error parsing cart data:', error);
+      return [];
+    }
   });
   const [orders, setOrders] = useState([]);
   const { user } = useUser();
