@@ -77,11 +77,12 @@ function MobileMenu({ isOpen, onClose }) {
 function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const location = useLocation();
   const { toggleProfileCard, closeProfileCard } = useUser();
 
+  // Check if current page is signup
   const isSignUpPage = location.pathname === '/signup';
 
   // Close profile card when navigating to signup page
@@ -92,43 +93,34 @@ function Navbar() {
   }, [isSignUpPage, closeProfileCard]);
 
   useEffect(() => {
-    let lastScrollY = window.scrollY;
-    let ticking = false;
-
-    const updateNavbar = () => {
-      const scrollY = window.scrollY;
-      
-      // Show navbar if we're at the top
-      if (scrollY < 50) {
+    const controlNavbar = () => {
+      // Skip scroll handling on signup page
+      if (isSignUpPage) {
         setVisible(true);
-      } else {
-        // If we're scrolling down, hide the navbar
-        // If we're scrolling up, show the navbar
-        setVisible(lastScrollY > scrollY);
+        return;
       }
-      
-      lastScrollY = scrollY;
-      ticking = false;
+
+      if (window.scrollY > lastScrollY && window.scrollY > 50) { // Scrolling down
+        setVisible(false);
+      } else { // Scrolling up
+        setVisible(true);
+      }
+      setLastScrollY(window.scrollY);
     };
 
-    const onScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(updateNavbar);
-        ticking = true;
-      }
+    window.addEventListener('scroll', controlNavbar);
+    return () => {
+      window.removeEventListener('scroll', controlNavbar);
     };
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  }, [lastScrollY, isSignUpPage]);
 
   return (
     <nav 
       className={`fixed w-full top-0 transform transition-transform duration-300 ease-in-out
-        ${!visible ? '-translate-y-full' : 'translate-y-0'}
+        ${!visible && !isSignUpPage ? '-translate-y-full' : 'translate-y-0'}
         ${location.pathname === '/' && window.scrollY < 50 
           ? 'bg-transparent' 
-          : 'bg-bg-100/95 backdrop-blur-sm'
+          : 'bg-bg-100/80 backdrop-blur-xl'
         }
         ${isSignUpPage ? 'z-[40]' : 'z-[50]'}
       `}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SignUpBackground from '../components/SignUpBackground';
 import { useUser } from '../contexts/UserContext';
@@ -69,10 +69,20 @@ function SignUp() {
     }
   };
 
+  // Disable scrolling when component mounts
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    // Re-enable scrolling when component unmounts
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex overflow-hidden">
       {/* Left side - Form */}
-      <div className="w-full md:w-[480px] p-8 flex flex-col justify-center relative z-10">
+      <div className="w-full md:w-[480px] bg-bg-100/80 backdrop-blur-xl p-8 flex flex-col 
+        justify-center relative z-10 shadow-2xl">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-text-100 mb-2">Welcome!</h1>
           <p className="text-text-200">
