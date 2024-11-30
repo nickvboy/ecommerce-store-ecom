@@ -7,7 +7,9 @@ const {
   updateProfile,
   addAddress,
   addToWishlist,
-  removeFromWishlist
+  removeFromWishlist,
+  getAllUsers,
+  getUserById
 } = require('../../controllers/userController');
 const { auth } = require('../../middleware/auth');
 
@@ -21,5 +23,9 @@ router.put('/profile', auth, updateProfile);
 router.post('/address', auth, addAddress);
 router.post('/wishlist', auth, addToWishlist);
 router.delete('/wishlist/:productId', auth, removeFromWishlist);
+
+// Admin routes
+router.get('/admin/list', auth, getAllUsers);
+router.get('/admin/:userId', auth, getUserById);
 
 module.exports = router; 

@@ -1,0 +1,22 @@
+2024-11-30 17:29:22,165 - INFO - Logging initialized
+2024-11-30 17:29:22,166 - INFO - Starting Product Dashboard application
+2024-11-30 17:29:22,245 - INFO - Initializing ProductDashboard
+2024-11-30 17:29:22,253 - INFO - Fetching products from API - Page 1
+2024-11-30 17:29:22,254 - ERROR - Unexpected error: 'ProductDashboard' object has no attribute 'refresh_button'
+Traceback (most recent call last):
+  File "c:\Users\nickv\Downloads\tester\ecommerce-store-ecom\backend\scripts\product_dashboard.py", line 516, in fetch_products
+    self.refresh_button.config(state='disabled')
+    ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ProductDashboard' object has no attribute 'refresh_button'
+2024-11-30 17:29:23,912 - ERROR - Error during initialization: 'ProductDashboard' object has no attribute 'refresh_button'
+Traceback (most recent call last):
+  File "c:\Users\nickv\Downloads\tester\ecommerce-store-ecom\backend\scripts\product_dashboard.py", line 113, in __init__
+    self.show_products_section()
+  File "c:\Users\nickv\Downloads\tester\ecommerce-store-ecom\backend\scripts\product_dashboard.py", line 205, in show_products_section
+    self.fetch_products()
+  File "c:\Users\nickv\Downloads\tester\ecommerce-store-ecom\backend\scripts\product_dashboard.py", line 595, in fetch_products
+    self.refresh_button.config(state='normal')
+    ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ProductDashboard' object has no attribute 'refresh_button'
+2024-11-30 17:29:24,799 - INFO - Application initialized. Log file: logs/product_dashboard_20241130_172922.log
+2024-11-30 17:29:24,799 - INFO - Starting main loop

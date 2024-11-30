@@ -1,0 +1,273 @@
+2024-11-30 17:48:09,939 - INFO - Logging initialized
+2024-11-30 17:48:09,939 - INFO - Starting Product Dashboard application
+2024-11-30 17:48:10,018 - INFO - Initializing ProductDashboard
+2024-11-30 17:48:10,043 - INFO - Fetching products from API - Page 1
+2024-11-30 17:48:10,043 - INFO - API Request Details:
+2024-11-30 17:48:10,044 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-30 17:48:10,044 - INFO -   Method: GET
+2024-11-30 17:48:10,044 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-30 17:48:10,098 - INFO - API Response Details:
+2024-11-30 17:48:10,099 - INFO -   Status Code: 200
+2024-11-30 17:48:10,099 - INFO -   Response Time: 0.051 seconds
+2024-11-30 17:48:10,099 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-30 17:48:10,099 - INFO - Pagination Details:
+2024-11-30 17:48:10,100 - INFO -   Total Products: Not specified
+2024-11-30 17:48:10,100 - INFO -   Current Page: 1
+2024-11-30 17:48:10,100 - INFO -   Total Pages: 5
+2024-11-30 17:48:10,100 - INFO -   Items Per Page: 10
+2024-11-30 17:48:10,100 - INFO - Products Summary:
+2024-11-30 17:48:10,100 - INFO -   Products Retrieved: 10
+2024-11-30 17:48:10,101 - INFO -   Categories Present: Bundles, Accessories, Tools, Pens, EDC Gear
+2024-11-30 17:48:10,101 - INFO -   Price Range: $23.00 - $202.00
+2024-11-30 17:48:10,101 - INFO - Successfully fetched and processed product data
+2024-11-30 17:48:10,101 - INFO - Updating UI with fetched products
+2024-11-30 17:48:10,102 - INFO - UI update completed successfully
+2024-11-30 17:48:10,102 - INFO - Product fetch operation completed
+2024-11-30 17:48:10,102 - INFO - Performing initial data fetch
+2024-11-30 17:48:10,103 - INFO - Fetching products from API - Page 1
+2024-11-30 17:48:10,103 - INFO - API Request Details:
+2024-11-30 17:48:10,103 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-30 17:48:10,104 - INFO -   Method: GET
+2024-11-30 17:48:10,104 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-30 17:48:10,133 - INFO - API Response Details:
+2024-11-30 17:48:10,133 - INFO -   Status Code: 200
+2024-11-30 17:48:10,133 - INFO -   Response Time: 0.028 seconds
+2024-11-30 17:48:10,134 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-30 17:48:10,134 - INFO - Pagination Details:
+2024-11-30 17:48:10,135 - INFO -   Total Products: Not specified
+2024-11-30 17:48:10,135 - INFO -   Current Page: 1
+2024-11-30 17:48:10,135 - INFO -   Total Pages: 5
+2024-11-30 17:48:10,135 - INFO -   Items Per Page: 10
+2024-11-30 17:48:10,135 - INFO - Products Summary:
+2024-11-30 17:48:10,136 - INFO -   Products Retrieved: 10
+2024-11-30 17:48:10,136 - INFO -   Categories Present: Bundles, Accessories, Tools, Pens, EDC Gear
+2024-11-30 17:48:10,136 - INFO -   Price Range: $23.00 - $202.00
+2024-11-30 17:48:10,136 - INFO - Successfully fetched and processed product data
+2024-11-30 17:48:10,137 - INFO - Updating UI with fetched products
+2024-11-30 17:48:10,138 - INFO - UI update completed successfully
+2024-11-30 17:48:10,138 - INFO - Product fetch operation completed
+2024-11-30 17:48:10,139 - INFO - Application initialized. Log file: logs/product_dashboard_20241130_174809.log
+2024-11-30 17:48:10,139 - INFO - Starting main loop
+2024-11-30 17:48:12,058 - INFO - Fetching users from API
+2024-11-30 17:48:12,198 - INFO - Updating UI with fetched users
+2024-11-30 17:48:12,200 - INFO - Users UI update completed successfully
+2024-11-30 17:48:14,470 - ERROR - Failed to fetch user details: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /api/users/674b95e3f1a3ba0615772857</pre>
+</body>
+</html>
+
+2024-11-30 17:48:15,008 - ERROR - Failed to fetch user details: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /api/users/674b95e4f1a3ba0615772867</pre>
+</body>
+</html>
+
+2024-11-30 17:48:15,458 - ERROR - Failed to fetch user details: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /api/users/674b95e4f1a3ba061577286f</pre>
+</body>
+</html>
+
+2024-11-30 17:48:15,844 - ERROR - Failed to fetch user details: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /api/users/674b95e4f1a3ba0615772876</pre>
+</body>
+</html>
+
+2024-11-30 17:48:16,259 - ERROR - Failed to fetch user details: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /api/users/674b95e4f1a3ba0615772879</pre>
+</body>
+</html>
+
+2024-11-30 17:48:17,242 - ERROR - Failed to fetch user details: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /api/users/674b95e4f1a3ba061577287e</pre>
+</body>
+</html>
+
+2024-11-30 17:48:17,730 - ERROR - Failed to fetch user details: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /api/users/674b95e3f1a3ba0615772857</pre>
+</body>
+</html>
+
+2024-11-30 17:48:18,142 - ERROR - Failed to fetch user details: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /api/users/674b95e3f1a3ba061577283d</pre>
+</body>
+</html>
+
+2024-11-30 17:48:18,726 - ERROR - Failed to fetch user details: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /api/users/674b95e2f1a3ba061577281c</pre>
+</body>
+</html>
+
+2024-11-30 17:48:19,160 - ERROR - Failed to fetch user details: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /api/users/674b95e2f1a3ba061577280a</pre>
+</body>
+</html>
+
+2024-11-30 17:48:19,950 - ERROR - Failed to fetch user details: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /api/users/674b95e2f1a3ba0615772815</pre>
+</body>
+</html>
+
+2024-11-30 17:48:20,260 - ERROR - Failed to fetch user details: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /api/users/674b95e2f1a3ba0615772823</pre>
+</body>
+</html>
+
+2024-11-30 17:48:20,599 - ERROR - Failed to fetch user details: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /api/users/674b95e3f1a3ba0615772844</pre>
+</body>
+</html>
+
+2024-11-30 17:48:20,904 - ERROR - Failed to fetch user details: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /api/users/674b95e3f1a3ba0615772857</pre>
+</body>
+</html>
+
+2024-11-30 17:48:21,173 - ERROR - Failed to fetch user details: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /api/users/674b95e4f1a3ba0615772860</pre>
+</body>
+</html>
+
+2024-11-30 17:48:21,627 - ERROR - Failed to fetch user details: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /api/users/674b95e4f1a3ba061577286c</pre>
+</body>
+</html>
+
+2024-11-30 17:48:22,149 - ERROR - Failed to fetch user details: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /api/users/674b95e3f1a3ba0615772832</pre>
+</body>
+</html>
+
+2024-11-30 17:48:22,476 - ERROR - Failed to fetch user details: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /api/users/674b95e3f1a3ba061577282b</pre>
+</body>
+</html>
+
+2024-11-30 17:48:22,743 - ERROR - Failed to fetch user details: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /api/users/674b95e2f1a3ba061577281f</pre>
+</body>
+</html>
+
+2024-11-30 17:48:25,646 - ERROR - Failed to fetch user details: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /api/users/674b95e2f1a3ba0615772826</pre>
+</body>
+</html>
+

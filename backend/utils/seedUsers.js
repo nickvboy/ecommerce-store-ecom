@@ -52,6 +52,7 @@ const generateUsers = (count = 30) => {
 const seedUsers = async () => {
   try {
     await connectDB();
+    console.log('MongoDB Connected:', mongoose.connection.host);
     
     // Clear existing users
     await User.deleteMany({});
@@ -67,8 +68,10 @@ const seedUsers = async () => {
     
     console.log('Users seeded successfully');
     
+    // Close connection if running directly
     if (require.main === module) {
-      mongoose.connection.close();
+      await mongoose.connection.close();
+      console.log('Database connection closed');
     }
   } catch (error) {
     console.error('Error seeding users:', error);
@@ -76,8 +79,10 @@ const seedUsers = async () => {
   }
 };
 
+// Export the seedUsers function
 module.exports = seedUsers;
 
+// If running this script directly, execute seedUsers
 if (require.main === module) {
-  seedUsers();
+  seedUsers().then(() => process.exit(0));
 } 

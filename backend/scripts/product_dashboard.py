@@ -50,7 +50,7 @@ class ProductDashboard:
     def __init__(self, root):
         logging.info('Initializing ProductDashboard')
         self.root = root
-        self.root.title("EDC Store Product Dashboard")
+        self.root.title("EDC Store Dashboard")
         self.root.geometry("1200x800")
         
         # Add pagination state
@@ -71,35 +71,57 @@ class ProductDashboard:
             logging.debug('Configuring ttk style')
             style = ttk.Style()
             style.theme_use('clam')
+            style.configure("Active.TButton", background="#007bff")
             
             # Create main frame
             logging.debug('Creating main frame')
             main_frame = ttk.Frame(root, padding="10")
             main_frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
             
-            # Create and configure treeview
-            logging.debug('Setting up treeview')
-            self.setup_treeview(main_frame)
+            # Create navigation frame for section buttons
+            nav_frame = ttk.Frame(main_frame)
+            nav_frame.grid(row=0, column=0, sticky=(tk.W, tk.E), pady=(0, 10))
             
-            # Add scrollbar
-            logging.debug('Adding scrollbar')
-            self.add_scrollbar(main_frame)
+            # Products button (default active)
+            self.products_button = ttk.Button(
+                nav_frame,
+                text="Products",
+                command=self.show_products_section,
+                style="Active.TButton"
+            )
+            self.products_button.grid(row=0, column=0, padx=5)
             
-            # Add summary frame
-            logging.debug('Creating summary frame')
-            self.setup_summary_frame(main_frame)
+            # Users button
+            self.users_button = ttk.Button(
+                nav_frame,
+                text="Users",
+                command=self.show_users_section
+            )
+            self.users_button.grid(row=0, column=1, padx=5)
             
-            # Add pagination frame
-            logging.debug('Creating pagination frame')
-            self.setup_pagination_frame(main_frame)
+            # Create products frame
+            self.products_frame = ttk.Frame(main_frame)
+            self.products_frame.grid(row=1, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
             
-            # Add buttons frame
-            logging.debug('Creating buttons frame')
-            self.setup_buttons_frame(main_frame)
+            # Create users frame
+            self.users_frame = ttk.Frame(main_frame)
+            
+            # Initialize all UI components for products
+            self.setup_treeview(self.products_frame)
+            self.add_scrollbar(self.products_frame)
+            self.setup_summary_frame(self.products_frame)
+            self.setup_pagination_frame(self.products_frame)
+            self.setup_buttons_frame(self.products_frame)
+            
+            # Initialize all UI components for users
+            self.setup_users_treeview(self.users_frame)
             
             # Configure grid weights
-            logging.debug('Configuring grid weights')
             self.configure_grid(main_frame)
+            
+            # Initially show products section
+            self.current_section = 'products'
+            self.show_products_section()
             
             # Initial data fetch
             logging.info('Performing initial data fetch')
@@ -108,6 +130,250 @@ class ProductDashboard:
         except Exception as e:
             logging.error(f'Error during initialization: {str(e)}', exc_info=True)
             messagebox.showerror("Initialization Error", f"Failed to initialize dashboard: {str(e)}")
+    
+    def setup_users_treeview(self, container):
+        """Set up the users treeview widget"""
+        logging.debug('Creating users treeview columns')
+        self.users_tree = ttk.Treeview(container, columns=(
+            "id",
+            "name",
+            "email",
+            "role",
+            "created_at",
+            "orders_count",
+            "addresses_count"
+        ), show="headings", selectmode="extended")
+        
+        # Define column headings and widths
+        columns_config = {
+            "id": {"text": "ID", "width": 100},
+            "name": {"text": "Name", "width": 200},
+            "email": {"text": "Email", "width": 250},
+            "role": {"text": "Role", "width": 100},
+            "created_at": {"text": "Created At", "width": 150},
+            "orders_count": {"text": "Orders", "width": 80},
+            "addresses_count": {"text": "Addresses", "width": 80}
+        }
+        
+        for col, config in columns_config.items():
+            logging.debug(f'Configuring users column: {col}')
+            self.users_tree.heading(col, text=config["text"])
+            self.users_tree.column(col, width=config["width"])
+        
+        # Add scrollbar for users treeview
+        users_scrollbar = ttk.Scrollbar(container, orient=tk.VERTICAL, command=self.users_tree.yview)
+        self.users_tree.configure(yscrollcommand=users_scrollbar.set)
+        
+        self.users_tree.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
+        users_scrollbar.grid(row=0, column=1, sticky=(tk.N, tk.S))
+        
+        # Configure grid weights for users container
+        container.columnconfigure(0, weight=1)
+        container.rowconfigure(0, weight=1)
+        
+        # Bind selection event
+        self.users_tree.bind('<<TreeviewSelect>>', self.on_user_select)
+        
+        # Add refresh button for users
+        refresh_users_btn = ttk.Button(
+            container,
+            text="Refresh Users",
+            command=self.fetch_users
+        )
+        refresh_users_btn.grid(row=1, column=0, pady=10)
+    
+    def show_products_section(self):
+        """Show the products section"""
+        self.current_section = 'products'
+        self.users_frame.grid_remove()
+        self.products_frame.grid(row=1, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
+        self.products_button.configure(style="Active.TButton")
+        self.users_button.configure(style="TButton")
+        self.fetch_products()
+    
+    def show_users_section(self):
+        """Show the users section"""
+        self.current_section = 'users'
+        self.products_frame.grid_remove()
+        self.users_frame.grid(row=1, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
+        self.users_button.configure(style="Active.TButton")
+        self.products_button.configure(style="TButton")
+        self.fetch_users()
+    
+    def fetch_users(self):
+        """Fetch users from the API"""
+        logging.info('Fetching users from API')
+        try:
+            # First get admin token
+            login_data = {
+                'email': 'admin@example.com',
+                'password': 'admin123'
+            }
+            
+            # Login to get token
+            login_response = requests.post(f'{self.api_base_url}/users/login', json=login_data)
+            if login_response.status_code != 200:
+                error_msg = f'Failed to authenticate: {login_response.status_code}'
+                logging.error(error_msg)
+                if login_response.text:
+                    logging.error(f'Response content: {login_response.text}')
+                return
+                
+            # Store token for reuse
+            self.admin_token = login_response.json().get('token')
+            if not self.admin_token:
+                logging.error('No token received from login')
+                return
+                
+            # Fetch users with token
+            headers = {'Authorization': f'Bearer {self.admin_token}'}
+            response = requests.get(f'{self.api_base_url}/users/admin/list', headers=headers)
+            
+            if response.status_code == 200:
+                users = response.json()
+                self.update_users_ui(users)
+            elif response.status_code == 403:
+                logging.error('Access denied. Admin privileges required.')
+            else:
+                error_msg = f'Failed to fetch users: {response.status_code}'
+                logging.error(error_msg)
+                if response.text:
+                    logging.error(f'Response content: {response.text}')
+                
+        except requests.RequestException as e:
+            error_msg = f'Connection error while fetching users: {str(e)}'
+            logging.error(error_msg, exc_info=True)
+        except Exception as e:
+            error_msg = f'Unexpected error while fetching users: {str(e)}'
+            logging.error(error_msg, exc_info=True)
+    
+    def update_users_ui(self, users):
+        """Update the UI with fetched users"""
+        logging.info('Updating UI with fetched users')
+        try:
+            # Clear existing items
+            for item in self.users_tree.get_children():
+                self.users_tree.delete(item)
+            
+            # Add users to treeview
+            for user in users:
+                created_at = datetime.fromisoformat(user['createdAt'].replace('Z', '+00:00')).strftime('%Y-%m-%d %H:%M')
+                self.users_tree.insert("", tk.END, values=(
+                    user['_id'],
+                    user['name'],
+                    user['email'],
+                    user['role'],
+                    created_at,
+                    len(user.get('orders', [])),
+                    len(user.get('addresses', []))
+                ))
+            
+            logging.info('Users UI update completed successfully')
+            
+        except Exception as e:
+            error_msg = f'Error updating users UI: {str(e)}'
+            logging.error(error_msg, exc_info=True)
+    
+    def on_user_select(self, event):
+        """Handle user selection"""
+        selected_items = self.users_tree.selection()
+        if not selected_items:
+            return
+        
+        # Get the selected user's data
+        user_id = self.users_tree.item(selected_items[0])['values'][0]
+        self.show_user_details(user_id)
+    
+    def show_user_details(self, user_id):
+        """Show detailed information about a user"""
+        try:
+            if not hasattr(self, 'admin_token'):
+                logging.error('No admin token available. Please refresh the user list first.')
+                return
+                
+            headers = {'Authorization': f'Bearer {self.admin_token}'}
+            response = requests.get(f'{self.api_base_url}/users/admin/{user_id}', headers=headers)
+            
+            if response.status_code == 200:
+                user = response.json()
+                
+                # Create details window
+                details_window = tk.Toplevel(self.root)
+                details_window.title(f"User Details - {user['name']}")
+                details_window.geometry("600x400")
+                
+                # Create main frame with padding
+                main_frame = ttk.Frame(details_window, padding="20")
+                main_frame.pack(fill=tk.BOTH, expand=True)
+                
+                # Basic Information
+                info_frame = ttk.LabelFrame(main_frame, text="Basic Information", padding="10")
+                info_frame.pack(fill=tk.X, pady=(0, 10))
+                
+                ttk.Label(info_frame, text=f"Name: {user['name']}").pack(anchor=tk.W)
+                ttk.Label(info_frame, text=f"Email: {user['email']}").pack(anchor=tk.W)
+                ttk.Label(info_frame, text=f"Role: {user['role']}").pack(anchor=tk.W)
+                created_at = datetime.fromisoformat(user['createdAt'].replace('Z', '+00:00')).strftime('%Y-%m-%d %H:%M')
+                ttk.Label(info_frame, text=f"Created: {created_at}").pack(anchor=tk.W)
+                
+                # Addresses
+                if user.get('addresses'):
+                    addresses_frame = ttk.LabelFrame(main_frame, text="Addresses", padding="10")
+                    addresses_frame.pack(fill=tk.X, pady=(0, 10))
+                    
+                    for idx, addr in enumerate(user['addresses'], 1):
+                        address_text = f"Address {idx}: {addr.get('street', '')}, {addr.get('city', '')}, "
+                        address_text += f"{addr.get('state', '')}, {addr.get('zipCode', '')}, {addr.get('country', '')}"
+                        if addr.get('isDefault'):
+                            address_text += " (Default)"
+                        ttk.Label(addresses_frame, text=address_text, wraplength=500).pack(anchor=tk.W, pady=2)
+                
+                # Orders
+                if user.get('orders'):
+                    orders_frame = ttk.LabelFrame(main_frame, text="Orders", padding="10")
+                    orders_frame.pack(fill=tk.X, pady=(0, 10))
+                    
+                    orders_tree = ttk.Treeview(orders_frame, columns=("id", "date", "total", "status"), show="headings", height=5)
+                    orders_tree.heading("id", text="Order ID")
+                    orders_tree.heading("date", text="Date")
+                    orders_tree.heading("total", text="Total")
+                    orders_tree.heading("status", text="Status")
+                    
+                    orders_tree.column("id", width=100)
+                    orders_tree.column("date", width=150)
+                    orders_tree.column("total", width=100)
+                    orders_tree.column("status", width=100)
+                    
+                    orders_tree.pack(fill=tk.X)
+                    
+                    for order in user['orders']:
+                        order_date = datetime.fromisoformat(order['createdAt'].replace('Z', '+00:00')).strftime('%Y-%m-%d %H:%M')
+                        orders_tree.insert("", tk.END, values=(
+                            order['_id'],
+                            order_date,
+                            f"${order.get('totalAmount', 0):.2f}",
+                            order.get('status', 'N/A')
+                        ))
+                
+                # Center the window
+                details_window.update_idletasks()
+                width = details_window.winfo_width()
+                height = details_window.winfo_height()
+                x = (details_window.winfo_screenwidth() // 2) - (width // 2)
+                y = (details_window.winfo_screenheight() // 2) - (height // 2)
+                details_window.geometry(f'{width}x{height}+{x}+{y}')
+                
+            elif response.status_code == 403:
+                logging.error('Access denied. Admin privileges required.')
+            else:
+                error_msg = f'Failed to fetch user details: {response.status_code}'
+                logging.error(error_msg)
+                if response.text:
+                    logging.error(f'Response content: {response.text}')
+                
+        except Exception as e:
+            error_msg = f"Error showing user details: {str(e)}"
+            logging.error(error_msg, exc_info=True)
     
     def setup_treeview(self, main_frame):
         """Set up the treeview widget"""
@@ -276,7 +542,8 @@ class ProductDashboard:
         """Fetch products from the API with pagination"""
         logging.info(f'Fetching products from API - Page {self.current_page}')
         try:
-            self.refresh_button.config(state='disabled')
+            if hasattr(self, 'refresh_button'):
+                self.refresh_button.config(state='disabled')
             
             # Build API URL and parameters
             base_url = 'http://localhost:5000/api/products'
@@ -341,7 +608,6 @@ class ProductDashboard:
                 error_msg = f'Failed to fetch products: {response.status_code}'
                 logging.error(error_msg)
                 logging.error(f'Response Content: {response.text}')
-                messagebox.showerror("Error", error_msg)
             
         except requests.RequestException as e:
             error_msg = f'Connection error: {str(e)}'
@@ -349,24 +615,30 @@ class ProductDashboard:
             logging.error(f'Request Details:')
             logging.error(f'  URL: {base_url}')
             logging.error(f'  Parameters: {params}')
-            messagebox.showerror("Error", error_msg)
         except Exception as e:
             error_msg = f'Unexpected error: {str(e)}'
             logging.error(error_msg, exc_info=True)
-            messagebox.showerror("Error", error_msg)
         finally:
-            self.refresh_button.config(state='normal')
+            if hasattr(self, 'refresh_button'):
+                self.refresh_button.config(state='normal')
             logging.info('Product fetch operation completed')
 
     def update_pagination_controls(self):
         """Update pagination controls state"""
         logging.debug('Updating pagination controls')
-        # Update page label
-        self.page_label.config(text=f"Page {self.current_page} of {self.total_pages}")
-        
-        # Update button states
-        self.prev_button.config(state='normal' if self.current_page > 1 else 'disabled')
-        self.next_button.config(state='normal' if self.current_page < self.total_pages else 'disabled')
+        try:
+            if not all(hasattr(self, attr) for attr in ['page_label', 'prev_button', 'next_button']):
+                logging.error('Pagination controls not initialized')
+                return
+                
+            # Update page label
+            self.page_label.config(text=f"Page {self.current_page} of {self.total_pages}")
+            
+            # Update button states
+            self.prev_button.config(state='normal' if self.current_page > 1 else 'disabled')
+            self.next_button.config(state='normal' if self.current_page < self.total_pages else 'disabled')
+        except Exception as e:
+            logging.error(f'Error updating pagination controls: {str(e)}', exc_info=True)
 
     def next_page(self):
         """Go to next page"""
@@ -393,32 +665,34 @@ class ProductDashboard:
         """Update the UI with fetched products"""
         logging.info('Updating UI with fetched products')
         try:
+            if not hasattr(self, 'tree'):
+                logging.error('Tree view not initialized')
+                return
+                
             # Clear existing items
-            logging.debug('Clearing existing items from treeview')
             for item in self.tree.get_children():
                 self.tree.delete(item)
             
             # Update summary statistics
-            logging.debug('Calculating summary statistics')
             total_products = len(products)
             total_stock = sum(p['stock'] for p in products)
             avg_price = sum(Decimal(str(p['price'])) for p in products) / total_products if total_products > 0 else 0
             
-            logging.debug('Updating summary labels')
-            self.total_products_label.config(text=f"Total Products: {total_products}")
-            self.total_stock_label.config(text=f"Total Stock: {total_stock}")
-            self.avg_price_label.config(text=f"Average Price: ${avg_price:.2f}")
+            if hasattr(self, 'total_products_label'):
+                self.total_products_label.config(text=f"Total Products: {total_products}")
+            if hasattr(self, 'total_stock_label'):
+                self.total_stock_label.config(text=f"Total Stock: {total_stock}")
+            if hasattr(self, 'avg_price_label'):
+                self.avg_price_label.config(text=f"Average Price: ${avg_price:.2f}")
             
             # Add products to treeview
-            logging.debug('Adding products to treeview')
             for product in products:
                 rating = product.get('reviewStats', {}).get('averageRating', 0)
                 rating_display = "★" * int(rating) + "☆" * (5 - int(rating))
                 
-                # Create a hidden column to store the full MongoDB ObjectId
-                item = self.tree.insert("", tk.END, values=(
-                    product['_id'],  # Hidden full MongoDB ObjectId
-                    str(product['_id'])[-6:],  # Displayed shortened ID
+                self.tree.insert("", tk.END, values=(
+                    product['_id'],
+                    str(product['_id'])[-6:],
                     product['name'],
                     product['category'],
                     f"${product['price']:.2f}",
@@ -432,9 +706,7 @@ class ProductDashboard:
             logging.info('UI update completed successfully')
             
         except Exception as e:
-            error_msg = f'Error updating UI: {str(e)}'
-            logging.error(error_msg, exc_info=True)
-            messagebox.showerror("Error", error_msg)
+            logging.error(f'Error updating UI: {str(e)}', exc_info=True)
 
     def show_add_product_dialog(self):
         """Show dialog for adding a new product"""

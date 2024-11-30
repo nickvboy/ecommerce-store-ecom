@@ -1,0 +1,65 @@
+2024-11-30 17:30:56,401 - INFO - Logging initialized
+2024-11-30 17:30:56,401 - INFO - Starting Product Dashboard application
+2024-11-30 17:30:56,478 - INFO - Initializing ProductDashboard
+2024-11-30 17:30:56,486 - INFO - Fetching products from API - Page 1
+2024-11-30 17:30:56,486 - INFO - API Request Details:
+2024-11-30 17:30:56,487 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-30 17:30:56,487 - INFO -   Method: GET
+2024-11-30 17:30:56,487 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-30 17:30:56,510 - INFO - API Response Details:
+2024-11-30 17:30:56,511 - INFO -   Status Code: 200
+2024-11-30 17:30:56,511 - INFO -   Response Time: 0.021 seconds
+2024-11-30 17:30:56,512 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-30 17:30:56,512 - INFO - Pagination Details:
+2024-11-30 17:30:56,512 - INFO -   Total Products: Not specified
+2024-11-30 17:30:56,512 - INFO -   Current Page: 1
+2024-11-30 17:30:56,513 - INFO -   Total Pages: 6
+2024-11-30 17:30:56,513 - INFO -   Items Per Page: 10
+2024-11-30 17:30:56,513 - INFO - Products Summary:
+2024-11-30 17:30:56,513 - INFO -   Products Retrieved: 10
+2024-11-30 17:30:56,513 - INFO -   Categories Present: Pens, Tools, Accessories, EDC Gear, Bundles
+2024-11-30 17:30:56,513 - INFO -   Price Range: $2.00 - $148.00
+2024-11-30 17:30:56,514 - INFO - Successfully fetched and processed product data
+2024-11-30 17:30:56,514 - INFO - Updating UI with fetched products
+2024-11-30 17:30:56,514 - ERROR - Error updating UI: 'ProductDashboard' object has no attribute 'tree'
+Traceback (most recent call last):
+  File "c:\Users\nickv\Downloads\tester\ecommerce-store-ecom\backend\scripts\product_dashboard.py", line 634, in update_ui
+    for item in self.tree.get_children():
+                ^^^^^^^^^
+AttributeError: 'ProductDashboard' object has no attribute 'tree'
+2024-11-30 17:30:58,436 - ERROR - Unexpected error: 'ProductDashboard' object has no attribute 'page_label'
+Traceback (most recent call last):
+  File "c:\Users\nickv\Downloads\tester\ecommerce-store-ecom\backend\scripts\product_dashboard.py", line 577, in fetch_products
+    self.update_pagination_controls()
+  File "c:\Users\nickv\Downloads\tester\ecommerce-store-ecom\backend\scripts\product_dashboard.py", line 601, in update_pagination_controls
+    self.page_label.config(text=f"Page {self.current_page} of {self.total_pages}")
+    ^^^^^^^^^^^^^^^
+AttributeError: 'ProductDashboard' object has no attribute 'page_label'
+2024-11-30 17:30:58,439 - INFO - Product fetch operation completed
+2024-11-30 17:30:58,456 - INFO - Performing initial data fetch
+2024-11-30 17:30:58,456 - INFO - Fetching products from API - Page 1
+2024-11-30 17:30:58,456 - INFO - API Request Details:
+2024-11-30 17:30:58,456 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-30 17:30:58,457 - INFO -   Method: GET
+2024-11-30 17:30:58,457 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-30 17:30:58,474 - INFO - API Response Details:
+2024-11-30 17:30:58,475 - INFO -   Status Code: 200
+2024-11-30 17:30:58,475 - INFO -   Response Time: 0.017 seconds
+2024-11-30 17:30:58,475 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-30 17:30:58,476 - INFO - Pagination Details:
+2024-11-30 17:30:58,476 - INFO -   Total Products: Not specified
+2024-11-30 17:30:58,476 - INFO -   Current Page: 1
+2024-11-30 17:30:58,476 - INFO -   Total Pages: 6
+2024-11-30 17:30:58,476 - INFO -   Items Per Page: 10
+2024-11-30 17:30:58,476 - INFO - Products Summary:
+2024-11-30 17:30:58,478 - INFO -   Products Retrieved: 10
+2024-11-30 17:30:58,478 - INFO -   Categories Present: Pens, Tools, Accessories, EDC Gear, Bundles
+2024-11-30 17:30:58,478 - INFO -   Price Range: $2.00 - $148.00
+2024-11-30 17:30:58,478 - INFO - Successfully fetched and processed product data
+2024-11-30 17:30:58,479 - INFO - Updating UI with fetched products
+2024-11-30 17:30:58,480 - INFO - UI update completed successfully
+2024-11-30 17:30:58,480 - INFO - Product fetch operation completed
+2024-11-30 17:30:58,480 - INFO - Application initialized. Log file: logs/product_dashboard_20241130_173056.log
+2024-11-30 17:30:58,481 - INFO - Starting main loop
+2024-11-30 17:31:01,579 - INFO - Fetching users from API
+2024-11-30 17:31:01,583 - ERROR - Failed to fetch users: 404
