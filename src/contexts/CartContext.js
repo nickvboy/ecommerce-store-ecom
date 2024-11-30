@@ -1,14 +1,25 @@
 import { createContext, useContext, useState } from 'react';
 import { API_BASE_URL } from '../lib/utils';
+import { useUser } from './UserContext';
 
 const CartContext = createContext();
 
 export function CartProvider({ children }) {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(() => {
+    const savedCart = localStorage.getItem('cart');
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
   const [orders, setOrders] = useState([]);
+  const { user } = useUser();
+
+  // Save cart to localStorage whenever it changes
+  const updateCartAndStorage = (newCart) => {
+    setCartItems(newCart);
+    localStorage.setItem('cart', JSON.stringify(newCart));
+  };
 
   const addToCart = (product, quantity = 1, selectedSize = null) => {
-    setCartItems(prev => {
+    updateCartAndStorage(prev => {
       const existingItem = prev.find(item => 
         item.id === product._id && item.selectedSize === selectedSize
       );
@@ -33,19 +44,24 @@ export function CartProvider({ children }) {
   };
 
   const removeFromCart = (itemId) => {
-    setCartItems(prev => prev.filter(item => item.id !== itemId));
+    updateCartAndStorage(prev => prev.filter(item => item.id !== itemId));
   };
 
   const clearCart = () => {
-    setCartItems([]);
+    updateCartAndStorage([]);
   };
 
   const createOrder = async (orderData) => {
+    // Prevent guest users from creating orders
+    if (user.isGuest) {
+      throw new Error('Please sign in or create an account to complete your order');
+    }
+
     try {
-      // Format the order data for the API
       const items = cartItems.map(item => ({
         productId: item.id,
-        quantity: item.quantity
+        quantity: item.quantity,
+        size: item.selectedSize
       }));
 
       const shippingAddress = {
@@ -56,13 +72,13 @@ export function CartProvider({ children }) {
         country: 'United States'
       };
 
-      // Make the API call to create the order
       const response = await fetch(`${API_BASE_URL}/orders`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+          userId: user.id,
           email: orderData.email,
           customerName: `${orderData.firstName} ${orderData.lastName}`,
           items,
@@ -77,8 +93,6 @@ export function CartProvider({ children }) {
       }
 
       const newOrder = await response.json();
-
-      // Format the order for the frontend
       const formattedOrder = {
         orderId: newOrder._id,
         items: cartItems,
@@ -94,6 +108,7 @@ export function CartProvider({ children }) {
       };
 
       setOrders(prev => [...prev, formattedOrder]);
+      clearCart(); // Clear the cart after successful order
       return formattedOrder;
     } catch (error) {
       console.error('Error creating order:', error);

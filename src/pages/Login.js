@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useUser } from '../contexts/UserContext';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import SignUpBackground from '../components/SignUpBackground';
+import { useUser } from '../contexts/UserContext';
 
 const API_URL = process.env.NODE_ENV === 'production' 
   ? '/api' 
@@ -45,13 +45,13 @@ function Login() {
         throw new Error(data.message || 'Login failed');
       }
 
-      // Update user context with the new user data
+      // Update user context with the logged in user data
       updateUser({
         id: data.user.id,
         name: data.user.name,
         email: data.user.email,
         role: data.user.role,
-        isAnonymous: false
+        isGuest: false
       });
 
       // Store the token
@@ -66,14 +66,24 @@ function Login() {
     }
   };
 
+  // Disable scrolling when component mounts
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    // Re-enable scrolling when component unmounts
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex overflow-hidden">
       {/* Left side - Form */}
-      <div className="w-full md:w-[480px] p-8 flex flex-col justify-center relative z-10">
+      <div className="w-full md:w-[480px] bg-bg-100/80 backdrop-blur-xl p-8 flex flex-col 
+        justify-center relative z-10 shadow-2xl">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-text-100 mb-2">Welcome Back!</h1>
           <p className="text-text-200">
-            Sign in to your account to continue shopping and manage your orders.
+            Log in to your account to continue your journey.
           </p>
         </div>
 
@@ -123,18 +133,15 @@ function Login() {
               <input
                 type="checkbox"
                 id="remember"
-                className="h-4 w-4 text-primary-100 focus:ring-primary-100 border-bg-300 rounded"
+                className="h-4 w-4 rounded border-bg-300 text-primary-100 focus:ring-primary-100/50"
               />
-              <label htmlFor="remember" className="ml-2 block text-sm text-text-200">
+              <label htmlFor="remember" className="ml-2 text-sm text-text-200">
                 Remember me
               </label>
             </div>
-
-            <div className="text-sm">
-              <Link to="/forgot-password" className="text-primary-100 hover:underline">
-                Forgot your password?
-              </Link>
-            </div>
+            <a href="/forgot-password" className="text-sm text-primary-100 hover:underline">
+              Forgot password?
+            </a>
           </div>
 
           <button
@@ -143,15 +150,15 @@ function Login() {
             className="w-full py-3 px-4 rounded-md bg-primary-100 hover:bg-primary-200 
               text-white font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isLoading ? 'Signing In...' : 'Sign In'}
+            {isLoading ? 'Logging in...' : 'Log In'}
           </button>
         </form>
 
         <p className="mt-6 text-center text-text-200">
           Don't have an account?{' '}
-          <Link to="/signup" className="text-primary-100 hover:underline">
+          <a href="/signup" className="text-primary-100 hover:underline">
             Sign Up
-          </Link>
+          </a>
         </p>
       </div>
 

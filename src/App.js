@@ -8,15 +8,16 @@ import ProductDetail from './pages/ProductDetail';
 import OfflineBanner from './components/OfflineBanner';
 import Settings from './pages/Settings';
 import SignUp from './pages/SignUp';
+import Login from './pages/Login';
 import { CartProvider } from './contexts/CartContext';
 import Checkout from './pages/Checkout';
 import OrderSuccess from './pages/OrderSuccess';
 
 function App() {
   return (
-    <CartProvider>
-      <ApiStatusProvider>
-        <UserProvider>
+    <ApiStatusProvider>
+      <UserProvider>
+        <CartProvider>
           <Router>
             <div className="min-h-screen bg-bg-100 text-text-100">
               <OfflineBanner />
@@ -28,15 +29,16 @@ function App() {
                   <Route path="/products/:id" element={<ProductDetail />} />
                   <Route path="/settings" element={<Settings />} />
                   <Route path="/signup" element={<SignUp />} />
+                  <Route path="/login" element={<Login />} />
                   <Route path="/checkout" element={<Checkout />} />
                   <Route path="/order-success" element={<OrderSuccess />} />
                 </Routes>
               </div>
             </div>
           </Router>
-        </UserProvider>
-      </ApiStatusProvider>
-    </CartProvider>
+        </CartProvider>
+      </UserProvider>
+    </ApiStatusProvider>
   );
 }
 

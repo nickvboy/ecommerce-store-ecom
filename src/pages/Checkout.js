@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useCart } from '../contexts/CartContext';
+import { useUser } from '../contexts/UserContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeftIcon, CreditCardIcon, BuildingStorefrontIcon } from '@heroicons/react/24/outline';
 import { Button } from "../components/ui/button";
@@ -7,6 +8,7 @@ import { Button } from "../components/ui/button";
 function Checkout() {
   const navigate = useNavigate();
   const { cartItems, createOrder } = useCart();
+  const { user } = useUser();
   const [paymentMethod, setPaymentMethod] = useState('card');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -20,6 +22,18 @@ function Checkout() {
     postalCode: '',
     country: 'United States'
   });
+
+  // Redirect guest users to signup
+  useEffect(() => {
+    if (user.isGuest) {
+      navigate('/signup', { 
+        state: { 
+          redirectTo: '/checkout',
+          message: 'Please create an account or sign in to complete your purchase.' 
+        } 
+      });
+    }
+  }, [user, navigate]);
   
   const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   const shipping = 10.00;
@@ -38,6 +52,19 @@ function Checkout() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Double-check that user is not a guest
+    if (user.isGuest) {
+      setError('Please create an account or sign in to complete your purchase.');
+      navigate('/signup', { 
+        state: { 
+          redirectTo: '/checkout',
+          message: 'Please create an account or sign in to complete your purchase.' 
+        } 
+      });
+      return;
+    }
+
     setLoading(true);
     setError(null);
     
@@ -61,6 +88,17 @@ function Checkout() {
     }
   };
 
+  // Show loading state while checking user status
+  if (loading && !cartItems.length) {
+    return (
+      <div className="min-h-screen bg-[#1A1A1A] text-text-100 py-8">
+        <div className="max-w-2xl mx-auto px-4 text-center">
+          <h1 className="text-2xl font-bold mb-4">Loading...</h1>
+        </div>
+      </div>
+    );
+  }
+
   if (cartItems.length === 0) {
     return (
       <div className="min-h-screen bg-[#1A1A1A] text-text-100 py-8">
@@ -68,6 +106,21 @@ function Checkout() {
           <h1 className="text-2xl font-bold mb-4">Your cart is empty</h1>
           <Link to="/products" className="text-primary-100 hover:underline">
             Continue Shopping
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  // If user is guest, this will render briefly before redirect
+  if (user.isGuest) {
+    return (
+      <div className="min-h-screen bg-[#1A1A1A] text-text-100 py-8">
+        <div className="max-w-2xl mx-auto px-4 text-center">
+          <h1 className="text-2xl font-bold mb-4">Please Sign In</h1>
+          <p className="mb-4">You need to be signed in to complete your purchase.</p>
+          <Link to="/signup" className="text-primary-100 hover:underline">
+            Create Account or Sign In
           </Link>
         </div>
       </div>

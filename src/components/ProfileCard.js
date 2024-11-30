@@ -5,8 +5,7 @@ import {
   ArrowRightOnRectangleIcon,
   ShoppingBagIcon,
   HeartIcon,
-  ClipboardDocumentListIcon,
-  UserPlusIcon
+  ClipboardDocumentListIcon
 } from '@heroicons/react/24/outline';
 import { useUser } from '../contexts/UserContext';
 
@@ -15,14 +14,12 @@ function ProfileCard() {
   const { user, signOut, isProfileCardOpen, closeProfileCard } = useUser();
 
   const handleSignOut = () => {
-    // Remove token from localStorage
-    localStorage.removeItem('token');
-    // Call context signOut
     signOut();
-    // Close profile card
     closeProfileCard();
-    // Redirect to home
-    navigate('/');
+    // Add a small delay before navigation to allow the notification to show
+    setTimeout(() => {
+      navigate('/');
+    }, 100);
   };
 
   if (!isProfileCardOpen) return null;
@@ -45,21 +42,11 @@ function ProfileCard() {
           </div>
           <div>
             <h3 className="font-medium text-text-100">{user.name}</h3>
-            <p className="text-sm text-text-200">{user.email}</p>
+            {user.email && (
+              <p className="text-sm text-text-200">{user.email}</p>
+            )}
           </div>
         </div>
-        
-        {user.isAnonymous && (
-          <Link 
-            to="/signup"
-            onClick={closeProfileCard}
-            className="mt-3 w-full flex items-center justify-center gap-2 px-3 py-2 rounded-md 
-              bg-primary-100 hover:bg-primary-200 text-white font-medium transition-colors"
-          >
-            <UserPlusIcon className="w-5 h-5" />
-            <span>Create Account</span>
-          </Link>
-        )}
       </div>
 
       {/* Quick Links */}
@@ -92,7 +79,7 @@ function ProfileCard() {
         </Link>
       </div>
 
-      {/* Settings & Logout */}
+      {/* Settings & Login/Logout */}
       <div className="border-t border-bg-300 p-2">
         <Link 
           to="/settings" 
@@ -103,13 +90,24 @@ function ProfileCard() {
           <span>Settings</span>
         </Link>
         
-        <button 
-          onClick={handleSignOut}
-          className="w-full flex items-center gap-3 px-3 py-2 rounded-md hover:bg-bg-200 text-text-100 group"
-        >
-          <ArrowRightOnRectangleIcon className="w-5 h-5 text-text-200 group-hover:text-primary-100" />
-          <span>Sign Out</span>
-        </button>
+        {user.isGuest ? (
+          <Link 
+            to="/login"
+            onClick={closeProfileCard}
+            className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-bg-200 text-text-100 group"
+          >
+            <ArrowRightOnRectangleIcon className="w-5 h-5 text-text-200 group-hover:text-primary-100" />
+            <span>Login</span>
+          </Link>
+        ) : (
+          <button 
+            onClick={handleSignOut}
+            className="w-full flex items-center gap-3 px-3 py-2 rounded-md hover:bg-bg-200 text-text-100 group"
+          >
+            <ArrowRightOnRectangleIcon className="w-5 h-5 text-text-200 group-hover:text-primary-100" />
+            <span>Sign Out</span>
+          </button>
+        )}
       </div>
     </div>
   );
