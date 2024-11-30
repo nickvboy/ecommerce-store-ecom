@@ -1,21 +1,18 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import SignUpBackground from '../components/SignUpBackground';
+import { Link, useNavigate } from 'react-router-dom';
 import { useUser } from '../contexts/UserContext';
+import SignUpBackground from '../components/SignUpBackground';
 
 const API_URL = process.env.NODE_ENV === 'production' 
   ? '/api' 
   : 'http://localhost:5000/api';
 
-function SignUp() {
+function Login() {
   const navigate = useNavigate();
   const { updateUser } = useUser();
   const [formData, setFormData] = useState({
-    name: '',
     email: '',
-    username: '',
-    password: '',
-    address: ''
+    password: ''
   });
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -33,7 +30,7 @@ function SignUp() {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${API_URL}/users/register`, {
+      const response = await fetch(`${API_URL}/users/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -45,7 +42,7 @@ function SignUp() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || 'Registration failed');
+        throw new Error(data.message || 'Login failed');
       }
 
       // Update user context with the new user data
@@ -74,9 +71,9 @@ function SignUp() {
       {/* Left side - Form */}
       <div className="w-full md:w-[480px] p-8 flex flex-col justify-center relative z-10">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-text-100 mb-2">Welcome!</h1>
+          <h1 className="text-3xl font-bold text-text-100 mb-2">Welcome Back!</h1>
           <p className="text-text-200">
-            Create an account to view awesome content and support your favorite creator today!
+            Sign in to your account to continue shopping and manage your orders.
           </p>
         </div>
 
@@ -87,23 +84,6 @@ function SignUp() {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium text-text-200 mb-1">
-              Full Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full px-3 py-2 rounded-md border border-bg-300 bg-bg-100 text-text-100
-                focus:outline-none focus:ring-2 focus:ring-primary-100/50"
-              placeholder="Enter your full name"
-              required
-            />
-          </div>
-
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-text-200 mb-1">
               Email
@@ -122,23 +102,6 @@ function SignUp() {
           </div>
 
           <div>
-            <label htmlFor="username" className="block text-sm font-medium text-text-200 mb-1">
-              Username
-            </label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-              className="w-full px-3 py-2 rounded-md border border-bg-300 bg-bg-100 text-text-100
-                focus:outline-none focus:ring-2 focus:ring-primary-100/50"
-              placeholder="Choose a username"
-              required
-            />
-          </div>
-
-          <div>
             <label htmlFor="password" className="block text-sm font-medium text-text-200 mb-1">
               Password
             </label>
@@ -150,32 +113,28 @@ function SignUp() {
               onChange={handleChange}
               className="w-full px-3 py-2 rounded-md border border-bg-300 bg-bg-100 text-text-100
                 focus:outline-none focus:ring-2 focus:ring-primary-100/50"
-              placeholder="Create a password"
+              placeholder="Enter your password"
               required
             />
           </div>
 
-          <div>
-            <label htmlFor="address" className="block text-sm font-medium text-text-200 mb-1">
-              Address
-            </label>
-            <textarea
-              id="address"
-              name="address"
-              value={formData.address}
-              onChange={handleChange}
-              className="w-full px-3 py-2 rounded-md border border-bg-300 bg-bg-100 text-text-100
-                focus:outline-none focus:ring-2 focus:ring-primary-100/50"
-              placeholder="Enter your address"
-              rows="3"
-              required
-            />
-          </div>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                id="remember"
+                className="h-4 w-4 text-primary-100 focus:ring-primary-100 border-bg-300 rounded"
+              />
+              <label htmlFor="remember" className="ml-2 block text-sm text-text-200">
+                Remember me
+              </label>
+            </div>
 
-          <div className="text-sm text-text-200">
-            By signing up, you confirm that you have read and agree to our{' '}
-            <a href="/terms" className="text-primary-100 hover:underline">Terms of Service</a> and{' '}
-            <a href="/privacy" className="text-primary-100 hover:underline">Privacy Policy</a>.
+            <div className="text-sm">
+              <Link to="/forgot-password" className="text-primary-100 hover:underline">
+                Forgot your password?
+              </Link>
+            </div>
           </div>
 
           <button
@@ -184,15 +143,15 @@ function SignUp() {
             className="w-full py-3 px-4 rounded-md bg-primary-100 hover:bg-primary-200 
               text-white font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isLoading ? 'Creating Account...' : 'Sign Up'}
+            {isLoading ? 'Signing In...' : 'Sign In'}
           </button>
         </form>
 
         <p className="mt-6 text-center text-text-200">
-          Already a member?{' '}
-          <a href="/login" className="text-primary-100 hover:underline">
-            Log In
-          </a>
+          Don't have an account?{' '}
+          <Link to="/signup" className="text-primary-100 hover:underline">
+            Sign Up
+          </Link>
         </p>
       </div>
 
@@ -204,4 +163,4 @@ function SignUp() {
   );
 }
 
-export default SignUp; 
+export default Login; 

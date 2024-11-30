@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   UserIcon,
   Cog6ToothIcon,
@@ -11,7 +11,19 @@ import {
 import { useUser } from '../contexts/UserContext';
 
 function ProfileCard() {
+  const navigate = useNavigate();
   const { user, signOut, isProfileCardOpen, closeProfileCard } = useUser();
+
+  const handleSignOut = () => {
+    // Remove token from localStorage
+    localStorage.removeItem('token');
+    // Call context signOut
+    signOut();
+    // Close profile card
+    closeProfileCard();
+    // Redirect to home
+    navigate('/');
+  };
 
   if (!isProfileCardOpen) return null;
 
@@ -40,6 +52,7 @@ function ProfileCard() {
         {user.isAnonymous && (
           <Link 
             to="/signup"
+            onClick={closeProfileCard}
             className="mt-3 w-full flex items-center justify-center gap-2 px-3 py-2 rounded-md 
               bg-primary-100 hover:bg-primary-200 text-white font-medium transition-colors"
           >
@@ -53,6 +66,7 @@ function ProfileCard() {
       <div className="p-2">
         <Link 
           to="/orders" 
+          onClick={closeProfileCard}
           className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-bg-200 text-text-100 group"
         >
           <ShoppingBagIcon className="w-5 h-5 text-text-200 group-hover:text-primary-100" />
@@ -61,6 +75,7 @@ function ProfileCard() {
         
         <Link 
           to="/wishlist" 
+          onClick={closeProfileCard}
           className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-bg-200 text-text-100 group"
         >
           <HeartIcon className="w-5 h-5 text-text-200 group-hover:text-primary-100" />
@@ -69,6 +84,7 @@ function ProfileCard() {
         
         <Link 
           to="/tracking" 
+          onClick={closeProfileCard}
           className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-bg-200 text-text-100 group"
         >
           <ClipboardDocumentListIcon className="w-5 h-5 text-text-200 group-hover:text-primary-100" />
@@ -80,6 +96,7 @@ function ProfileCard() {
       <div className="border-t border-bg-300 p-2">
         <Link 
           to="/settings" 
+          onClick={closeProfileCard}
           className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-bg-200 text-text-100 group"
         >
           <Cog6ToothIcon className="w-5 h-5 text-text-200 group-hover:text-primary-100" />
@@ -87,7 +104,7 @@ function ProfileCard() {
         </Link>
         
         <button 
-          onClick={signOut}
+          onClick={handleSignOut}
           className="w-full flex items-center gap-3 px-3 py-2 rounded-md hover:bg-bg-200 text-text-100 group"
         >
           <ArrowRightOnRectangleIcon className="w-5 h-5 text-text-200 group-hover:text-primary-100" />
