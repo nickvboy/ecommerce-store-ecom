@@ -22,8 +22,14 @@ const productSchema = new mongoose.Schema({
     required: true
   },
   images: [{
-    type: String,
-    required: true
+    url: {
+      type: String,
+      required: true
+    },
+    order: {
+      type: Number,
+      default: 0
+    }
   }],
   rating: {
     type: Number,
@@ -119,6 +125,18 @@ productSchema.methods.updateReviewStats = async function() {
   }
   
   await this.save();
+};
+
+// Add method to reorder images
+productSchema.methods.reorderImages = async function(imageOrders) {
+  // imageOrders should be an array of { id, order } objects
+  this.images = this.images.map(img => ({
+    ...img,
+    order: imageOrders.find(o => o.id === img._id.toString())?.order ?? img.order
+  })).sort((a, b) => a.order - b.order);
+  
+  await this.save();
+  return this.images;
 };
 
 module.exports = mongoose.model('Product', productSchema); 

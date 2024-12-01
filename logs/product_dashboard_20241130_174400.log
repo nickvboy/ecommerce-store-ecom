@@ -1,0 +1,64 @@
+2024-11-30 17:44:00,925 - INFO - Logging initialized
+2024-11-30 17:44:00,925 - INFO - Starting Product Dashboard application
+2024-11-30 17:44:01,031 - INFO - Initializing ProductDashboard
+2024-11-30 17:44:01,065 - INFO - Fetching products from API - Page 1
+2024-11-30 17:44:01,065 - INFO - API Request Details:
+2024-11-30 17:44:01,066 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-30 17:44:01,066 - INFO -   Method: GET
+2024-11-30 17:44:01,066 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-30 17:44:01,094 - INFO - API Response Details:
+2024-11-30 17:44:01,095 - INFO -   Status Code: 200
+2024-11-30 17:44:01,095 - INFO -   Response Time: 0.025 seconds
+2024-11-30 17:44:01,095 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-30 17:44:01,096 - INFO - Pagination Details:
+2024-11-30 17:44:01,096 - INFO -   Total Products: Not specified
+2024-11-30 17:44:01,096 - INFO -   Current Page: 1
+2024-11-30 17:44:01,097 - INFO -   Total Pages: 6
+2024-11-30 17:44:01,097 - INFO -   Items Per Page: 10
+2024-11-30 17:44:01,097 - INFO - Products Summary:
+2024-11-30 17:44:01,097 - INFO -   Products Retrieved: 10
+2024-11-30 17:44:01,097 - INFO -   Categories Present: Pens, Accessories, Tools, EDC Gear, Bundles
+2024-11-30 17:44:01,097 - INFO -   Price Range: $2.00 - $148.00
+2024-11-30 17:44:01,097 - INFO - Successfully fetched and processed product data
+2024-11-30 17:44:01,097 - INFO - Updating UI with fetched products
+2024-11-30 17:44:01,100 - INFO - UI update completed successfully
+2024-11-30 17:44:01,100 - INFO - Product fetch operation completed
+2024-11-30 17:44:01,100 - INFO - Performing initial data fetch
+2024-11-30 17:44:01,100 - INFO - Fetching products from API - Page 1
+2024-11-30 17:44:01,101 - INFO - API Request Details:
+2024-11-30 17:44:01,101 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-30 17:44:01,101 - INFO -   Method: GET
+2024-11-30 17:44:01,102 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-30 17:44:01,120 - INFO - API Response Details:
+2024-11-30 17:44:01,121 - INFO -   Status Code: 200
+2024-11-30 17:44:01,121 - INFO -   Response Time: 0.018 seconds
+2024-11-30 17:44:01,122 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-30 17:44:01,122 - INFO - Pagination Details:
+2024-11-30 17:44:01,123 - INFO -   Total Products: Not specified
+2024-11-30 17:44:01,123 - INFO -   Current Page: 1
+2024-11-30 17:44:01,123 - INFO -   Total Pages: 6
+2024-11-30 17:44:01,123 - INFO -   Items Per Page: 10
+2024-11-30 17:44:01,124 - INFO - Products Summary:
+2024-11-30 17:44:01,124 - INFO -   Products Retrieved: 10
+2024-11-30 17:44:01,124 - INFO -   Categories Present: Pens, Accessories, Tools, EDC Gear, Bundles
+2024-11-30 17:44:01,125 - INFO -   Price Range: $2.00 - $148.00
+2024-11-30 17:44:01,125 - INFO - Successfully fetched and processed product data
+2024-11-30 17:44:01,125 - INFO - Updating UI with fetched products
+2024-11-30 17:44:01,126 - INFO - UI update completed successfully
+2024-11-30 17:44:01,127 - INFO - Product fetch operation completed
+2024-11-30 17:44:01,127 - INFO - Application initialized. Log file: logs/product_dashboard_20241130_174400.log
+2024-11-30 17:44:01,127 - INFO - Starting main loop
+2024-11-30 17:44:03,306 - INFO - Fetching users from API
+2024-11-30 17:44:03,392 - ERROR - Failed to fetch users: 404
+2024-11-30 17:44:03,393 - ERROR - Response content: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /api/users/admin/list</pre>
+</body>
+</html>
+
+2024-11-30 17:45:19,321 - INFO - Application shutting down

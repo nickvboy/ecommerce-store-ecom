@@ -1,0 +1,35 @@
+2024-11-28 10:39:54,672 - INFO - Logging initialized
+2024-11-28 10:39:54,673 - INFO - Starting Product Dashboard application
+2024-11-28 10:39:54,757 - INFO - Initializing ProductDashboard
+2024-11-28 10:39:54,784 - INFO - Performing initial data fetch
+2024-11-28 10:39:54,785 - INFO - Fetching products from API - Page 1
+2024-11-28 10:39:54,785 - INFO - API Request Details:
+2024-11-28 10:39:54,785 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-28 10:39:54,785 - INFO -   Method: GET
+2024-11-28 10:39:54,786 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-28 10:39:54,804 - INFO - API Response Details:
+2024-11-28 10:39:54,804 - INFO -   Status Code: 200
+2024-11-28 10:39:54,805 - INFO -   Response Time: 0.015 seconds
+2024-11-28 10:39:54,805 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-28 10:39:54,806 - INFO - Pagination Details:
+2024-11-28 10:39:54,807 - INFO -   Total Products: Not specified
+2024-11-28 10:39:54,807 - INFO -   Current Page: 1
+2024-11-28 10:39:54,807 - INFO -   Total Pages: 6
+2024-11-28 10:39:54,807 - INFO -   Items Per Page: 10
+2024-11-28 10:39:54,808 - INFO - Products Summary:
+2024-11-28 10:39:54,808 - INFO -   Products Retrieved: 10
+2024-11-28 10:39:54,808 - INFO -   Categories Present: Bundles, Pens, Tools, Accessories, EDC Gear
+2024-11-28 10:39:54,808 - INFO -   Price Range: $28.42 - $179.00
+2024-11-28 10:39:54,809 - INFO - Successfully fetched and processed product data
+2024-11-28 10:39:54,809 - INFO - Updating UI with fetched products
+2024-11-28 10:39:54,810 - INFO - UI update completed successfully
+2024-11-28 10:39:54,811 - INFO - Product fetch operation completed
+2024-11-28 10:39:54,811 - INFO - Application initialized. Log file: logs/product_dashboard_20241128_103954.log
+2024-11-28 10:39:54,811 - INFO - Starting main loop
+2024-11-28 10:39:59,455 - INFO - Showing add product dialog
+2024-11-28 10:40:21,866 - ERROR - Error adding product: ProductDashboard.show_add_product_dialog.<locals>.upload_images() missing 1 required positional argument: 'self'
+Traceback (most recent call last):
+  File "c:\Users\nickv\Downloads\tester\ecommerce-store-ecom\backend\scripts\product_dashboard.py", line 651, in submit
+    image_urls = upload_images()
+                 ^^^^^^^^^^^^^^^
+TypeError: ProductDashboard.show_add_product_dialog.<locals>.upload_images() missing 1 required positional argument: 'self'

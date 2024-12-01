@@ -13,6 +13,8 @@ import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "../componen
 import ReviewSummary from '../components/ReviewSummary';
 import { API_BASE_URL } from '../lib/utils';
 import SizeSelector from '../components/SizeSelector';
+import AddToCartNotification from '../components/AddToCartNotification';
+import { useCart } from '../contexts/CartContext';
 
 function ProductDetail() {
   const { id: productId } = useParams();
@@ -21,7 +23,11 @@ function ProductDetail() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [scrollPosition, setScrollPosition] = useState(0);
   const [product, setProduct] = useState(null);
-  const [selectedSize, setSelectedSize] = useState('L');
+  const [selectedSize, setSelectedSize] = useState(null);
+  const [loadedImages, setLoadedImages] = useState([]);
+  const [showNotification, setShowNotification] = useState(false);
+  const { addToCart } = useCart();
+  const [openSection, setOpenSection] = useState(null);
 
   const images = [
     { id: 1, color: 'bg-blue-500' },
@@ -64,8 +70,54 @@ function ProductDetail() {
     fetchProduct();
   }, [fetchProduct]); // Now fetchProduct is a stable dependency
 
+  // Add image preloading
+  useEffect(() => {
+    if (product?.images) {
+      product.images.forEach(img => {
+        const image = new Image();
+        image.src = img.url;
+        image.onload = () => {
+          setLoadedImages(prev => [...prev, img.url]);
+        };
+      });
+    }
+  }, [product]);
+
+  // Add reordering function
+  const handleReorderImages = async (newOrder) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/products/${productId}/images/reorder`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ imageOrders: newOrder })
+      });
+      
+      if (!response.ok) throw new Error('Failed to reorder images');
+      const updatedImages = await response.json();
+      setProduct(prev => ({ ...prev, images: updatedImages }));
+    } catch (error) {
+      console.error('Error reordering images:', error);
+    }
+  };
+
+  // Add function to handle adding to cart
+  const handleAddToCart = () => {
+    // Only add size to cart if product has sizes and one is selected
+    const cartItem = {
+      id: product._id,  // Ensure we're setting the id explicitly
+      name: product.name,
+      price: product.price,
+      images: product.images,
+      quantity: quantity,
+      selectedSize: product.sizes && product.sizes.length > 0 ? selectedSize : null
+    };
+    addToCart(cartItem);
+    setShowNotification(true);
+    setTimeout(() => setShowNotification(false), 3000);
+  };
+
   return (
-    <div className="min-h-screen bg-[#1A1A1A] text-text-100 py-8">
+    <div className="min-h-screen bg-bg-100 text-text-100 py-8">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <Link 
           to="/products" 
@@ -82,13 +134,21 @@ function ProductDetail() {
               {/* Mobile Carousel */}
               <div className="md:hidden relative w-full">
                 <div className="relative rounded-lg overflow-hidden">
-                  <div 
-                    className={`w-full aspect-square ${images[currentImageIndex].color} rounded-lg`}
-                  />
+                  {loadedImages.includes(product.images[currentImageIndex]?.url) ? (
+                    <img 
+                      src={product.images[currentImageIndex]?.url}
+                      alt={`${product.name} - Image ${currentImageIndex + 1}`}
+                      className="w-full aspect-square object-cover rounded-lg"
+                    />
+                  ) : (
+                    <div className="w-full aspect-square bg-bg-300 animate-pulse rounded-lg" />
+                  )}
                   
                   {/* Navigation Arrows */}
                   <button 
-                    onClick={() => setCurrentImageIndex(prev => prev === 0 ? images.length - 1 : prev - 1)}
+                    onClick={() => setCurrentImageIndex(prev => 
+                      prev === 0 ? product.images.length - 1 : prev - 1
+                    )}
                     className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
                     aria-label="Previous image"
                   >
@@ -96,7 +156,9 @@ function ProductDetail() {
                   </button>
                   
                   <button 
-                    onClick={() => setCurrentImageIndex(prev => prev === images.length - 1 ? 0 : prev + 1)}
+                    onClick={() => setCurrentImageIndex(prev => 
+                      prev === product.images.length - 1 ? 0 : prev + 1
+                    )}
                     className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
                     aria-label="Next image"
                   >
@@ -105,7 +167,7 @@ function ProductDetail() {
 
                   {/* Image Indicators */}
                   <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2">
-                    {images.map((_, index) => (
+                    {product.images.map((_, index) => (
                       <button
                         key={index}
                         onClick={() => setCurrentImageIndex(index)}
@@ -126,53 +188,36 @@ function ProductDetail() {
               <div className="hidden md:flex gap-4 w-full">
                 {/* Thumbnails */}
                 <div className="relative w-20">
-                  {/* Scroll Up Button */}
-                  <button 
-                    onClick={() => handleScroll('up')}
-                    className="absolute -top-2 left-1/2 -translate-x-1/2 z-10 text-text-200 hover:text-primary-100"
-                    disabled={scrollPosition === 0}
-                  >
-                    <ChevronUpIcon className="h-6 w-6" />
-                  </button>
-
-                  {/* Thumbnails Container */}
-                  <div className="h-[400px] overflow-hidden relative">
-                    <div 
-                      className="absolute w-full transition-transform duration-300 py-2"
-                      style={{ transform: `translateY(-${scrollPosition}px)` }}
+                  {product.images.map((image, index) => (
+                    <button
+                      key={image._id}
+                      onClick={() => setCurrentImageIndex(index)}
+                      className="relative w-full aspect-square mb-2"
                     >
-                      {images.map((image, index) => (
-                        <button
-                          key={image.id}
-                          onClick={() => setCurrentImageIndex(index)}
-                          className={`w-full aspect-square mb-4 rounded-lg overflow-hidden 
-                            ${currentImageIndex === index 
-                              ? 'ring-2 ring-primary-100' 
-                              : 'opacity-50 hover:opacity-75'}`}
-                        >
-                          <div className={`w-full h-full ${image.color} rounded-lg`} />
-                        </button>
-                      ))}
-                      {/* Add extra padding at bottom for scrolling */}
-                      <div className="h-20"></div>
-                    </div>
-                  </div>
-
-                  {/* Scroll Down Button */}
-                  <button 
-                    onClick={() => handleScroll('down')}
-                    className="absolute -bottom-2 left-1/2 -translate-x-1/2 z-10 text-text-200 hover:text-primary-100"
-                    disabled={scrollPosition >= (images.length * 80) - 320}
-                  >
-                    <ChevronDownIcon className="h-6 w-6" />
-                  </button>
+                      {loadedImages.includes(image.url) ? (
+                        <img 
+                          src={image.url}
+                          alt={`Product thumbnail ${index + 1}`}
+                          className="w-full h-full object-cover rounded"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-bg-300 animate-pulse rounded" />
+                      )}
+                    </button>
+                  ))}
                 </div>
 
                 {/* Main Image */}
                 <div className="flex-1 rounded-lg overflow-hidden">
-                  <div 
-                    className={`w-full aspect-square ${images[currentImageIndex].color} rounded-lg`}
-                  />
+                  {loadedImages.includes(product.images[currentImageIndex]?.url) ? (
+                    <img 
+                      src={product.images[currentImageIndex]?.url}
+                      alt={product.name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-bg-300 animate-pulse" />
+                  )}
                 </div>
               </div>
             </div>
@@ -197,8 +242,8 @@ function ProductDetail() {
                   <svg width="0" height="0" className="absolute">
                     <defs>
                       <linearGradient id="star-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#ff983f" /> {/* primary-200 */}
-                        <stop offset="100%" stopColor="#f1690e" /> {/* primary-100 */}
+                        <stop offset="0%" className="primary-100" stopColor="var(--primary-100)" />
+                        <stop offset="100%" className="primary-200" stopColor="var(--primary-200)" />
                       </linearGradient>
                     </defs>
                   </svg>
@@ -262,7 +307,7 @@ function ProductDetail() {
               <div className="flex items-end justify-between mb-8">
                 <div className="flex flex-col">
                   <span className="text-sm font-medium mb-2 text-center">QUANTITY</span>
-                  <div className="flex items-center bg-[#1A1A1A] border border-text-100 rounded-lg overflow-hidden">
+                  <div className="flex items-center bg-bg-100 border border-text-100 rounded-lg overflow-hidden">
                     <button 
                       onClick={() => handleQuantityChange(-1)}
                       className="px-4 py-2 text-text-100 hover:text-primary-100 font-bold"
@@ -282,58 +327,124 @@ function ProductDetail() {
                 </div>
                 
                 <Button 
-                  onClick={() => alert('Added to cart!')}
+                  onClick={handleAddToCart}
                   className="px-12 bg-gradient-to-r from-primary-100 to-primary-200 
                     hover:from-primary-200 hover:to-primary-100 text-white py-2 rounded-lg
                     transform transition-all duration-200 ease-in-out
                     hover:scale-105 hover:shadow-lg hover:shadow-primary-100/50
-                    active:scale-95 relative
-                    after:absolute after:inset-0 after:rounded-lg
-                    after:shadow-[0_0_15px_3px] after:shadow-primary-100/30
-                    after:transition-opacity after:duration-200
-                    after:opacity-0 hover:after:opacity-100"
+                    active:scale-95"
                 >
                   ADD TO CART
                 </Button>
               </div>
 
-              {/* Collapsible Sections */}
-              <div className="space-y-4">
-                <Collapsible>
-                  <CollapsibleTrigger className="flex justify-between items-center w-full p-4 bg-[#1A1A1A] border border-text-100 rounded-lg group">
-                    <span className="font-bold">Description</span>
-                    <span className="text-text-100 transition-transform duration-300 group-data-[state=open]:rotate-180">▼</span>
-                  </CollapsibleTrigger>
-                  <CollapsibleContent className="overflow-hidden data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp">
-                    <div className="mt-0 p-4 bg-[#1A1A1A] border-x border-b border-text-100 rounded-b-lg">
-                      <h3 className="font-bold mb-2">Materials</h3>
-                      <ul className="list-disc pl-5 space-y-1 text-text-200">
-                        <li>Body: 303 Stainless steel</li>
-                        <li>Bolt: 303 stainless or Lead free brass</li>
-                        <li>Pen Clip: Nickel plated spring steel</li>
-                      </ul>
-                      <h3 className="font-bold mt-4 mb-2">Ink refill:</h3>
-                      <ul className="list-disc pl-5 space-y-1 text-text-200">
-                        <li>Schmidt EasyFlow 9000 medium, black</li>
-                        <li>Compatible with "Parker G2" ISO 12757-1 refills</li>
-                      </ul>
-                    </div>
-                  </CollapsibleContent>
-                </Collapsible>
+              
 
-                <Collapsible>
-                  <CollapsibleTrigger className="flex justify-between items-center w-full p-4 bg-[#1A1A1A] border border-text-100 rounded-lg group">
-                    <span className="font-bold">Product Information</span>
-                    <span className="text-text-100 transition-transform duration-300 group-data-[state=open]:rotate-180">▼</span>
-                  </CollapsibleTrigger>
-                  <CollapsibleContent className="overflow-hidden data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp">
-                    <div className="mt-0 p-4 bg-[#1A1A1A] border-x border-b border-text-100 rounded-b-lg">
-                      <p className="text-text-200">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                      </p>
+              {/* Description Section */}
+              <div className="border border-text-100/10 rounded-lg mb-4 bg-bg-100">
+                <button 
+                  onClick={() => setOpenSection(openSection === 'description' ? null : 'description')}
+                  className="flex justify-between items-center w-full p-4 text-left"
+                >
+                  <span className="font-semibold text-text-100">Description</span>
+                  <ChevronDownIcon 
+                    className={`h-5 w-5 transform transition-transform duration-200 text-text-100 ${
+                      openSection === 'description' ? 'rotate-180' : ''
+                    }`}
+                  />
+                </button>
+                {openSection === 'description' && (
+                  <div className="p-4 border-t border-text-100/10">
+                    <p className="text-text-200 whitespace-pre-wrap">{product.description}</p>
+                  </div>
+                )}
+              </div>
+
+              {/* Product Information Section */}
+              <div className="border border-text-100/10 rounded-lg mb-4 bg-bg-100">
+                <button 
+                  onClick={() => setOpenSection(openSection === 'info' ? null : 'info')}
+                  className="flex justify-between items-center w-full p-4 text-left"
+                >
+                  <span className="font-semibold text-text-100">Product Information</span>
+                  <ChevronDownIcon 
+                    className={`h-5 w-5 transform transition-transform duration-200 text-text-100 ${
+                      openSection === 'info' ? 'rotate-180' : ''
+                    }`}
+                  />
+                </button>
+                {openSection === 'info' && (
+                  <div className="p-4 border-t border-text-100/10">
+                    {/* Materials List */}
+                    {product.specifications?.materials && product.specifications.materials.length > 0 && (
+                      <div className="mb-4">
+                        <h3 className="font-medium text-text-100 mb-2">Materials</h3>
+                        <ul className="space-y-2">
+                          {product.specifications.materials.map((material, index) => (
+                            <li key={index} className="flex">
+                              <span className="font-medium text-text-100 min-w-[120px]">{material.name}</span>
+                              <span className="text-text-200">{material.description}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {/* Basic Information */}
+                    <div className="mb-4">
+                      <h3 className="font-medium text-text-100 mb-2">Basic Information</h3>
+                      <ul className="space-y-2">
+                        <li className="flex">
+                          <span className="font-medium text-text-100 min-w-[120px]">Category:</span>
+                          <span className="text-text-200">{product.category}</span>
+                        </li>
+                        {product.sizes && product.sizes.length > 0 && (
+                          <li className="flex">
+                            <span className="font-medium text-text-100 min-w-[120px]">Available Sizes:</span>
+                            <span className="text-text-200">{product.sizes.join(', ')}</span>
+                          </li>
+                        )}
+                        <li className="flex">
+                          <span className="font-medium text-text-100 min-w-[120px]">Stock:</span>
+                          <span className="text-text-200">{product.stock} units</span>
+                        </li>
+                      </ul>
                     </div>
-                  </CollapsibleContent>
-                </Collapsible>
+
+                    {/* Dimensions if available */}
+                    {product.specifications?.dimensions && (
+                      <div>
+                        <h3 className="font-medium text-text-100 mb-2">Dimensions</h3>
+                        <ul className="space-y-2">
+                          {product.specifications.dimensions.length && (
+                            <li className="flex">
+                              <span className="font-medium text-text-100 min-w-[120px]">Length:</span>
+                              <span className="text-text-200">{product.specifications.dimensions.length} mm</span>
+                            </li>
+                          )}
+                          {product.specifications.dimensions.width && (
+                            <li className="flex">
+                              <span className="font-medium text-text-100 min-w-[120px]">Width:</span>
+                              <span className="text-text-200">{product.specifications.dimensions.width} mm</span>
+                            </li>
+                          )}
+                          {product.specifications.dimensions.height && (
+                            <li className="flex">
+                              <span className="font-medium text-text-100 min-w-[120px]">Height:</span>
+                              <span className="text-text-200">{product.specifications.dimensions.height} mm</span>
+                            </li>
+                          )}
+                          {product.specifications.dimensions.weight && (
+                            <li className="flex">
+                              <span className="font-medium text-text-100 min-w-[120px]">Weight:</span>
+                              <span className="text-text-200">{product.specifications.dimensions.weight} g</span>
+                            </li>
+                          )}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -348,6 +459,12 @@ function ProductDetail() {
           <ReviewSummary productId={product._id} />
         </div>
       )}
+
+      {/* Add notification */}
+      <AddToCartNotification 
+        show={showNotification}
+        onClose={() => setShowNotification(false)}
+      />
     </div>
   );
 }

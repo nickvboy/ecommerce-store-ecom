@@ -142,22 +142,21 @@ const generateReviews = (baseCount = 60) => {
   return reviews;
 };
 
+const generateProductImages = (productId, count = 6) => {
+  return Array(count).fill(null).map((_, index) => ({
+    url: `https://picsum.photos/seed/${productId}-${index}/800/800`,
+    order: index
+  }));
+};
+
 const products = [
-  // Pens Category
   {
     name: "SCRIBEDRIVER BOLT ACTION PEN",
     description: "Premium bolt action pen with precision engineering",
     price: 19.99,
     originalPrice: 29.99,
     category: "Pens",
-    images: [
-      "/images/scribedriver/blue.jpg",
-      "/images/scribedriver/red.jpg",
-      "/images/scribedriver/green.jpg",
-      "/images/scribedriver/yellow.jpg",
-      "/images/scribedriver/purple.jpg",
-      "/images/scribedriver/orange.jpg"
-    ],
+    images: generateProductImages('scribedriver'),
     rating: 4.5,
     reviews: [
       {
@@ -228,7 +227,7 @@ for (let i = 0; i < 49; i++) {
     price: discountPercent ? parseFloat((basePrice * (1 - discountPercent)).toFixed(2)) : basePrice,
     originalPrice: discountPercent ? parseFloat(basePrice.toFixed(2)) : null,
     category: categoriesList[Math.floor(Math.random() * categoriesList.length)],
-    images: Array(6).fill(null).map((_, index) => `/images/product-${i + 2}/image-${index + 1}.jpg`),
+    images: generateProductImages(`product-${i + 2}`),
     rating: parseFloat((Math.random() * 2 + 3).toFixed(1)), // Rating between 3 and 5
     reviews: generateReviews(), // Generate dynamic reviews
     specifications: {

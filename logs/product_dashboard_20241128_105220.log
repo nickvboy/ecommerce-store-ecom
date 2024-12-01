@@ -1,0 +1,34 @@
+2024-11-28 10:52:20,107 - INFO - Logging initialized
+2024-11-28 10:52:20,107 - INFO - Starting Product Dashboard application
+2024-11-28 10:52:20,187 - INFO - Initializing ProductDashboard
+2024-11-28 10:52:20,213 - INFO - Performing initial data fetch
+2024-11-28 10:52:20,214 - INFO - Fetching products from API - Page 1
+2024-11-28 10:52:20,214 - INFO - API Request Details:
+2024-11-28 10:52:20,214 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-28 10:52:20,215 - INFO -   Method: GET
+2024-11-28 10:52:20,215 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-28 10:52:20,233 - INFO - API Response Details:
+2024-11-28 10:52:20,233 - INFO -   Status Code: 200
+2024-11-28 10:52:20,233 - INFO -   Response Time: 0.016 seconds
+2024-11-28 10:52:20,234 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-28 10:52:20,234 - INFO - Pagination Details:
+2024-11-28 10:52:20,234 - INFO -   Total Products: Not specified
+2024-11-28 10:52:20,235 - INFO -   Current Page: 1
+2024-11-28 10:52:20,235 - INFO -   Total Pages: 6
+2024-11-28 10:52:20,235 - INFO -   Items Per Page: 10
+2024-11-28 10:52:20,235 - INFO - Products Summary:
+2024-11-28 10:52:20,235 - INFO -   Products Retrieved: 10
+2024-11-28 10:52:20,235 - INFO -   Categories Present: EDC Gear, Accessories, Bundles, Pens, Tools
+2024-11-28 10:52:20,236 - INFO -   Price Range: $28.42 - $179.00
+2024-11-28 10:52:20,236 - INFO - Successfully fetched and processed product data
+2024-11-28 10:52:20,236 - INFO - Updating UI with fetched products
+2024-11-28 10:52:20,237 - INFO - UI update completed successfully
+2024-11-28 10:52:20,237 - INFO - Product fetch operation completed
+2024-11-28 10:52:20,237 - INFO - Application initialized. Log file: logs/product_dashboard_20241128_105220.log
+2024-11-28 10:52:20,237 - INFO - Starting main loop
+2024-11-28 10:52:41,925 - ERROR - Error updating product: name 'validate_fields' is not defined
+Traceback (most recent call last):
+  File "c:\Users\nickv\Downloads\tester\ecommerce-store-ecom\backend\scripts\product_dashboard.py", line 1214, in submit
+    errors = validate_fields()
+             ^^^^^^^^^^^^^^^
+NameError: name 'validate_fields' is not defined

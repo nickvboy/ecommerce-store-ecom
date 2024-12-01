@@ -1,15 +1,35 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { StarIcon } from '@heroicons/react/24/solid';
 
 function ProductCard({ product }) {
+  const [loadedImages, setLoadedImages] = useState([]);
+
+  useEffect(() => {
+    // Preload images
+    product.images.forEach(img => {
+      const image = new Image();
+      image.src = img.url;
+      image.onload = () => {
+        setLoadedImages(prev => [...prev, img.url]);
+      };
+    });
+  }, [product.images]);
+
   return (
     <Link to={`/products/${product._id}`} className="group block transition-transform duration-300 hover:-translate-y-1">
       <div className="relative bg-bg-200 rounded-lg overflow-hidden shadow-sm transition-shadow duration-300 group-hover:shadow-lg">
         {/* Product Image */}
         <div className="aspect-square overflow-hidden">
-          <div 
-            className={`w-full h-full ${product.images[0]} transition-transform duration-300 group-hover:scale-110`} 
-          />
+          {loadedImages.includes(product.images[0]?.url) ? (
+            <img 
+              src={product.images[0]?.url}
+              alt={product.name}
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+            />
+          ) : (
+            <div className="w-full h-full bg-bg-300 animate-pulse" />
+          )}
         </div>
         
         {/* Sale Badge */}
