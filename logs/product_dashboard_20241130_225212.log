@@ -1,0 +1,122 @@
+2024-11-30 22:52:12,326 - INFO - Logging initialized
+2024-11-30 22:52:12,327 - INFO - Starting Product Dashboard application
+2024-11-30 22:52:12,471 - INFO - Initializing ProductDashboard
+2024-11-30 22:52:12,508 - INFO - Fetching products from API - Page 1
+2024-11-30 22:52:12,508 - INFO - API Request Details:
+2024-11-30 22:52:12,509 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-30 22:52:12,509 - INFO -   Method: GET
+2024-11-30 22:52:12,509 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-30 22:52:12,532 - INFO - API Response Details:
+2024-11-30 22:52:12,532 - INFO -   Status Code: 200
+2024-11-30 22:52:12,533 - INFO -   Response Time: 0.019 seconds
+2024-11-30 22:52:12,533 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-30 22:52:12,533 - INFO - Pagination Details:
+2024-11-30 22:52:12,534 - INFO -   Total Products: Not specified
+2024-11-30 22:52:12,535 - INFO -   Current Page: 1
+2024-11-30 22:52:12,536 - INFO -   Total Pages: 0
+2024-11-30 22:52:12,536 - INFO -   Items Per Page: 10
+2024-11-30 22:52:12,536 - INFO - Products Summary:
+2024-11-30 22:52:12,536 - INFO -   Products Retrieved: 0
+2024-11-30 22:52:12,537 - INFO -   Categories Present: 
+2024-11-30 22:52:12,537 - ERROR - Unexpected error: min() iterable argument is empty
+Traceback (most recent call last):
+  File "c:\Users\nickv\Downloads\tester\ecommerce-store-ecom\backend\scripts\product_dashboard.py", line 596, in fetch_products
+    'min': min(p.get('price', float('inf')) for p in products),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: min() iterable argument is empty
+2024-11-30 22:52:12,539 - INFO - Product fetch operation completed
+2024-11-30 22:52:12,540 - INFO - Performing initial data fetch
+2024-11-30 22:52:12,540 - INFO - Fetching products from API - Page 1
+2024-11-30 22:52:12,540 - INFO - API Request Details:
+2024-11-30 22:52:12,540 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-30 22:52:12,540 - INFO -   Method: GET
+2024-11-30 22:52:12,541 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-30 22:52:12,549 - INFO - API Response Details:
+2024-11-30 22:52:12,549 - INFO -   Status Code: 200
+2024-11-30 22:52:12,549 - INFO -   Response Time: 0.007 seconds
+2024-11-30 22:52:12,550 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-30 22:52:12,550 - INFO - Pagination Details:
+2024-11-30 22:52:12,550 - INFO -   Total Products: Not specified
+2024-11-30 22:52:12,550 - INFO -   Current Page: 1
+2024-11-30 22:52:12,551 - INFO -   Total Pages: 0
+2024-11-30 22:52:12,551 - INFO -   Items Per Page: 10
+2024-11-30 22:52:12,551 - INFO - Products Summary:
+2024-11-30 22:52:12,551 - INFO -   Products Retrieved: 0
+2024-11-30 22:52:12,551 - INFO -   Categories Present: 
+2024-11-30 22:52:12,552 - ERROR - Unexpected error: min() iterable argument is empty
+Traceback (most recent call last):
+  File "c:\Users\nickv\Downloads\tester\ecommerce-store-ecom\backend\scripts\product_dashboard.py", line 596, in fetch_products
+    'min': min(p.get('price', float('inf')) for p in products),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: min() iterable argument is empty
+2024-11-30 22:52:12,553 - INFO - Product fetch operation completed
+2024-11-30 22:52:12,553 - INFO - Application initialized. Log file: logs/product_dashboard_20241130_225212.log
+2024-11-30 22:52:12,554 - INFO - Starting main loop
+2024-11-30 22:52:31,405 - INFO - Fetching products from API - Page 1
+2024-11-30 22:52:31,405 - INFO - API Request Details:
+2024-11-30 22:52:31,405 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-30 22:52:31,405 - INFO -   Method: GET
+2024-11-30 22:52:31,406 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-30 22:52:31,419 - INFO - API Response Details:
+2024-11-30 22:52:31,420 - INFO -   Status Code: 200
+2024-11-30 22:52:31,420 - INFO -   Response Time: 0.013 seconds
+2024-11-30 22:52:31,420 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-30 22:52:31,421 - INFO - Pagination Details:
+2024-11-30 22:52:31,421 - INFO -   Total Products: Not specified
+2024-11-30 22:52:31,421 - INFO -   Current Page: 1
+2024-11-30 22:52:31,421 - INFO -   Total Pages: 2
+2024-11-30 22:52:31,421 - INFO -   Items Per Page: 10
+2024-11-30 22:52:31,422 - INFO - Products Summary:
+2024-11-30 22:52:31,422 - INFO -   Products Retrieved: 10
+2024-11-30 22:52:31,422 - INFO -   Categories Present: EDC Gear, Clothing
+2024-11-30 22:52:31,422 - INFO -   Price Range: $19.99 - $249.99
+2024-11-30 22:52:31,422 - INFO - Successfully fetched and processed product data
+2024-11-30 22:52:31,423 - INFO - Updating UI with fetched products
+2024-11-30 22:52:31,426 - INFO - UI update completed successfully
+2024-11-30 22:52:31,427 - INFO - Product fetch operation completed
+2024-11-30 22:52:38,563 - INFO - Moving to next page
+2024-11-30 22:52:38,563 - INFO - Fetching products from API - Page 2
+2024-11-30 22:52:38,563 - INFO - API Request Details:
+2024-11-30 22:52:38,564 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-30 22:52:38,564 - INFO -   Method: GET
+2024-11-30 22:52:38,564 - INFO -   Parameters: {'page': 2, 'limit': 10}
+2024-11-30 22:52:38,573 - INFO - API Response Details:
+2024-11-30 22:52:38,574 - INFO -   Status Code: 200
+2024-11-30 22:52:38,574 - INFO -   Response Time: 0.008 seconds
+2024-11-30 22:52:38,574 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-30 22:52:38,574 - INFO - Pagination Details:
+2024-11-30 22:52:38,575 - INFO -   Total Products: Not specified
+2024-11-30 22:52:38,575 - INFO -   Current Page: 2
+2024-11-30 22:52:38,575 - INFO -   Total Pages: 2
+2024-11-30 22:52:38,575 - INFO -   Items Per Page: 10
+2024-11-30 22:52:38,575 - INFO - Products Summary:
+2024-11-30 22:52:38,575 - INFO -   Products Retrieved: 8
+2024-11-30 22:52:38,576 - INFO -   Categories Present: Clothing
+2024-11-30 22:52:38,576 - INFO -   Price Range: $49.99 - $189.99
+2024-11-30 22:52:38,576 - INFO - Successfully fetched and processed product data
+2024-11-30 22:52:38,576 - INFO - Updating UI with fetched products
+2024-11-30 22:52:38,577 - INFO - UI update completed successfully
+2024-11-30 22:52:38,578 - INFO - Product fetch operation completed
+2024-11-30 22:52:39,588 - INFO - Moving to previous page
+2024-11-30 22:52:39,588 - INFO - Fetching products from API - Page 1
+2024-11-30 22:52:39,588 - INFO - API Request Details:
+2024-11-30 22:52:39,589 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-30 22:52:39,589 - INFO -   Method: GET
+2024-11-30 22:52:39,589 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-30 22:52:39,600 - INFO - API Response Details:
+2024-11-30 22:52:39,601 - INFO -   Status Code: 200
+2024-11-30 22:52:39,601 - INFO -   Response Time: 0.011 seconds
+2024-11-30 22:52:39,601 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-30 22:52:39,602 - INFO - Pagination Details:
+2024-11-30 22:52:39,602 - INFO -   Total Products: Not specified
+2024-11-30 22:52:39,602 - INFO -   Current Page: 1
+2024-11-30 22:52:39,602 - INFO -   Total Pages: 2
+2024-11-30 22:52:39,602 - INFO -   Items Per Page: 10
+2024-11-30 22:52:39,603 - INFO - Products Summary:
+2024-11-30 22:52:39,603 - INFO -   Products Retrieved: 10
+2024-11-30 22:52:39,603 - INFO -   Categories Present: EDC Gear, Clothing
+2024-11-30 22:52:39,603 - INFO -   Price Range: $19.99 - $249.99
+2024-11-30 22:52:39,604 - INFO - Successfully fetched and processed product data
+2024-11-30 22:52:39,604 - INFO - Updating UI with fetched products
+2024-11-30 22:52:39,605 - INFO - UI update completed successfully
+2024-11-30 22:52:39,605 - INFO - Product fetch operation completed

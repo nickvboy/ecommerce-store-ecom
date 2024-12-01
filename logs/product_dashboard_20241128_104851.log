@@ -1,0 +1,14 @@
+2024-11-28 10:48:51,773 - INFO - Logging initialized
+2024-11-28 10:48:51,773 - INFO - Starting Product Dashboard application
+2024-11-28 10:48:51,869 - INFO - Initializing ProductDashboard
+2024-11-28 10:48:51,894 - ERROR - Error during initialization: 'ProductDashboard' object has no attribute 'show_image_upload_dialog'
+Traceback (most recent call last):
+  File "c:\Users\nickv\Downloads\tester\ecommerce-store-ecom\backend\scripts\product_dashboard.py", line 98, in __init__
+    self.setup_buttons_frame(main_frame)
+  File "c:\Users\nickv\Downloads\tester\ecommerce-store-ecom\backend\scripts\product_dashboard.py", line 254, in setup_buttons_frame
+    command=self.show_image_upload_dialog,
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ProductDashboard' object has no attribute 'show_image_upload_dialog'
+2024-11-28 10:48:53,803 - INFO - Application initialized. Log file: logs/product_dashboard_20241128_104851.log
+2024-11-28 10:48:53,804 - INFO - Starting main loop
+2024-11-28 10:48:54,912 - INFO - Application shutting down

@@ -1,0 +1,102 @@
+2024-11-28 10:54:12,743 - INFO - Logging initialized
+2024-11-28 10:54:12,743 - INFO - Starting Product Dashboard application
+2024-11-28 10:54:12,832 - INFO - Initializing ProductDashboard
+2024-11-28 10:54:12,869 - INFO - Performing initial data fetch
+2024-11-28 10:54:12,870 - INFO - Fetching products from API - Page 1
+2024-11-28 10:54:12,870 - INFO - API Request Details:
+2024-11-28 10:54:12,870 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-28 10:54:12,871 - INFO -   Method: GET
+2024-11-28 10:54:12,871 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-28 10:54:12,892 - INFO - API Response Details:
+2024-11-28 10:54:12,892 - INFO -   Status Code: 200
+2024-11-28 10:54:12,892 - INFO -   Response Time: 0.017 seconds
+2024-11-28 10:54:12,893 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-28 10:54:12,893 - INFO - Pagination Details:
+2024-11-28 10:54:12,893 - INFO -   Total Products: Not specified
+2024-11-28 10:54:12,894 - INFO -   Current Page: 1
+2024-11-28 10:54:12,894 - INFO -   Total Pages: 6
+2024-11-28 10:54:12,894 - INFO -   Items Per Page: 10
+2024-11-28 10:54:12,894 - INFO - Products Summary:
+2024-11-28 10:54:12,894 - INFO -   Products Retrieved: 10
+2024-11-28 10:54:12,895 - INFO -   Categories Present: Accessories, Bundles, Tools, Pens, EDC Gear
+2024-11-28 10:54:12,895 - INFO -   Price Range: $28.42 - $179.00
+2024-11-28 10:54:12,895 - INFO - Successfully fetched and processed product data
+2024-11-28 10:54:12,896 - INFO - Updating UI with fetched products
+2024-11-28 10:54:12,897 - INFO - UI update completed successfully
+2024-11-28 10:54:12,897 - INFO - Product fetch operation completed
+2024-11-28 10:54:12,898 - INFO - Application initialized. Log file: logs/product_dashboard_20241128_105412.log
+2024-11-28 10:54:12,898 - INFO - Starting main loop
+2024-11-28 10:54:26,606 - INFO - Fetching products from API - Page 1
+2024-11-28 10:54:26,607 - INFO - API Request Details:
+2024-11-28 10:54:26,607 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-28 10:54:26,607 - INFO -   Method: GET
+2024-11-28 10:54:26,608 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-28 10:54:26,620 - INFO - API Response Details:
+2024-11-28 10:54:26,621 - INFO -   Status Code: 200
+2024-11-28 10:54:26,621 - INFO -   Response Time: 0.012 seconds
+2024-11-28 10:54:26,621 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-28 10:54:26,622 - INFO - Pagination Details:
+2024-11-28 10:54:26,622 - INFO -   Total Products: Not specified
+2024-11-28 10:54:26,622 - INFO -   Current Page: 1
+2024-11-28 10:54:26,622 - INFO -   Total Pages: 6
+2024-11-28 10:54:26,623 - INFO -   Items Per Page: 10
+2024-11-28 10:54:26,623 - INFO - Products Summary:
+2024-11-28 10:54:26,623 - INFO -   Products Retrieved: 10
+2024-11-28 10:54:26,624 - INFO -   Categories Present: Accessories, Bundles, Tools, Pens, EDC Gear
+2024-11-28 10:54:26,624 - INFO -   Price Range: $28.42 - $179.00
+2024-11-28 10:54:26,624 - INFO - Successfully fetched and processed product data
+2024-11-28 10:54:26,625 - INFO - Updating UI with fetched products
+2024-11-28 10:54:26,628 - INFO - UI update completed successfully
+2024-11-28 10:54:26,630 - INFO - Product fetch operation completed
+2024-11-29 15:47:37,589 - INFO - Fetching products from API - Page 1
+2024-11-29 15:47:37,822 - INFO - API Request Details:
+2024-11-29 15:47:37,904 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-29 15:47:37,904 - INFO -   Method: GET
+2024-11-29 15:47:37,905 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-29 15:47:38,083 - INFO - API Response Details:
+2024-11-29 15:47:38,084 - INFO -   Status Code: 200
+2024-11-29 15:47:38,085 - INFO -   Response Time: 0.066 seconds
+2024-11-29 15:47:38,085 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-29 15:47:38,086 - INFO - Pagination Details:
+2024-11-29 15:47:38,086 - INFO -   Total Products: Not specified
+2024-11-29 15:47:38,087 - INFO -   Current Page: 1
+2024-11-29 15:47:38,087 - INFO -   Total Pages: 5
+2024-11-29 15:47:38,087 - INFO -   Items Per Page: 10
+2024-11-29 15:47:38,087 - INFO - Products Summary:
+2024-11-29 15:47:38,087 - INFO -   Products Retrieved: 10
+2024-11-29 15:47:38,087 - INFO -   Categories Present: Bundles, Pens, EDC Gear, Tools
+2024-11-29 15:47:38,088 - INFO -   Price Range: $37.00 - $192.00
+2024-11-29 15:47:38,088 - INFO - Successfully fetched and processed product data
+2024-11-29 15:47:38,088 - INFO - Updating UI with fetched products
+2024-11-29 15:47:38,092 - INFO - UI update completed successfully
+2024-11-29 15:47:38,093 - INFO - Product fetch operation completed
+2024-11-29 15:47:38,269 - INFO - Fetching products from API - Page 1
+2024-11-29 15:47:38,270 - INFO - API Request Details:
+2024-11-29 15:47:38,270 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-29 15:47:38,270 - INFO -   Method: GET
+2024-11-29 15:47:38,271 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-29 15:47:38,290 - INFO - API Response Details:
+2024-11-29 15:47:38,291 - INFO -   Status Code: 200
+2024-11-29 15:47:38,291 - INFO -   Response Time: 0.019 seconds
+2024-11-29 15:47:38,291 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-29 15:47:38,292 - INFO - Pagination Details:
+2024-11-29 15:47:38,292 - INFO -   Total Products: Not specified
+2024-11-29 15:47:38,292 - INFO -   Current Page: 1
+2024-11-29 15:47:38,292 - INFO -   Total Pages: 5
+2024-11-29 15:47:38,293 - INFO -   Items Per Page: 10
+2024-11-29 15:47:38,293 - INFO - Products Summary:
+2024-11-29 15:47:38,293 - INFO -   Products Retrieved: 10
+2024-11-29 15:47:38,293 - INFO -   Categories Present: Bundles, Pens, EDC Gear, Tools
+2024-11-29 15:47:38,294 - INFO -   Price Range: $37.00 - $192.00
+2024-11-29 15:47:38,294 - INFO - Successfully fetched and processed product data
+2024-11-29 15:47:38,294 - INFO - Updating UI with fetched products
+2024-11-29 15:47:38,295 - INFO - UI update completed successfully
+2024-11-29 15:47:38,296 - INFO - Product fetch operation completed
+2024-11-29 15:47:41,403 - INFO - Showing add product dialog
+2024-11-29 15:47:41,475 - ERROR - Error showing add product dialog: name 'product' is not defined
+Traceback (most recent call last):
+  File "c:\Users\nickv\Downloads\tester\ecommerce-store-ecom\backend\scripts\product_dashboard.py", line 581, in show_add_product_dialog
+    for image in product.get('images', []):
+                 ^^^^^^^
+NameError: name 'product' is not defined
+2024-11-29 15:47:46,312 - INFO - Application shutting down

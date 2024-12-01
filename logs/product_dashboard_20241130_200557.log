@@ -1,0 +1,51 @@
+2024-11-30 20:05:57,242 - INFO - Logging initialized
+2024-11-30 20:05:57,242 - INFO - Starting Product Dashboard application
+2024-11-30 20:05:57,321 - INFO - Initializing ProductDashboard
+2024-11-30 20:05:57,355 - INFO - Fetching products from API - Page 1
+2024-11-30 20:05:57,355 - INFO - API Request Details:
+2024-11-30 20:05:57,356 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-30 20:05:57,356 - INFO -   Method: GET
+2024-11-30 20:05:57,357 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-30 20:05:57,409 - INFO - API Response Details:
+2024-11-30 20:05:57,411 - INFO -   Status Code: 200
+2024-11-30 20:05:57,411 - INFO -   Response Time: 0.048 seconds
+2024-11-30 20:05:57,411 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-30 20:05:57,413 - INFO - Pagination Details:
+2024-11-30 20:05:57,413 - INFO -   Total Products: Not specified
+2024-11-30 20:05:57,414 - INFO -   Current Page: 1
+2024-11-30 20:05:57,414 - INFO -   Total Pages: 5
+2024-11-30 20:05:57,414 - INFO -   Items Per Page: 10
+2024-11-30 20:05:57,415 - INFO - Products Summary:
+2024-11-30 20:05:57,415 - INFO -   Products Retrieved: 10
+2024-11-30 20:05:57,415 - INFO -   Categories Present: Bundles, Accessories, Pens, Tools
+2024-11-30 20:05:57,416 - INFO -   Price Range: $27.00 - $210.00
+2024-11-30 20:05:57,416 - INFO - Successfully fetched and processed product data
+2024-11-30 20:05:57,416 - INFO - Updating UI with fetched products
+2024-11-30 20:05:57,419 - INFO - UI update completed successfully
+2024-11-30 20:05:57,420 - INFO - Product fetch operation completed
+2024-11-30 20:05:57,421 - INFO - Performing initial data fetch
+2024-11-30 20:05:57,421 - INFO - Fetching products from API - Page 1
+2024-11-30 20:05:57,421 - INFO - API Request Details:
+2024-11-30 20:05:57,421 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-30 20:05:57,422 - INFO -   Method: GET
+2024-11-30 20:05:57,422 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-30 20:05:57,451 - INFO - API Response Details:
+2024-11-30 20:05:57,452 - INFO -   Status Code: 200
+2024-11-30 20:05:57,452 - INFO -   Response Time: 0.028 seconds
+2024-11-30 20:05:57,452 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-30 20:05:57,453 - INFO - Pagination Details:
+2024-11-30 20:05:57,454 - INFO -   Total Products: Not specified
+2024-11-30 20:05:57,454 - INFO -   Current Page: 1
+2024-11-30 20:05:57,454 - INFO -   Total Pages: 5
+2024-11-30 20:05:57,454 - INFO -   Items Per Page: 10
+2024-11-30 20:05:57,455 - INFO - Products Summary:
+2024-11-30 20:05:57,455 - INFO -   Products Retrieved: 10
+2024-11-30 20:05:57,455 - INFO -   Categories Present: Bundles, Accessories, Pens, Tools
+2024-11-30 20:05:57,455 - INFO -   Price Range: $27.00 - $210.00
+2024-11-30 20:05:57,456 - INFO - Successfully fetched and processed product data
+2024-11-30 20:05:57,456 - INFO - Updating UI with fetched products
+2024-11-30 20:05:57,458 - INFO - UI update completed successfully
+2024-11-30 20:05:57,458 - INFO - Product fetch operation completed
+2024-11-30 20:05:57,459 - INFO - Application initialized. Log file: logs/product_dashboard_20241130_200557.log
+2024-11-30 20:05:57,459 - INFO - Starting main loop
+2024-11-30 20:06:28,452 - INFO - Application shutting down

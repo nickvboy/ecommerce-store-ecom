@@ -1,0 +1,201 @@
+2024-11-30 17:53:30,385 - INFO - Logging initialized
+2024-11-30 17:53:30,386 - INFO - Starting Product Dashboard application
+2024-11-30 17:53:30,467 - INFO - Initializing ProductDashboard
+2024-11-30 17:53:30,494 - INFO - Fetching products from API - Page 1
+2024-11-30 17:53:30,494 - INFO - API Request Details:
+2024-11-30 17:53:30,494 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-30 17:53:30,495 - INFO -   Method: GET
+2024-11-30 17:53:30,495 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-30 17:53:30,523 - INFO - API Response Details:
+2024-11-30 17:53:30,523 - INFO -   Status Code: 200
+2024-11-30 17:53:30,523 - INFO -   Response Time: 0.025 seconds
+2024-11-30 17:53:30,524 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-30 17:53:30,524 - INFO - Pagination Details:
+2024-11-30 17:53:30,525 - INFO -   Total Products: Not specified
+2024-11-30 17:53:30,525 - INFO -   Current Page: 1
+2024-11-30 17:53:30,525 - INFO -   Total Pages: 5
+2024-11-30 17:53:30,525 - INFO -   Items Per Page: 10
+2024-11-30 17:53:30,525 - INFO - Products Summary:
+2024-11-30 17:53:30,525 - INFO -   Products Retrieved: 10
+2024-11-30 17:53:30,526 - INFO -   Categories Present: Accessories, EDC Gear, Pens, Tools, Bundles
+2024-11-30 17:53:30,526 - INFO -   Price Range: $23.00 - $202.00
+2024-11-30 17:53:30,526 - INFO - Successfully fetched and processed product data
+2024-11-30 17:53:30,526 - INFO - Updating UI with fetched products
+2024-11-30 17:53:30,527 - INFO - UI update completed successfully
+2024-11-30 17:53:30,527 - INFO - Product fetch operation completed
+2024-11-30 17:53:30,528 - INFO - Performing initial data fetch
+2024-11-30 17:53:30,528 - INFO - Fetching products from API - Page 1
+2024-11-30 17:53:30,528 - INFO - API Request Details:
+2024-11-30 17:53:30,528 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-30 17:53:30,529 - INFO -   Method: GET
+2024-11-30 17:53:30,529 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-30 17:53:30,557 - INFO - API Response Details:
+2024-11-30 17:53:30,557 - INFO -   Status Code: 200
+2024-11-30 17:53:30,557 - INFO -   Response Time: 0.027 seconds
+2024-11-30 17:53:30,558 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-30 17:53:30,558 - INFO - Pagination Details:
+2024-11-30 17:53:30,559 - INFO -   Total Products: Not specified
+2024-11-30 17:53:30,559 - INFO -   Current Page: 1
+2024-11-30 17:53:30,559 - INFO -   Total Pages: 5
+2024-11-30 17:53:30,559 - INFO -   Items Per Page: 10
+2024-11-30 17:53:30,560 - INFO - Products Summary:
+2024-11-30 17:53:30,560 - INFO -   Products Retrieved: 10
+2024-11-30 17:53:30,560 - INFO -   Categories Present: Accessories, EDC Gear, Pens, Tools, Bundles
+2024-11-30 17:53:30,561 - INFO -   Price Range: $23.00 - $202.00
+2024-11-30 17:53:30,561 - INFO - Successfully fetched and processed product data
+2024-11-30 17:53:30,561 - INFO - Updating UI with fetched products
+2024-11-30 17:53:30,563 - INFO - UI update completed successfully
+2024-11-30 17:53:30,563 - INFO - Product fetch operation completed
+2024-11-30 17:53:30,563 - INFO - Application initialized. Log file: logs/product_dashboard_20241130_175330.log
+2024-11-30 17:53:30,564 - INFO - Starting main loop
+2024-11-30 17:53:32,084 - INFO - Fetching users from API
+2024-11-30 17:53:32,194 - INFO - Updating UI with fetched users
+2024-11-30 17:53:32,195 - INFO - Users UI update completed successfully
+2024-11-30 17:53:34,341 - ERROR - Failed to fetch user details: 404
+2024-11-30 17:53:34,342 - ERROR - Response content: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /api/users/admin/674b95e3f1a3ba0615772844</pre>
+</body>
+</html>
+
+2024-11-30 17:53:35,980 - ERROR - Failed to fetch user details: 404
+2024-11-30 17:53:35,980 - ERROR - Response content: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /api/users/admin/674b95e4f1a3ba0615772873</pre>
+</body>
+</html>
+
+2024-11-30 17:53:41,596 - ERROR - Failed to delete user Garrett Shanahan: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot DELETE /api/users/admin/674b95e4f1a3ba0615772873</pre>
+</body>
+</html>
+
+2024-11-30 17:53:41,597 - ERROR - Failed to delete users: Garrett Shanahan
+2024-11-30 17:53:44,362 - INFO - Fetching users from API
+2024-11-30 17:53:44,461 - INFO - Updating UI with fetched users
+2024-11-30 17:53:44,463 - INFO - Users UI update completed successfully
+2024-11-30 17:53:45,489 - INFO - Fetching users from API
+2024-11-30 17:53:45,589 - INFO - Updating UI with fetched users
+2024-11-30 17:53:45,590 - INFO - Users UI update completed successfully
+2024-11-30 17:53:45,872 - INFO - Fetching users from API
+2024-11-30 17:53:45,967 - INFO - Updating UI with fetched users
+2024-11-30 17:53:45,969 - INFO - Users UI update completed successfully
+2024-11-30 17:53:46,303 - INFO - Fetching users from API
+2024-11-30 17:53:46,397 - INFO - Updating UI with fetched users
+2024-11-30 17:53:46,398 - INFO - Users UI update completed successfully
+2024-11-30 17:53:46,612 - INFO - Fetching users from API
+2024-11-30 17:53:46,705 - INFO - Updating UI with fetched users
+2024-11-30 17:53:46,706 - INFO - Users UI update completed successfully
+2024-11-30 17:53:46,864 - INFO - Fetching users from API
+2024-11-30 17:53:46,958 - INFO - Updating UI with fetched users
+2024-11-30 17:53:46,959 - INFO - Users UI update completed successfully
+2024-11-30 17:53:55,990 - INFO - Fetching users from API
+2024-11-30 17:53:56,083 - INFO - Updating UI with fetched users
+2024-11-30 17:53:56,084 - INFO - Users UI update completed successfully
+2024-11-30 17:53:56,281 - INFO - Fetching users from API
+2024-11-30 17:53:56,377 - INFO - Updating UI with fetched users
+2024-11-30 17:53:56,379 - INFO - Users UI update completed successfully
+2024-11-30 17:53:56,559 - INFO - Fetching users from API
+2024-11-30 17:53:56,652 - INFO - Updating UI with fetched users
+2024-11-30 17:53:56,653 - INFO - Users UI update completed successfully
+2024-11-30 17:54:03,053 - ERROR - Failed to fetch user details: 404
+2024-11-30 17:54:03,053 - ERROR - Response content: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /api/users/admin/674b95e3f1a3ba0615772848</pre>
+</body>
+</html>
+
+2024-11-30 17:54:03,620 - ERROR - Failed to fetch user details: 404
+2024-11-30 17:54:03,620 - ERROR - Response content: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /api/users/admin/674b95e4f1a3ba0615772860</pre>
+</body>
+</html>
+
+2024-11-30 17:54:04,038 - ERROR - Failed to fetch user details: 404
+2024-11-30 17:54:04,038 - ERROR - Response content: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /api/users/admin/674b95e4f1a3ba0615772873</pre>
+</body>
+</html>
+
+2024-11-30 17:54:05,033 - INFO - Fetching products from API - Page 1
+2024-11-30 17:54:05,033 - INFO - API Request Details:
+2024-11-30 17:54:05,033 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-30 17:54:05,033 - INFO -   Method: GET
+2024-11-30 17:54:05,033 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-30 17:54:05,053 - INFO - API Response Details:
+2024-11-30 17:54:05,053 - INFO -   Status Code: 200
+2024-11-30 17:54:05,053 - INFO -   Response Time: 0.018 seconds
+2024-11-30 17:54:05,053 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-30 17:54:05,054 - INFO - Pagination Details:
+2024-11-30 17:54:05,054 - INFO -   Total Products: Not specified
+2024-11-30 17:54:05,054 - INFO -   Current Page: 1
+2024-11-30 17:54:05,055 - INFO -   Total Pages: 5
+2024-11-30 17:54:05,055 - INFO -   Items Per Page: 10
+2024-11-30 17:54:05,055 - INFO - Products Summary:
+2024-11-30 17:54:05,055 - INFO -   Products Retrieved: 10
+2024-11-30 17:54:05,055 - INFO -   Categories Present: Accessories, EDC Gear, Pens, Tools, Bundles
+2024-11-30 17:54:05,055 - INFO -   Price Range: $23.00 - $202.00
+2024-11-30 17:54:05,056 - INFO - Successfully fetched and processed product data
+2024-11-30 17:54:05,056 - INFO - Updating UI with fetched products
+2024-11-30 17:54:05,057 - INFO - UI update completed successfully
+2024-11-30 17:54:05,057 - INFO - Product fetch operation completed
+2024-11-30 17:54:05,564 - INFO - Fetching users from API
+2024-11-30 17:54:05,663 - INFO - Updating UI with fetched users
+2024-11-30 17:54:05,664 - INFO - Users UI update completed successfully
+2024-11-30 17:54:06,899 - ERROR - Failed to fetch user details: 404
+2024-11-30 17:54:06,900 - ERROR - Response content: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /api/users/admin/674b95e4f1a3ba0615772873</pre>
+</body>
+</html>
+
+2024-11-30 17:54:09,878 - ERROR - Failed to delete user Garrett Shanahan: <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot DELETE /api/users/admin/674b95e4f1a3ba0615772873</pre>
+</body>
+</html>
+
+2024-11-30 17:54:09,878 - ERROR - Failed to delete users: Garrett Shanahan

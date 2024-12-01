@@ -6,6 +6,7 @@ import { Checkbox } from "../components/ui/checkbox";
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "../components/ui/collapsible";
 import { ChevronDownIcon } from '@heroicons/react/24/solid';
 import { useInView } from 'react-intersection-observer';
+import { useApiStatus } from '../contexts/ApiStatusContext';
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -19,6 +20,8 @@ function Products() {
     ratings: []
   });
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
+  const { isConnected } = useApiStatus();
+  const [error, setError] = useState(null);
 
   const { ref: loadMoreRef, inView } = useInView({
     threshold: 0.1,
@@ -28,6 +31,15 @@ function Products() {
   const fetchProducts = useCallback(async () => {
     try {
       setLoading(true);
+      setError(null);
+      
+      if (!isConnected) {
+        setError('Unable to fetch products. Please check your connection.');
+        setProducts([]);
+        setHasMore(false);
+        return;
+      }
+
       const response = await fetch('http://localhost:5000/api/products/filter', {
         method: 'POST',
         headers: {
@@ -39,16 +51,19 @@ function Products() {
           limit: 12
         }),
       });
-      const data = await response.json();
       
+      if (!response.ok) throw new Error('Failed to fetch products');
+      
+      const data = await response.json();
       setProducts(prev => page === 1 ? data.products : [...prev, ...data.products]);
       setHasMore(data.products.length > 0);
-      setLoading(false);
     } catch (error) {
+      setError('Unable to load products. Please try again later.');
       console.error('Error fetching products:', error);
+    } finally {
       setLoading(false);
     }
-  }, [filters, page]);
+  }, [filters, page, isConnected]);
 
   useEffect(() => {
     setProducts([]);
@@ -90,6 +105,12 @@ function Products() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
+      {error && (
+        <div className="mb-8 p-4 bg-red-100 text-red-700 rounded-lg">
+          {error}
+        </div>
+      )}
+      
       <div className="flex gap-8">
         {/* Filter Sidebar */}
         <aside className="w-64 space-y-6">
