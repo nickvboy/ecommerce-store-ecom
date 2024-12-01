@@ -113,7 +113,7 @@ function ProductDetail() {
   };
 
   return (
-    <div className="min-h-screen bg-[#1A1A1A] text-text-100 py-8">
+    <div className="min-h-screen bg-bg-100 text-text-100 py-8">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <Link 
           to="/products" 
@@ -303,7 +303,7 @@ function ProductDetail() {
               <div className="flex items-end justify-between mb-8">
                 <div className="flex flex-col">
                   <span className="text-sm font-medium mb-2 text-center">QUANTITY</span>
-                  <div className="flex items-center bg-[#1A1A1A] border border-text-100 rounded-lg overflow-hidden">
+                  <div className="flex items-center bg-bg-100 border border-text-100 rounded-lg overflow-hidden">
                     <button 
                       onClick={() => handleQuantityChange(-1)}
                       className="px-4 py-2 text-text-100 hover:text-primary-100 font-bold"
@@ -337,12 +337,12 @@ function ProductDetail() {
               {/* Collapsible Sections */}
               <div className="space-y-4">
                 <Collapsible>
-                  <CollapsibleTrigger className="flex justify-between items-center w-full p-4 bg-[#1A1A1A] border border-text-100 rounded-lg group">
+                  <CollapsibleTrigger className="flex justify-between items-center w-full p-4 bg-bg-100 border border-text-100 rounded-lg group">
                     <span className="font-bold">Description</span>
                     <span className="text-text-100 transition-transform duration-300 group-data-[state=open]:rotate-180">▼</span>
                   </CollapsibleTrigger>
                   <CollapsibleContent className="overflow-hidden data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp">
-                    <div className="mt-0 p-4 bg-[#1A1A1A] border-x border-b border-text-100 rounded-b-lg">
+                    <div className="mt-0 p-4 bg-bg-100 border-x border-b border-text-100 rounded-b-lg">
                       <h3 className="font-bold mb-2">Materials</h3>
                       <ul className="list-disc pl-5 space-y-1 text-text-200">
                         <li>Body: 303 Stainless steel</li>
@@ -359,12 +359,12 @@ function ProductDetail() {
                 </Collapsible>
 
                 <Collapsible>
-                  <CollapsibleTrigger className="flex justify-between items-center w-full p-4 bg-[#1A1A1A] border border-text-100 rounded-lg group">
+                  <CollapsibleTrigger className="flex justify-between items-center w-full p-4 bg-bg-100 border border-text-100 rounded-lg group">
                     <span className="font-bold">Product Information</span>
                     <span className="text-text-100 transition-transform duration-300 group-data-[state=open]:rotate-180">▼</span>
                   </CollapsibleTrigger>
                   <CollapsibleContent className="overflow-hidden data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp">
-                    <div className="mt-0 p-4 bg-[#1A1A1A] border-x border-b border-text-100 rounded-b-lg">
+                    <div className="mt-0 p-4 bg-bg-100 border-x border-b border-text-100 rounded-b-lg">
                       <p className="text-text-200">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                       </p>
