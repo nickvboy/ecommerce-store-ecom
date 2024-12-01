@@ -1124,6 +1124,13 @@ class ProductDashboard:
             fields['category'] = ttk.Combobox(category_frame, values=categories, state="readonly")
             fields['category'].pack(side=tk.LEFT, expand=True, fill=tk.X, padx=(10, 0))
             
+            # Description field
+            description_frame = ttk.Frame(main_container)
+            description_frame.pack(fill=tk.X, pady=5)
+            ttk.Label(description_frame, text="Description *", width=15).pack(side=tk.LEFT)
+            fields['description'] = tk.Text(description_frame, height=4, wrap=tk.WORD)
+            fields['description'].pack(side=tk.LEFT, expand=True, fill=tk.X, padx=(10, 0))
+            
             # Has Sizes checkbox
             has_sizes_frame = ttk.Frame(main_container)
             has_sizes_frame.pack(fill=tk.X, pady=5)
@@ -1170,13 +1177,6 @@ class ProductDashboard:
             
             fields['sizes'] = size_vars  # Add to fields dictionary
             
-            # Description field
-            description_frame = ttk.Frame(main_container)
-            description_frame.pack(fill=tk.X, pady=5)
-            ttk.Label(description_frame, text="Description *", width=15).pack(side=tk.LEFT)
-            fields['description'] = tk.Text(description_frame, height=4, wrap=tk.WORD)
-            fields['description'].pack(side=tk.LEFT, expand=True, fill=tk.X, padx=(10, 0))
-            
             # Pricing Section
             pricing_frame = ttk.LabelFrame(main_container, text="Pricing", padding="10")
             pricing_frame.pack(fill=tk.X, pady=(0, 15))
@@ -1206,136 +1206,62 @@ class ProductDashboard:
             fields['stock'] = ttk.Entry(stock_frame)
             fields['stock'].pack(side=tk.LEFT, expand=True, fill=tk.X, padx=(10, 0))
             
-            # Populate fields with existing data
-            fields['name'].insert(0, product['name'])
-            fields['category'].set(product['category'])
-            fields['description'].insert("1.0", product['description'])
-            fields['price'].insert(0, str(product['price']))
-            if product.get('originalPrice'):
-                fields['originalPrice'].insert(0, str(product['originalPrice']))
-            fields['stock'].insert(0, str(product['stock']))
+            # Materials Section
+            materials_frame = ttk.LabelFrame(main_container, text="Materials", padding="10")
+            materials_frame.pack(fill=tk.X, pady=(0, 15))
             
-            # Set size checkboxes if product has sizes
-            if product.get('sizes'):
-                has_sizes_var.set(True)
-                for size, var in fields['sizes'].items():
-                    var.set(size in product['sizes'])
+            # Body Material
+            body_material_frame = ttk.Frame(materials_frame)
+            body_material_frame.pack(fill=tk.X, pady=5)
+            ttk.Label(body_material_frame, text="Body Material", width=15).pack(side=tk.LEFT)
+            fields['body_material'] = ttk.Entry(body_material_frame)
+            fields['body_material'].pack(side=tk.LEFT, expand=True, fill=tk.X, padx=(10, 0))
             
-            # Images Section
-            images_frame = ttk.LabelFrame(main_container, text="Images", padding="10")
-            images_frame.pack(fill=tk.X, pady=(0, 15))
+            # Bolt Material
+            bolt_material_frame = ttk.Frame(materials_frame)
+            bolt_material_frame.pack(fill=tk.X, pady=5)
+            ttk.Label(bolt_material_frame, text="Bolt Material", width=15).pack(side=tk.LEFT)
+            fields['bolt_material'] = ttk.Entry(bolt_material_frame)
+            fields['bolt_material'].pack(side=tk.LEFT, expand=True, fill=tk.X, padx=(10, 0))
             
-            # Preview area for existing images
-            existing_preview_canvas = tk.Canvas(images_frame, height=150)
-            existing_preview_frame = ttk.Frame(existing_preview_canvas)
-            existing_scrollbar = ttk.Scrollbar(images_frame, orient="horizontal", command=existing_preview_canvas.xview)
-            existing_preview_canvas.configure(xscrollcommand=existing_scrollbar.set)
+            # Pen Clip Material
+            clip_material_frame = ttk.Frame(materials_frame)
+            clip_material_frame.pack(fill=tk.X, pady=5)
+            ttk.Label(clip_material_frame, text="Pen Clip Material", width=15).pack(side=tk.LEFT)
+            fields['clip_material'] = ttk.Entry(clip_material_frame)
+            fields['clip_material'].pack(side=tk.LEFT, expand=True, fill=tk.X, padx=(10, 0))
             
-            existing_scrollbar.pack(side=tk.BOTTOM, fill=tk.X)
-            existing_preview_canvas.pack(side=tk.TOP, fill=tk.X, expand=True)
+            # Ink Refill Section
+            ink_frame = ttk.LabelFrame(main_container, text="Ink Refill", padding="10")
+            ink_frame.pack(fill=tk.X, pady=(0, 15))
             
-            canvas_frame = existing_preview_canvas.create_window((0, 0), window=existing_preview_frame, anchor="nw")
+            # Ink Type
+            ink_type_frame = ttk.Frame(ink_frame)
+            ink_type_frame.pack(fill=tk.X, pady=5)
+            ttk.Label(ink_type_frame, text="Ink Type", width=15).pack(side=tk.LEFT)
+            fields['ink_type'] = ttk.Entry(ink_type_frame)
+            fields['ink_type'].pack(side=tk.LEFT, expand=True, fill=tk.X, padx=(10, 0))
             
-            # Define add_images function before using it
-            def add_images():
-                files = filedialog.askopenfilenames(
-                    title="Select Images",
-                    filetypes=[("Image files", "*.png *.jpg *.jpeg *.gif *.bmp")]
-                )
-                for file in files:
-                    if file not in self.selected_images:
-                        self.selected_images.append(file)
-                        # Create and pack preview frame
-                        preview = self.create_image_preview_frame(existing_preview_frame, file)
-                        preview.pack(side=tk.LEFT, padx=5, pady=5)
-                        
-                        # Add remove button for this specific image
-                        def remove_this_image(f=file, p=preview):
-                            self.selected_images.remove(f)
-                            p.destroy()
-                            existing_preview_canvas.configure(scrollregion=existing_preview_canvas.bbox("all"))
-                        
-                        remove_btn = ttk.Button(
-                            preview,
-                            text="×",
-                            width=2,
-                            command=remove_this_image
-                        )
-                        remove_btn.place(x=0, y=0)
-                        
-                        # Update scroll region after adding new image
-                        existing_preview_canvas.configure(scrollregion=existing_preview_canvas.bbox("all"))
+            # Compatible Refills
+            compatible_frame = ttk.Frame(ink_frame)
+            compatible_frame.pack(fill=tk.X, pady=5)
+            ttk.Label(compatible_frame, text="Compatible With", width=15).pack(side=tk.LEFT)
+            fields['compatible_refills'] = ttk.Entry(compatible_frame)
+            fields['compatible_refills'].pack(side=tk.LEFT, expand=True, fill=tk.X, padx=(10, 0))
 
-            # Add Image Button - Now add_images is defined
-            add_image_btn = ttk.Button(
-                images_frame,
-                text="Add Images",
-                command=add_images,
-                style="Accent.TButton"
-            )
-            add_image_btn.pack(side=tk.TOP, pady=(0, 10))
-            
-            # Load and display existing images
-            existing_image_frames = []
-            for idx, image in enumerate(product.get('images', [])):
-                try:
-                    # Create a frame for each image
-                    image_frame = ttk.Frame(existing_preview_frame)
-                    image_frame.pack(side=tk.LEFT, padx=5, pady=5)
-                    
-                    # Display image number
-                    ttk.Label(image_frame, text=f"Image {idx + 1}").pack()
-                    
-                    # Add move up/down buttons
-                    def move_up(index=idx):
-                        if index > 0:
-                            product['images'][index], product['images'][index-1] = \
-                                product['images'][index-1], product['images'][index]
-                            refresh_image_preview()
-
-                    def move_down(index=idx):
-                        if index < len(product['images']) - 1:
-                            product['images'][index], product['images'][index+1] = \
-                                product['images'][index+1], product['images'][index]
-                            refresh_image_preview()
-
-                    ttk.Button(image_frame, text="↑", width=2, command=move_up).pack(side=tk.LEFT, padx=2)
-                    ttk.Button(image_frame, text="↓", width=2, command=move_down).pack(side=tk.LEFT, padx=2)
-                    
-                    existing_image_frames.append(image_frame)
-                    
-                except Exception as e:
-                    logging.error(f"Error loading image preview: {str(e)}")
-
-            def refresh_image_preview():
-                # Clear existing frames
-                for frame in existing_image_frames:
-                    frame.destroy()
-                existing_image_frames.clear()
-                
-                # Reload images in new order
-                for idx, image in enumerate(product.get('images', [])):
-                    image_frame = ttk.Frame(existing_preview_frame)
-                    image_frame.pack(side=tk.LEFT, padx=5, pady=5)
-                    ttk.Label(image_frame, text=f"Image {idx + 1}").pack()
-                    
-                    def move_up(index=idx):
-                        if index > 0:
-                            product['images'][index], product['images'][index-1] = \
-                                product['images'][index-1], product['images'][index]
-                            refresh_image_preview()
-
-                    def move_down(index=idx):
-                        if index < len(product['images']) - 1:
-                            product['images'][index], product['images'][index+1] = \
-                                product['images'][index+1], product['images'][index]
-                            refresh_image_preview()
-
-                    ttk.Button(image_frame, text="↑", width=2, command=move_up).pack(side=tk.LEFT, padx=2)
-                    ttk.Button(image_frame, text="↓", width=2, command=move_down).pack(side=tk.LEFT, padx=2)
-                    existing_image_frames.append(image_frame)
-                
-                existing_preview_canvas.configure(scrollregion=existing_preview_canvas.bbox("all"))
+            # Populate materials and ink fields if they exist
+            if product.get('specifications', {}).get('materials'):
+                for material in product['specifications']['materials']:
+                    if 'Body:' in material['name']:
+                        fields['body_material'].insert(0, material['description'])
+                    elif 'Bolt:' in material['name']:
+                        fields['bolt_material'].insert(0, material['description'])
+                    elif 'Pen Clip:' in material['name']:
+                        fields['clip_material'].insert(0, material['description'])
+                    elif 'Ink Type:' in material['name']:
+                        fields['ink_type'].insert(0, material['description'])
+                    elif 'Compatible:' in material['name']:
+                        fields['compatible_refills'].insert(0, material['description'])
 
             def submit():
                 try:
@@ -1345,23 +1271,18 @@ class ProductDashboard:
                         messagebox.showerror("Validation Error", "\n".join(errors))
                         return
                     
-                    # Upload any new images
-                    new_image_urls = []
-                    if self.selected_images:
-                        for image_path in self.selected_images:
-                            try:
-                                result = cloudinary.uploader.upload(
-                                    image_path,
-                                    timestamp=int(time.time())
-                                )
-                                new_image_urls.append({
-                                    'url': result['secure_url'],
-                                    'order': len(product['images']) + len(new_image_urls)  # Add to end of existing images
-                                })
-                            except Exception as e:
-                                logging.error(f"Failed to upload image {image_path}: {str(e)}")
-                                raise e
-
+                    # Prepare materials data
+                    materials = [
+                        {'name': 'Body:', 'description': fields['body_material'].get().strip()},
+                        {'name': 'Bolt:', 'description': fields['bolt_material'].get().strip()},
+                        {'name': 'Pen Clip:', 'description': fields['clip_material'].get().strip()},
+                        {'name': 'Ink Type:', 'description': fields['ink_type'].get().strip()},
+                        {'name': 'Compatible:', 'description': fields['compatible_refills'].get().strip()}
+                    ]
+                    
+                    # Filter out empty materials
+                    materials = [m for m in materials if m['description']]
+                    
                     # Prepare product data
                     product_data = {
                         'name': fields['name'].get(),
@@ -1370,7 +1291,9 @@ class ProductDashboard:
                         'price': float(fields['price'].get()),
                         'stock': int(fields['stock'].get()),
                         'sizes': [size for size, var in fields['sizes'].items() if var.get()],
-                        'images': product['images'] + new_image_urls  # Combine existing images with new ones
+                        'specifications': {
+                            'materials': materials
+                        }
                     }
 
                     # Add optional fields if they exist
@@ -1384,8 +1307,6 @@ class ProductDashboard:
                     )
                     
                     if response.ok:
-                        # Clear selected images after successful update
-                        self.selected_images = []
                         messagebox.showinfo("Success", "Product updated successfully!")
                         dialog.destroy()
                         self.fetch_products()  # Refresh product list

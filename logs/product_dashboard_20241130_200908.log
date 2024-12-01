@@ -1,0 +1,95 @@
+2024-11-30 20:09:08,161 - INFO - Logging initialized
+2024-11-30 20:09:08,162 - INFO - Starting Product Dashboard application
+2024-11-30 20:09:08,248 - INFO - Initializing ProductDashboard
+2024-11-30 20:09:08,275 - INFO - Fetching products from API - Page 1
+2024-11-30 20:09:08,275 - INFO - API Request Details:
+2024-11-30 20:09:08,275 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-30 20:09:08,276 - INFO -   Method: GET
+2024-11-30 20:09:08,276 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-30 20:09:08,305 - INFO - API Response Details:
+2024-11-30 20:09:08,306 - INFO -   Status Code: 200
+2024-11-30 20:09:08,306 - INFO -   Response Time: 0.024 seconds
+2024-11-30 20:09:08,306 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-30 20:09:08,307 - INFO - Pagination Details:
+2024-11-30 20:09:08,307 - INFO -   Total Products: Not specified
+2024-11-30 20:09:08,307 - INFO -   Current Page: 1
+2024-11-30 20:09:08,308 - INFO -   Total Pages: 5
+2024-11-30 20:09:08,308 - INFO -   Items Per Page: 10
+2024-11-30 20:09:08,308 - INFO - Products Summary:
+2024-11-30 20:09:08,308 - INFO -   Products Retrieved: 10
+2024-11-30 20:09:08,308 - INFO -   Categories Present: Tools, Bundles, Pens, Accessories
+2024-11-30 20:09:08,309 - INFO -   Price Range: $27.00 - $210.00
+2024-11-30 20:09:08,309 - INFO - Successfully fetched and processed product data
+2024-11-30 20:09:08,309 - INFO - Updating UI with fetched products
+2024-11-30 20:09:08,311 - INFO - UI update completed successfully
+2024-11-30 20:09:08,311 - INFO - Product fetch operation completed
+2024-11-30 20:09:08,312 - INFO - Performing initial data fetch
+2024-11-30 20:09:08,312 - INFO - Fetching products from API - Page 1
+2024-11-30 20:09:08,313 - INFO - API Request Details:
+2024-11-30 20:09:08,313 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-30 20:09:08,313 - INFO -   Method: GET
+2024-11-30 20:09:08,313 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-30 20:09:08,336 - INFO - API Response Details:
+2024-11-30 20:09:08,336 - INFO -   Status Code: 200
+2024-11-30 20:09:08,337 - INFO -   Response Time: 0.021 seconds
+2024-11-30 20:09:08,337 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-30 20:09:08,338 - INFO - Pagination Details:
+2024-11-30 20:09:08,338 - INFO -   Total Products: Not specified
+2024-11-30 20:09:08,338 - INFO -   Current Page: 1
+2024-11-30 20:09:08,338 - INFO -   Total Pages: 5
+2024-11-30 20:09:08,339 - INFO -   Items Per Page: 10
+2024-11-30 20:09:08,339 - INFO - Products Summary:
+2024-11-30 20:09:08,339 - INFO -   Products Retrieved: 10
+2024-11-30 20:09:08,340 - INFO -   Categories Present: Tools, Bundles, Pens, Accessories
+2024-11-30 20:09:08,340 - INFO -   Price Range: $27.00 - $210.00
+2024-11-30 20:09:08,340 - INFO - Successfully fetched and processed product data
+2024-11-30 20:09:08,341 - INFO - Updating UI with fetched products
+2024-11-30 20:09:08,341 - INFO - UI update completed successfully
+2024-11-30 20:09:08,342 - INFO - Product fetch operation completed
+2024-11-30 20:09:08,342 - INFO - Application initialized. Log file: logs/product_dashboard_20241130_200908.log
+2024-11-30 20:09:08,343 - INFO - Starting main loop
+2024-11-30 20:09:10,815 - INFO - Showing add product dialog
+2024-11-30 20:09:51,291 - INFO - Fetching products from API - Page 1
+2024-11-30 20:09:51,292 - INFO - API Request Details:
+2024-11-30 20:09:51,292 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-30 20:09:51,292 - INFO -   Method: GET
+2024-11-30 20:09:51,292 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-30 20:09:51,314 - INFO - API Response Details:
+2024-11-30 20:09:51,314 - INFO -   Status Code: 200
+2024-11-30 20:09:51,314 - INFO -   Response Time: 0.020 seconds
+2024-11-30 20:09:51,314 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-30 20:09:51,315 - INFO - Pagination Details:
+2024-11-30 20:09:51,315 - INFO -   Total Products: Not specified
+2024-11-30 20:09:51,316 - INFO -   Current Page: 1
+2024-11-30 20:09:51,316 - INFO -   Total Pages: 6
+2024-11-30 20:09:51,316 - INFO -   Items Per Page: 10
+2024-11-30 20:09:51,316 - INFO - Products Summary:
+2024-11-30 20:09:51,316 - INFO -   Products Retrieved: 10
+2024-11-30 20:09:51,316 - INFO -   Categories Present: Tools, Bundles, Accessories, Pens
+2024-11-30 20:09:51,317 - INFO -   Price Range: $27.00 - $210.00
+2024-11-30 20:09:51,317 - INFO - Successfully fetched and processed product data
+2024-11-30 20:09:51,317 - INFO - Updating UI with fetched products
+2024-11-30 20:09:51,318 - INFO - UI update completed successfully
+2024-11-30 20:09:51,318 - INFO - Product fetch operation completed
+2024-11-30 20:09:51,319 - INFO - Fetching products from API - Page 1
+2024-11-30 20:09:51,319 - INFO - API Request Details:
+2024-11-30 20:09:51,319 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-11-30 20:09:51,319 - INFO -   Method: GET
+2024-11-30 20:09:51,319 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-11-30 20:09:51,342 - INFO - API Response Details:
+2024-11-30 20:09:51,342 - INFO -   Status Code: 200
+2024-11-30 20:09:51,342 - INFO -   Response Time: 0.022 seconds
+2024-11-30 20:09:51,342 - INFO -   Content Type: application/json; charset=utf-8
+2024-11-30 20:09:51,343 - INFO - Pagination Details:
+2024-11-30 20:09:51,343 - INFO -   Total Products: Not specified
+2024-11-30 20:09:51,344 - INFO -   Current Page: 1
+2024-11-30 20:09:51,344 - INFO -   Total Pages: 6
+2024-11-30 20:09:51,345 - INFO -   Items Per Page: 10
+2024-11-30 20:09:51,345 - INFO - Products Summary:
+2024-11-30 20:09:51,345 - INFO -   Products Retrieved: 10
+2024-11-30 20:09:51,346 - INFO -   Categories Present: Tools, Bundles, Accessories, Pens
+2024-11-30 20:09:51,346 - INFO -   Price Range: $27.00 - $210.00
+2024-11-30 20:09:51,346 - INFO - Successfully fetched and processed product data
+2024-11-30 20:09:51,346 - INFO - Updating UI with fetched products
+2024-11-30 20:09:51,348 - INFO - UI update completed successfully
+2024-11-30 20:09:51,349 - INFO - Product fetch operation completed

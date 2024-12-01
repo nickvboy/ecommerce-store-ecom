@@ -27,6 +27,7 @@ function ProductDetail() {
   const [loadedImages, setLoadedImages] = useState([]);
   const [showNotification, setShowNotification] = useState(false);
   const { addToCart } = useCart();
+  const [openSection, setOpenSection] = useState(null);
 
   const images = [
     { id: 1, color: 'bg-blue-500' },
@@ -334,43 +335,113 @@ function ProductDetail() {
                 </Button>
               </div>
 
-              {/* Collapsible Sections */}
-              <div className="space-y-4">
-                <Collapsible>
-                  <CollapsibleTrigger className="flex justify-between items-center w-full p-4 bg-bg-100 border border-text-100 rounded-lg group">
-                    <span className="font-bold">Description</span>
-                    <span className="text-text-100 transition-transform duration-300 group-data-[state=open]:rotate-180">▼</span>
-                  </CollapsibleTrigger>
-                  <CollapsibleContent className="overflow-hidden data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp">
-                    <div className="mt-0 p-4 bg-bg-100 border-x border-b border-text-100 rounded-b-lg">
-                      <h3 className="font-bold mb-2">Materials</h3>
-                      <ul className="list-disc pl-5 space-y-1 text-text-200">
-                        <li>Body: 303 Stainless steel</li>
-                        <li>Bolt: 303 stainless or Lead free brass</li>
-                        <li>Pen Clip: Nickel plated spring steel</li>
-                      </ul>
-                      <h3 className="font-bold mt-4 mb-2">Ink refill:</h3>
-                      <ul className="list-disc pl-5 space-y-1 text-text-200">
-                        <li>Schmidt EasyFlow 9000 medium, black</li>
-                        <li>Compatible with "Parker G2" ISO 12757-1 refills</li>
-                      </ul>
-                    </div>
-                  </CollapsibleContent>
-                </Collapsible>
+              
 
-                <Collapsible>
-                  <CollapsibleTrigger className="flex justify-between items-center w-full p-4 bg-bg-100 border border-text-100 rounded-lg group">
-                    <span className="font-bold">Product Information</span>
-                    <span className="text-text-100 transition-transform duration-300 group-data-[state=open]:rotate-180">▼</span>
-                  </CollapsibleTrigger>
-                  <CollapsibleContent className="overflow-hidden data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp">
-                    <div className="mt-0 p-4 bg-bg-100 border-x border-b border-text-100 rounded-b-lg">
-                      <p className="text-text-200">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                      </p>
+              {/* Description Section */}
+              <div className="border border-text-100/10 rounded-lg mb-4 bg-bg-100">
+                <button 
+                  onClick={() => setOpenSection(openSection === 'description' ? null : 'description')}
+                  className="flex justify-between items-center w-full p-4 text-left"
+                >
+                  <span className="font-semibold text-text-100">Description</span>
+                  <ChevronDownIcon 
+                    className={`h-5 w-5 transform transition-transform duration-200 text-text-100 ${
+                      openSection === 'description' ? 'rotate-180' : ''
+                    }`}
+                  />
+                </button>
+                {openSection === 'description' && (
+                  <div className="p-4 border-t border-text-100/10">
+                    <p className="text-text-200 whitespace-pre-wrap">{product.description}</p>
+                  </div>
+                )}
+              </div>
+
+              {/* Product Information Section */}
+              <div className="border border-text-100/10 rounded-lg mb-4 bg-bg-100">
+                <button 
+                  onClick={() => setOpenSection(openSection === 'info' ? null : 'info')}
+                  className="flex justify-between items-center w-full p-4 text-left"
+                >
+                  <span className="font-semibold text-text-100">Product Information</span>
+                  <ChevronDownIcon 
+                    className={`h-5 w-5 transform transition-transform duration-200 text-text-100 ${
+                      openSection === 'info' ? 'rotate-180' : ''
+                    }`}
+                  />
+                </button>
+                {openSection === 'info' && (
+                  <div className="p-4 border-t border-text-100/10">
+                    {/* Materials List */}
+                    {product.specifications?.materials && product.specifications.materials.length > 0 && (
+                      <div className="mb-4">
+                        <h3 className="font-medium text-text-100 mb-2">Materials</h3>
+                        <ul className="space-y-2">
+                          {product.specifications.materials.map((material, index) => (
+                            <li key={index} className="flex">
+                              <span className="font-medium text-text-100 min-w-[120px]">{material.name}</span>
+                              <span className="text-text-200">{material.description}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {/* Basic Information */}
+                    <div className="mb-4">
+                      <h3 className="font-medium text-text-100 mb-2">Basic Information</h3>
+                      <ul className="space-y-2">
+                        <li className="flex">
+                          <span className="font-medium text-text-100 min-w-[120px]">Category:</span>
+                          <span className="text-text-200">{product.category}</span>
+                        </li>
+                        {product.sizes && product.sizes.length > 0 && (
+                          <li className="flex">
+                            <span className="font-medium text-text-100 min-w-[120px]">Available Sizes:</span>
+                            <span className="text-text-200">{product.sizes.join(', ')}</span>
+                          </li>
+                        )}
+                        <li className="flex">
+                          <span className="font-medium text-text-100 min-w-[120px]">Stock:</span>
+                          <span className="text-text-200">{product.stock} units</span>
+                        </li>
+                      </ul>
                     </div>
-                  </CollapsibleContent>
-                </Collapsible>
+
+                    {/* Dimensions if available */}
+                    {product.specifications?.dimensions && (
+                      <div>
+                        <h3 className="font-medium text-text-100 mb-2">Dimensions</h3>
+                        <ul className="space-y-2">
+                          {product.specifications.dimensions.length && (
+                            <li className="flex">
+                              <span className="font-medium text-text-100 min-w-[120px]">Length:</span>
+                              <span className="text-text-200">{product.specifications.dimensions.length} mm</span>
+                            </li>
+                          )}
+                          {product.specifications.dimensions.width && (
+                            <li className="flex">
+                              <span className="font-medium text-text-100 min-w-[120px]">Width:</span>
+                              <span className="text-text-200">{product.specifications.dimensions.width} mm</span>
+                            </li>
+                          )}
+                          {product.specifications.dimensions.height && (
+                            <li className="flex">
+                              <span className="font-medium text-text-100 min-w-[120px]">Height:</span>
+                              <span className="text-text-200">{product.specifications.dimensions.height} mm</span>
+                            </li>
+                          )}
+                          {product.specifications.dimensions.weight && (
+                            <li className="flex">
+                              <span className="font-medium text-text-100 min-w-[120px]">Weight:</span>
+                              <span className="text-text-200">{product.specifications.dimensions.weight} g</span>
+                            </li>
+                          )}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           </div>

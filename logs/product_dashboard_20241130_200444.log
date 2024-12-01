@@ -1,0 +1,13 @@
+2024-11-30 20:04:44,282 - INFO - Logging initialized
+2024-11-30 20:04:44,282 - INFO - Starting Product Dashboard application
+2024-11-30 20:04:44,489 - INFO - Initializing ProductDashboard
+2024-11-30 20:04:44,534 - ERROR - Error during initialization: 'ProductDashboard' object has no attribute 'add_product'
+Traceback (most recent call last):
+  File "c:\Users\nickv\Downloads\tester\ecommerce-store-ecom\backend\scripts\product_dashboard.py", line 114, in __init__
+    self.setup_buttons_frame(self.products_frame)
+  File "c:\Users\nickv\Downloads\tester\ecommerce-store-ecom\backend\scripts\product_dashboard.py", line 483, in setup_buttons_frame
+    ttk.Button(buttons_frame, text="Add Product", command=self.add_product).grid(row=0, column=0, padx=5)
+                                                          ^^^^^^^^^^^^^^^^
+AttributeError: 'ProductDashboard' object has no attribute 'add_product'
+2024-11-30 20:04:46,386 - INFO - Application initialized. Log file: logs/product_dashboard_20241130_200444.log
+2024-11-30 20:04:46,386 - INFO - Starting main loop
