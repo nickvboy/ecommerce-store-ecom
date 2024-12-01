@@ -12,6 +12,13 @@ import Login from './pages/Login';
 import { CartProvider } from './contexts/CartContext';
 import Checkout from './pages/Checkout';
 import OrderSuccess from './pages/OrderSuccess';
+import AboutUs from './pages/about/AboutUs';
+import Tagline from './pages/about/Tagline';
+import Story from './pages/about/Story';
+import FactSheet from './pages/about/FactSheet';
+import Team from './pages/about/Team';
+import ContactUs from './pages/ContactUs';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 function App() {
   return (
@@ -27,6 +34,15 @@ function App() {
                   <Route path="/" element={<Home />} />
                   <Route path="/products" element={<Products />} />
                   <Route path="/products/:id" element={<ProductDetail />} />
+                  <Route path="/gear" element={<Products category="gear" />} />
+                  <Route path="/clothing" element={<Products category="clothing" />} />
+                  <Route path="/about" element={<AboutUs />} />
+                  <Route path="/about/tagline" element={<Tagline />} />
+                  <Route path="/about/story" element={<Story />} />
+                  <Route path="/about/factsheet" element={<FactSheet />} />
+                  <Route path="/about/team" element={<Team />} />
+                  <Route path="/contact" element={<ContactUs />} />
+                  <Route path="/privacy" element={<PrivacyPolicy />} />
                   <Route path="/settings" element={<Settings />} />
                   <Route path="/signup" element={<SignUp />} />
                   <Route path="/login" element={<Login />} />

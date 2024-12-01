@@ -58,7 +58,17 @@ function MobileMenu({ isOpen, onClose }) {
           <Link to="/gear" className="text-xl font-bold text-text-100 hover:text-primary-100">Gear</Link>
           <Link to="/clothing" className="text-xl font-bold text-text-100 hover:text-primary-100">Clothing</Link>
           <Link to="/products" className="text-xl font-bold text-text-100 hover:text-primary-100">All Products</Link>
-          <Link to="/bfcm" className="text-xl font-bold text-text-100 hover:text-primary-100">BFCM</Link>
+          <div className="space-y-2">
+            <Link to="/about" className="text-xl font-bold text-text-100 hover:text-primary-100">About</Link>
+            <div className="pl-4 space-y-2">
+              <Link to="/about/tagline" className="block text-lg text-text-200 hover:text-primary-100">Our Tagline</Link>
+              <Link to="/about/story" className="block text-lg text-text-200 hover:text-primary-100">Company Story</Link>
+              <Link to="/about/factsheet" className="block text-lg text-text-200 hover:text-primary-100">Fact Sheet</Link>
+              <Link to="/about/team" className="block text-lg text-text-200 hover:text-primary-100">Meet the Team</Link>
+            </div>
+          </div>
+          <Link to="/contact" className="text-xl font-bold text-text-100 hover:text-primary-100">Contact</Link>
+          <Link to="/privacy" className="text-xl font-bold text-text-100 hover:text-primary-100">Privacy Policy</Link>
         </nav>
         <div className="mt-auto">
           <div className="flex justify-around py-4 border-t border-bg-300">
@@ -225,8 +235,35 @@ function Navbar() {
               <span className="hover:text-primary-100 transition-colors">All Products</span>
               <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary-100 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
             </Link>
-            <Link to="/bfcm" className="font-bold relative group text-base tracking-wide">
-              <span className="hover:text-primary-100 transition-colors">BFCM</span>
+            <div className="relative group">
+              <Link to="/about" className="font-bold relative group text-base tracking-wide">
+                <span className="hover:text-primary-100 transition-colors">About</span>
+                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary-100 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
+              </Link>
+              {/* About Submenu */}
+              <div className="absolute left-1/2 -translate-x-1/2 mt-2 w-48 bg-bg-100 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                <div className="py-2">
+                  <Link to="/about/tagline" className="block px-4 py-2 text-text-200 hover:text-primary-100 hover:bg-bg-200">
+                    Our Tagline
+                  </Link>
+                  <Link to="/about/story" className="block px-4 py-2 text-text-200 hover:text-primary-100 hover:bg-bg-200">
+                    Company Story
+                  </Link>
+                  <Link to="/about/factsheet" className="block px-4 py-2 text-text-200 hover:text-primary-100 hover:bg-bg-200">
+                    Fact Sheet
+                  </Link>
+                  <Link to="/about/team" className="block px-4 py-2 text-text-200 hover:text-primary-100 hover:bg-bg-200">
+                    Meet the Team
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <Link to="/contact" className="font-bold relative group text-base tracking-wide">
+              <span className="hover:text-primary-100 transition-colors">Contact</span>
+              <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary-100 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
+            </Link>
+            <Link to="/privacy" className="font-bold relative group text-base tracking-wide">
+              <span className="hover:text-primary-100 transition-colors">Privacy</span>
               <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary-100 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
             </Link>
           </div>

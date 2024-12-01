@@ -91,7 +91,7 @@ function Checkout() {
   // Show loading state while checking user status
   if (loading && !cartItems.length) {
     return (
-      <div className="min-h-screen bg-[#1A1A1A] text-text-100 py-8">
+      <div className="min-h-screen bg-100 text-text-100 py-8">
         <div className="max-w-2xl mx-auto px-4 text-center">
           <h1 className="text-2xl font-bold mb-4">Loading...</h1>
         </div>
@@ -101,10 +101,10 @@ function Checkout() {
 
   if (cartItems.length === 0) {
     return (
-      <div className="min-h-screen bg-[#1A1A1A] text-text-100 py-8">
+      <div className="min-h-screen bg-100 text-text-100 py-8">
         <div className="max-w-2xl mx-auto px-4 text-center">
           <h1 className="text-2xl font-bold mb-4">Your cart is empty</h1>
-          <Link to="/products" className="text-primary-100 hover:underline">
+          <Link to="/products" className="text-primary-100 hover:text-primary-200 transition-colors">
             Continue Shopping
           </Link>
         </div>
@@ -115,11 +115,11 @@ function Checkout() {
   // If user is guest, this will render briefly before redirect
   if (user.isGuest) {
     return (
-      <div className="min-h-screen bg-[#1A1A1A] text-text-100 py-8">
+      <div className="min-h-screen bg-100 text-text-100 py-8">
         <div className="max-w-2xl mx-auto px-4 text-center">
           <h1 className="text-2xl font-bold mb-4">Please Sign In</h1>
           <p className="mb-4">You need to be signed in to complete your purchase.</p>
-          <Link to="/signup" className="text-primary-100 hover:underline">
+          <Link to="/signup" className="text-primary-100 hover:text-primary-200 transition-colors">
             Create Account or Sign In
           </Link>
         </div>
@@ -128,11 +128,11 @@ function Checkout() {
   }
 
   return (
-    <div className="min-h-screen bg-[#1A1A1A] text-text-100 py-8">
+    <div className="min-h-screen bg-100 text-text-100 py-8">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <Link 
           to="/cart" 
-          className="inline-flex items-center text-text-200 hover:text-primary-100 mb-8"
+          className="inline-flex items-center text-text-200 hover:text-primary-100 transition-colors mb-8"
         >
           <ArrowLeftIcon className="h-4 w-4 mr-2" />
           BACK TO CART
@@ -148,7 +148,7 @@ function Checkout() {
           <div className="grid md:grid-cols-12 gap-8">
             {/* Left Column - Form */}
             <div className="md:col-span-8">
-              <div className="bg-[#212121] rounded-lg p-6 mb-6">
+              <div className="bg-200 rounded-lg p-6 mb-6">
                 <h2 className="text-xl font-medium mb-6">Contact Information</h2>
                 <div className="space-y-4">
                   <div>
@@ -162,7 +162,7 @@ function Checkout() {
                       onChange={handleInputChange}
                       required
                       disabled={loading}
-                      className="w-full px-4 py-2 bg-[#1A1A1A] border border-gray-800 rounded-md 
+                      className="w-full px-4 py-2 bg-100 border border-300 rounded-md 
                                text-text-100 focus:outline-none focus:ring-2 focus:ring-primary-100
                                disabled:opacity-50 disabled:cursor-not-allowed"
                       placeholder="Enter your email"
@@ -171,7 +171,7 @@ function Checkout() {
                 </div>
               </div>
 
-              <div className="bg-[#212121] rounded-lg p-6 mb-6">
+              <div className="bg-200 rounded-lg p-6 mb-6">
                 <h2 className="text-xl font-medium mb-6">Shipping Address</h2>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
@@ -185,7 +185,7 @@ function Checkout() {
                       onChange={handleInputChange}
                       required
                       disabled={loading}
-                      className="w-full px-4 py-2 bg-[#1A1A1A] border border-gray-800 rounded-md 
+                      className="w-full px-4 py-2 bg-100 border border-300 rounded-md 
                                text-text-100 focus:outline-none focus:ring-2 focus:ring-primary-100
                                disabled:opacity-50 disabled:cursor-not-allowed"
                     />
@@ -201,7 +201,7 @@ function Checkout() {
                       onChange={handleInputChange}
                       required
                       disabled={loading}
-                      className="w-full px-4 py-2 bg-[#1A1A1A] border border-gray-800 rounded-md 
+                      className="w-full px-4 py-2 bg-100 border border-300 rounded-md 
                                text-text-100 focus:outline-none focus:ring-2 focus:ring-primary-100
                                disabled:opacity-50 disabled:cursor-not-allowed"
                     />
@@ -217,7 +217,7 @@ function Checkout() {
                       onChange={handleInputChange}
                       required
                       disabled={loading}
-                      className="w-full px-4 py-2 bg-[#1A1A1A] border border-gray-800 rounded-md 
+                      className="w-full px-4 py-2 bg-100 border border-300 rounded-md 
                                text-text-100 focus:outline-none focus:ring-2 focus:ring-primary-100
                                disabled:opacity-50 disabled:cursor-not-allowed"
                     />
@@ -233,7 +233,7 @@ function Checkout() {
                       onChange={handleInputChange}
                       required
                       disabled={loading}
-                      className="w-full px-4 py-2 bg-[#1A1A1A] border border-gray-800 rounded-md 
+                      className="w-full px-4 py-2 bg-100 border border-300 rounded-md 
                                text-text-100 focus:outline-none focus:ring-2 focus:ring-primary-100
                                disabled:opacity-50 disabled:cursor-not-allowed"
                     />
@@ -249,7 +249,7 @@ function Checkout() {
                       onChange={handleInputChange}
                       required
                       disabled={loading}
-                      className="w-full px-4 py-2 bg-[#1A1A1A] border border-gray-800 rounded-md 
+                      className="w-full px-4 py-2 bg-100 border border-300 rounded-md 
                                text-text-100 focus:outline-none focus:ring-2 focus:ring-primary-100
                                disabled:opacity-50 disabled:cursor-not-allowed"
                     />
@@ -265,7 +265,7 @@ function Checkout() {
                       onChange={handleInputChange}
                       required
                       disabled={loading}
-                      className="w-full px-4 py-2 bg-[#1A1A1A] border border-gray-800 rounded-md 
+                      className="w-full px-4 py-2 bg-100 border border-300 rounded-md 
                                text-text-100 focus:outline-none focus:ring-2 focus:ring-primary-100
                                disabled:opacity-50 disabled:cursor-not-allowed"
                     />
@@ -279,24 +279,24 @@ function Checkout() {
                       name="country"
                       value={formData.country}
                       disabled={true}
-                      className="w-full px-4 py-2 bg-[#1A1A1A] border border-gray-800 rounded-md 
+                      className="w-full px-4 py-2 bg-100 border border-300 rounded-md 
                                text-text-100 opacity-50 cursor-not-allowed"
                     />
                   </div>
                 </div>
               </div>
 
-              <div className="bg-[#212121] rounded-lg p-6">
+              <div className="bg-200 rounded-lg p-6">
                 <h2 className="text-xl font-medium mb-6">Payment Method</h2>
                 <div className="space-y-4">
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('card')}
                     disabled={loading}
-                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-md border ${
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-md border transition-colors ${
                       paymentMethod === 'card'
-                        ? 'border-primary-100 bg-[#1A1A1A]'
-                        : 'border-gray-800 hover:border-gray-700'
+                        ? 'border-primary-100 bg-100'
+                        : 'border-300 hover:border-primary-100'
                     } ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
                   >
                     <CreditCardIcon className="h-6 w-6" />
@@ -306,10 +306,10 @@ function Checkout() {
                     type="button"
                     onClick={() => setPaymentMethod('shop')}
                     disabled={loading}
-                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-md border ${
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-md border transition-colors ${
                       paymentMethod === 'shop'
-                        ? 'border-primary-100 bg-[#1A1A1A]'
-                        : 'border-gray-800 hover:border-gray-700'
+                        ? 'border-primary-100 bg-100'
+                        : 'border-300 hover:border-primary-100'
                     } ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
                   >
                     <BuildingStorefrontIcon className="h-6 w-6" />
@@ -321,7 +321,7 @@ function Checkout() {
 
             {/* Right Column - Order Summary */}
             <div className="md:col-span-4">
-              <div className="bg-[#212121] rounded-lg p-6 sticky top-24">
+              <div className="bg-200 rounded-lg p-6 sticky top-24">
                 <h2 className="text-xl font-medium mb-6">Order Summary</h2>
                 
                 {/* Order Items */}
@@ -337,7 +337,7 @@ function Checkout() {
                               className="w-full h-full object-cover"
                             />
                           </div>
-                          <span className="absolute -top-2 -right-2 h-5 w-5 rounded-full bg-gray-800 
+                          <span className="absolute -top-2 -right-2 h-5 w-5 rounded-full bg-300 
                                        flex items-center justify-center text-xs">
                             {item.quantity}
                           </span>
@@ -355,7 +355,7 @@ function Checkout() {
                 </div>
 
                 {/* Totals */}
-                <div className="space-y-3 border-t border-gray-800 pt-4">
+                <div className="space-y-3 border-t border-300 pt-4">
                   <div className="flex justify-between text-text-200">
                     <span>Subtotal</span>
                     <span>${subtotal.toFixed(2)}</span>
@@ -368,7 +368,7 @@ function Checkout() {
                     <span>Tax</span>
                     <span>${tax.toFixed(2)}</span>
                   </div>
-                  <div className="flex justify-between text-lg font-medium pt-3 border-t border-gray-800">
+                  <div className="flex justify-between text-lg font-medium pt-3 border-t border-300">
                     <span>Total</span>
                     <span>${total.toFixed(2)} USD</span>
                   </div>
@@ -377,8 +377,9 @@ function Checkout() {
                 <Button 
                   type="submit"
                   disabled={loading}
-                  className={`w-full mt-6 bg-[#FF6600] hover:bg-[#FF7719] text-white py-3 rounded-md
-                    ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  className={`w-full mt-6 bg-gradient-to-r from-primary-100 to-primary-200 
+                             hover:from-primary-200 hover:to-primary-300 text-white py-3 rounded-md
+                             transition-all duration-300 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
                   {loading ? 'Processing...' : 'Place Order'}
                 </Button>

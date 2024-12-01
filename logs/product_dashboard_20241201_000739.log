@@ -1,0 +1,119 @@
+2024-12-01 00:07:39,128 - INFO - Logging initialized
+2024-12-01 00:07:39,128 - INFO - Starting Product Dashboard application
+2024-12-01 00:07:39,261 - INFO - Initializing ProductDashboard
+2024-12-01 00:07:39,322 - INFO - Fetching products from API - Page 1
+2024-12-01 00:07:39,323 - INFO - API Request Details:
+2024-12-01 00:07:39,323 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-12-01 00:07:39,323 - INFO -   Method: GET
+2024-12-01 00:07:39,324 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-12-01 00:07:39,355 - INFO - API Response Details:
+2024-12-01 00:07:39,356 - INFO -   Status Code: 200
+2024-12-01 00:07:39,356 - INFO -   Response Time: 0.026 seconds
+2024-12-01 00:07:39,356 - INFO -   Content Type: application/json; charset=utf-8
+2024-12-01 00:07:39,357 - INFO - Pagination Details:
+2024-12-01 00:07:39,357 - INFO -   Total Products: Not specified
+2024-12-01 00:07:39,357 - INFO -   Current Page: 1
+2024-12-01 00:07:39,358 - INFO -   Total Pages: 2
+2024-12-01 00:07:39,358 - INFO -   Items Per Page: 10
+2024-12-01 00:07:39,358 - INFO - Products Summary:
+2024-12-01 00:07:39,359 - INFO -   Products Retrieved: 10
+2024-12-01 00:07:39,359 - INFO -   Categories Present: EDC Gear, Clothing
+2024-12-01 00:07:39,359 - INFO -   Price Range: $19.99 - $249.99
+2024-12-01 00:07:39,359 - INFO - Successfully fetched and processed product data
+2024-12-01 00:07:39,360 - INFO - Updating UI with fetched products
+2024-12-01 00:07:39,361 - INFO - UI update completed successfully
+2024-12-01 00:07:39,362 - INFO - Product fetch operation completed
+2024-12-01 00:07:39,362 - INFO - Performing initial data fetch
+2024-12-01 00:07:39,362 - INFO - Fetching products from API - Page 1
+2024-12-01 00:07:39,363 - INFO - API Request Details:
+2024-12-01 00:07:39,363 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-12-01 00:07:39,363 - INFO -   Method: GET
+2024-12-01 00:07:39,363 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-12-01 00:07:39,381 - INFO - API Response Details:
+2024-12-01 00:07:39,381 - INFO -   Status Code: 200
+2024-12-01 00:07:39,381 - INFO -   Response Time: 0.016 seconds
+2024-12-01 00:07:39,382 - INFO -   Content Type: application/json; charset=utf-8
+2024-12-01 00:07:39,382 - INFO - Pagination Details:
+2024-12-01 00:07:39,382 - INFO -   Total Products: Not specified
+2024-12-01 00:07:39,382 - INFO -   Current Page: 1
+2024-12-01 00:07:39,383 - INFO -   Total Pages: 2
+2024-12-01 00:07:39,383 - INFO -   Items Per Page: 10
+2024-12-01 00:07:39,383 - INFO - Products Summary:
+2024-12-01 00:07:39,383 - INFO -   Products Retrieved: 10
+2024-12-01 00:07:39,384 - INFO -   Categories Present: EDC Gear, Clothing
+2024-12-01 00:07:39,384 - INFO -   Price Range: $19.99 - $249.99
+2024-12-01 00:07:39,384 - INFO - Successfully fetched and processed product data
+2024-12-01 00:07:39,384 - INFO - Updating UI with fetched products
+2024-12-01 00:07:39,385 - INFO - UI update completed successfully
+2024-12-01 00:07:39,385 - INFO - Product fetch operation completed
+2024-12-01 00:07:39,386 - INFO - Application initialized. Log file: logs/product_dashboard_20241201_000739.log
+2024-12-01 00:07:39,386 - INFO - Starting main loop
+2024-12-01 00:07:59,847 - INFO - Items per page changed
+2024-12-01 00:07:59,848 - INFO - Fetching products from API - Page 1
+2024-12-01 00:07:59,848 - INFO - API Request Details:
+2024-12-01 00:07:59,848 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-12-01 00:07:59,848 - INFO -   Method: GET
+2024-12-01 00:07:59,849 - INFO -   Parameters: {'page': 1, 'limit': 100}
+2024-12-01 00:07:59,870 - INFO - API Response Details:
+2024-12-01 00:07:59,870 - INFO -   Status Code: 200
+2024-12-01 00:07:59,870 - INFO -   Response Time: 0.020 seconds
+2024-12-01 00:07:59,871 - INFO -   Content Type: application/json; charset=utf-8
+2024-12-01 00:07:59,871 - INFO - Pagination Details:
+2024-12-01 00:07:59,872 - INFO -   Total Products: Not specified
+2024-12-01 00:07:59,872 - INFO -   Current Page: 1
+2024-12-01 00:07:59,872 - INFO -   Total Pages: 1
+2024-12-01 00:07:59,872 - INFO -   Items Per Page: 100
+2024-12-01 00:07:59,873 - INFO - Products Summary:
+2024-12-01 00:07:59,873 - INFO -   Products Retrieved: 18
+2024-12-01 00:07:59,873 - INFO -   Categories Present: EDC Gear, Clothing
+2024-12-01 00:07:59,873 - INFO -   Price Range: $19.99 - $249.99
+2024-12-01 00:07:59,874 - INFO - Successfully fetched and processed product data
+2024-12-01 00:07:59,874 - INFO - Updating UI with fetched products
+2024-12-01 00:07:59,875 - INFO - UI update completed successfully
+2024-12-01 00:07:59,875 - INFO - Product fetch operation completed
+2024-12-01 00:08:42,986 - INFO - Showing add product dialog
+2024-12-01 00:10:24,830 - INFO - Fetching products from API - Page 1
+2024-12-01 00:10:24,831 - INFO - API Request Details:
+2024-12-01 00:10:24,831 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-12-01 00:10:24,831 - INFO -   Method: GET
+2024-12-01 00:10:24,831 - INFO -   Parameters: {'page': 1, 'limit': 100}
+2024-12-01 00:10:24,865 - INFO - API Response Details:
+2024-12-01 00:10:24,865 - INFO -   Status Code: 200
+2024-12-01 00:10:24,866 - INFO -   Response Time: 0.033 seconds
+2024-12-01 00:10:24,866 - INFO -   Content Type: application/json; charset=utf-8
+2024-12-01 00:10:24,867 - INFO - Pagination Details:
+2024-12-01 00:10:24,867 - INFO -   Total Products: Not specified
+2024-12-01 00:10:24,867 - INFO -   Current Page: 1
+2024-12-01 00:10:24,867 - INFO -   Total Pages: 1
+2024-12-01 00:10:24,867 - INFO -   Items Per Page: 100
+2024-12-01 00:10:24,868 - INFO - Products Summary:
+2024-12-01 00:10:24,868 - INFO -   Products Retrieved: 19
+2024-12-01 00:10:24,868 - INFO -   Categories Present: EDC Gear, Clothing, Other
+2024-12-01 00:10:24,868 - INFO -   Price Range: $12.00 - $249.99
+2024-12-01 00:10:24,868 - INFO - Successfully fetched and processed product data
+2024-12-01 00:10:24,869 - INFO - Updating UI with fetched products
+2024-12-01 00:10:24,870 - INFO - UI update completed successfully
+2024-12-01 00:10:24,870 - INFO - Product fetch operation completed
+2024-12-01 00:10:24,871 - INFO - Fetching products from API - Page 1
+2024-12-01 00:10:24,871 - INFO - API Request Details:
+2024-12-01 00:10:24,872 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-12-01 00:10:24,872 - INFO -   Method: GET
+2024-12-01 00:10:24,872 - INFO -   Parameters: {'page': 1, 'limit': 100}
+2024-12-01 00:10:24,899 - INFO - API Response Details:
+2024-12-01 00:10:24,899 - INFO -   Status Code: 200
+2024-12-01 00:10:24,899 - INFO -   Response Time: 0.025 seconds
+2024-12-01 00:10:24,900 - INFO -   Content Type: application/json; charset=utf-8
+2024-12-01 00:10:24,901 - INFO - Pagination Details:
+2024-12-01 00:10:24,901 - INFO -   Total Products: Not specified
+2024-12-01 00:10:24,901 - INFO -   Current Page: 1
+2024-12-01 00:10:24,901 - INFO -   Total Pages: 1
+2024-12-01 00:10:24,902 - INFO -   Items Per Page: 100
+2024-12-01 00:10:24,902 - INFO - Products Summary:
+2024-12-01 00:10:24,902 - INFO -   Products Retrieved: 19
+2024-12-01 00:10:24,902 - INFO -   Categories Present: EDC Gear, Clothing, Other
+2024-12-01 00:10:24,903 - INFO -   Price Range: $12.00 - $249.99
+2024-12-01 00:10:24,903 - INFO - Successfully fetched and processed product data
+2024-12-01 00:10:24,903 - INFO - Updating UI with fetched products
+2024-12-01 00:10:24,905 - INFO - UI update completed successfully
+2024-12-01 00:10:24,905 - INFO - Product fetch operation completed
+2024-12-01 00:12:07,912 - INFO - Application shutting down

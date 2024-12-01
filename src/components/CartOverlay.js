@@ -21,7 +21,7 @@ function CartOverlay({ isOpen, onClose }) {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-black/30 backdrop-blur-sm" />
+          <div className="fixed inset-0 bg-bg-100/30 backdrop-blur-sm" />
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-hidden">
@@ -37,13 +37,13 @@ function CartOverlay({ isOpen, onClose }) {
                 leaveTo="translate-x-full"
               >
                 <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
-                  <div className="flex h-full flex-col bg-[#1A1A1A] shadow-xl">
+                  <div className="flex h-full flex-col bg-bg-100 shadow-xl">
                     {/* Header */}
-                    <div className="flex items-center justify-between px-4 py-6 border-b border-gray-800">
-                      <Dialog.Title className="text-xl font-medium text-white">Shopping Cart</Dialog.Title>
+                    <div className="flex items-center justify-between px-4 py-6 border-b border-bg-300">
+                      <Dialog.Title className="text-xl font-medium text-text-100">Shopping Cart</Dialog.Title>
                       <button
                         type="button"
-                        className="text-gray-400 hover:text-white"
+                        className="text-text-200 hover:text-text-100"
                         onClick={onClose}
                       >
                         <XMarkIcon className="h-6 w-6" />
@@ -51,10 +51,10 @@ function CartOverlay({ isOpen, onClose }) {
                     </div>
 
                     {/* LTT Stream Message Checkbox */}
-                    <div className="px-4 py-3 border-b border-gray-800">
+                    <div className="px-4 py-3 border-b border-bg-300">
                       <div className="flex items-center gap-2">
                         <Checkbox id="ltt-stream" />
-                        <label htmlFor="ltt-stream" className="text-sm text-gray-300">
+                        <label htmlFor="ltt-stream" className="text-sm text-text-200">
                           I would like my purchase to appear as a Merch Message on the LTT Stream
                         </label>
                       </div>
@@ -63,11 +63,11 @@ function CartOverlay({ isOpen, onClose }) {
                     {/* Cart Items */}
                     <div className="flex-1 overflow-y-auto">
                       {cartItems.length === 0 ? (
-                        <p className="text-center text-gray-400 py-8">Your cart is empty</p>
+                        <p className="text-center text-text-200 py-8">Your cart is empty</p>
                       ) : (
                         <div className="px-4 py-6">
                           {/* Headers */}
-                          <div className="grid grid-cols-12 gap-4 mb-4 text-sm text-gray-400 uppercase">
+                          <div className="grid grid-cols-12 gap-4 mb-4 text-sm text-text-200 uppercase">
                             <div className="col-span-6">Product</div>
                             <div className="col-span-3 text-center">Quantity</div>
                             <div className="col-span-3 text-right">Total</div>
@@ -75,10 +75,10 @@ function CartOverlay({ isOpen, onClose }) {
 
                           {/* Items */}
                           {cartItems.map((item) => (
-                            <div key={`${item.id}-${item.selectedSize}`} className="grid grid-cols-12 gap-4 py-4 border-b border-gray-800">
+                            <div key={`${item.id}-${item.selectedSize}`} className="grid grid-cols-12 gap-4 py-4 border-b border-bg-300">
                               {/* Product Info */}
                               <div className="col-span-6 flex gap-3">
-                                <div className="w-20 h-20 bg-gray-800 rounded-md overflow-hidden">
+                                <div className="w-20 h-20 bg-bg-200 rounded-md overflow-hidden">
                                   <img
                                     src={item.images[0]?.url}
                                     alt={item.name}
@@ -86,29 +86,29 @@ function CartOverlay({ isOpen, onClose }) {
                                   />
                                 </div>
                                 <div>
-                                  <h3 className="text-white font-medium">{item.name}</h3>
-                                  <p className="text-gray-400 text-sm">${item.price.toFixed(2)} USD</p>
+                                  <h3 className="text-text-100 font-medium">{item.name}</h3>
+                                  <p className="text-text-200 text-sm">${item.price.toFixed(2)} USD</p>
                                   {item.selectedSize && (
-                                    <p className="text-gray-400 text-sm">Size: {item.selectedSize}</p>
+                                    <p className="text-text-200 text-sm">Size: {item.selectedSize}</p>
                                   )}
                                 </div>
                               </div>
 
                               {/* Quantity */}
                               <div className="col-span-3 flex items-center justify-center">
-                                <div className="flex items-center bg-gray-800 rounded-md">
-                                  <button className="px-3 py-1 text-gray-400 hover:text-white">-</button>
-                                  <span className="px-3 py-1 text-white">{item.quantity}</span>
-                                  <button className="px-3 py-1 text-gray-400 hover:text-white">+</button>
+                                <div className="flex items-center bg-bg-200 rounded-md">
+                                  <button className="px-3 py-1 text-text-200 hover:text-text-100">-</button>
+                                  <span className="px-3 py-1 text-text-100">{item.quantity}</span>
+                                  <button className="px-3 py-1 text-text-200 hover:text-text-100">+</button>
                                 </div>
                               </div>
 
                               {/* Total & Remove */}
                               <div className="col-span-3 flex items-center justify-between">
-                                <span className="text-white">${(item.price * item.quantity).toFixed(2)} USD</span>
+                                <span className="text-text-100">${(item.price * item.quantity).toFixed(2)} USD</span>
                                 <button
                                   onClick={() => removeFromCart(item.id)}
-                                  className="text-gray-400 hover:text-white"
+                                  className="text-text-200 hover:text-text-100"
                                 >
                                   <XMarkIcon className="h-5 w-5" />
                                 </button>
@@ -121,14 +121,16 @@ function CartOverlay({ isOpen, onClose }) {
 
                     {/* Footer */}
                     {cartItems.length > 0 && (
-                      <div className="border-t border-gray-800 px-4 py-6">
-                        <div className="flex justify-between text-lg font-medium text-white mb-6">
+                      <div className="border-t border-bg-300 px-4 py-6">
+                        <div className="flex justify-between text-lg font-medium text-text-100 mb-6">
                           <span>Subtotal</span>
                           <span>${subtotal.toFixed(2)} USD</span>
                         </div>
                         <Link
                           to="/checkout"
-                          className="block w-full bg-[#FF6600] text-white text-center py-3 rounded-md hover:bg-[#FF7719] transition-colors"
+                          className="block w-full bg-gradient-to-r from-primary-100 to-primary-200 
+                            hover:from-primary-200 hover:to-primary-100 text-text-100 text-center py-3 
+                            rounded-md transition-all duration-200 transform hover:scale-[1.02]"
                           onClick={onClose}
                         >
                           Checkout
