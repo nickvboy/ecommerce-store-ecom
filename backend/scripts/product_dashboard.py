@@ -11,6 +11,8 @@ from tkinter import filedialog
 from PIL import Image, ImageTk
 from dotenv import load_dotenv
 import time
+import csv
+import io
 
 # Configure logging
 def setup_logging():
@@ -530,13 +532,21 @@ class ProductDashboard:
         )
         self.add_product_button.grid(row=0, column=3, padx=5)
         
+        # Import CSV button
+        self.import_csv_button = ttk.Button(
+            buttons_frame,
+            text="Import CSV",
+            command=self.import_csv_products
+        )
+        self.import_csv_button.grid(row=0, column=4, padx=5)
+        
         # Refresh button
         self.refresh_button = ttk.Button(
             buttons_frame,
             text="Refresh Data",
             command=self.fetch_products
         )
-        self.refresh_button.grid(row=0, column=4, padx=5)
+        self.refresh_button.grid(row=0, column=5, padx=5)
 
     def fetch_products(self):
         """Fetch products from the API with pagination"""
@@ -1608,6 +1618,390 @@ class ProductDashboard:
         except Exception as e:
             logging.error(f"Error uploading images: {str(e)}", exc_info=True)
             messagebox.showerror("Error", f"Failed to upload images: {str(e)}")
+
+    def import_csv_products(self):
+        """Import products from a CSV file"""
+        try:
+            # Open file dialog to select CSV
+            file_path = filedialog.askopenfilename(
+                title="Select CSV File",
+                filetypes=[("CSV files", "*.csv")]
+            )
+            
+            if not file_path:
+                return
+            
+            # Read CSV file
+            with open(file_path, 'r', encoding='utf-8') as file:
+                csv_reader = csv.DictReader(file)
+                products = list(csv_reader)
+                
+                if not products:
+                    messagebox.showwarning("Warning", "No products found in CSV file")
+                    return
+                
+                # Confirm import
+                if not messagebox.askyesno(
+                    "Confirm Import",
+                    f"Are you sure you want to import {len(products)} products?"
+                ):
+                    return
+                
+                # Show progress dialog
+                progress_dialog = tk.Toplevel(self.root)
+                progress_dialog.title("Importing Products")
+                progress_dialog.geometry("300x150")
+                progress_dialog.transient(self.root)
+                
+                # Center the dialog
+                progress_dialog.update_idletasks()
+                x = (progress_dialog.winfo_screenwidth() // 2) - (progress_dialog.winfo_width() // 2)
+                y = (progress_dialog.winfo_screenheight() // 2) - (progress_dialog.winfo_height() // 2)
+                progress_dialog.geometry(f"+{x}+{y}")
+                
+                # Progress label
+                progress_label = ttk.Label(
+                    progress_dialog,
+                    text="Importing products...",
+                    padding=20
+                )
+                progress_label.pack()
+                
+                # Progress bar
+                progress_var = tk.DoubleVar()
+                progress_bar = ttk.Progressbar(
+                    progress_dialog,
+                    variable=progress_var,
+                    maximum=len(products)
+                )
+                progress_bar.pack(fill=tk.X, padx=20)
+                
+                # Counter label
+                counter_label = ttk.Label(
+                    progress_dialog,
+                    text="0 / " + str(len(products))
+                )
+                counter_label.pack(pady=10)
+                
+                success_count = 0
+                failed_products = []
+                imported_products = []
+                
+                def process_products():
+                    nonlocal success_count
+                    
+                    for i, product in enumerate(products):
+                        try:
+                            # Update progress
+                            progress_var.set(i + 1)
+                            counter_label.config(text=f"{i + 1} / {len(products)}")
+                            progress_dialog.update()
+                            
+                            # Process sizes
+                            sizes = []
+                            if product.get('sizes'):
+                                sizes = [s.strip() for s in product['sizes'].split(',') if s.strip()]
+                            
+                            # Prepare product data
+                            product_data = {
+                                'name': product['name'],
+                                'category': product['category'],
+                                'description': product['description'],
+                                'price': float(product['price']),
+                                'stock': int(product['stock']),
+                                'sizes': sizes
+                            }
+                            
+                            # Add optional fields
+                            if product.get('originalPrice'):
+                                product_data['originalPrice'] = float(product['originalPrice'])
+                            
+                            # Make API request
+                            response = requests.post(
+                                f'{self.api_base_url}/products',
+                                json=product_data
+                            )
+                            
+                            if response.ok:
+                                success_count += 1
+                                imported_products.append(response.json())
+                            else:
+                                failed_products.append(f"{product['name']}: {response.text}")
+                            
+                            # Add small delay to simulate form filling
+                            time.sleep(0.5)
+                            
+                        except Exception as e:
+                            failed_products.append(f"{product.get('name', 'Unknown')}: {str(e)}")
+                    
+                    # Close progress dialog
+                    progress_dialog.destroy()
+                    
+                    # Show results
+                    if failed_products:
+                        error_msg = "\n".join(failed_products)
+                        messagebox.showwarning(
+                            "Import Results",
+                            f"Successfully imported {success_count} products.\n"
+                            f"Failed to import {len(failed_products)} products:\n\n{error_msg}"
+                        )
+                    else:
+                        messagebox.showinfo(
+                            "Success",
+                            f"Successfully imported all {success_count} products!"
+                        )
+                    
+                    # Ask if user wants to add images
+                    if imported_products and messagebox.askyesno(
+                        "Add Images",
+                        "Would you like to add images to the imported products now?"
+                    ):
+                        self.show_sequential_image_upload_dialog(imported_products)
+                    else:
+                        self.fetch_products()
+                
+                # Start processing in the main thread since we're simulating user input
+                self.root.after(100, process_products)
+                
+        except Exception as e:
+            logging.error(f"Error importing CSV: {str(e)}", exc_info=True)
+            messagebox.showerror("Error", f"Failed to import CSV: {str(e)}")
+
+    def show_sequential_image_upload_dialog(self, products):
+        """Show dialog for uploading images sequentially to multiple products"""
+        try:
+            dialog = tk.Toplevel(self.root)
+            dialog.title("Upload Product Images")
+            dialog.geometry("800x600")
+            dialog.transient(self.root)
+            
+            # Main container with padding
+            main_container = ttk.Frame(dialog, padding="20")
+            main_container.pack(fill=tk.BOTH, expand=True)
+            
+            # Product info frame
+            product_frame = ttk.LabelFrame(main_container, text="Current Product", padding="10")
+            product_frame.pack(fill=tk.X, pady=(0, 15))
+            
+            # Product name label
+            product_name_label = ttk.Label(
+                product_frame,
+                text="",
+                font=('Helvetica', 12, 'bold')
+            )
+            product_name_label.pack(anchor=tk.W)
+            
+            # Progress frame
+            progress_frame = ttk.Frame(main_container)
+            progress_frame.pack(fill=tk.X, pady=(0, 15))
+            
+            # Progress label
+            progress_label = ttk.Label(
+                progress_frame,
+                text="Product 0 of " + str(len(products))
+            )
+            progress_label.pack(side=tk.LEFT)
+            
+            # Progress bar
+            progress_var = tk.DoubleVar()
+            progress_bar = ttk.Progressbar(
+                progress_frame,
+                variable=progress_var,
+                maximum=len(products)
+            )
+            progress_bar.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=10)
+            
+            # Image preview area
+            preview_frame = ttk.LabelFrame(main_container, text="Selected Images", padding="10")
+            preview_frame.pack(fill=tk.BOTH, expand=True, pady=(0, 15))
+            
+            # Canvas for scrolling
+            preview_canvas = tk.Canvas(preview_frame)
+            preview_scrollbar = ttk.Scrollbar(preview_frame, orient="horizontal", command=preview_canvas.xview)
+            preview_container = ttk.Frame(preview_canvas)
+            
+            preview_canvas.configure(xscrollcommand=preview_scrollbar.set)
+            
+            # Pack scrolling components
+            preview_scrollbar.pack(side=tk.BOTTOM, fill=tk.X)
+            preview_canvas.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+            
+            # Create a window inside the canvas
+            canvas_frame = preview_canvas.create_window((0, 0), window=preview_container, anchor="nw")
+            
+            # Configure canvas scrolling
+            def configure_scroll_region(event):
+                preview_canvas.configure(scrollregion=preview_canvas.bbox("all"))
+            preview_container.bind("<Configure>", configure_scroll_region)
+            
+            # Store selected images for current product
+            current_images = []
+            
+            def add_images():
+                """Add images to current product preview"""
+                files = filedialog.askopenfilenames(
+                    title="Select Images",
+                    filetypes=[("Image files", "*.png *.jpg *.jpeg *.gif *.bmp")]
+                )
+                
+                # Clear existing previews
+                for widget in preview_container.winfo_children():
+                    widget.destroy()
+                current_images.clear()
+                
+                # Add new images
+                for file in files:
+                    current_images.append(file)
+                    preview = self.create_image_preview_frame(preview_container, file)
+                    preview.pack(side=tk.LEFT, padx=5, pady=5)
+                    
+                    # Add remove button
+                    def remove_image(f=file, p=preview):
+                        current_images.remove(f)
+                        p.destroy()
+                        preview_canvas.configure(scrollregion=preview_canvas.bbox("all"))
+                    
+                    remove_btn = ttk.Button(
+                        preview,
+                        text="×",
+                        width=2,
+                        command=remove_image
+                    )
+                    remove_btn.place(x=0, y=0)
+                
+                preview_canvas.configure(scrollregion=preview_canvas.bbox("all"))
+            
+            # Buttons frame
+            buttons_frame = ttk.Frame(main_container)
+            buttons_frame.pack(fill=tk.X, pady=(0, 10))
+            
+            add_images_btn = ttk.Button(
+                buttons_frame,
+                text="Select Images",
+                command=add_images
+            )
+            add_images_btn.pack(side=tk.LEFT, padx=5)
+            
+            # Next/Finish buttons frame
+            nav_buttons_frame = ttk.Frame(main_container)
+            nav_buttons_frame.pack(fill=tk.X)
+            
+            current_index = 0
+            
+            def upload_current_images():
+                """Upload images for current product"""
+                if current_images:
+                    try:
+                        uploaded_urls = []
+                        for image_path in current_images:
+                            result = cloudinary.uploader.upload(
+                                image_path,
+                                timestamp=int(time.time())
+                            )
+                            uploaded_urls.append({
+                                'url': result['secure_url']
+                            })
+                        
+                        # Add images to product
+                        response = requests.post(
+                            f'{self.api_base_url}/products/{products[current_index]["_id"]}/images',
+                            json={'images': uploaded_urls}
+                        )
+                        
+                        if not response.ok:
+                            messagebox.showwarning(
+                                "Warning",
+                                f"Failed to upload images for {products[current_index]['name']}"
+                            )
+                    
+                    except Exception as e:
+                        messagebox.showwarning(
+                            "Warning",
+                            f"Error uploading images for {products[current_index]['name']}: {str(e)}"
+                        )
+            
+            def next_product():
+                """Move to next product"""
+                nonlocal current_index
+                
+                # Upload current images
+                upload_current_images()
+                
+                # Move to next product
+                current_index += 1
+                if current_index >= len(products):
+                    dialog.destroy()
+                    messagebox.showinfo("Complete", "Image upload completed for all products!")
+                    self.fetch_products()
+                    return
+                
+                # Update UI for next product
+                product_name_label.config(text=products[current_index]['name'])
+                progress_var.set(current_index + 1)
+                progress_label.config(text=f"Product {current_index + 1} of {len(products)}")
+                
+                # Clear current images
+                for widget in preview_container.winfo_children():
+                    widget.destroy()
+                current_images.clear()
+                preview_canvas.configure(scrollregion=preview_canvas.bbox("all"))
+            
+            def skip_product():
+                """Skip current product without uploading images"""
+                nonlocal current_index
+                current_index += 1
+                
+                if current_index >= len(products):
+                    dialog.destroy()
+                    messagebox.showinfo("Complete", "Image upload completed!")
+                    self.fetch_products()
+                    return
+                
+                # Update UI for next product
+                product_name_label.config(text=products[current_index]['name'])
+                progress_var.set(current_index + 1)
+                progress_label.config(text=f"Product {current_index + 1} of {len(products)}")
+                
+                # Clear current images
+                for widget in preview_container.winfo_children():
+                    widget.destroy()
+                current_images.clear()
+                preview_canvas.configure(scrollregion=preview_canvas.bbox("all"))
+            
+            # Add navigation buttons
+            ttk.Button(
+                nav_buttons_frame,
+                text="Skip Product",
+                command=skip_product
+            ).pack(side=tk.RIGHT, padx=5)
+            
+            ttk.Button(
+                nav_buttons_frame,
+                text="Next Product",
+                command=next_product,
+                style="Accent.TButton"
+            ).pack(side=tk.RIGHT)
+            
+            # Initialize first product
+            if products:
+                product_name_label.config(text=products[0]['name'])
+                progress_label.config(text=f"Product 1 of {len(products)}")
+            
+            # Center dialog
+            dialog.update_idletasks()
+            width = dialog.winfo_width()
+            height = dialog.winfo_height()
+            x = (dialog.winfo_screenwidth() // 2) - (width // 2)
+            y = (dialog.winfo_screenheight() // 2) - (height // 2)
+            dialog.geometry(f'{width}x{height}+{x}+{y}')
+            
+            # Make dialog modal
+            dialog.grab_set()
+            dialog.focus_set()
+            
+        except Exception as e:
+            logging.error(f"Error in sequential image upload: {str(e)}", exc_info=True)
+            messagebox.showerror("Error", f"Failed to show image upload dialog: {str(e)}")
 
 def main():
     try:
