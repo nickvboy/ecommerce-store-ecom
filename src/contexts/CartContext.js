@@ -24,21 +24,31 @@ export function CartProvider({ children }) {
   };
 
   const addToCart = (product, quantity = 1, selectedSize = null) => {
+    // Handle case where product is passed as a complete object with quantity
+    if (typeof product === 'object' && 'quantity' in product) {
+      quantity = product.quantity;
+      selectedSize = product.selectedSize;
+    }
+
     updateCartAndStorage(prev => {
       const existingItem = prev.find(item => 
-        item.id === product._id && item.selectedSize === selectedSize
+        item.id === (product._id || product.id) && item.selectedSize === selectedSize
       );
 
       if (existingItem) {
+        // If the product has a quantity property, replace the quantity instead of adding to it
+        // This means it's coming from the product detail page
+        const newQuantity = 'quantity' in product ? quantity : existingItem.quantity + quantity;
+        
         return prev.map(item =>
-          item.id === product._id && item.selectedSize === selectedSize
-            ? { ...item, quantity: item.quantity + quantity }
+          item.id === (product._id || product.id) && item.selectedSize === selectedSize
+            ? { ...item, quantity: newQuantity }
             : item
         );
       }
 
       return [...prev, {
-        id: product._id,
+        id: product._id || product.id,
         name: product.name,
         price: product.price,
         images: product.images,
@@ -46,6 +56,21 @@ export function CartProvider({ children }) {
         selectedSize
       }];
     });
+  };
+
+  const updateQuantity = (itemId, selectedSize, newQuantity) => {
+    if (newQuantity < 1) {
+      removeFromCart(itemId);
+      return;
+    }
+
+    updateCartAndStorage(prev => 
+      prev.map(item => 
+        item.id === itemId && item.selectedSize === selectedSize
+          ? { ...item, quantity: newQuantity }
+          : item
+      )
+    );
   };
 
   const removeFromCart = (itemId) => {
@@ -128,7 +153,8 @@ export function CartProvider({ children }) {
       removeFromCart, 
       clearCart,
       createOrder,
-      orders 
+      orders,
+      updateQuantity
     }}>
       {children}
     </CartContext.Provider>

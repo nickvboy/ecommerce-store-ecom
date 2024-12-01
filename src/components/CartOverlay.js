@@ -6,8 +6,13 @@ import { useCart } from '../contexts/CartContext';
 import { Checkbox } from "./ui/checkbox";
 
 function CartOverlay({ isOpen, onClose }) {
-  const { cartItems, removeFromCart } = useCart();
+  const { cartItems, removeFromCart, updateQuantity } = useCart();
   const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+  const handleQuantityChange = (item, change) => {
+    const newQuantity = item.quantity + change;
+    updateQuantity(item.id, item.selectedSize, newQuantity);
+  };
 
   return (
     <Transition.Root show={isOpen} as={Fragment}>
@@ -97,9 +102,19 @@ function CartOverlay({ isOpen, onClose }) {
                               {/* Quantity */}
                               <div className="col-span-3 flex items-center justify-center">
                                 <div className="flex items-center bg-bg-200 rounded-md">
-                                  <button className="px-3 py-1 text-text-200 hover:text-text-100">-</button>
+                                  <button 
+                                    onClick={() => handleQuantityChange(item, -1)}
+                                    className="px-3 py-1 text-text-200 hover:text-text-100 transition-colors"
+                                  >
+                                    -
+                                  </button>
                                   <span className="px-3 py-1 text-text-100">{item.quantity}</span>
-                                  <button className="px-3 py-1 text-text-200 hover:text-text-100">+</button>
+                                  <button 
+                                    onClick={() => handleQuantityChange(item, 1)}
+                                    className="px-3 py-1 text-text-200 hover:text-text-100 transition-colors"
+                                  >
+                                    +
+                                  </button>
                                 </div>
                               </div>
 
@@ -108,7 +123,7 @@ function CartOverlay({ isOpen, onClose }) {
                                 <span className="text-text-100">${(item.price * item.quantity).toFixed(2)} USD</span>
                                 <button
                                   onClick={() => removeFromCart(item.id)}
-                                  className="text-text-200 hover:text-text-100"
+                                  className="text-text-200 hover:text-text-100 transition-colors"
                                 >
                                   <XMarkIcon className="h-5 w-5" />
                                 </button>

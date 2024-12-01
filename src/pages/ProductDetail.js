@@ -104,9 +104,12 @@ function ProductDetail() {
   const handleAddToCart = () => {
     // Only add size to cart if product has sizes and one is selected
     const cartItem = {
-      ...product,
-      quantity,
-      ...(product.sizes && product.sizes.length > 0 && selectedSize && { selectedSize })
+      id: product._id,  // Ensure we're setting the id explicitly
+      name: product.name,
+      price: product.price,
+      images: product.images,
+      quantity: quantity,
+      selectedSize: product.sizes && product.sizes.length > 0 ? selectedSize : null
     };
     addToCart(cartItem);
     setShowNotification(true);
