@@ -1,0 +1,52 @@
+2024-12-02 12:48:27,520 - INFO - Logging initialized
+2024-12-02 12:48:27,521 - INFO - Starting Product Dashboard application
+2024-12-02 12:48:28,052 - INFO - Initializing ProductDashboard
+2024-12-02 12:48:28,112 - INFO - Fetching products from API - Page 1
+2024-12-02 12:48:28,112 - INFO - API Request Details:
+2024-12-02 12:48:28,112 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-12-02 12:48:28,113 - INFO -   Method: GET
+2024-12-02 12:48:28,113 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-12-02 12:48:28,154 - INFO - API Response Details:
+2024-12-02 12:48:28,155 - INFO -   Status Code: 200
+2024-12-02 12:48:28,155 - INFO -   Response Time: 0.026 seconds
+2024-12-02 12:48:28,156 - INFO -   Content Type: application/json; charset=utf-8
+2024-12-02 12:48:28,156 - INFO - Pagination Details:
+2024-12-02 12:48:28,157 - INFO -   Total Products: Not specified
+2024-12-02 12:48:28,157 - INFO -   Current Page: 1
+2024-12-02 12:48:28,157 - INFO -   Total Pages: 9
+2024-12-02 12:48:28,157 - INFO -   Items Per Page: 10
+2024-12-02 12:48:28,157 - INFO - Products Summary:
+2024-12-02 12:48:28,158 - INFO -   Products Retrieved: 10
+2024-12-02 12:48:28,158 - ERROR - Unexpected error: sequence item 0: expected str instance, NoneType found
+Traceback (most recent call last):
+  File "c:\Users\nickv\Downloads\new test\ecommerce-store-ecom\backend\scripts\product_dashboard.py", line 594, in fetch_products
+    logging.info(f'  Categories Present: {", ".join(categories)}')
+                                          ^^^^^^^^^^^^^^^^^^^^^
+TypeError: sequence item 0: expected str instance, NoneType found
+2024-12-02 12:48:28,159 - INFO - Product fetch operation completed
+2024-12-02 12:48:28,160 - INFO - Performing initial data fetch
+2024-12-02 12:48:28,160 - INFO - Fetching products from API - Page 1
+2024-12-02 12:48:28,160 - INFO - API Request Details:
+2024-12-02 12:48:28,161 - INFO -   Endpoint: http://localhost:5000/api/products
+2024-12-02 12:48:28,161 - INFO -   Method: GET
+2024-12-02 12:48:28,161 - INFO -   Parameters: {'page': 1, 'limit': 10}
+2024-12-02 12:48:28,186 - INFO - API Response Details:
+2024-12-02 12:48:28,186 - INFO -   Status Code: 200
+2024-12-02 12:48:28,187 - INFO -   Response Time: 0.024 seconds
+2024-12-02 12:48:28,187 - INFO -   Content Type: application/json; charset=utf-8
+2024-12-02 12:48:28,188 - INFO - Pagination Details:
+2024-12-02 12:48:28,189 - INFO -   Total Products: Not specified
+2024-12-02 12:48:28,189 - INFO -   Current Page: 1
+2024-12-02 12:48:28,189 - INFO -   Total Pages: 9
+2024-12-02 12:48:28,189 - INFO -   Items Per Page: 10
+2024-12-02 12:48:28,190 - INFO - Products Summary:
+2024-12-02 12:48:28,190 - INFO -   Products Retrieved: 10
+2024-12-02 12:48:28,191 - ERROR - Unexpected error: sequence item 0: expected str instance, NoneType found
+Traceback (most recent call last):
+  File "c:\Users\nickv\Downloads\new test\ecommerce-store-ecom\backend\scripts\product_dashboard.py", line 594, in fetch_products
+    logging.info(f'  Categories Present: {", ".join(categories)}')
+                                          ^^^^^^^^^^^^^^^^^^^^^
+TypeError: sequence item 0: expected str instance, NoneType found
+2024-12-02 12:48:28,192 - INFO - Product fetch operation completed
+2024-12-02 12:48:28,192 - INFO - Application initialized. Log file: logs/product_dashboard_20241202_124827.log
+2024-12-02 12:48:28,192 - INFO - Starting main loop

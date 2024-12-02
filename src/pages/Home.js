@@ -353,58 +353,6 @@ function Home() {
           </div>
         </div>
       </div>
-
-      {/* Footer */}
-      <footer className="bg-bg-200 mt-16">
-        <div className="max-w-7xl mx-auto px-4 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {/* Company Info */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-bold text-text-100">Company</h3>
-              <ul className="space-y-2 text-text-200">
-                <li><Link to="/about" className="hover:text-primary-100">About Us</Link></li>
-                <li><Link to="/contact" className="hover:text-primary-100">Contact</Link></li>
-                <li><Link to="/careers" className="hover:text-primary-100">Careers</Link></li>
-              </ul>
-            </div>
-
-            {/* Shop */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-bold text-text-100">Shop</h3>
-              <ul className="space-y-2 text-text-200">
-                <li><Link to="/products" className="hover:text-primary-100">All Products</Link></li>
-                <li><Link to="/new-arrivals" className="hover:text-primary-100">New Arrivals</Link></li>
-                <li><Link to="/bestsellers" className="hover:text-primary-100">Bestsellers</Link></li>
-              </ul>
-            </div>
-
-            {/* Support */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-bold text-text-100">Support</h3>
-              <ul className="space-y-2 text-text-200">
-                <li><Link to="/faq" className="hover:text-primary-100">FAQ</Link></li>
-                <li><Link to="/shipping" className="hover:text-primary-100">Shipping Info</Link></li>
-                <li><Link to="/returns" className="hover:text-primary-100">Returns</Link></li>
-              </ul>
-            </div>
-
-            {/* Legal */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-bold text-text-100">Legal</h3>
-              <ul className="space-y-2 text-text-200">
-                <li><Link to="/privacy" className="hover:text-primary-100">Privacy Policy</Link></li>
-                <li><Link to="/terms" className="hover:text-primary-100">Terms of Service</Link></li>
-                <li><Link to="/warranty" className="hover:text-primary-100">Warranty</Link></li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Bottom Bar */}
-          <div className="mt-12 pt-8 border-t border-bg-300 text-center text-text-200">
-            <p>&copy; {new Date().getFullYear()} Your Store Name. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
     </>
   );
 }

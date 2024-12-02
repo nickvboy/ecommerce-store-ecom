@@ -18,93 +18,108 @@ const generateReviews = (baseCount = 60) => {
   
   const reviews = [];
   const ratingWeights = {
-    5: 0.4,
-    4: 0.35,
-    3: 0.15,
-    2: 0.07,
-    1: 0.03
+    5: 0.42,  // About 42% (22 reviews)
+    4: 0.34,  // About 34% (18 reviews)
+    3: 0.15,  // About 15% (8 reviews)
+    2: 0.07,  // About 7% (4 reviews)
+    1: 0.02   // About 2% (1 review)
   };
 
-  const reviewTemplates = [
-    "Absolutely {adjective}! {feature} is {quality}.",
-    "The {feature} is {quality}. {conclusion}",
-    "{timeOwned} and {experience}.",
-    "Purchased for {useCase} and {conclusion}.",
-    "{quality} product overall. {feature} {experience}.",
-    "As a {useCase} enthusiast, {experience}.",
-    "After {timeOwned}, I can say {conclusion}.",
-    "The {feature} really {quality}. {experience}.",
-    "Perfect for {useCase}! {conclusion}",
-    "Compared to others, this {feature} is {adjective}."
+  // Rating-specific templates
+  const reviewTemplatesByRating = {
+    1: [
+      "Extremely disappointed with the {feature}. {negative_point}.",
+      "Terrible {feature}. {negative_point} Would not recommend.",
+      "Waste of money. {negative_point}.",
+      "Poor quality {feature}. {negative_point}.",
+      "Regret this purchase. {negative_point}."
+    ],
+    2: [
+      "Below expectations. {feature} is {negative_quality}.",
+      "Not worth the price. {negative_point}.",
+      "Mediocre {feature}. {mixed_experience}.",
+      "Several issues with {feature}. {negative_point}.",
+      "Underwhelming product. {mixed_experience}."
+    ],
+    3: [
+      "Average {feature}. {mixed_experience}.",
+      "Decent but not great. {mixed_experience}.",
+      "Mixed feelings about this. {mixed_experience}.",
+      "OK for the price. {mixed_experience}.",
+      "Could be better. {mixed_experience}."
+    ],
+    4: [
+      "Generally pleased with the {feature}. {positive_point}.",
+      "Good product overall. {positive_point}.",
+      "Mostly satisfied. {positive_point}.",
+      "Better than expected. {positive_point}.",
+      "Nice {feature}, but {minor_issue}."
+    ],
+    5: [
+      "Absolutely perfect! {feature} is {positive_quality}.",
+      "Exceeded all expectations! {positive_point}.",
+      "Outstanding quality. {positive_point}.",
+      "Best purchase ever! {positive_point}.",
+      "Couldn't be happier! {positive_point}."
+    ]
+  };
+
+  const negativePoints = [
+    "Poor build quality",
+    "Breaks easily",
+    "Not worth the money",
+    "Customer service was unhelpful",
+    "Doesn't work as advertised",
+    "Major design flaws",
+    "Uncomfortable to use",
+    "Feels cheap"
   ];
 
-  const adjectives = [
-    "amazing", "fantastic", "outstanding", "excellent", "incredible", "superb",
-    "brilliant", "remarkable", "exceptional", "magnificent", "stellar", "impressive"
+  const mixedExperiences = [
+    "has some good features but needs improvement",
+    "works okay for basic needs",
+    "decent for the price but nothing special",
+    "functional but lacks refinement",
+    "acceptable quality but overpriced"
   ];
-  
+
+  const positivePoints = [
+    "Excellent build quality",
+    "Great value for money",
+    "Performs beautifully",
+    "Exceeds expectations",
+    "Perfect for daily use"
+  ];
+
+  const negativeQualities = [
+    "subpar",
+    "disappointing",
+    "inadequate",
+    "flimsy",
+    "unreliable"
+  ];
+
+  const positiveQualities = [
+    "outstanding",
+    "exceptional",
+    "superb",
+    "excellent",
+    "perfect"
+  ];
+
+  const minorIssues = [
+    "could use minor improvements",
+    "slightly expensive",
+    "small design quirks",
+    "minor inconveniences",
+    "few minor drawbacks"
+  ];
+
   const features = [
     "build quality", "design", "functionality", "durability", "performance", "material",
     "craftsmanship", "finish", "ergonomics", "balance", "precision", "reliability"
   ];
   
-  const qualities = [
-    "top-notch", "exceptional", "impressive", "remarkable", "solid", "premium",
-    "outstanding", "superior", "excellent", "first-rate", "unmatched", "phenomenal"
-  ];
-  
-  const experiences = [
-    "exceeded my expectations",
-    "couldn't be happier",
-    "very satisfied with the purchase",
-    "works perfectly for my needs",
-    "definitely worth the investment",
-    "it's become my daily favorite",
-    "I'm thoroughly impressed",
-    "it's a game changer",
-    "it's exceeded all my requirements",
-    "I'm completely satisfied"
-  ];
-  
-  const timeOwned = [
-    "Been using for several months",
-    "Had it for a year now",
-    "Using it daily for weeks",
-    "Recently purchased",
-    "Been testing for a while",
-    "After six months of use",
-    "Three months in",
-    "Two weeks of daily use",
-    "After extensive testing",
-    "Following months of regular use"
-  ];
-  
-  const useCases = [
-    "everyday carry",
-    "professional use",
-    "outdoor activities",
-    "office work",
-    "travel companion",
-    "EDC enthusiast",
-    "collector",
-    "minimalist",
-    "professional writer",
-    "design professional"
-  ];
-  
-  const conclusions = [
-    "highly recommend it",
-    "exactly what I was looking for",
-    "great value for money",
-    "would buy again",
-    "perfect for my needs",
-    "exceeded my expectations",
-    "worth every penny",
-    "couldn't be happier",
-    "best purchase this year",
-    "absolutely love it"
-  ];
-
   for (let i = 0; i < count; i++) {
     const random = Math.random();
     let rating = 5;
@@ -117,23 +132,30 @@ const generateReviews = (baseCount = 60) => {
       }
     }
 
-    const template = reviewTemplates[Math.floor(Math.random() * reviewTemplates.length)]
-      .replace("{adjective}", adjectives[Math.floor(Math.random() * adjectives.length)])
+    // Select template based on rating
+    const templates = reviewTemplatesByRating[rating];
+    const template = templates[Math.floor(Math.random() * templates.length)]
       .replace("{feature}", features[Math.floor(Math.random() * features.length)])
-      .replace("{quality}", qualities[Math.floor(Math.random() * qualities.length)])
-      .replace("{experience}", experiences[Math.floor(Math.random() * experiences.length)])
-      .replace("{timeOwned}", timeOwned[Math.floor(Math.random() * timeOwned.length)])
-      .replace("{useCase}", useCases[Math.floor(Math.random() * useCases.length)])
-      .replace("{conclusion}", conclusions[Math.floor(Math.random() * conclusions.length)]);
+      .replace("{negative_point}", negativePoints[Math.floor(Math.random() * negativePoints.length)])
+      .replace("{mixed_experience}", mixedExperiences[Math.floor(Math.random() * mixedExperiences.length)])
+      .replace("{positive_point}", positivePoints[Math.floor(Math.random() * positivePoints.length)])
+      .replace("{negative_quality}", negativeQualities[Math.floor(Math.random() * negativeQualities.length)])
+      .replace("{positive_quality}", positiveQualities[Math.floor(Math.random() * positiveQualities.length)])
+      .replace("{minor_issue}", minorIssues[Math.floor(Math.random() * minorIssues.length)]);
+
+    // Generate title based on rating
+    const titlePrefix = rating <= 2 ? 
+      faker.word.adjective({ strategy: 'any' }) : 
+      faker.commerce.productAdjective();
 
     reviews.push({
       userName: faker.person.fullName(),
       location: `${faker.location.city()}, ${faker.location.countryCode()}`,
       rating,
-      title: faker.commerce.productAdjective() + " " + features[Math.floor(Math.random() * features.length)],
+      title: `${titlePrefix} ${features[Math.floor(Math.random() * features.length)]}`,
       content: template,
-      likes: faker.number.int({ min: 0, max: 100 }),
-      dislikes: faker.number.int({ min: 0, max: 10 }),
+      likes: faker.number.int({ min: 0, max: rating * 20 }), // More likes for higher ratings
+      dislikes: faker.number.int({ min: 0, max: (6 - rating) * 2 }), // More dislikes for lower ratings
       date: faker.date.past({ years: 1 })
     });
   }

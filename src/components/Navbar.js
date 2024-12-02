@@ -16,7 +16,7 @@ import { useCart } from '../contexts/CartContext';
 function MobileMenu({ isOpen, onClose }) {
   return (
     <div 
-      className={`fixed inset-0 bg-bg-100 transform transition-transform duration-300 ease-in-out ${
+      className={`fixed inset-0 bg-bg-100/95 backdrop-blur-xl transform transition-transform duration-300 ease-in-out ${
         isOpen ? 'translate-x-0' : '-translate-x-full'
       } lg:hidden`}
       style={{ zIndex: 1000 }}
@@ -71,7 +71,7 @@ function MobileMenu({ isOpen, onClose }) {
           <Link to="/privacy" className="text-xl font-bold text-text-100 hover:text-primary-100">Privacy Policy</Link>
         </nav>
         <div className="mt-auto">
-          <div className="flex justify-around py-4 border-t border-bg-300">
+          <div className="flex justify-around py-4 border-t border-bg-300/50">
             <button className="text-text-100 hover:text-primary-100">
               <MagnifyingGlassIcon className="h-6 w-6" />
             </button>

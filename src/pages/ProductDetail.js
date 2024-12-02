@@ -228,20 +228,20 @@ function ProductDetail() {
               
               {/* Reviews */}
               <div className="flex items-center space-x-2 mb-4">
-                <div className="flex relative">
+                <div className="flex flex-row-reverse relative">
                   {[1, 2, 3, 4, 5].map((star) => (
                     <StarIcon 
                       key={star}
-                      className={`h-5 w-5 ${star <= Math.floor(product.reviewStats.averageRating) ? 'fill-transparent' : 'text-bg-300'}`}
-                      style={star <= Math.floor(product.reviewStats.averageRating) ? {
+                      className={`h-5 w-5 ${star <= Math.floor(product.reviewStats.averageRating) ? 'text-bg-300' : 'fill-transparent'}`}
+                      style={star <= Math.floor(product.reviewStats.averageRating) ? {} : {
                         fill: 'url(#star-gradient)'
-                      } : {}}
+                      }}
                     />
                   ))}
                   {/* Define the gradient */}
                   <svg width="0" height="0" className="absolute">
                     <defs>
-                      <linearGradient id="star-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <linearGradient id="star-gradient" x1="100%" y1="0%" x2="0%" y2="0%">
                         <stop offset="0%" className="primary-100" stopColor="var(--primary-100)" />
                         <stop offset="100%" className="primary-200" stopColor="var(--primary-200)" />
                       </linearGradient>

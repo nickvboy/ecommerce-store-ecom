@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ApiStatusProvider } from './contexts/ApiStatusContext';
 import { UserProvider } from './contexts/UserContext';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import Home from './pages/Home';
 import Products from './pages/Products';
 import ProductDetail from './pages/ProductDetail';
@@ -12,13 +13,7 @@ import Login from './pages/Login';
 import { CartProvider } from './contexts/CartContext';
 import Checkout from './pages/Checkout';
 import OrderSuccess from './pages/OrderSuccess';
-import AboutUs from './pages/about/AboutUs';
-import Tagline from './pages/about/Tagline';
-import Story from './pages/about/Story';
-import FactSheet from './pages/about/FactSheet';
-import Team from './pages/about/Team';
-import ContactUs from './pages/ContactUs';
-import PrivacyPolicy from './pages/PrivacyPolicy';
+import UnderConstruction from './components/UnderConstruction';
 
 function App() {
   return (
@@ -36,13 +31,21 @@ function App() {
                   <Route path="/products/:id" element={<ProductDetail />} />
                   <Route path="/gear" element={<Products category="gear" />} />
                   <Route path="/clothing" element={<Products category="clothing" />} />
-                  <Route path="/about" element={<AboutUs />} />
-                  <Route path="/about/tagline" element={<Tagline />} />
-                  <Route path="/about/story" element={<Story />} />
-                  <Route path="/about/factsheet" element={<FactSheet />} />
-                  <Route path="/about/team" element={<Team />} />
-                  <Route path="/contact" element={<ContactUs />} />
-                  <Route path="/privacy" element={<PrivacyPolicy />} />
+                  <Route path="/about" element={<UnderConstruction />} />
+                  <Route path="/about/tagline" element={<UnderConstruction />} />
+                  <Route path="/about/story" element={<UnderConstruction />} />
+                  <Route path="/about/factsheet" element={<UnderConstruction />} />
+                  <Route path="/about/team" element={<UnderConstruction />} />
+                  <Route path="/contact" element={<UnderConstruction />} />
+                  <Route path="/privacy" element={<UnderConstruction />} />
+                  <Route path="/terms" element={<UnderConstruction />} />
+                  <Route path="/warranty" element={<UnderConstruction />} />
+                  <Route path="/faq" element={<UnderConstruction />} />
+                  <Route path="/shipping" element={<UnderConstruction />} />
+                  <Route path="/returns" element={<UnderConstruction />} />
+                  <Route path="/careers" element={<UnderConstruction />} />
+                  <Route path="/new-arrivals" element={<UnderConstruction />} />
+                  <Route path="/bestsellers" element={<UnderConstruction />} />
                   <Route path="/settings" element={<Settings />} />
                   <Route path="/signup" element={<SignUp />} />
                   <Route path="/login" element={<Login />} />
@@ -50,6 +53,7 @@ function App() {
                   <Route path="/order-success" element={<OrderSuccess />} />
                 </Routes>
               </div>
+              <Footer />
             </div>
           </Router>
         </CartProvider>

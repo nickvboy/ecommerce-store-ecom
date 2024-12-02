@@ -30,7 +30,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "concurrently \"cd backend && npm run dev\" \"npm start\""
   },
   "eslintConfig": {
     "extends": [
@@ -52,6 +53,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.16",
+    "concurrently": "^8.2.2",
     "postcss": "^8.4.32",
     "tailwindcss": "^3.3.5"
   }

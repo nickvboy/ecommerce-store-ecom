@@ -137,17 +137,17 @@ function ReviewSummary({ productId }) {
 
             {/* Rating Distribution Bars */}
             <div className="w-auto min-w-[240px] max-w-[280px] flex-shrink-0">
-              {[5, 4, 3, 2, 1].map((stars, index) => (
+              {[5, 4, 3, 2, 1].map((stars) => (
                 <div key={stars} className="flex items-center gap-2 mb-2">
                   <span className="text-sm text-text-200 w-16">{stars} stars</span>
                   <div className="w-32 md:w-48 h-4 rounded-full bg-bg-200 overflow-hidden">
                     <div
                       className="h-full rounded-full bg-gradient-to-r from-primary-100 to-primary-200"
-                      style={{ width: `${percentages[5 - stars]}%` }}
+                      style={{ width: `${percentages[stars - 1]}%` }}
                     />
                   </div>
                   <span className="text-sm text-text-200 w-8 text-right">
-                    {stats.distribution[5 - stars]}
+                    {stats.distribution[stars - 1]}
                   </span>
                 </div>
               ))}
