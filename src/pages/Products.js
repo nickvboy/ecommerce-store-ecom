@@ -13,13 +13,13 @@ function Products() {
   const [loading, setLoading] = useState(true);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
+  const [categories, setCategories] = useState([]);
   const [filters, setFilters] = useState({
     categories: [],
     priceRange: { min: 0, max: 500 },
-    materials: [],
-    ratings: []
+    attributes: {}
   });
-  const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
+  const [availableAttributes, setAvailableAttributes] = useState({});
   const { isConnected } = useApiStatus();
   const [error, setError] = useState(null);
 
@@ -27,6 +27,20 @@ function Products() {
     threshold: 0.1,
     delay: 100
   });
+
+  // Fetch categories
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/categories');
+        const data = await response.json();
+        setCategories(data);
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
+    fetchCategories();
+  }, []);
 
   const fetchProducts = useCallback(async () => {
     try {
@@ -57,6 +71,11 @@ function Products() {
       const data = await response.json();
       setProducts(prev => page === 1 ? data.products : [...prev, ...data.products]);
       setHasMore(data.products.length > 0);
+      
+      // Update available attributes from the response
+      if (data.attributeStats) {
+        setAvailableAttributes(data.attributeStats);
+      }
     } catch (error) {
       setError('Unable to load products. Please try again later.');
       console.error('Error fetching products:', error);
@@ -94,13 +113,47 @@ function Products() {
     }));
   };
 
-  const handleCategoryChange = (category) => {
+  const handleCategoryChange = (categoryId) => {
     setFilters(prev => ({
       ...prev,
-      categories: prev.categories.includes(category)
-        ? prev.categories.filter(c => c !== category)
-        : [...prev.categories, category]
+      categories: prev.categories.includes(categoryId)
+        ? prev.categories.filter(c => c !== categoryId)
+        : [...prev.categories, categoryId]
     }));
+  };
+
+  const handleAttributeChange = (attributeName, value) => {
+    setFilters(prev => ({
+      ...prev,
+      attributes: {
+        ...prev.attributes,
+        [attributeName]: prev.attributes[attributeName]?.includes(value)
+          ? prev.attributes[attributeName].filter(v => v !== value)
+          : [...(prev.attributes[attributeName] || []), value]
+      }
+    }));
+  };
+
+  const renderCategoryTree = (categories, level = 0) => {
+    return categories.map((category) => (
+      <div key={category._id}>
+        <div className="flex items-center space-x-2 py-1" style={{ paddingLeft: `${level * 16}px` }}>
+          <Checkbox
+            checked={filters.categories.includes(category._id)}
+            onCheckedChange={() => handleCategoryChange(category._id)}
+          />
+          <span className="text-text-200">{category.name}</span>
+          {category.productCount && (
+            <span className="text-text-300 text-sm">({category.productCount})</span>
+          )}
+        </div>
+        {category.children && category.children.length > 0 && (
+          <div>
+            {renderCategoryTree(category.children, level + 1)}
+          </div>
+        )}
+      </div>
+    ));
   };
 
   return (
@@ -124,44 +177,39 @@ function Products() {
             />
           </div>
 
-          {/* Categories Filter */}
+          {/* Categories Filter - Always expanded */}
           <div className="space-y-4">
             <h3 className="text-lg font-bold">Categories</h3>
-            <div className="space-y-2">
-              {["Pens", "Tools", "EDC Gear", "Accessories", "Bundles"].map((category) => (
-                <label key={category} className="flex items-center space-x-2">
-                  <Checkbox
-                    checked={filters.categories.includes(category)}
-                    onCheckedChange={() => handleCategoryChange(category)}
-                  />
-                  <span className="text-text-200">{category}</span>
-                </label>
-              ))}
+            <div className="space-y-1 max-h-[400px] overflow-y-auto pr-2">
+              {renderCategoryTree(categories)}
             </div>
           </div>
 
-          {/* Materials Filter */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-bold">Materials</h3>
-            <div className="space-y-2">
-              {["Titanium", "Brass", "Copper", "Carbon Fiber", "Stainless Steel"].map((material) => (
-                <label key={material} className="flex items-center space-x-2">
-                  <Checkbox
-                    checked={filters.materials.includes(material)}
-                    onCheckedChange={() => {
-                      setFilters(prev => ({
-                        ...prev,
-                        materials: prev.materials.includes(material)
-                          ? prev.materials.filter(m => m !== material)
-                          : [...prev.materials, material]
-                      }));
-                    }}
-                  />
-                  <span className="text-text-200">{material}</span>
-                </label>
-              ))}
-            </div>
-          </div>
+          {/* Dynamic Attribute Filters */}
+          {Object.entries(availableAttributes).map(([attributeName, values]) => (
+            <Collapsible key={attributeName}>
+              <div className="space-y-4">
+                <CollapsibleTrigger className="flex items-center justify-between w-full">
+                  <h3 className="text-lg font-bold capitalize">{attributeName}</h3>
+                  <ChevronDownIcon className="h-5 w-5" />
+                </CollapsibleTrigger>
+                <CollapsibleContent>
+                  <div className="space-y-2">
+                    {values.map(({ value, count }) => (
+                      <label key={value} className="flex items-center space-x-2">
+                        <Checkbox
+                          checked={filters.attributes[attributeName]?.includes(value)}
+                          onCheckedChange={() => handleAttributeChange(attributeName, value)}
+                        />
+                        <span className="text-text-200">{value}</span>
+                        <span className="text-text-300 text-sm">({count})</span>
+                      </label>
+                    ))}
+                  </div>
+                </CollapsibleContent>
+              </div>
+            </Collapsible>
+          ))}
         </aside>
 
         {/* Product Grid */}

@@ -1,4 +1,5 @@
 const Product = require('../models/Product');
+const Category = require('../models/Category');
 
 // Get all products with filtering
 exports.getProducts = async (req, res) => {
@@ -7,49 +8,144 @@ exports.getProducts = async (req, res) => {
       page = 1, 
       limit = 10, 
       sort = '-createdAt',
-      category,
+      categoryId,
       minPrice,
       maxPrice,
-      search
+      search,
+      attributes
     } = req.query;
 
     const query = {};
 
-    if (category) query.category = category;
+    // Handle category filtering including subcategories
+    if (categoryId) {
+      const category = await Category.findById(categoryId);
+      if (category) {
+        const children = await category.getAllChildren();
+        const categoryIds = [categoryId, ...children.map(c => c._id)];
+        query.category = { $in: categoryIds };
+      }
+    }
+
+    // Price range filter
     if (minPrice || maxPrice) {
       query.price = {};
       if (minPrice) query.price.$gte = Number(minPrice);
       if (maxPrice) query.price.$lte = Number(maxPrice);
     }
+
+    // Text search
     if (search) {
       query.$text = { $search: search };
     }
 
+    // Attribute filters
+    if (attributes) {
+      const attributeFilters = JSON.parse(attributes);
+      Object.entries(attributeFilters).forEach(([name, value]) => {
+        if (Array.isArray(value)) {
+          // For checkbox/radio attributes with multiple values
+          query['attributes'] = {
+            $elemMatch: {
+              name,
+              value: { $in: value }
+            }
+          };
+        } else if (typeof value === 'object' && (value.min !== undefined || value.max !== undefined)) {
+          // For range attributes
+          const rangeFilter = {
+            'attributes': {
+              $elemMatch: {
+                name,
+                value: {}
+              }
+            }
+          };
+          if (value.min !== undefined) rangeFilter.attributes.$elemMatch.value.$gte = value.min;
+          if (value.max !== undefined) rangeFilter.attributes.$elemMatch.value.$lte = value.max;
+          Object.assign(query, rangeFilter);
+        } else {
+          // For single value attributes
+          query['attributes'] = {
+            $elemMatch: {
+              name,
+              value
+            }
+          };
+        }
+      });
+    }
+
     const products = await Product.find(query)
+      .populate('category', 'name alias')
       .sort(sort)
       .limit(limit * 1)
       .skip((page - 1) * limit);
 
     const count = await Product.countDocuments(query);
 
+    // Get available attribute values for filtering
+    const attributeStats = await getAttributeStats(query);
+
     res.json({
       products,
       totalPages: Math.ceil(count / limit),
-      currentPage: page
+      currentPage: page,
+      attributeStats
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
+// Helper function to get attribute statistics for filtering
+async function getAttributeStats(baseQuery = {}) {
+  const products = await Product.find(baseQuery).select('attributes');
+  const stats = {};
+
+  products.forEach(product => {
+    product.attributes.forEach(attr => {
+      if (!stats[attr.name]) {
+        stats[attr.name] = new Set();
+      }
+      stats[attr.name].add(attr.value);
+    });
+  });
+
+  // Convert sets to arrays and add counts
+  return Object.entries(stats).reduce((acc, [name, values]) => {
+    acc[name] = Array.from(values).map(value => ({
+      value,
+      count: products.filter(p => 
+        p.attributes.some(a => a.name === name && a.value === value)
+      ).length
+    }));
+    return acc;
+  }, {});
+}
+
 // Get single product by ID
 exports.getProductById = async (req, res) => {
   try {
-    const product = await Product.findById(req.params.id);
+    const product = await Product.findById(req.params.id)
+      .populate('category', 'name alias');
+    
     if (!product) {
       return res.status(404).json({ message: 'Product not found' });
     }
-    res.json(product);
+
+    // Get category path
+    const category = await Category.findById(product.category);
+    const categoryPath = await category.getPath();
+
+    res.json({
+      ...product.toObject(),
+      categoryPath: categoryPath.map(cat => ({
+        _id: cat._id,
+        name: cat.name,
+        alias: cat.alias
+      }))
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -64,9 +160,16 @@ exports.createProduct = async (req, res) => {
       price,
       originalPrice,
       category,
+      attributes,
       stock,
-      sizes
+      tags
     } = req.body;
+
+    // Validate category and its attributes
+    const categoryDoc = await Category.findById(category);
+    if (!categoryDoc) {
+      return res.status(400).json({ message: 'Invalid category' });
+    }
 
     const product = new Product({
       name,
@@ -74,29 +177,29 @@ exports.createProduct = async (req, res) => {
       price,
       originalPrice,
       category,
+      attributes: attributes || [],
       stock,
-      sizes: sizes || []
+      tags: tags || []
     });
 
     const savedProduct = await product.save();
     res.status(201).json(savedProduct);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(400).json({ message: error.message });
   }
 };
 
 // Update product
 exports.updateProduct = async (req, res) => {
   try {
-    const product = await Product.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true, runValidators: true }
-    );
+    const product = await Product.findById(req.params.id);
     if (!product) {
       return res.status(404).json({ message: 'Product not found' });
     }
-    res.json(product);
+
+    Object.assign(product, req.body);
+    const updatedProduct = await product.save();
+    res.json(updatedProduct);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -121,9 +224,7 @@ exports.filterProducts = async (req, res) => {
     const {
       categories,
       priceRange,
-      materials,
-      ratings,
-      tags,
+      attributes,
       sort,
       page = 1,
       limit = 10
@@ -131,21 +232,41 @@ exports.filterProducts = async (req, res) => {
 
     const query = {};
 
-    if (categories?.length) query.category = { $in: categories };
+    // Handle category filtering including subcategories
+    if (categories?.length) {
+      const categoryIds = [];
+      for (const categoryId of categories) {
+        const category = await Category.findById(categoryId);
+        if (category) {
+          const children = await category.getAllChildren();
+          categoryIds.push(categoryId, ...children.map(c => c._id));
+        }
+      }
+      if (categoryIds.length) {
+        query.category = { $in: categoryIds };
+      }
+    }
+
+    // Price range filter
     if (priceRange) {
       query.price = {
         $gte: priceRange.min,
         $lte: priceRange.max
       };
     }
-    if (materials?.length) {
-      query['specifications.materials.name'] = { $in: materials };
-    }
-    if (ratings?.length) {
-      query.rating = { $in: ratings };
-    }
-    if (tags?.length) {
-      query.tags = { $in: tags };
+
+    // Dynamic attribute filters
+    if (attributes) {
+      Object.entries(attributes).forEach(([name, values]) => {
+        if (Array.isArray(values) && values.length > 0) {
+          query['attributes'] = {
+            $elemMatch: {
+              name,
+              value: { $in: values }
+            }
+          };
+        }
+      });
     }
 
     const sortOption = {};
@@ -169,22 +290,52 @@ exports.filterProducts = async (req, res) => {
     }
 
     const products = await Product.find(query)
+      .populate('category')
       .sort(sortOption)
       .limit(limit)
       .skip((page - 1) * limit);
 
     const total = await Product.countDocuments(query);
 
+    // Get available attribute values for filtering
+    const attributeStats = await getAttributeStats(query);
+
     res.json({
       products,
       total,
       totalPages: Math.ceil(total / limit),
-      currentPage: page
+      currentPage: page,
+      attributeStats
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
+
+// Helper function to get attribute statistics for filtering
+async function getAttributeStats(baseQuery = {}) {
+  const products = await Product.find(baseQuery).select('attributes');
+  const stats = {};
+
+  products.forEach(product => {
+    product.attributes.forEach(attr => {
+      if (!stats[attr.name]) {
+        stats[attr.name] = new Map();
+      }
+      const count = stats[attr.name].get(attr.value) || 0;
+      stats[attr.name].set(attr.value, count + 1);
+    });
+  });
+
+  // Convert maps to arrays with counts
+  return Object.entries(stats).reduce((acc, [name, valueMap]) => {
+    acc[name] = Array.from(valueMap.entries()).map(([value, count]) => ({
+      value,
+      count
+    }));
+    return acc;
+  }, {});
+}
 
 // Add images to product
 exports.addProductImages = async (req, res) => {

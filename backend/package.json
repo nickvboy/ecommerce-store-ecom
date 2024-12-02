@@ -9,6 +9,7 @@
     "clear": "node utils/clearData.js",
     "seed": "node utils/seed.js",
     "seed:users": "node utils/seedUsers.js",
+    "seed:categories": "node utils/seedCategories.js",
     "seed:products": "node utils/seedProducts.js",
     "seed:reviews": "node utils/seedReviews.js",
     "seed:images": "node utils/seedImages.js",

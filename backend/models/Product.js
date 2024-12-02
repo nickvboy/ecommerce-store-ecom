@@ -18,9 +18,15 @@ const productSchema = new mongoose.Schema({
     type: Number
   },
   category: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Category',
     required: true
   },
+  attributes: [{
+    name: String,
+    value: mongoose.Schema.Types.Mixed,
+    unit: String
+  }],
   images: [{
     url: {
       type: String,
@@ -69,10 +75,6 @@ const productSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  createdAt: {
-    type: Date,
-    default: Date.now
-  },
   reviewStats: {
     averageRating: { type: Number, default: 0 },
     totalReviews: { type: Number, default: 0 },
@@ -83,12 +85,9 @@ const productSchema = new mongoose.Schema({
       2: { type: Number, default: 0 },
       1: { type: Number, default: 0 }
     }
-  },
-  sizes: {
-    type: [String],
-    enum: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
-    default: []
   }
+}, {
+  timestamps: true
 });
 
 // Add indexes for common queries
@@ -96,6 +95,7 @@ productSchema.index({ name: 'text', description: 'text' });
 productSchema.index({ category: 1 });
 productSchema.index({ price: 1 });
 productSchema.index({ rating: -1 });
+productSchema.index({ 'attributes.name': 1, 'attributes.value': 1 });
 
 // Method to update review statistics
 productSchema.methods.updateReviewStats = async function() {
@@ -127,16 +127,44 @@ productSchema.methods.updateReviewStats = async function() {
   await this.save();
 };
 
-// Add method to reorder images
-productSchema.methods.reorderImages = async function(imageOrders) {
-  // imageOrders should be an array of { id, order } objects
-  this.images = this.images.map(img => ({
-    ...img,
-    order: imageOrders.find(o => o.id === img._id.toString())?.order ?? img.order
-  })).sort((a, b) => a.order - b.order);
+// Method to validate attributes against category requirements
+productSchema.methods.validateAttributes = async function() {
+  const Category = mongoose.model('Category');
+  const category = await Category.findById(this.category);
   
-  await this.save();
-  return this.images;
+  if (!category) {
+    throw new Error('Invalid category');
+  }
+
+  const requiredAttributes = category.attributes.filter(attr => attr.required);
+  const productAttributeNames = this.attributes.map(attr => attr.name);
+
+  for (const reqAttr of requiredAttributes) {
+    if (!productAttributeNames.includes(reqAttr.name)) {
+      throw new Error(`Missing required attribute: ${reqAttr.name}`);
+    }
+
+    const productAttr = this.attributes.find(attr => attr.name === reqAttr.name);
+    
+    if (reqAttr.type === 'range') {
+      if (productAttr.value < reqAttr.min || productAttr.value > reqAttr.max) {
+        throw new Error(`${reqAttr.name} must be between ${reqAttr.min} and ${reqAttr.max}`);
+      }
+    } else if (reqAttr.type === 'checkbox' || reqAttr.type === 'radio') {
+      const validValues = reqAttr.values.map(v => v.value);
+      if (!validValues.includes(productAttr.value)) {
+        throw new Error(`Invalid value for ${reqAttr.name}`);
+      }
+    }
+  }
 };
+
+// Pre-save middleware to validate attributes
+productSchema.pre('save', async function(next) {
+  if (this.isModified('attributes') || this.isModified('category')) {
+    await this.validateAttributes();
+  }
+  next();
+});
 
 module.exports = mongoose.model('Product', productSchema); 

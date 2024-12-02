@@ -1,129 +1,157 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
+const { faker } = require('@faker-js/faker');
 const Product = require('../models/Product');
+const Category = require('../models/Category');
 const connectDB = require('../config/db');
 
-// Define product data
-const products = [
+// Helper function to get random value from array
+const getRandomValue = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+// Helper function to get random number in range
+const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+// Helper function to get random values from checkbox options
+const getRandomCheckboxValues = (values, min = 1, max = null) => {
+  const count = max ? getRandomNumber(min, Math.min(max, values.length)) : min;
+  return faker.helpers.arrayElements(values.map(v => v.value), count);
+};
+
+// Helper function to generate attributes based on category
+const generateAttributes = async (category) => {
+  const attributes = [];
+  const categoryPath = await category.getPath();
+  
+  // Combine attributes from all parent categories
+  const allAttributes = categoryPath.reduce((attrs, cat) => {
+    return [...attrs, ...cat.attributes];
+  }, []);
+
+  // Generate values for each attribute
+  for (const attr of allAttributes) {
+    switch (attr.type) {
+      case 'checkbox':
+        attributes.push({
+          name: attr.name,
+          value: getRandomCheckboxValues(attr.values, 1, 3)
+        });
+        break;
+      case 'radio':
+        attributes.push({
+          name: attr.name,
+          value: getRandomValue(attr.values).value
+        });
+        break;
+      case 'range':
+        attributes.push({
+          name: attr.name,
+          value: getRandomNumber(attr.min, attr.max),
+          unit: attr.unit
+        });
+        break;
+    }
+  }
+
+  return attributes;
+};
+
+// Define base products with specific categories and attributes
+const baseProducts = [
+  // Your actual products here
   {
-    name: "SCRIBEDRIVER BOLT ACTION PEN",
-    description: "Premium bolt action pen with precision engineering",
-    price: 19.99,
-    originalPrice: 29.99,
-    category: "Pens",
-    images: [], // Empty images array
-    rating: 4.5,
-    specifications: {
-      materials: [
-        {
-          name: "303 Stainless steel",
-          description: "Body material"
-        },
-        {
-          name: "Lead free brass",
-          description: "Bolt material option"
-        }
-      ],
-      dimensions: {
-        length: 5.5,
-        width: 0.5,
-        height: 0.5,
-        weight: 45
-      }
-    },
-    variants: [
-      {
-        name: "Bolt Material",
-        type: "material",
-        options: [
-          {
-            value: "Stainless Steel",
-            available: true,
-            priceModifier: 0
-          },
-          {
-            value: "Brass",
-            available: true,
-            priceModifier: 5
-          }
-        ]
-      }
+    name: "MCM Essential Solution",
+    description: "Professional multimeter kit for electronics testing and repair",
+    price: 119.99,
+    originalPrice: 149.99,
+    categoryAlias: "power",
+    attributes: [
+      { name: "Type", value: "power-bank" },
+      { name: "Features", value: ["usb-c", "waterproof"] }
     ],
-    stock: 100,
-    tags: ["pen", "writing", "EDC", "metal pen"],
+    stock: 50,
+    tags: ["electronics", "testing", "professional"],
     featured: true
   }
 ];
-
-// Generate additional products
-const categoriesList = ["Pens", "Tools", "EDC Gear", "Accessories", "Bundles"];
-const materialsList = ["Titanium", "Brass", "Copper", "Carbon Fiber", "Stainless Steel"];
-const tagsList = ["EDC", "writing", "tool", "premium", "limited edition", "everyday carry", "metal", "custom"];
-
-for (let i = 0; i < 49; i++) {
-  const basePrice = Math.floor(Math.random() * 200) + 20;
-  const discountPercent = Math.random() < 0.3 ? Math.random() * 0.4 + 0.1 : 0; // 30% chance of discount
-  
-  const product = {
-    name: `EDC ${categoriesList[Math.floor(Math.random() * categoriesList.length)]} ${i + 2}`,
-    description: `Premium EDC product with high-quality materials and precision engineering.`,
-    price: discountPercent ? parseFloat((basePrice * (1 - discountPercent)).toFixed(2)) : basePrice,
-    originalPrice: discountPercent ? parseFloat(basePrice.toFixed(2)) : null,
-    category: categoriesList[Math.floor(Math.random() * categoriesList.length)],
-    images: [], // Empty images array
-    rating: parseFloat((Math.random() * 2 + 3).toFixed(1)), // Rating between 3 and 5
-    specifications: {
-      materials: materialsList
-        .slice(0, Math.floor(Math.random() * 3) + 1)
-        .map(material => ({
-          name: material,
-          description: `High-quality ${material.toLowerCase()} component`
-        })),
-      dimensions: {
-        length: parseFloat((Math.random() * 10 + 2).toFixed(1)),
-        width: parseFloat((Math.random() * 2 + 0.5).toFixed(1)),
-        height: parseFloat((Math.random() * 2 + 0.5).toFixed(1)),
-        weight: parseFloat((Math.random() * 200 + 20).toFixed(1))
-      }
-    },
-    variants: [
-      {
-        name: "Material",
-        type: "material",
-        options: materialsList
-          .slice(0, Math.floor(Math.random() * 3) + 2)
-          .map(material => ({
-            value: material,
-            available: Math.random() > 0.2,
-            priceModifier: Math.floor(Math.random() * 50)
-          }))
-      }
-    ],
-    stock: Math.floor(Math.random() * 200) + 10,
-    tags: [...new Set([...tagsList].sort(() => 0.5 - Math.random()).slice(0, Math.floor(Math.random() * 5) + 2))],
-    featured: Math.random() < 0.1 // 10% chance of being featured
-  };
-  
-  products.push(product);
-}
 
 const seedProducts = async () => {
   try {
     await connectDB();
     
+    // Get all categories
+    const categories = await Category.find({ isActive: true });
+    if (categories.length === 0) {
+      throw new Error('No categories found. Please run seedCategories first.');
+    }
+
     // Clear existing products
     await Product.deleteMany({});
     console.log('Cleared existing products');
     
-    // Insert new products
-    for (const productData of products) {
-      const { reviews: reviewData, ...productInfo } = productData;
-      const product = await Product.create(productInfo);
+    // Create base products
+    for (const productData of baseProducts) {
+      const category = categories.find(c => c.alias === productData.categoryAlias);
+      if (!category) {
+        console.warn(`Category ${productData.categoryAlias} not found for ${productData.name}`);
+        continue;
+      }
+
+      const product = await Product.create({
+        ...productData,
+        category: category._id
+      });
       console.log(`Created product: ${product.name}`);
     }
+
+    // Generate additional random products for each category
+    for (const category of categories) {
+      // Generate 5-10 products per category
+      const numProducts = getRandomNumber(5, 10);
+      
+      for (let i = 0; i < numProducts; i++) {
+        const basePrice = getRandomNumber(20, 200);
+        const discountPercent = Math.random() < 0.3 ? Math.random() * 0.4 + 0.1 : 0;
+        const attributes = await generateAttributes(category);
+        
+        const product = await Product.create({
+          name: `${faker.commerce.productAdjective()} ${category.name} ${faker.commerce.productAdjective()}`,
+          description: faker.commerce.productDescription(),
+          price: discountPercent ? parseFloat((basePrice * (1 - discountPercent)).toFixed(2)) : basePrice,
+          originalPrice: discountPercent ? parseFloat(basePrice.toFixed(2)) : null,
+          category: category._id,
+          attributes,
+          stock: getRandomNumber(10, 200),
+          tags: [
+            category.name.toLowerCase(),
+            faker.commerce.productAdjective().toLowerCase(),
+            faker.commerce.productMaterial().toLowerCase()
+          ],
+          featured: Math.random() < 0.1,
+          specifications: {
+            materials: [
+              {
+                name: faker.commerce.productMaterial(),
+                description: faker.commerce.productDescription()
+              }
+            ],
+            dimensions: {
+              length: parseFloat((Math.random() * 10 + 2).toFixed(1)),
+              width: parseFloat((Math.random() * 2 + 0.5).toFixed(1)),
+              height: parseFloat((Math.random() * 2 + 0.5).toFixed(1)),
+              weight: parseFloat((Math.random() * 200 + 20).toFixed(1))
+            }
+          }
+        });
+
+        console.log(`Created random product: ${product.name}`);
+      }
+    }
     
-    mongoose.connection.close();
     console.log('Products seeded successfully');
+    
+    if (require.main === module) {
+      mongoose.connection.close();
+    }
   } catch (error) {
     console.error('Error seeding products:', error);
     process.exit(1);
