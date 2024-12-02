@@ -128,15 +128,50 @@ async function getAttributeStats(baseQuery = {}) {
 exports.getProductById = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id)
-      .populate('category', 'name alias');
+      .populate({
+        path: 'category',
+        select: 'name alias description attributes',
+        populate: {
+          path: 'parent',
+          select: 'name alias'
+        }
+      });
     
     if (!product) {
       return res.status(404).json({ message: 'Product not found' });
     }
 
-    // Get category path
-    const category = await Category.findById(product.category);
-    const categoryPath = await category.getPath();
+    // Handle case where category is null or invalid
+    if (!product.category) {
+      return res.json({
+        ...product.toObject(),
+        categoryPath: [],
+        categoryAttributes: []
+      });
+    }
+
+    // Get category path and attributes
+    const category = await Category.findById(product.category._id);
+    if (!category) {
+      // Return product without category information if category is not found
+      return res.json({
+        ...product.toObject(),
+        categoryPath: [],
+        categoryAttributes: []
+      });
+    }
+
+    const [categoryPath, categoryAttributes] = await Promise.all([
+      category.getPath(),
+      category.getPath().then(path => 
+        path.reduce((attrs, cat) => [...attrs, ...(cat.attributes || [])], [])
+      )
+    ]);
+
+    // Remove duplicate attributes based on name
+    const uniqueAttributes = Array.from(
+      new Map(categoryAttributes.map(attr => [attr.name, attr])).values()
+    );
 
     res.json({
       ...product.toObject(),
@@ -144,10 +179,15 @@ exports.getProductById = async (req, res) => {
         _id: cat._id,
         name: cat.name,
         alias: cat.alias
-      }))
+      })),
+      categoryAttributes: uniqueAttributes
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error('Error in getProductById:', error);
+    res.status(500).json({ 
+      message: 'Error fetching product',
+      error: error.message 
+    });
   }
 };
 
