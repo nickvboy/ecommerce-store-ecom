@@ -5,4 +5,4 @@ export function cn(...inputs) {
   return twMerge(clsx(inputs))
 }
 
-export const API_BASE_URL = 'http://localhost:5000/api';
+export const API_BASE_URL = 'http://movies-treated.gl.at.ply.gg:16505/api';

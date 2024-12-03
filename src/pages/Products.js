@@ -7,6 +7,7 @@ import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "../componen
 import { ChevronDownIcon } from '@heroicons/react/24/solid';
 import { useInView } from 'react-intersection-observer';
 import { useApiStatus } from '../contexts/ApiStatusContext';
+import { API_BASE_URL } from '../lib/utils';
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -32,7 +33,7 @@ function Products() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/categories');
+        const response = await fetch(`${API_BASE_URL}/categories`);
         const data = await response.json();
         setCategories(data);
       } catch (error) {
@@ -54,7 +55,7 @@ function Products() {
         return;
       }
 
-      const response = await fetch('http://localhost:5000/api/products/filter', {
+      const response = await fetch(`${API_BASE_URL}/products/filter`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

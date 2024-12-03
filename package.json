@@ -2,7 +2,6 @@
   "name": "ecommerce-store",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:5000",
   "dependencies": {
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
@@ -30,7 +29,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "concurrently \"npm start\" \"cd backend && npm run dev\"",
+    "playit": "echo \"1. Download playit.gg from https://playit.gg/download\" && echo \"2. Run playit.exe\" && echo \"3. Create tunnels for ports 3000 (frontend) and 5000 (backend)\" && npm run dev"
   },
   "eslintConfig": {
     "extends": [
@@ -52,6 +53,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.16",
+    "concurrently": "^9.1.0",
     "postcss": "^8.4.32",
     "tailwindcss": "^3.3.5"
   }
