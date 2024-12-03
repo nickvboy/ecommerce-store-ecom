@@ -1,70 +1,178 @@
-# Getting Started with Create React App
+# E-Commerce Platform
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, full-stack e-commerce platform built with React and Node.js.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- 🛍️ **Product Management**
+  - Browse products with infinite scrolling
+  - Advanced filtering by categories, price range, and attributes
+  - Detailed product views with images and specifications
+  - Product reviews and ratings
 
-### `npm start`
+- 🔍 **Search & Filter**
+  - Dynamic category filtering
+  - Price range slider
+  - Attribute-based filtering
+  - Real-time search results
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- 👤 **User Management**
+  - User registration and authentication
+  - JWT-based secure sessions
+  - User profiles with order history
+  - Wishlist functionality
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- 🛒 **Shopping Experience**
+  - Shopping cart management
+  - Secure checkout process
+  - Order tracking
+  - Multiple payment methods support
 
-### `npm test`
+## Tech Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Frontend
+- React.js
+- TailwindCSS for styling
+- React Router for navigation
+- Context API for state management
+- Axios for API requests
 
-### `npm run build`
+### Backend
+- Node.js & Express
+- MongoDB with Mongoose
+- JWT for authentication
+- CORS enabled
+- RESTful API architecture
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Getting Started
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Prerequisites
+- Node.js (v14 or higher)
+- MongoDB Atlas account or local MongoDB installation
+- npm or yarn package manager
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Installation
 
-### `npm run eject`
+1. Clone the repository:
+```bash
+git clone [repository-url]
+cd ecommerce-store
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. Install dependencies for both frontend and backend:
+```bash
+# Install frontend dependencies
+npm install
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Install backend dependencies
+cd backend
+npm install
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. Configure environment variables:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Create `.env` file in the root directory:
+```env
+HOST=0.0.0.0
+DANGEROUSLY_DISABLE_HOST_CHECK=true
+```
 
-## Learn More
+Create `.env` file in the backend directory:
+```env
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+PORT=5000
+NODE_ENV=development
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+4. Start the development servers:
+```bash
+# From the root directory
+npm run dev
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Running with Playit.gg (Remote Access)
 
-### Code Splitting
+1. Download and install playit.gg from https://playit.gg/download
+2. Run playit.exe
+3. Create two tunnels:
+   - Frontend: Port 3000
+   - Backend: Port 5000
+4. Start the application:
+```bash
+npm run playit
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## API Documentation
 
-### Analyzing the Bundle Size
+### Products API
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- `GET /api/products` - Get all products
+- `POST /api/products/filter` - Filter products
+- `GET /api/products/:id` - Get product details
+- `POST /api/products` - Create product (admin)
+- `PUT /api/products/:id` - Update product (admin)
+- `DELETE /api/products/:id` - Delete product (admin)
 
-### Making a Progressive Web App
+### Categories API
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- `GET /api/categories` - Get all categories
+- `GET /api/categories/tree` - Get category tree
+- `GET /api/categories/:id` - Get category details
+- `POST /api/categories` - Create category (admin)
+- `PUT /api/categories/:id` - Update category (admin)
+- `DELETE /api/categories/:id` - Delete category (admin)
 
-### Advanced Configuration
+### Users API
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- `POST /api/users/register` - Register new user
+- `POST /api/users/login` - User login
+- `GET /api/users/profile` - Get user profile
+- `PUT /api/users/profile` - Update user profile
+- `POST /api/users/wishlist` - Add to wishlist
+- `DELETE /api/users/wishlist/:productId` - Remove from wishlist
 
-### Deployment
+### Orders API
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- `POST /api/orders` - Create order
+- `GET /api/orders/:orderId` - Get order details
+- `GET /api/orders/email/:email` - Get orders by email
+- `PATCH /api/orders/:orderId/status` - Update order status
 
-### `npm run build` fails to minify
+## Project Structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+ecommerce-store/
+├── src/                    # Frontend source code
+│   ├── components/        # React components
+│   ├── contexts/         # Context providers
+│   ├── lib/             # Utilities and helpers
+│   └── pages/           # Page components
+├── backend/              # Backend source code
+│   ├── config/          # Configuration files
+│   ├── controllers/     # Route controllers
+│   ├── middleware/      # Custom middleware
+│   ├── models/          # Mongoose models
+│   ├── routes/          # API routes
+│   └── utils/           # Utility functions
+└── public/              # Static files
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- Built with React and Node.js
+- Styled with TailwindCSS
+- Database powered by MongoDB
+- Remote access enabled by playit.gg
