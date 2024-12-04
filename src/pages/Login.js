@@ -2,10 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SignUpBackground from '../components/SignUpBackground';
 import { useUser } from '../contexts/UserContext';
-
-const API_URL = process.env.NODE_ENV === 'production' 
-  ? '/api' 
-  : 'http://localhost:5000/api';
+import api from '../lib/api';
 
 function Login() {
   const navigate = useNavigate();
@@ -30,20 +27,7 @@ function Login() {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${API_URL}/users/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify(formData)
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || 'Login failed');
-      }
+      const { data } = await api.post('/users/login', formData);
 
       // Update user context with the logged in user data
       updateUser({
@@ -60,7 +44,7 @@ function Login() {
       // Redirect to home page
       navigate('/');
     } catch (err) {
-      setError(err.message);
+      setError(err.response?.data?.message || 'Login failed');
     } finally {
       setIsLoading(false);
     }
