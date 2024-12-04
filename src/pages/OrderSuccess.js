@@ -16,7 +16,7 @@ function OrderSuccess() {
 
   if (!order) {
     return (
-      <div className="min-h-screen bg-[#1A1A1A] text-text-100 py-8">
+      <div className="min-h-screen bg-bg-100 text-text-100 py-8">
         <div className="max-w-2xl mx-auto px-4">
           <div className="text-center">
             <h1 className="text-2xl font-bold mb-4">No order found</h1>
@@ -30,16 +30,16 @@ function OrderSuccess() {
   }
 
   return (
-    <div className="min-h-screen bg-[#1A1A1A] text-text-100 py-8">
+    <div className="min-h-screen bg-bg-100 text-text-100 py-8">
       <div className="max-w-2xl mx-auto px-4">
-        <div className="bg-[#212121] rounded-lg p-6">
+        <div className="bg-bg-200 rounded-lg p-6">
           <div className="text-center mb-8">
-            <CheckCircleIcon className="h-16 w-16 text-green-500 mx-auto mb-4" />
+            <CheckCircleIcon className="h-16 w-16 text-primary-100 mx-auto mb-4" />
             <h1 className="text-2xl font-bold mb-2">Order Successful!</h1>
             <p className="text-text-200">Thank you for your purchase</p>
           </div>
 
-          <div className="border-t border-gray-800 pt-6">
+          <div className="border-t border-bg-300 pt-6">
             <h2 className="text-xl font-medium mb-4">Order Details</h2>
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
@@ -80,7 +80,7 @@ function OrderSuccess() {
                 </div>
               </div>
 
-              <div className="border-t border-gray-800 pt-4">
+              <div className="border-t border-bg-300 pt-4">
                 <div className="flex justify-between mb-2">
                   <span className="text-text-200">Subtotal</span>
                   <span>${order.subtotal.toFixed(2)}</span>
@@ -93,7 +93,7 @@ function OrderSuccess() {
                   <span className="text-text-200">Tax</span>
                   <span>${order.tax.toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between font-medium text-lg pt-2 border-t border-gray-800">
+                <div className="flex justify-between font-medium text-lg pt-2 border-t border-bg-300">
                   <span>Total</span>
                   <span>${order.total.toFixed(2)} USD</span>
                 </div>
