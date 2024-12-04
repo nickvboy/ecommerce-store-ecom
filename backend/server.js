@@ -14,11 +14,34 @@ const app = express();
 // Connect to database
 connectDB();
 
-// Middleware
+// CORS configuration
+const allowedOrigins = [
+  'http://localhost:3000',
+  /^http:\/\/[\w-]+\.gl\.at\.ply\.gg(:\d+)?$/  // Matches any playit.gg subdomain
+];
+
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: function(origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+
+    // Check if the origin is allowed
+    const isAllowed = allowedOrigins.some(allowedOrigin => {
+      if (allowedOrigin instanceof RegExp) {
+        return allowedOrigin.test(origin);
+      }
+      return allowedOrigin === origin;
+    });
+
+    if (isAllowed) {
+      callback(null, true);
+    } else {
+      callback(new Error('CORS not allowed'));
+    }
+  },
   credentials: true
 }));
+
 app.use(express.json());
 
 // Routes
