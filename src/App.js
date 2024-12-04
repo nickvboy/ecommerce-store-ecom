@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ApiStatusProvider } from './contexts/ApiStatusContext';
 import { UserProvider } from './contexts/UserContext';
 import Navbar from './components/Navbar';
@@ -34,8 +34,8 @@ function App() {
                   <Route path="/" element={<Home />} />
                   <Route path="/products" element={<Products />} />
                   <Route path="/products/:id" element={<ProductDetail />} />
-                  <Route path="/gear" element={<Products category="gear" />} />
-                  <Route path="/clothing" element={<Products category="clothing" />} />
+                  <Route path="/gear" element={<Navigate to="/products" replace />} />
+                  <Route path="/clothing" element={<Navigate to="/products" replace />} />
                   <Route path="/about" element={<AboutUs />} />
                   <Route path="/about/tagline" element={<Tagline />} />
                   <Route path="/about/story" element={<Story />} />
