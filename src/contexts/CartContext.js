@@ -17,6 +17,19 @@ export function CartProvider({ children }) {
   const [orders, setOrders] = useState([]);
   const { user } = useUser();
 
+  // Function to fetch latest stock information
+  const fetchLatestStock = async (productId) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/products/${productId}`);
+      if (!response.ok) throw new Error('Failed to fetch product');
+      const data = await response.json();
+      return data.stock;
+    } catch (error) {
+      console.error('Error fetching stock:', error);
+      return null;
+    }
+  };
+
   // Save cart to localStorage whenever it changes
   const updateCartAndStorage = (newCart) => {
     setCartItems(newCart);
@@ -53,24 +66,49 @@ export function CartProvider({ children }) {
         price: product.price,
         images: product.images,
         quantity,
-        selectedSize
+        selectedSize,
+        stock: product.stock
       }];
     });
   };
 
-  const updateQuantity = (itemId, selectedSize, newQuantity) => {
+  const updateQuantity = async (itemId, selectedSize, newQuantity) => {
     if (newQuantity < 1) {
       removeFromCart(itemId);
       return;
     }
 
-    updateCartAndStorage(prev => 
-      prev.map(item => 
+    // Fetch latest stock information
+    const latestStock = await fetchLatestStock(itemId);
+    if (latestStock === null) {
+      alert('Unable to verify stock. Please try again.');
+      return;
+    }
+
+    updateCartAndStorage(prev => {
+      const item = prev.find(item => item.id === itemId && item.selectedSize === selectedSize);
+      
+      // Update item's stock information with latest data
+      if (item) {
+        item.stock = latestStock;
+      }
+      
+      // Check if new quantity exceeds stock
+      if (item && newQuantity > latestStock) {
+        alert(`Sorry, only ${latestStock} units available`);
+        return prev.map(cartItem => 
+          cartItem.id === itemId && cartItem.selectedSize === selectedSize
+            ? { ...cartItem, stock: latestStock }
+            : cartItem
+        );
+      }
+      
+      return prev.map(item => 
         item.id === itemId && item.selectedSize === selectedSize
-          ? { ...item, quantity: newQuantity }
+          ? { ...item, quantity: newQuantity, stock: latestStock }
           : item
-      )
-    );
+      );
+    });
   };
 
   const removeFromCart = (itemId) => {

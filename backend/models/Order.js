@@ -77,22 +77,42 @@ const orderSchema = new mongoose.Schema({
 
 // Method to check if all items are in stock
 orderSchema.methods.checkStock = async function() {
+  console.log(`Checking stock for Order ID: ${this._id}`);
   for (const item of this.items) {
+    console.log(`Checking product ID: ${item.product}, Quantity: ${item.quantity}`);
     const product = await mongoose.model('Product').findById(item.product);
-    if (!product || product.stock < item.quantity) {
-      throw new Error(`Insufficient stock for product: ${product ? product.name : 'Unknown Product'}`);
+    if (!product) {
+      console.error(`Product not found: ${item.product}`);
+      throw new Error(`Insufficient stock for product: Unknown Product`);
+    }
+    console.log(`Product "${product.name}" has stock: ${product.stock}`);
+    if (product.stock < item.quantity) {
+      console.error(`Insufficient stock for product: ${product.name}`);
+      throw new Error(`Insufficient stock for product: ${product.name}`);
     }
   }
+  console.log(`All items are in stock for Order ID: ${this._id}`);
   return true;
 };
 
 // Method to update product stock after order
 orderSchema.methods.updateStock = async function() {
+  console.log(`Updating stock for Order ID: ${this._id}`);
   for (const item of this.items) {
+    console.log(`Updating stock for product ID: ${item.product}, Quantity: ${item.quantity}`);
     const product = await mongoose.model('Product').findById(item.product);
+    if (!product) {
+      console.error(`Product not found: ${item.product}`);
+      throw new Error(`Product not found: Unknown Product`);
+    }
+    
+    // Reduce the stock by the ordered quantity
     product.stock -= item.quantity;
+    console.log(`Updated stock for product "${product.name}": ${product.stock}`);
     await product.save();
   }
+  console.log(`Stock update completed for Order ID: ${this._id}`);
+  return true;
 };
 
 // Create a new model with the updated schema

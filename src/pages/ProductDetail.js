@@ -40,7 +40,7 @@ function ProductDetail() {
 
   const handleQuantityChange = (change) => {
     const newQuantity = quantity + change;
-    if (newQuantity >= 1) {
+    if (newQuantity >= 1 && newQuantity <= product.stock) {
       setQuantity(newQuantity);
     }
   };
@@ -102,6 +102,12 @@ function ProductDetail() {
 
   // Add function to handle adding to cart
   const handleAddToCart = () => {
+    // Check stock availability
+    if (quantity > product.stock) {
+      alert(`Sorry, only ${product.stock} units available`);
+      return;
+    }
+
     // Only add size to cart if product has sizes and one is selected
     const cartItem = {
       id: product._id,  // Ensure we're setting the id explicitly
@@ -328,13 +334,18 @@ function ProductDetail() {
                 
                 <Button 
                   onClick={handleAddToCart}
-                  className="px-12 bg-gradient-to-r from-primary-100 to-primary-200 
+                  disabled={product.stock === 0 || quantity > product.stock}
+                  className={`px-12 bg-gradient-to-r from-primary-100 to-primary-200 
                     hover:from-primary-200 hover:to-primary-100 text-white py-2 rounded-lg
                     transform transition-all duration-200 ease-in-out
                     hover:scale-105 hover:shadow-lg hover:shadow-primary-100/50
-                    active:scale-95"
+                    active:scale-95 ${product.stock === 0 || quantity > product.stock ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
-                  ADD TO CART
+                  {product.stock === 0 
+                    ? 'OUT OF STOCK'
+                    : quantity > product.stock 
+                      ? 'NOT ENOUGH STOCK'
+                      : 'ADD TO CART'}
                 </Button>
               </div>
 
@@ -396,7 +407,7 @@ function ProductDetail() {
                       <ul className="space-y-2">
                         <li className="flex">
                           <span className="font-medium text-text-100 min-w-[120px]">Category:</span>
-                          <span className="text-text-200">{product.category}</span>
+                          <span className="text-text-200">{product.category.name}</span>
                         </li>
                         {product.sizes && product.sizes.length > 0 && (
                           <li className="flex">

@@ -74,6 +74,20 @@ const baseProducts = [
   }
 ];
 
+// Helper function to generate stock levels with varying distributions
+const generateStockLevel = () => {
+  const rand = Math.random();
+  if (rand < 0.1) {  // 10% chance of being out of stock
+    return 0;
+  } else if (rand < 0.3) {  // 20% chance of low stock (1-5)
+    return getRandomNumber(1, 5);
+  } else if (rand < 0.6) {  // 30% chance of medium stock (6-20)
+    return getRandomNumber(6, 20);
+  } else {  // 40% chance of high stock (21-200)
+    return getRandomNumber(21, 200);
+  }
+};
+
 const seedProducts = async () => {
   try {
     await connectDB();
@@ -120,7 +134,7 @@ const seedProducts = async () => {
           originalPrice: discountPercent ? parseFloat(basePrice.toFixed(2)) : null,
           category: category._id,
           attributes,
-          stock: getRandomNumber(10, 200),
+          stock: generateStockLevel(),
           tags: [
             category.name.toLowerCase(),
             faker.commerce.productAdjective().toLowerCase(),
