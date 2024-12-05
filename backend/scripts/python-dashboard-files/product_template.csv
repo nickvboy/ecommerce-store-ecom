@@ -1,0 +1,8 @@
+name,price,stock,description,category
+Example Product 1,29.99,100,This is a sample product description,Electronics
+Example Product 2,49.99,50,Another sample product description,Clothing
+# Instructions:
+# 1. Delete the example rows above
+# 2. Fill in your product data following the same format
+# 3. Save the file and use the bulk upload feature in the application
+# 4. Category must match one of the existing categories in the system 
