@@ -368,16 +368,32 @@ exports.addProductImages = async (req, res) => {
 exports.reorderProductImages = async (req, res) => {
   try {
     const { productId } = req.params;
-    const { imageOrders } = req.body; // Array of { id, order }
+    const { imageOrders } = req.body; // Array of { url, order }
     
     const product = await Product.findById(productId);
     if (!product) {
       return res.status(404).json({ message: 'Product not found' });
     }
 
-    const reorderedImages = await product.reorderImages(imageOrders);
-    res.json(reorderedImages);
+    // Validate imageOrders
+    if (!Array.isArray(imageOrders) || imageOrders.length === 0) {
+      return res.status(400).json({ message: 'Invalid image orders' });
+    }
+
+    // Validate that all URLs exist in the product
+    const productImageUrls = new Set(product.images.map(img => img.url));
+    const allUrlsExist = imageOrders.every(img => productImageUrls.has(img.url));
+    if (!allUrlsExist) {
+      return res.status(400).json({ message: 'Invalid image URLs' });
+    }
+
+    // Reorder images
+    product.images = product.reorderImages(imageOrders);
+    await product.save();
+
+    res.json(product.images);
   } catch (error) {
+    console.error('Error reordering images:', error);
     res.status(500).json({ message: error.message });
   }
 };

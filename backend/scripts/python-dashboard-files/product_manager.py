@@ -15,9 +15,9 @@ from PyQt6.QtWidgets import (
     QTableWidget, QTableWidgetItem, QHeaderView, QSpinBox,
     QMessageBox, QFileDialog, QProgressDialog, QFrame,
     QSplitter, QStatusBar, QGroupBox, QFormLayout, QDoubleSpinBox,
-    QScrollArea
+    QScrollArea, QGridLayout
 )
-from PyQt6.QtCore import Qt, pyqtSignal, QThread, QDateTime, QMimeData, QPoint
+from PyQt6.QtCore import Qt, pyqtSignal, QThread, QDateTime, QMimeData, QPoint, QTimer
 from PyQt6.QtGui import (
     QColor, QPalette, QFont, QDragEnterEvent, QDropEvent, QPixmap, 
     QImage, QDrag, QCursor
@@ -29,6 +29,7 @@ import cloudinary
 import cloudinary.uploader
 from dotenv import load_dotenv
 from pathlib import Path
+import tempfile
 
 # Load environment variables
 load_dotenv()
@@ -83,9 +84,7 @@ class ImageTracker:
             logger.error(f"Error saving image tracker: {e}")
     
     def update_product_images(self, product_id, image_urls):
-        """
-        Update product images with order information
-        """
+        """Update product images with order information"""
         try:
             # Create image entries with order information
             image_entries = [
@@ -110,8 +109,10 @@ class ImageTracker:
             
             self.save_tracker()
             logger.info(f"Updated images for product {product_id}")
+            return True
         except Exception as e:
             logger.error(f"Error updating product images: {e}")
+            return False
     
     def get_product_images(self, product_id):
         """
@@ -128,6 +129,71 @@ class ImageTracker:
         except Exception as e:
             logger.error(f"Error retrieving product images: {e}")
             return []
+
+class ImagePreviewWidget(QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.image_labels = []
+        self.setup_ui()
+        
+    def setup_ui(self):
+        self.layout = QGridLayout()
+        self.setLayout(self.layout)
+        self.setMinimumHeight(200)
+        
+    def clear_previews(self):
+        for label in self.image_labels:
+            self.layout.removeWidget(label)
+            label.deleteLater()
+        self.image_labels.clear()
+        
+    def load_image_from_url(self, url):
+        try:
+            response = requests.get(url)
+            image_data = response.content
+            pixmap = QPixmap()
+            pixmap.loadFromData(image_data)
+            return pixmap.scaled(150, 150, Qt.AspectRatioMode.KeepAspectRatio)
+        except Exception as e:
+            logger.error(f"Error loading image from URL {url}: {e}")
+            return None
+            
+    def update_previews(self, image_urls):
+        self.clear_previews()
+        row, col = 0, 0
+        max_cols = 4  # Show 4 images per row
+        
+        for url in image_urls:
+            label = QLabel()
+            label.setFixedSize(150, 150)
+            label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+            label.setStyleSheet("""
+                QLabel {
+                    border: 1px solid #ccc;
+                    background-color: #f9f9f9;
+                    padding: 5px;
+                }
+            """)
+            
+            # Load image in the background
+            def load_image(label=label, url=url):
+                pixmap = self.load_image_from_url(url)
+                if pixmap:
+                    label.setPixmap(pixmap)
+                else:
+                    label.setText("Failed to load")
+            
+            # Start loading in a separate thread
+            thread = threading.Thread(target=load_image)
+            thread.start()
+            
+            self.layout.addWidget(label, row, col)
+            self.image_labels.append(label)
+            
+            col += 1
+            if col >= max_cols:
+                col = 0
+                row += 1
 
 class ApiClient:
     def __init__(self, base_url="http://localhost:5000/api"):
@@ -172,16 +238,34 @@ class ApiClient:
         try:
             # Handle image uploads if present
             image_paths = product_data.pop('images', [])
-            if image_paths:
-                image_urls = self.upload_images(image_paths)
-                product_data['images'] = image_urls
             
+            # First create the product without images
             response = requests.post(f"{self.base_url}/products", json=product_data)
             if response.ok:
                 result = response.json()
-                # Track the images if upload was successful
-                if image_urls:
-                    self.image_tracker.update_product_images(result['_id'], image_urls)
+                product_id = result['_id']
+                
+                # Then upload and add images if present
+                if image_paths:
+                    image_urls = self.upload_images(image_paths)
+                    if image_urls:
+                        # Format image data with order information
+                        image_data = {
+                            'images': [
+                                {'url': url, 'order': idx} 
+                                for idx, url in enumerate(image_urls)
+                            ]
+                        }
+                        
+                        # Use the dedicated image endpoint
+                        img_response = requests.post(
+                            f"{self.base_url}/products/{product_id}/images",
+                            json=image_data
+                        )
+                        if img_response.ok:
+                            # Update image tracker
+                            self.image_tracker.update_product_images(product_id, image_urls)
+                
                 return result
             return None
         except Exception as e:
@@ -190,20 +274,45 @@ class ApiClient:
     
     def update_product(self, product_id, product_data):
         try:
-            # Handle image uploads if present
-            image_paths = product_data.pop('images', [])
-            if image_paths:
-                image_urls = self.upload_images(image_paths)
-                product_data['images'] = image_urls
+            # Get local paths and remote URLs separately
+            local_paths = [path for path in product_data['images'] 
+                          if os.path.exists(path)]  # Check if it's a local file
+            remote_urls = [url for url in product_data['images'] 
+                          if not os.path.exists(url)]  # Assume it's a remote URL
             
-            response = requests.put(f"{self.base_url}/products/{product_id}", json=product_data)
+            # Remove images from product data
+            product_data.pop('images', None)
+            
+            # First update the product without images
+            response = requests.put(f"{self.base_url}/products/{product_id}", 
+                                 json=product_data)
+            
             if response.ok:
                 result = response.json()
-                # Track the images if upload was successful
-                if image_urls:
-                    self.image_tracker.update_product_images(product_id, image_urls)
+                
+                # Upload new images if any
+                new_image_urls = []
+                if local_paths:
+                    new_image_urls = self.upload_images(local_paths)
+                
+                # Combine existing remote URLs with new uploaded URLs
+                all_image_urls = remote_urls + new_image_urls
+                
+                if all_image_urls:
+                    # Create image orders with current sequence
+                    image_orders = [
+                        {'url': url, 'order': idx} 
+                        for idx, url in enumerate(all_image_urls)
+                    ]
+                    
+                    # Update image orders
+                    reorder_success = self.reorder_product_images(product_id, image_orders)
+                    if not reorder_success:
+                        logger.error(f"Failed to reorder images for product {product_id}")
+                
                 return result
             return None
+            
         except Exception as e:
             logger.error(f"Error updating product {product_id}: {e}")
             return None
@@ -228,6 +337,57 @@ class ApiClient:
             return uploaded_urls
         except Exception as e:
             logger.error(f"Error uploading images to Cloudinary: {e}")
+            return []
+    
+    def reorder_product_images(self, product_id, image_orders):
+        """Reorder product images using the dedicated endpoint"""
+        try:
+            # Format the request body
+            request_body = {
+                'imageOrders': image_orders
+            }
+            
+            response = requests.patch(
+                f"{self.base_url}/products/{product_id}/images/reorder",
+                json=request_body
+            )
+            
+            if response.ok:
+                # Get the ordered URLs
+                ordered_urls = [img['url'] for img in image_orders]
+                # Update local tracker
+                self.image_tracker.update_product_images(product_id, ordered_urls)
+                logger.info(f"Successfully reordered images for product {product_id}")
+                return True
+            else:
+                logger.error(f"Failed to reorder images: {response.status_code} - {response.text}")
+                return False
+        except Exception as e:
+            logger.error(f"Error reordering images for product {product_id}: {e}")
+            return False
+    
+    def get_product_preview_images(self, product_id):
+        """Get preview images for a product"""
+        try:
+            # First check local tracker
+            local_images = self.image_tracker.get_product_images(product_id)
+            if local_images:
+                return local_images
+            
+            # If not in tracker, fetch from API
+            product = self.get_product_by_id(product_id)
+            if product and 'images' in product:
+                # Sort images by order before extracting URLs
+                sorted_images = sorted(product['images'], key=lambda x: x.get('order', 0))
+                image_urls = [img['url'] for img in sorted_images]
+                
+                # Update local tracker
+                if image_urls:
+                    self.image_tracker.update_product_images(product_id, image_urls)
+                return image_urls
+            return []
+        except Exception as e:
+            logger.error(f"Error fetching preview images for product {product_id}: {e}")
             return []
 
 class ConsoleWidget(QTextEdit):
@@ -326,14 +486,51 @@ class ProductTableWidget(QTableWidget):
     selection_changed_signal = pyqtSignal()
     edit_clicked = pyqtSignal(dict)
 
+class ImageCache:
+    _instance = None
+    _cache = {}
+    _loading = set()  # Track URLs currently being loaded
+
+    @classmethod
+    def instance(cls):
+        if cls._instance is None:
+            cls._instance = cls()
+        return cls._instance
+
+    def get_image(self, url):
+        # Return immediately if cached
+        if url in self._cache:
+            return self._cache.get(url)
+        
+        # Start async load if not already loading
+        if url not in self._loading:
+            self._loading.add(url)
+            threading.Thread(target=self._load_image, args=(url,), daemon=True).start()
+        
+        return None
+
+    def _load_image(self, url):
+        try:
+            response = requests.get(url)
+            if response.ok:
+                pixmap = QPixmap()
+                pixmap.loadFromData(response.content)
+                self._cache[url] = pixmap
+        except Exception as e:
+            logger.error(f"Error caching image {url}: {e}")
+        finally:
+            self._loading.remove(url)
+
 class ImageThumbnail(QLabel):
     removed = pyqtSignal(str)  # Signal emitted when thumbnail is removed
-    reordered = pyqtSignal(str, int)  # Signal emitted when thumbnail is reordered (image_path, new_index)
+    reordered = pyqtSignal(str, int)  # Signal emitted when thumbnail is reordered (image_url, new_index)
     
-    def __init__(self, image_path, index):
+    def __init__(self, image_url, index, is_local=False):
         super().__init__()
-        self.image_path = image_path
+        self.image_url = image_url
         self.index = index
+        self.is_local = is_local
+        self.loading_timer = None
         self.setFixedSize(100, 100)
         self.setStyleSheet("""
             QLabel {
@@ -348,28 +545,53 @@ class ImageThumbnail(QLabel):
         """)
         self.setCursor(QCursor(Qt.CursorShape.OpenHandCursor))
         self.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.setAcceptDrops(True)
-        self.load_image()
-        
-    def load_image(self):
-        pixmap = QPixmap(self.image_path)
-        scaled_pixmap = pixmap.scaled(90, 90, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
+        self.setAcceptDrops(True)  # Enable drop events
+        self.start_loading()
+
+    def start_loading(self):
+        if self.is_local:
+            self.load_local_image()
+        else:
+            self.setText("Loading...")
+            # Start periodic check for cached image
+            self.loading_timer = QTimer()
+            self.loading_timer.timeout.connect(self.check_cached_image)
+            self.loading_timer.start(100)  # Check every 100ms
+
+    def load_local_image(self):
+        pixmap = QPixmap(self.image_url)
+        if not pixmap.isNull():
+            self.set_image(pixmap)
+        else:
+            self.setText("Failed")
+
+    def check_cached_image(self):
+        pixmap = ImageCache.instance().get_image(self.image_url)
+        if pixmap:
+            self.set_image(pixmap)
+            self.loading_timer.stop()
+            self.loading_timer = None
+
+    def set_image(self, pixmap):
+        scaled_pixmap = pixmap.scaled(90, 90, Qt.AspectRatioMode.KeepAspectRatio,
+                                    Qt.TransformationMode.SmoothTransformation)
         self.setPixmap(scaled_pixmap)
-        
+
     def mousePressEvent(self, event):
         if event.button() == Qt.MouseButton.RightButton:
-            self.removed.emit(self.image_path)
+            self.removed.emit(self.image_url)
         elif event.button() == Qt.MouseButton.LeftButton:
             self.setCursor(QCursor(Qt.CursorShape.ClosedHandCursor))
             drag = QDrag(self)
             mime_data = QMimeData()
-            mime_data.setText(self.image_path)
+            mime_data.setText(self.image_url)
             drag.setMimeData(mime_data)
             
             # Create a pixmap for drag feedback
             pixmap = self.pixmap()
             if pixmap:
-                scaled_pixmap = pixmap.scaled(50, 50, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
+                scaled_pixmap = pixmap.scaled(50, 50, Qt.AspectRatioMode.KeepAspectRatio, 
+                                            Qt.TransformationMode.SmoothTransformation)
                 drag.setPixmap(scaled_pixmap)
                 drag.setHotSpot(QPoint(25, 25))
             
@@ -386,17 +608,19 @@ class ImageThumbnail(QLabel):
             
     def dropEvent(self, event):
         if event.mimeData().hasText():
-            source_path = event.mimeData().text()
-            if source_path != self.image_path:  # Don't reorder if dropped on itself
-                self.reordered.emit(source_path, self.index)
+            source_url = event.mimeData().text()
+            if source_url != self.image_url:  # Don't reorder if dropped on itself
+                self.reordered.emit(source_url, self.index)
             event.acceptProposedAction()
 
 class ImageUploadWidget(QWidget):
     images_updated = pyqtSignal(list)  # Signal emitted when images are added/removed/reordered
+    image_reordered = pyqtSignal(list)  # New signal for reordering existing product images
     
     def __init__(self):
         super().__init__()
-        self.images = []  # List of image paths
+        self.image_urls = []  # Store URLs or file paths
+        self.is_local = {}  # Track which images are local files
         self.setup_ui()
         
     def setup_ui(self):
@@ -467,7 +691,7 @@ class ImageUploadWidget(QWidget):
         elif event.mimeData().hasText():
             # Handle reordering
             source_path = event.mimeData().text()
-            if source_path in self.images:
+            if source_path in self.image_urls:
                 # Calculate the drop index based on the mouse position
                 drop_pos = event.position().x()
                 drop_index = 0
@@ -495,43 +719,75 @@ class ImageUploadWidget(QWidget):
             self.add_images(file_paths)
             
     def add_images(self, file_paths):
+        """Add new images from local files"""
         for file_path in file_paths:
-            if file_path not in self.images:
-                self.images.append(file_path)
+            if file_path not in self.image_urls:
+                self.image_urls.append(file_path)
+                self.is_local[file_path] = True  # Mark as local file
         self.update_thumbnails()
-        self.images_updated.emit(self.images)
+        self.images_updated.emit(self.image_urls)
         
     def update_thumbnails(self):
         # Clear existing thumbnails
-        while self.thumbnail_layout.count() > 1:  # Keep the stretch at the end
+        while self.thumbnail_layout.count() > 1:
             item = self.thumbnail_layout.takeAt(0)
             if item.widget():
                 item.widget().deleteLater()
         
-        # Add new thumbnails
-        for i, image_path in enumerate(self.images):
-            thumbnail = ImageThumbnail(image_path, i)
-            thumbnail.removed.connect(self.remove_image)
-            thumbnail.reordered.connect(self.reorder_image)
-            self.thumbnail_layout.insertWidget(i, thumbnail)
+        # Add thumbnails in batches
+        batch_size = 4  # Load 4 thumbnails at a time
+        for i in range(0, len(self.image_urls), batch_size):
+            batch = self.image_urls[i:i + batch_size]
+            for j, image_url in enumerate(batch):
+                is_local = self.is_local.get(image_url, False)
+                thumbnail = ImageThumbnail(image_url, i + j, is_local)
+                thumbnail.removed.connect(self.remove_image)
+                thumbnail.reordered.connect(self.reorder_image)
+                self.thumbnail_layout.insertWidget(i + j, thumbnail)
             
-    def remove_image(self, image_path):
-        if image_path in self.images:
-            self.images.remove(image_path)
+            # Process events to keep UI responsive
+            QApplication.processEvents()
+    
+    def remove_image(self, image_url):
+        if image_url in self.image_urls:
+            self.image_urls.remove(image_url)
             self.update_thumbnails()
-            self.images_updated.emit(self.images)
+            self.images_updated.emit(self.image_urls)
             
-    def reorder_image(self, image_path, new_index):
-        if image_path in self.images:
-            old_index = self.images.index(image_path)
+    def reorder_image(self, image_url, new_index):
+        """Handle image reordering"""
+        if image_url in self.image_urls:
+            old_index = self.image_urls.index(image_url)
             if old_index != new_index:
-                self.images.insert(new_index, self.images.pop(old_index))
+                # Remove from old position and insert at new position
+                self.image_urls.insert(new_index, self.image_urls.pop(old_index))
+                # Update thumbnails to reflect new order
                 self.update_thumbnails()
-                self.images_updated.emit(self.images)
                 
-    def set_images(self, image_paths):
-        self.images = image_paths.copy() if image_paths else []
+                # Emit different signals based on whether images are local or remote
+                if any(self.is_local.get(url, False) for url in self.image_urls):
+                    # For new products or local images
+                    self.images_updated.emit(self.image_urls)
+                else:
+                    # For existing products with remote URLs
+                    self.image_reordered.emit(self.image_urls)
+                
+                logger.info(f"Reordered image from position {old_index} to {new_index}")
+    
+    def set_images(self, image_urls):
+        """Set images from URLs (for existing products)"""
+        self.image_urls = image_urls.copy() if image_urls else []
+        self.is_local = {url: False for url in self.image_urls}  # Mark all as remote URLs
         self.update_thumbnails()
+        self.images_updated.emit(self.image_urls)
+    
+    def get_local_paths(self):
+        """Get list of local file paths only"""
+        return [path for path in self.image_urls if self.is_local.get(path, False)]
+    
+    def get_remote_urls(self):
+        """Get list of remote URLs only"""
+        return [url for url in self.image_urls if not self.is_local.get(url, False)]
 
 class ProductFormWidget(QWidget):
     product_added = pyqtSignal()
@@ -540,10 +796,35 @@ class ProductFormWidget(QWidget):
     def __init__(self, api_client, console_widget):
         super().__init__()
         self.api_client = api_client
-        self.console = console_widget  # Store console widget reference
+        self.console = console_widget
         self.current_product = None
         self.setup_ui()
         self.load_categories()
+        
+        # Connect the new reorder signal
+        self.image_upload.image_reordered.connect(self.handle_image_reorder)
+
+    def handle_image_reorder(self, reordered_urls):
+        """Handle reordering of images for existing products"""
+        if self.current_product and self.current_product.get('_id'):
+            # Create image orders with new sequence
+            image_orders = [
+                {'url': url, 'order': idx} 
+                for idx, url in enumerate(reordered_urls)
+            ]
+            
+            # Call API to update order
+            success = self.api_client.reorder_product_images(
+                self.current_product['_id'], 
+                image_orders
+            )
+            
+            if success:
+                self.console.log("Image order updated successfully", "SUCCESS")
+            else:
+                self.console.log("Failed to update image order", "ERROR")
+                # Refresh the product to restore original order
+                self.set_edit_mode(self.current_product)
     
     def load_categories(self):
         try:
@@ -623,27 +904,57 @@ class ProductFormWidget(QWidget):
         layout.addStretch()
     
     def set_edit_mode(self, product):
-        self.current_product = product
-        self.title_label.setText("Edit Product")
-        self.submit_btn.setText("Update Product")
-        
-        # Fill form with product data
-        self.name_input.setText(product['name'])
-        self.description_input.setText(product['description'])
-        self.price_input.setValue(float(product['price']))
-        if 'originalPrice' in product:
-            self.original_price_input.setValue(float(product['originalPrice']))
-        self.stock_input.setValue(int(product['stock']))
-        
-        # Set category
-        category_index = self.category_input.findData(product['category'])
-        if category_index >= 0:
-            self.category_input.setCurrentIndex(category_index)
+        """Set the form to edit mode and populate with product data"""
+        try:
+            self.current_product = product
+            self.title_label.setText("Edit Product")
+            self.submit_btn.setText("Update Product")
             
-        # Set images
-        if 'images' in product:
-            self.image_upload.set_images(product['images'])
+            # Fill form with product data
+            self.name_input.setText(product.get('name', ''))
+            self.description_input.setText(product.get('description', ''))
             
+            # Handle price values safely
+            try:
+                self.price_input.setValue(float(product.get('price', 0)))
+            except (TypeError, ValueError):
+                self.price_input.setValue(0)
+            
+            try:
+                if 'originalPrice' in product and product['originalPrice'] is not None:
+                    self.original_price_input.setValue(float(product['originalPrice']))
+                else:
+                    self.original_price_input.setValue(0)
+            except (TypeError, ValueError):
+                self.original_price_input.setValue(0)
+            
+            # Handle stock value safely
+            try:
+                self.stock_input.setValue(int(product.get('stock', 0)))
+            except (TypeError, ValueError):
+                self.stock_input.setValue(0)
+            
+            # Set category
+            category_id = product.get('category')
+            if category_id:
+                category_index = self.category_input.findData(category_id)
+                if category_index >= 0:
+                    self.category_input.setCurrentIndex(category_index)
+            
+            # Load and display existing images
+            if product.get('_id'):
+                image_urls = self.api_client.get_product_preview_images(product['_id'])
+                if image_urls:
+                    self.console.log(f"Loading {len(image_urls)} images for product", "INFO")
+                    self.image_upload.set_images(image_urls)
+                else:
+                    self.console.log("No images found for product", "WARNING")
+                    self.image_upload.set_images([])
+            
+        except Exception as e:
+            self.console.log(f"Error setting edit mode: {str(e)}", "ERROR")
+            logger.error(f"Error in set_edit_mode: {str(e)}")
+    
     def set_add_mode(self):
         self.current_product = None
         self.title_label.setText("Add New Product")
@@ -668,7 +979,7 @@ class ProductFormWidget(QWidget):
                 'originalPrice': self.original_price_input.value(),
                 'stock': self.stock_input.value(),
                 'category': self.category_input.currentData(),
-                'images': self.image_upload.images  # This will now contain the image paths
+                'images': self.image_upload.image_urls  # Use current order of images
             }
             
             if self.current_product:  # Update existing product
@@ -679,6 +990,8 @@ class ProductFormWidget(QWidget):
                     self.product_updated.emit()
                     self.set_add_mode()
             else:  # Add new product
+                # For new products, only send local file paths
+                product_data['images'] = self.image_upload.get_local_paths()
                 response = self.api_client.create_product(product_data)
                 if response:
                     self.console.log(f"Product created: {response['name']}", "SUCCESS")
@@ -1191,7 +1504,6 @@ class ProductManager(QMainWindow):
                 
             except Exception as e:
                 QMessageBox.critical(self, "Error", f"Failed to stop backend: {str(e)}")
-                logger.error(f"Backend stop error: {str(e)}")
                 
     def monitor_backend(self):
         while self.backend_process and self.backend_process.poll() is None:
@@ -1210,6 +1522,8 @@ class ProductManager(QMainWindow):
             products = self.api_client.get_products()
             self.product_table.populate_products(products)
             self.update_button_states()  # Update button states after refresh
+            # Clear the form and set to add mode
+            self.product_form.set_add_mode()
         except Exception as e:
             print(f"Error refreshing products: {e}")
     

@@ -167,4 +167,20 @@ productSchema.pre('save', async function(next) {
   next();
 });
 
+// Add this method to the productSchema
+productSchema.methods.reorderImages = function(imageOrders) {
+  // Create a map of url to order for quick lookup
+  const orderMap = new Map(imageOrders.map(img => [img.url, img.order]));
+  
+  // Update orders of existing images
+  this.images = this.images
+    .map(img => ({
+      url: img.url,
+      order: orderMap.has(img.url) ? orderMap.get(img.url) : img.order
+    }))
+    .sort((a, b) => a.order - b.order);
+  
+  return this.images;
+};
+
 module.exports = mongoose.model('Product', productSchema); 
