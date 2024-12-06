@@ -9,7 +9,8 @@ const generateUsers = (count = 30) => {
   
   // Always create one admin user
   users.push({
-    name: 'Admin User',
+    firstName: 'Admin',
+    lastName: 'User',
     email: 'admin@example.com',
     password: 'admin123',
     role: 'admin',
@@ -30,7 +31,8 @@ const generateUsers = (count = 30) => {
     const lastName = faker.person.lastName();
     
     users.push({
-      name: `${firstName} ${lastName}`,
+      firstName,
+      lastName,
       email: faker.internet.email({ firstName, lastName }).toLowerCase(),
       password: 'password123', // Simple password for all test users
       role: 'user',
@@ -63,7 +65,7 @@ const seedUsers = async () => {
     for (const userData of users) {
       const user = new User(userData);
       await user.save();
-      console.log(`Created user: ${user.name} (${user.email})`);
+      console.log(`Created user: ${user.firstName} ${user.lastName} (${user.email})`);
     }
     
     console.log('Users seeded successfully');

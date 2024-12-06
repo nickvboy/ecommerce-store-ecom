@@ -56,7 +56,8 @@ const generateOrders = async () => {
           orders.push({
             user: user._id,
             email: user.email,
-            customerName: user.name,
+            customerFirstName: user.firstName,
+            customerLastName: user.lastName,
             items,
             totalAmount,
             status: faker.helpers.arrayElement(['pending', 'completed', 'cancelled']),
@@ -86,7 +87,7 @@ const seedOrders = async () => {
     for (const orderData of orders) {
       const order = new Order(orderData);
       await order.save();
-      console.log(`Created order for user: ${orderData.customerName}`);
+      console.log(`Created order for user: ${orderData.customerFirstName} ${orderData.customerLastName}`);
     }
     
     console.log('Orders seeded successfully');

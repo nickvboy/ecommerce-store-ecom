@@ -5,7 +5,8 @@ const UserContext = createContext();
 
 const createGuestUser = () => ({
   id: `guest_${Math.random().toString(36).substr(2, 9)}`,
-  name: 'Guest User',
+  firstName: 'Guest',
+  lastName: 'User',
   email: null,
   role: 'guest',
   isGuest: true,

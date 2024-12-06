@@ -27,7 +27,11 @@ const orderSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  customerName: {
+  customerFirstName: {
+    type: String,
+    required: true
+  },
+  customerLastName: {
     type: String,
     required: true
   },

@@ -13,81 +13,6 @@ import { useUser } from '../contexts/UserContext';
 import CartOverlay from './CartOverlay';
 import { useCart } from '../contexts/CartContext';
 
-function MobileMenu({ isOpen, onClose }) {
-  return (
-    <div 
-      className={`fixed inset-0 bg-bg-100 transform transition-transform duration-300 ease-in-out ${
-        isOpen ? 'translate-x-0' : '-translate-x-full'
-      } lg:hidden`}
-      style={{ zIndex: 1000 }}
-    >
-      <div className="flex flex-col h-full p-4">
-        <div className="flex justify-between items-center mb-8">
-          <Link to="/" className="text-xl font-bold text-primary-100">
-            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M20 4L4 12L20 20L36 12L20 4Z"
-                fill="currentColor"
-                className="animate-pulse text-primary-200"
-              />
-              <path
-                d="M4 20L20 28L36 20"
-                stroke="currentColor"
-                className="text-primary-200"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M4 28L20 36L36 28"
-                stroke="currentColor"
-                className="text-primary-200"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                opacity="0.5"
-              />
-            </svg>
-          </Link>
-          <button onClick={onClose} className="text-text-100 hover:text-primary-100">
-            <XMarkIcon className="h-6 w-6" />
-          </button>
-        </div>
-        <nav className="flex flex-col space-y-6">
-          <Link to="/" className="text-xl font-bold text-text-100 hover:text-primary-100">Home</Link>
-          <Link to="/gear" className="text-xl font-bold text-text-100 hover:text-primary-100">Gear</Link>
-          <Link to="/clothing" className="text-xl font-bold text-text-100 hover:text-primary-100">Clothing</Link>
-          <Link to="/products" className="text-xl font-bold text-text-100 hover:text-primary-100">All Products</Link>
-          <div className="space-y-2">
-            <Link to="/about" className="text-xl font-bold text-text-100 hover:text-primary-100">About</Link>
-            <div className="pl-4 space-y-2">
-              <Link to="/about/tagline" className="block text-lg text-text-200 hover:text-primary-100">Our Tagline</Link>
-              <Link to="/about/story" className="block text-lg text-text-200 hover:text-primary-100">Company Story</Link>
-              <Link to="/about/factsheet" className="block text-lg text-text-200 hover:text-primary-100">Fact Sheet</Link>
-              <Link to="/about/team" className="block text-lg text-text-200 hover:text-primary-100">Meet the Team</Link>
-            </div>
-          </div>
-          <Link to="/contact" className="text-xl font-bold text-text-100 hover:text-primary-100">Contact</Link>
-          <Link to="/privacy" className="text-xl font-bold text-text-100 hover:text-primary-100">Privacy Policy</Link>
-        </nav>
-        <div className="mt-auto">
-          <div className="flex justify-around py-4 border-t border-bg-300">
-            <button className="text-text-100 hover:text-primary-100">
-              <MagnifyingGlassIcon className="h-6 w-6" />
-            </button>
-            <button className="text-text-100 hover:text-primary-100">
-              <UserIcon className="h-6 w-6" />
-            </button>
-            <button className="text-text-100 hover:text-primary-100">
-              <ShoppingCartIcon className="h-6 w-6" />
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -145,7 +70,7 @@ function Navbar() {
         <div className="flex justify-between items-center h-20 px-6 md:px-10 lg:px-8">
           {/* Mobile Menu Button */}
           <button 
-            className="lg:hidden text-text-100 hover:text-primary-100"
+            className="xl:hidden text-text-100 hover:text-primary-100"
             onClick={() => setIsMobileMenuOpen(true)}
           >
             <Bars3Icon className="h-8 w-8" />
@@ -159,7 +84,7 @@ function Navbar() {
               viewBox="0 0 40 40"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="hover:scale-105 transition-transform hidden lg:block"
+              className="hover:scale-105 transition-transform hidden xl:block"
             >
               <path
                 d="M20 4L4 12L20 20L36 12L20 4Z"
@@ -190,7 +115,7 @@ function Navbar() {
               viewBox="0 0 40 40"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="lg:hidden"
+              className="xl:hidden"
             >
               <path
                 d="M20 4L4 12L20 20L36 12L20 4Z"
@@ -218,7 +143,7 @@ function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center justify-center flex-1 space-x-16">
+          <div className="hidden xl:flex items-center justify-center flex-1 space-x-16">
             <Link to="/" className="font-bold relative group text-base tracking-wide">
               <span className="hover:text-primary-100 transition-colors">Home</span>
               <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary-100 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
@@ -301,14 +226,180 @@ function Navbar() {
         </div>
       </div>
 
+      {/* Mobile Menu Overlay */}
+      <div
+        className={`fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300 xl:hidden
+          ${isMobileMenuOpen ? 'opacity-100 pointer-events-auto z-60' : 'opacity-0 pointer-events-none'}
+        `}
+        onClick={() => setIsMobileMenuOpen(false)}
+      >
+        <div
+          className={`fixed inset-y-0 left-0 w-64 bg-bg-100 transform transition-transform duration-300 ease-in-out z-60
+            ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
+          `}
+          onClick={e => e.stopPropagation()}
+        >
+          <div className="p-6">
+            <div className="flex justify-between items-center mb-8">
+              <Link to="/" className="text-xl font-bold text-primary-100" onClick={() => setIsMobileMenuOpen(false)}>
+                <svg
+                  width="40"
+                  height="40"
+                  viewBox="0 0 40 40"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M20 4L4 12L20 20L36 12L20 4Z"
+                    fill="currentColor"
+                    className="animate-pulse text-primary-200"
+                  />
+                  <path
+                    d="M4 20L20 28L36 20"
+                    stroke="currentColor"
+                    className="text-primary-200"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M4 28L20 36L36 28"
+                    stroke="currentColor"
+                    className="text-primary-200"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    opacity="0.5"
+                  />
+                </svg>
+              </Link>
+              <button
+                className="text-text-100 hover:text-primary-100"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <XMarkIcon className="h-8 w-8" />
+              </button>
+            </div>
+
+            <div className="space-y-6">
+              <Link
+                to="/"
+                className="block font-bold text-lg hover:text-primary-100 transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Home
+              </Link>
+              <Link
+                to="/gear"
+                className="block font-bold text-lg hover:text-primary-100 transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Gear
+              </Link>
+              <Link
+                to="/clothing"
+                className="block font-bold text-lg hover:text-primary-100 transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Clothing
+              </Link>
+              <Link
+                to="/products"
+                className="block font-bold text-lg hover:text-primary-100 transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                All Products
+              </Link>
+              
+              {/* About section with submenu */}
+              <div className="space-y-2">
+                <Link
+                  to="/about"
+                  className="block font-bold text-lg hover:text-primary-100 transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  About
+                </Link>
+                <div className="pl-4 space-y-2">
+                  <Link
+                    to="/about/tagline"
+                    className="block text-text-200 hover:text-primary-100 transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Our Tagline
+                  </Link>
+                  <Link
+                    to="/about/story"
+                    className="block text-text-200 hover:text-primary-100 transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Company Story
+                  </Link>
+                  <Link
+                    to="/about/factsheet"
+                    className="block text-text-200 hover:text-primary-100 transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Fact Sheet
+                  </Link>
+                  <Link
+                    to="/about/team"
+                    className="block text-text-200 hover:text-primary-100 transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Meet the Team
+                  </Link>
+                </div>
+              </div>
+
+              <Link
+                to="/contact"
+                className="block font-bold text-lg hover:text-primary-100 transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Contact
+              </Link>
+              <Link
+                to="/privacy"
+                className="block font-bold text-lg hover:text-primary-100 transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Privacy
+              </Link>
+
+              {/* Mobile Search Button */}
+              <button
+                className="flex items-center space-x-2 font-bold text-lg hover:text-primary-100 transition-colors w-full"
+                onClick={() => {
+                  setIsSearchOpen(true);
+                  setIsMobileMenuOpen(false);
+                }}
+              >
+                <MagnifyingGlassIcon className="h-6 w-6" />
+                <span>Search</span>
+              </button>
+
+              {/* Mobile Profile Button */}
+              <button
+                className="flex items-center space-x-2 font-bold text-lg hover:text-primary-100 transition-colors w-full"
+                onClick={() => {
+                  toggleProfileCard();
+                  setIsMobileMenuOpen(false);
+                }}
+              >
+                <UserIcon className="h-6 w-6" />
+                <span>Profile</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Add the SearchOverlay component */}
       <SearchOverlay 
         isOpen={isSearchOpen} 
         onClose={() => setIsSearchOpen(false)} 
       />
-
-      {/* Mobile Menu */}
-      <MobileMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
 
       {/* Add CartOverlay */}
       <CartOverlay
