@@ -40,6 +40,23 @@ function ProductCard({ product }) {
             </span>
           </div>
         )}
+
+        {/* Stock Indicator */}
+        <div className="absolute bottom-2 right-2">
+          <span className={`px-2 py-1 rounded text-sm font-medium ${
+            product.stock === 0 
+              ? 'bg-red-500 text-white' 
+              : product.stock <= 5 
+                ? 'bg-yellow-500 text-black'
+                : 'bg-green-500 text-white'
+          }`}>
+            {product.stock === 0 
+              ? 'Out of Stock' 
+              : product.stock <= 5 
+                ? `Only ${product.stock} left` 
+                : 'In Stock'}
+          </span>
+        </div>
       </div>
 
       {/* Product Info */}

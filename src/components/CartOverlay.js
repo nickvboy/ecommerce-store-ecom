@@ -9,9 +9,9 @@ function CartOverlay({ isOpen, onClose }) {
   const { cartItems, removeFromCart, updateQuantity } = useCart();
   const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
-  const handleQuantityChange = (item, change) => {
+  const handleQuantityChange = async (item, change) => {
     const newQuantity = item.quantity + change;
-    updateQuantity(item.id, item.selectedSize, newQuantity);
+    await updateQuantity(item.id, item.selectedSize, newQuantity);
   };
 
   return (
@@ -111,11 +111,16 @@ function CartOverlay({ isOpen, onClose }) {
                                   <span className="px-3 py-1 text-text-100">{item.quantity}</span>
                                   <button 
                                     onClick={() => handleQuantityChange(item, 1)}
-                                    className="px-3 py-1 text-text-200 hover:text-text-100 transition-colors"
+                                    disabled={item.quantity >= item.stock}
+                                    className={`px-3 py-1 text-text-200 hover:text-text-100 transition-colors
+                                      ${item.quantity >= item.stock ? 'opacity-50 cursor-not-allowed' : ''}`}
                                   >
                                     +
                                   </button>
                                 </div>
+                                {item.quantity >= item.stock && (
+                                  <p className="text-xs text-yellow-500 mt-1">Max stock reached</p>
+                                )}
                               </div>
 
                               {/* Total & Remove */}

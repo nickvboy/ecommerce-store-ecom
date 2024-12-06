@@ -17,91 +17,98 @@ function PrivacyPolicy() {
         <section className="mb-12">
           <h2 className="text-2xl font-bold text-text-100 mb-4">1. Introduction</h2>
           <p>
-            GridgeGear ("we," "our," or "us") respects your privacy and is committed to protecting your personal data. This privacy policy will inform you about how we look after your personal data when you visit our website and tell you about your privacy rights and how the law protects you.
+            GridgeGear ("we," "our," or "us") is committed to protecting your privacy while providing high-quality outdoor and technical gear. This privacy policy explains how we collect, use, and protect your data when you use our e-commerce platform and services.
           </p>
         </section>
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold text-text-100 mb-4">2. Information We Collect</h2>
-          <p className="mb-4">We collect several different types of information for various purposes:</p>
+          <p className="mb-4">We collect the following types of information to provide and improve our services:</p>
           <ul className="list-disc pl-6 space-y-2">
-            <li>Personal identification information (Name, email address, phone number, etc.)</li>
-            <li>Payment information</li>
-            <li>Shipping and billing addresses</li>
-            <li>Technical data (IP address, browser type, device information)</li>
-            <li>Usage data (how you use our website and products)</li>
+            <li>Account Information: Name, email address, and password for your GridgeGear account</li>
+            <li>Shopping Information: Order history, wishlist items, and shopping cart contents</li>
+            <li>Payment Details: Payment method information (processed securely through our payment providers)</li>
+            <li>Shipping Information: Delivery addresses and contact details</li>
+            <li>Communication Preferences: Your notification and promotional email preferences</li>
+            <li>Technical Data: Browser type, device information, and IP address for website optimization</li>
+            <li>Usage Data: Product browsing history, search queries, and interaction with our features</li>
           </ul>
         </section>
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold text-text-100 mb-4">3. How We Use Your Information</h2>
-          <p className="mb-4">We use the collected data for various purposes:</p>
+          <p className="mb-4">Your information helps us provide and improve our services in the following ways:</p>
           <ul className="list-disc pl-6 space-y-2">
-            <li>To process and deliver your orders</li>
-            <li>To manage your account and provide customer support</li>
-            <li>To send you marketing and promotional communications (with your consent)</li>
-            <li>To improve our website and product offerings</li>
-            <li>To comply with legal obligations</li>
+            <li>Process and fulfill your orders for GridgeGear products</li>
+            <li>Send order confirmations and shipping updates</li>
+            <li>Provide personalized product recommendations</li>
+            <li>Improve our website's user experience and product offerings</li>
+            <li>Analyze shopping patterns and optimize our inventory</li>
+            <li>Prevent fraudulent transactions and enhance security</li>
           </ul>
         </section>
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold text-text-100 mb-4">4. Data Security</h2>
           <p>
-            We have implemented appropriate security measures to prevent your personal data from being accidentally lost, used, accessed, altered, or disclosed in an unauthorized way. We limit access to your personal data to those employees, agents, contractors, and other third parties who have a business need to know.
+            We implement industry-standard security measures to protect your data, including secure HTTPS connections, encrypted password storage, and secure payment processing. We regularly update our security practices to maintain the safety of your information.
           </p>
         </section>
 
         <section className="mb-12">
-          <h2 className="text-2xl font-bold text-text-100 mb-4">5. Your Rights</h2>
-          <p className="mb-4">Under certain circumstances, you have rights under data protection laws in relation to your personal data:</p>
+          <h2 className="text-2xl font-bold text-text-100 mb-4">5. Your Privacy Controls</h2>
+          <p className="mb-4">Through your GridgeGear account settings, you can:</p>
           <ul className="list-disc pl-6 space-y-2">
-            <li>The right to access your personal data</li>
-            <li>The right to correction of your personal data</li>
-            <li>The right to erasure of your personal data</li>
-            <li>The right to object to processing of your personal data</li>
-            <li>The right to data portability</li>
-            <li>The right to withdraw consent</li>
+            <li>Update your account information and preferences</li>
+            <li>Manage your communication preferences</li>
+            <li>View and download your order history</li>
+            <li>Delete your account and associated data</li>
+            <li>Opt-out of promotional emails</li>
+            <li>Request a copy of your personal data</li>
           </ul>
         </section>
 
+
+
         <section className="mb-12">
-          <h2 className="text-2xl font-bold text-text-100 mb-4">6. Cookies</h2>
+          <h2 className="text-2xl font-bold text-text-100 mb-4">6. Third-Party Services</h2>
           <p>
-            We use cookies and similar tracking technologies to track activity on our website and hold certain information. Cookies are files with small amount of data which may include an anonymous unique identifier. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent.
+            We work with trusted partners to provide specific services:
+          </p>
+          <ul className="list-disc pl-6 space-y-2 mt-4">
+            <li>Payment processing (secure payment gateway providers)</li>
+            <li>Shipping and delivery services</li>
+            <li>Analytics tools to improve our website</li>
+            <li>Customer support systems</li>
+          </ul>
+          <p className="mt-4">
+            These partners are bound by strict confidentiality agreements and can only use your data to provide their specific services.
           </p>
         </section>
 
         <section className="mb-12">
-          <h2 className="text-2xl font-bold text-text-100 mb-4">7. Third-Party Services</h2>
+          <h2 className="text-2xl font-bold text-text-100 mb-4">7. Data Retention</h2>
           <p>
-            We may employ third-party companies and individuals to facilitate our service, provide service on our behalf, perform service-related services, or assist us in analyzing how our service is used. These third parties have access to your personal data only to perform these tasks on our behalf and are obligated not to disclose or use it for any other purpose.
+            We retain your data for as long as necessary to provide our services and comply with legal obligations. Order history is kept for tax and warranty purposes, while account information is retained until you request deletion.
           </p>
         </section>
 
         <section className="mb-12">
-          <h2 className="text-2xl font-bold text-text-100 mb-4">8. Children's Privacy</h2>
+          <h2 className="text-2xl font-bold text-text-100 mb-4">8. Updates to Privacy Policy</h2>
           <p>
-            Our service does not address anyone under the age of 13. We do not knowingly collect personally identifiable information from children under 13. If we discover that a child under 13 has provided us with personal information, we immediately delete this from our servers.
+            We may update this policy to reflect changes in our practices or legal requirements. We'll notify you of significant changes through our website or email, and continue to protect your privacy in accordance with the latest version of this policy.
           </p>
         </section>
 
         <section className="mb-12">
-          <h2 className="text-2xl font-bold text-text-100 mb-4">9. Changes to This Privacy Policy</h2>
+          <h2 className="text-2xl font-bold text-text-100 mb-4">9. Contact Us</h2>
           <p>
-            We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "last updated" date at the top of this Privacy Policy.
-          </p>
-        </section>
-
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold text-text-100 mb-4">10. Contact Us</h2>
-          <p>
-            If you have any questions about this Privacy Policy, please contact us:
+            If you have questions about this Privacy Policy or your data:
           </p>
           <ul className="list-none space-y-2 mt-4">
-            <li>By email: privacy@gridgegear.com</li>
-            <li>By phone: +1 (415) 555-0123</li>
-            <li>By mail: 123 Innovation Way, San Francisco, CA 94105, United States</li>
+            <li>Email: privacy@gridgegear.com</li>
+            <li>Phone: +1 (415) 555-0123</li>
+            <li>Address: 123 Innovation Way, San Francisco, CA 94105, United States</li>
           </ul>
         </section>
       </div>

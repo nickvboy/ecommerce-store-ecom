@@ -6,9 +6,9 @@ const connectDB = require('../config/db');
 // Define the category hierarchy with attributes
 const categoryData = [
   {
-    name: 'Clothing',
-    alias: 'clothing',
-    description: 'Technical and survival apparel',
+    name: 'Apparel',
+    alias: 'apparel',
+    description: 'High-performance tactical and survival apparel',
     attributes: [
       {
         name: 'Size',
@@ -21,228 +21,148 @@ const categoryData = [
           { label: '2X-Large', value: 'XXL' }
         ]
       }
-    ],
-    subcategories: [
+    ]
+  },
+  {
+    name: 'Core Gear',
+    alias: 'core-gear',
+    description: 'Essential survival and tactical equipment',
+    attributes: [
       {
-        name: 'Outerwear',
-        alias: 'outerwear',
-        description: 'Technical jackets and protective layers',
-        attributes: [
-          {
-            name: 'Type',
-            type: 'radio',
-            values: [
-              { label: 'Windbreaker', value: 'windbreaker' },
-              { label: 'Jacket', value: 'jacket' },
-              { label: 'Poncho', value: 'poncho' },
-              { label: 'Vest', value: 'vest' }
-            ]
-          },
-          {
-            name: 'Features',
-            type: 'checkbox',
-            values: [
-              { label: 'Waterproof', value: 'waterproof' },
-              { label: 'Solar Integration', value: 'solar' },
-              { label: 'RFID Blocking', value: 'rfid' },
-              { label: 'Packable', value: 'packable' },
-              { label: 'Reflective', value: 'reflective' }
-            ]
-          }
-        ]
-      },
-      {
-        name: 'Base Layers',
-        alias: 'base-layers',
-        description: 'Technical shirts and compression wear',
-        attributes: [
-          {
-            name: 'Type',
-            type: 'radio',
-            values: [
-              { label: 'T-Shirt', value: 't-shirt' },
-              { label: 'Base Layer', value: 'base-layer' },
-              { label: 'Compression', value: 'compression' }
-            ]
-          },
-          {
-            name: 'Features',
-            type: 'checkbox',
-            values: [
-              { label: 'Moisture Wicking', value: 'wicking' },
-              { label: 'UV Protection', value: 'uv-protection' },
-              { label: 'Thermal Regulation', value: 'thermal' },
-              { label: 'RFID Blocking', value: 'rfid' }
-            ]
-          }
-        ]
-      },
-      {
-        name: 'Bottoms',
-        alias: 'bottoms',
-        description: 'Technical pants and shorts',
-        attributes: [
-          {
-            name: 'Type',
-            type: 'radio',
-            values: [
-              { label: 'Convertible Pants', value: 'convertible' },
-              { label: 'Tactical Pants', value: 'tactical' },
-              { label: 'Shorts', value: 'shorts' }
-            ]
-          },
-          {
-            name: 'Features',
-            type: 'checkbox',
-            values: [
-              { label: 'Water Repellent', value: 'water-repellent' },
-              { label: 'Hidden Compartments', value: 'hidden-compartments' },
-              { label: 'Adjustable', value: 'adjustable' }
-            ]
-          }
-        ]
-      },
-      {
-        name: 'Mid Layers',
-        alias: 'mid-layers',
-        description: 'Hoodies and insulating layers',
-        attributes: [
-          {
-            name: 'Type',
-            type: 'radio',
-            values: [
-              { label: 'Hoodie', value: 'hoodie' },
-              { label: 'Fleece', value: 'fleece' },
-              { label: 'Thermal', value: 'thermal' }
-            ]
-          },
-          {
-            name: 'Features',
-            type: 'checkbox',
-            values: [
-              { label: 'LED Integration', value: 'led' },
-              { label: 'Hidden Compartments', value: 'hidden-compartments' },
-              { label: 'Thermal Lined', value: 'thermal-lined' }
-            ]
-          }
+        name: 'Durability Rating',
+        type: 'radio',
+        values: [
+          { label: 'Standard', value: 'standard' },
+          { label: 'Professional', value: 'professional' },
+          { label: 'Military-Grade', value: 'military' }
         ]
       }
     ]
   },
   {
-    name: 'Gear',
-    alias: 'gear',
-    description: 'Survival and technical equipment',
+    name: 'Performance Base Layers',
+    alias: 'base-layers',
+    description: 'Technical base layer clothing for optimal performance',
     attributes: [
       {
-        name: 'Waterproof Rating',
+        name: 'Material',
         type: 'radio',
         values: [
-          { label: 'Water Resistant', value: 'resistant' },
-          { label: 'Waterproof', value: 'waterproof' },
-          { label: 'Not Rated', value: 'none' }
+          { label: 'Merino Wool', value: 'merino' },
+          { label: 'Synthetic Blend', value: 'synthetic' },
+          { label: 'Bamboo Tech', value: 'bamboo' }
         ]
       }
-    ],
-    subcategories: [
+    ]
+  },
+  {
+    name: 'Tactical Bottoms',
+    alias: 'tactical-bottoms',
+    description: 'Tactical pants and shorts with advanced features',
+    attributes: [
       {
-        name: 'Shelter & Protection',
-        alias: 'shelter',
-        description: 'Tents and protective equipment',
-        attributes: [
-          {
-            name: 'Type',
-            type: 'radio',
-            values: [
-              { label: 'Tent', value: 'tent' },
-              { label: 'Tarp', value: 'tarp' },
-              { label: 'Bivy', value: 'bivy' }
-            ]
-          },
-          {
-            name: 'Features',
-            type: 'checkbox',
-            values: [
-              { label: 'Solar Integration', value: 'solar' },
-              { label: 'USB Charging', value: 'usb' },
-              { label: 'Emergency Beacon', value: 'beacon' }
-            ]
-          }
+        name: 'Style',
+        type: 'radio',
+        values: [
+          { label: 'Cargo Pants', value: 'cargo' },
+          { label: 'Combat Pants', value: 'combat' },
+          { label: 'Tactical Shorts', value: 'shorts' }
         ]
-      },
+      }
+    ]
+  },
+  {
+    name: 'Hydration Systems',
+    alias: 'hydration',
+    description: 'Advanced hydration solutions and water management systems',
+    attributes: [
       {
-        name: 'Power & Electronics',
-        alias: 'power',
-        description: 'Power banks and electronic equipment',
-        attributes: [
-          {
-            name: 'Type',
-            type: 'radio',
-            values: [
-              { label: 'Solar Panel', value: 'solar-panel' },
-              { label: 'Power Bank', value: 'power-bank' },
-              { label: 'Emergency Light', value: 'light' }
-            ]
-          },
-          {
-            name: 'Features',
-            type: 'checkbox',
-            values: [
-              { label: 'Solar Charging', value: 'solar-charging' },
-              { label: 'USB-C', value: 'usb-c' },
-              { label: 'Waterproof', value: 'waterproof' }
-            ]
-          }
+        name: 'Capacity',
+        type: 'radio',
+        values: [
+          { label: '1L', value: '1l' },
+          { label: '2L', value: '2l' },
+          { label: '3L', value: '3l' }
         ]
-      },
+      }
+    ]
+  },
+  {
+    name: 'Insulating Mid Layers',
+    alias: 'mid-layers',
+    description: 'Thermal regulation and insulating garments',
+    attributes: [
       {
-        name: 'Tools & Accessories',
-        alias: 'tools',
-        description: 'Multi-tools and survival accessories',
-        attributes: [
-          {
-            name: 'Type',
-            type: 'radio',
-            values: [
-              { label: 'Multi-tool', value: 'multi-tool' },
-              { label: 'Survival Kit', value: 'survival-kit' },
-              { label: 'Accessories', value: 'accessories' }
-            ]
-          },
-          {
-            name: 'Features',
-            type: 'checkbox',
-            values: [
-              { label: 'Compact', value: 'compact' },
-              { label: 'Modular', value: 'modular' },
-              { label: 'Weatherproof', value: 'weatherproof' }
-            ]
-          }
+        name: 'Insulation Type',
+        type: 'radio',
+        values: [
+          { label: 'Synthetic', value: 'synthetic' },
+          { label: 'Down', value: 'down' },
+          { label: 'Fleece', value: 'fleece' }
         ]
-      },
+      }
+    ]
+  },
+  {
+    name: 'Protective Outerwear',
+    alias: 'outerwear',
+    description: 'Weather protection and tactical outer layers',
+    attributes: [
       {
-        name: 'Hydration',
-        alias: 'hydration',
-        description: 'Water bottles and filtration',
-        attributes: [
-          {
-            name: 'Type',
-            type: 'radio',
-            values: [
-              { label: 'Water Bottle', value: 'bottle' },
-              { label: 'Filter', value: 'filter' },
-              { label: 'Reservoir', value: 'reservoir' }
-            ]
-          },
-          {
-            name: 'Features',
-            type: 'checkbox',
-            values: [
-              { label: 'Collapsible', value: 'collapsible' },
-              { label: 'Filtration', value: 'filtration' },
-              { label: 'Insulated', value: 'insulated' }
-            ]
-          }
+        name: 'Weather Rating',
+        type: 'radio',
+        values: [
+          { label: 'Water Resistant', value: 'water-resistant' },
+          { label: 'Waterproof', value: 'waterproof' },
+          { label: 'All-Weather', value: 'all-weather' }
+        ]
+      }
+    ]
+  },
+  {
+    name: 'Power & Connectivity',
+    alias: 'power',
+    description: 'Portable power solutions and connectivity gear',
+    attributes: [
+      {
+        name: 'Power Output',
+        type: 'radio',
+        values: [
+          { label: 'Standard', value: 'standard' },
+          { label: 'High Output', value: 'high' },
+          { label: 'Ultra Capacity', value: 'ultra' }
+        ]
+      }
+    ]
+  },
+  {
+    name: 'Shelter & Environmental Protection',
+    alias: 'shelter',
+    description: 'Survival shelters and environmental protection equipment',
+    attributes: [
+      {
+        name: 'Shelter Type',
+        type: 'radio',
+        values: [
+          { label: 'Emergency', value: 'emergency' },
+          { label: 'Tactical', value: 'tactical' },
+          { label: 'Long-Term', value: 'long-term' }
+        ]
+      }
+    ]
+  },
+  {
+    name: 'Tools & Smart Accessories',
+    alias: 'tools',
+    description: 'Tactical tools and smart survival accessories',
+    attributes: [
+      {
+        name: 'Tool Class',
+        type: 'radio',
+        values: [
+          { label: 'Basic', value: 'basic' },
+          { label: 'Advanced', value: 'advanced' },
+          { label: 'Professional', value: 'professional' }
         ]
       }
     ]
