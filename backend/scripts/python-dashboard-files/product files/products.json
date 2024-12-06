@@ -1,0 +1,128 @@
+[
+  {
+    "name": "Aegis Base Tee",
+    "price": 34.40,
+    "stock": 124,
+    "description": "A moisture-wicking technical tee woven with conductive fibers to track biometric data. Neutral design and tailored fit.",
+    "category": "Apparel"
+  },
+  {
+    "name": "Nexus Travel Polo",
+    "price": 46.75,
+    "stock": 83,
+    "description": "A versatile polo with an RFID-shielded pocket and a slim solar strip along the collar. Understated styling, easy office-to-outdoor transition.",
+    "category": "Apparel"
+  },
+  {
+    "name": "Axon Utility Duffel",
+    "price": 163.20,
+    "stock": 44,
+    "description": "A water-resistant duffel from self-healing fabric, hidden solar panel, integrated power bank.",
+    "category": "Core Gear"
+  },
+  {
+    "name": "Helix Beltpack",
+    "price": 72.50,
+    "stock": 57,
+    "description": "A matte black waist pack with encrypted USB storage, low-profile GPS beacon.",
+    "category": "Core Gear"
+  },
+  {
+    "name": "Synapse Base Top",
+    "price": 58.40,
+    "stock": 96,
+    "description": "A moisture-regulating long-sleeve with embedded temperature sensors.",
+    "category": "Performance Base Layers"
+  },
+  {
+    "name": "Kinetic Compression Leggings",
+    "price": 62.70,
+    "stock": 79,
+    "description": "Sleek leggings with conductive filaments gently warming muscles.",
+    "category": "Performance Base Layers"
+  },
+  {
+    "name": "Vantage Cargo Pants",
+    "price": 81.60,
+    "stock": 73,
+    "description": "Rugged cargo pants with hidden LED strips and RFID-blocking compartments.",
+    "category": "Tactical Bottoms"
+  },
+  {
+    "name": "Solace Utility Trousers",
+    "price": 93.80,
+    "stock": 54,
+    "description": "Utility trousers with discreet solar panels and hidden sleeves for encrypted drives.",
+    "category": "Tactical Bottoms"
+  },
+  {
+    "name": "Astra Smart Flask",
+    "price": 17.50,
+    "stock": 147,
+    "description": "Insulated flask with UV purification, micro solar cell, app-synced hydration metrics.",
+    "category": "Hydration Systems"
+  },
+  {
+    "name": "Aurion Reservoir",
+    "price": 48.10,
+    "stock": 132,
+    "description": "Hydration bladder with volume and temperature sensors, self-sealing membranes.",
+    "category": "Hydration Systems"
+  },
+  {
+    "name": "Xenon Grid Hoodie",
+    "price": 105.20,
+    "stock": 62,
+    "description": "Hoodie distributing warmth through conductive threads, powered by a small solar patch.",
+    "category": "Insulating Mid Layers"
+  },
+  {
+    "name": "Arclite Insulated Vest",
+    "price": 116.50,
+    "stock": 59,
+    "description": "High-loft vest with passive heating elements, app-driven climate suggestions.",
+    "category": "Insulating Mid Layers"
+  },
+  {
+    "name": "Aegis Field Jacket",
+    "price": 176.40,
+    "stock": 41,
+    "description": "Weatherproof shell with integrated GPS beacon, SOS transmitter.",
+    "category": "Protective Outerwear"
+  },
+  {
+    "name": "TerraShell Parka",
+    "price": 218.70,
+    "stock": 33,
+    "description": "Heavy-duty parka with biometric sensors adjusting insulation.",
+    "category": "Protective Outerwear"
+  },
+  {
+    "name": "Solaris Panel Mat",
+    "price": 152.80,
+    "stock": 52,
+    "description": "Flexible solar panel mat charging multiple devices, portable and durable.",
+    "category": "Power & Connectivity"
+  },
+  {
+    "name": "Cipher Relay Hub",
+    "price": 64.40,
+    "stock": 63,
+    "description": "Palm-sized wireless hotspot with encrypted storage, micro solar cell.",
+    "category": "Power & Connectivity"
+  },
+  {
+    "name": "Veridian Micro Shelter",
+    "price": 185.60,
+    "stock": 21,
+    "description": "Compact bivy shelter from self-healing fabric, passive solar strips, internal LED lighting.",
+    "category": "Shelter & Environmental Protection"
+  },
+  {
+    "name": "Cryptic Multi-Tool",
+    "price": 19.80,
+    "stock": 77,
+    "description": "Titanium multi-tool with encrypted storage, mini solar charger, digital compass.",
+    "category": "Tools & Smart Accessories"
+  }
+]
