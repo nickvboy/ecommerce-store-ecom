@@ -40,10 +40,8 @@ function PrivacyPolicy() {
           <p className="mb-4">Your information helps us provide and improve our services in the following ways:</p>
           <ul className="list-disc pl-6 space-y-2">
             <li>Process and fulfill your orders for GridgeGear products</li>
-            <li>Manage your account and provide customer support</li>
             <li>Send order confirmations and shipping updates</li>
             <li>Provide personalized product recommendations</li>
-            <li>Send promotional emails about new products and sales (if you've opted in)</li>
             <li>Improve our website's user experience and product offerings</li>
             <li>Analyze shopping patterns and optimize our inventory</li>
             <li>Prevent fraudulent transactions and enhance security</li>
@@ -70,15 +68,10 @@ function PrivacyPolicy() {
           </ul>
         </section>
 
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold text-text-100 mb-4">6. Cookies and Tracking</h2>
-          <p>
-            We use cookies to enhance your shopping experience, maintain your shopping cart, remember your preferences, and analyze site traffic. You can manage cookie preferences through your browser settings, though some features may not function without essential cookies.
-          </p>
-        </section>
+
 
         <section className="mb-12">
-          <h2 className="text-2xl font-bold text-text-100 mb-4">7. Third-Party Services</h2>
+          <h2 className="text-2xl font-bold text-text-100 mb-4">6. Third-Party Services</h2>
           <p>
             We work with trusted partners to provide specific services:
           </p>
@@ -94,21 +87,21 @@ function PrivacyPolicy() {
         </section>
 
         <section className="mb-12">
-          <h2 className="text-2xl font-bold text-text-100 mb-4">8. Data Retention</h2>
+          <h2 className="text-2xl font-bold text-text-100 mb-4">7. Data Retention</h2>
           <p>
             We retain your data for as long as necessary to provide our services and comply with legal obligations. Order history is kept for tax and warranty purposes, while account information is retained until you request deletion.
           </p>
         </section>
 
         <section className="mb-12">
-          <h2 className="text-2xl font-bold text-text-100 mb-4">9. Updates to Privacy Policy</h2>
+          <h2 className="text-2xl font-bold text-text-100 mb-4">8. Updates to Privacy Policy</h2>
           <p>
             We may update this policy to reflect changes in our practices or legal requirements. We'll notify you of significant changes through our website or email, and continue to protect your privacy in accordance with the latest version of this policy.
           </p>
         </section>
 
         <section className="mb-12">
-          <h2 className="text-2xl font-bold text-text-100 mb-4">10. Contact Us</h2>
+          <h2 className="text-2xl font-bold text-text-100 mb-4">9. Contact Us</h2>
           <p>
             If you have questions about this Privacy Policy or your data:
           </p>
