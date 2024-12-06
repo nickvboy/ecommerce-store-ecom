@@ -14,10 +14,14 @@ from PyQt6.QtWidgets import (
     QPushButton, QLabel, QLineEdit, QTextEdit, QComboBox, 
     QTableWidget, QTableWidgetItem, QHeaderView, QSpinBox,
     QMessageBox, QFileDialog, QProgressDialog, QFrame,
-    QSplitter, QStatusBar, QGroupBox, QFormLayout, QDoubleSpinBox
+    QSplitter, QStatusBar, QGroupBox, QFormLayout, QDoubleSpinBox,
+    QScrollArea
 )
-from PyQt6.QtCore import Qt, pyqtSignal, QThread, QDateTime
-from PyQt6.QtGui import QColor, QPalette, QFont
+from PyQt6.QtCore import Qt, pyqtSignal, QThread, QDateTime, QMimeData, QPoint
+from PyQt6.QtGui import (
+    QColor, QPalette, QFont, QDragEnterEvent, QDropEvent, QPixmap, 
+    QImage, QDrag, QCursor
+)
 import base64
 import csv
 import time
@@ -199,6 +203,213 @@ class ProductTableWidget(QTableWidget):
     selection_changed_signal = pyqtSignal()
     edit_clicked = pyqtSignal(dict)
 
+class ImageThumbnail(QLabel):
+    removed = pyqtSignal(str)  # Signal emitted when thumbnail is removed
+    reordered = pyqtSignal(str, int)  # Signal emitted when thumbnail is reordered (image_path, new_index)
+    
+    def __init__(self, image_path, index):
+        super().__init__()
+        self.image_path = image_path
+        self.index = index
+        self.setFixedSize(100, 100)
+        self.setStyleSheet("""
+            QLabel {
+                background-color: #2d2d2d;
+                border: 1px solid #3d3d3d;
+                border-radius: 5px;
+                padding: 2px;
+            }
+            QLabel:hover {
+                border: 1px solid #0d47a1;
+            }
+        """)
+        self.setCursor(QCursor(Qt.CursorShape.OpenHandCursor))
+        self.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.setAcceptDrops(True)
+        self.load_image()
+        
+    def load_image(self):
+        pixmap = QPixmap(self.image_path)
+        scaled_pixmap = pixmap.scaled(90, 90, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
+        self.setPixmap(scaled_pixmap)
+        
+    def mousePressEvent(self, event):
+        if event.button() == Qt.MouseButton.RightButton:
+            self.removed.emit(self.image_path)
+        elif event.button() == Qt.MouseButton.LeftButton:
+            self.setCursor(QCursor(Qt.CursorShape.ClosedHandCursor))
+            drag = QDrag(self)
+            mime_data = QMimeData()
+            mime_data.setText(self.image_path)
+            drag.setMimeData(mime_data)
+            
+            # Create a pixmap for drag feedback
+            pixmap = self.pixmap()
+            if pixmap:
+                scaled_pixmap = pixmap.scaled(50, 50, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
+                drag.setPixmap(scaled_pixmap)
+                drag.setHotSpot(QPoint(25, 25))
+            
+            drag.exec(Qt.DropAction.MoveAction)
+            self.setCursor(QCursor(Qt.CursorShape.OpenHandCursor))
+            
+    def dragEnterEvent(self, event):
+        if event.mimeData().hasText():
+            event.acceptProposedAction()
+            
+    def dragMoveEvent(self, event):
+        if event.mimeData().hasText():
+            event.acceptProposedAction()
+            
+    def dropEvent(self, event):
+        if event.mimeData().hasText():
+            source_path = event.mimeData().text()
+            if source_path != self.image_path:  # Don't reorder if dropped on itself
+                self.reordered.emit(source_path, self.index)
+            event.acceptProposedAction()
+
+class ImageUploadWidget(QWidget):
+    images_updated = pyqtSignal(list)  # Signal emitted when images are added/removed/reordered
+    
+    def __init__(self):
+        super().__init__()
+        self.images = []  # List of image paths
+        self.setup_ui()
+        
+    def setup_ui(self):
+        layout = QVBoxLayout(self)
+        layout.setSpacing(10)
+        
+        # Drop area
+        self.drop_area = QLabel("Drop images here or click to upload")
+        self.drop_area.setMinimumHeight(80)
+        self.drop_area.setStyleSheet("""
+            QLabel {
+                background-color: #2d2d2d;
+                border: 2px dashed #3d3d3d;
+                border-radius: 5px;
+                color: #888888;
+                font-size: 14px;
+            }
+            QLabel:hover {
+                border-color: #0d47a1;
+                color: #ffffff;
+            }
+        """)
+        self.drop_area.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.drop_area.setAcceptDrops(True)
+        self.drop_area.dragEnterEvent = self.dragEnterEvent
+        self.drop_area.dropEvent = self.dropEvent
+        self.drop_area.mousePressEvent = self.open_file_dialog
+        
+        # Thumbnails scroll area
+        self.scroll_area = QScrollArea()
+        self.scroll_area.setWidgetResizable(True)
+        self.scroll_area.setMinimumHeight(120)
+        self.scroll_area.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOn)
+        self.scroll_area.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        
+        self.thumbnail_container = QWidget()
+        self.thumbnail_layout = QHBoxLayout(self.thumbnail_container)
+        self.thumbnail_layout.setSpacing(5)
+        self.thumbnail_layout.setContentsMargins(5, 5, 5, 5)
+        self.thumbnail_layout.addStretch()
+        
+        self.scroll_area.setWidget(self.thumbnail_container)
+        
+        layout.addWidget(self.drop_area)
+        layout.addWidget(self.scroll_area)
+        layout.addStretch()
+        
+    def dragEnterEvent(self, event):
+        if event.mimeData().hasUrls() or event.mimeData().hasText():
+            event.acceptProposedAction()
+            
+    def dragMoveEvent(self, event):
+        if event.mimeData().hasUrls() or event.mimeData().hasText():
+            event.acceptProposedAction()
+            
+    def dropEvent(self, event):
+        if event.mimeData().hasUrls():
+            # Handle new images being dropped
+            file_paths = []
+            for url in event.mimeData().urls():
+                file_path = url.toLocalFile()
+                if file_path.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.bmp')):
+                    file_paths.append(file_path)
+            
+            if file_paths:
+                self.add_images(file_paths)
+                event.acceptProposedAction()
+        elif event.mimeData().hasText():
+            # Handle reordering
+            source_path = event.mimeData().text()
+            if source_path in self.images:
+                # Calculate the drop index based on the mouse position
+                drop_pos = event.position().x()
+                drop_index = 0
+                
+                # Find the index where the image should be inserted
+                for i in range(self.thumbnail_layout.count() - 1):  # -1 to exclude the stretch
+                    widget = self.thumbnail_layout.itemAt(i).widget()
+                    if widget:
+                        widget_center = widget.x() + widget.width() / 2
+                        if drop_pos > widget_center:
+                            drop_index = i + 1
+                
+                self.reorder_image(source_path, drop_index)
+                event.acceptProposedAction()
+            
+    def open_file_dialog(self, event):
+        file_paths, _ = QFileDialog.getOpenFileNames(
+            self,
+            "Select Images",
+            "",
+            "Images (*.png *.jpg *.jpeg *.gif *.bmp)"
+        )
+        
+        if file_paths:
+            self.add_images(file_paths)
+            
+    def add_images(self, file_paths):
+        for file_path in file_paths:
+            if file_path not in self.images:
+                self.images.append(file_path)
+        self.update_thumbnails()
+        self.images_updated.emit(self.images)
+        
+    def update_thumbnails(self):
+        # Clear existing thumbnails
+        while self.thumbnail_layout.count() > 1:  # Keep the stretch at the end
+            item = self.thumbnail_layout.takeAt(0)
+            if item.widget():
+                item.widget().deleteLater()
+        
+        # Add new thumbnails
+        for i, image_path in enumerate(self.images):
+            thumbnail = ImageThumbnail(image_path, i)
+            thumbnail.removed.connect(self.remove_image)
+            thumbnail.reordered.connect(self.reorder_image)
+            self.thumbnail_layout.insertWidget(i, thumbnail)
+            
+    def remove_image(self, image_path):
+        if image_path in self.images:
+            self.images.remove(image_path)
+            self.update_thumbnails()
+            self.images_updated.emit(self.images)
+            
+    def reorder_image(self, image_path, new_index):
+        if image_path in self.images:
+            old_index = self.images.index(image_path)
+            if old_index != new_index:
+                self.images.insert(new_index, self.images.pop(old_index))
+                self.update_thumbnails()
+                self.images_updated.emit(self.images)
+                
+    def set_images(self, image_paths):
+        self.images = image_paths.copy() if image_paths else []
+        self.update_thumbnails()
+
 class ProductFormWidget(QWidget):
     product_added = pyqtSignal()
     
@@ -228,12 +439,28 @@ class ProductFormWidget(QWidget):
         self.title_label.setStyleSheet("font-size: 16px; font-weight: bold;")
         layout.addWidget(self.title_label)
         
-        # Form fields
-        form_layout = QFormLayout()
+        # Scroll area for form
+        scroll_area = QScrollArea()
+        scroll_area.setWidgetResizable(True)
+        scroll_area.setStyleSheet("""
+            QScrollArea { 
+                border: none;
+                background: transparent;
+            }
+            QWidget#FormContainer {
+                background: transparent;
+            }
+        """)
+        
+        form_container = QWidget()
+        form_container.setObjectName("FormContainer")
+        form_layout = QFormLayout(form_container)
         form_layout.setSpacing(10)
+        form_layout.setContentsMargins(0, 0, 0, 0)
         
         self.name_input = QLineEdit()
         self.description_input = QTextEdit()
+        self.description_input.setMinimumHeight(100)
         self.price_input = QDoubleSpinBox()
         self.price_input.setMaximum(99999.99)
         self.original_price_input = QDoubleSpinBox()
@@ -242,14 +469,19 @@ class ProductFormWidget(QWidget):
         self.stock_input.setMaximum(999999)
         self.category_input = QComboBox()
         
+        # Image upload widget
+        self.image_upload = ImageUploadWidget()
+        
         form_layout.addRow("Name:", self.name_input)
         form_layout.addRow("Description:", self.description_input)
         form_layout.addRow("Price:", self.price_input)
         form_layout.addRow("Original Price:", self.original_price_input)
         form_layout.addRow("Stock:", self.stock_input)
         form_layout.addRow("Category:", self.category_input)
+        form_layout.addRow("Images:", self.image_upload)
         
-        layout.addLayout(form_layout)
+        scroll_area.setWidget(form_container)
+        layout.addWidget(scroll_area, 1)
         
         # Buttons
         button_layout = QHBoxLayout()
@@ -282,7 +514,11 @@ class ProductFormWidget(QWidget):
         category_index = self.category_input.findData(product['category'])
         if category_index >= 0:
             self.category_input.setCurrentIndex(category_index)
-    
+            
+        # Set images
+        if 'images' in product:
+            self.image_upload.set_images(product['images'])
+            
     def set_add_mode(self):
         self.current_product = None
         self.title_label.setText("Add New Product")
@@ -296,6 +532,7 @@ class ProductFormWidget(QWidget):
         self.original_price_input.setValue(0)
         self.stock_input.setValue(0)
         self.category_input.setCurrentIndex(0)
+        self.image_upload.set_images([])  # Clear images
     
     def submit_product(self):
         try:
@@ -305,7 +542,8 @@ class ProductFormWidget(QWidget):
                 'price': self.price_input.value(),
                 'originalPrice': self.original_price_input.value(),
                 'stock': self.stock_input.value(),
-                'category': self.category_input.currentData()
+                'category': self.category_input.currentData(),
+                'images': self.image_upload.images  # Add images to product data
             }
             
             if self.current_product:  # Update existing product
