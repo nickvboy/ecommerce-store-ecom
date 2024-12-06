@@ -25,6 +25,20 @@ from PyQt6.QtGui import (
 import base64
 import csv
 import time
+import cloudinary
+import cloudinary.uploader
+from dotenv import load_dotenv
+from pathlib import Path
+
+# Load environment variables
+load_dotenv()
+
+# Configure Cloudinary
+cloudinary.config(
+    cloud_name=os.getenv('CLOUDINARY_CLOUD_NAME'),
+    api_key=os.getenv('CLOUDINARY_API_KEY'),
+    api_secret=os.getenv('CLOUDINARY_API_SECRET')
+)
 
 # Configure logging
 logging.basicConfig(
@@ -38,9 +52,87 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
+class ImageTracker:
+    def __init__(self):
+        # Change the path to be in the same directory as the script
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        self.tracker_file = os.path.join(current_dir, 'product_images.json')
+        self.image_data = self.load_tracker()
+    
+    def load_tracker(self):
+        try:
+            if os.path.exists(self.tracker_file):
+                with open(self.tracker_file, 'r') as f:
+                    return json.load(f)
+            return {'products': {}, 'metadata': {'last_updated': None}}
+        except Exception as e:
+            logger.error(f"Error loading image tracker: {e}")
+            return {'products': {}, 'metadata': {'last_updated': None}}
+    
+    def save_tracker(self):
+        try:
+            # Update metadata
+            self.image_data['metadata']['last_updated'] = QDateTime.currentDateTime().toString(Qt.DateFormat.ISODate)
+            
+            # No need to create directories since we're saving in the current directory
+            with open(self.tracker_file, 'w') as f:
+                json.dump(self.image_data, f, indent=2)
+                
+            logger.info(f"Image tracker saved to {self.tracker_file}")
+        except Exception as e:
+            logger.error(f"Error saving image tracker: {e}")
+    
+    def update_product_images(self, product_id, image_urls):
+        """
+        Update product images with order information
+        """
+        try:
+            # Create image entries with order information
+            image_entries = [
+                {
+                    'url': url,
+                    'order': idx,
+                    'added_at': QDateTime.currentDateTime().toString(Qt.DateFormat.ISODate)
+                }
+                for idx, url in enumerate(image_urls)
+            ]
+            
+            # Update or create product entry
+            if product_id not in self.image_data['products']:
+                self.image_data['products'][product_id] = {
+                    'images': image_entries,
+                    'created_at': QDateTime.currentDateTime().toString(Qt.DateFormat.ISODate),
+                    'updated_at': QDateTime.currentDateTime().toString(Qt.DateFormat.ISODate)
+                }
+            else:
+                self.image_data['products'][product_id]['images'] = image_entries
+                self.image_data['products'][product_id]['updated_at'] = QDateTime.currentDateTime().toString(Qt.DateFormat.ISODate)
+            
+            self.save_tracker()
+            logger.info(f"Updated images for product {product_id}")
+        except Exception as e:
+            logger.error(f"Error updating product images: {e}")
+    
+    def get_product_images(self, product_id):
+        """
+        Get product images maintaining order
+        """
+        try:
+            product_data = self.image_data['products'].get(product_id, {})
+            if not product_data:
+                return []
+            
+            # Sort images by order and return URLs
+            images = sorted(product_data.get('images', []), key=lambda x: x['order'])
+            return [img['url'] for img in images]
+        except Exception as e:
+            logger.error(f"Error retrieving product images: {e}")
+            return []
+
 class ApiClient:
     def __init__(self, base_url="http://localhost:5000/api"):
         self.base_url = base_url
+        self.image_tracker = ImageTracker()
     
     def get_categories(self):
         try:
@@ -78,22 +170,42 @@ class ApiClient:
     
     def create_product(self, product_data):
         try:
+            # Handle image uploads if present
+            image_paths = product_data.pop('images', [])
+            if image_paths:
+                image_urls = self.upload_images(image_paths)
+                product_data['images'] = image_urls
+            
             response = requests.post(f"{self.base_url}/products", json=product_data)
             if response.ok:
-                return response.json()
+                result = response.json()
+                # Track the images if upload was successful
+                if image_urls:
+                    self.image_tracker.update_product_images(result['_id'], image_urls)
+                return result
             return None
         except Exception as e:
-            print(f"Error creating product: {e}")
+            logger.error(f"Error creating product: {e}")
             return None
     
     def update_product(self, product_id, product_data):
         try:
+            # Handle image uploads if present
+            image_paths = product_data.pop('images', [])
+            if image_paths:
+                image_urls = self.upload_images(image_paths)
+                product_data['images'] = image_urls
+            
             response = requests.put(f"{self.base_url}/products/{product_id}", json=product_data)
             if response.ok:
-                return response.json()
+                result = response.json()
+                # Track the images if upload was successful
+                if image_urls:
+                    self.image_tracker.update_product_images(product_id, image_urls)
+                return result
             return None
         except Exception as e:
-            print(f"Error updating product {product_id}: {e}")
+            logger.error(f"Error updating product {product_id}: {e}")
             return None
     
     def delete_products(self, product_ids):
@@ -106,6 +218,17 @@ class ApiClient:
             except Exception as e:
                 print(f"Error deleting product {product_id}: {e}")
         return deleted
+    
+    def upload_images(self, image_paths):
+        uploaded_urls = []
+        try:
+            for path in image_paths:
+                response = cloudinary.uploader.upload(path)
+                uploaded_urls.append(response['secure_url'])
+            return uploaded_urls
+        except Exception as e:
+            logger.error(f"Error uploading images to Cloudinary: {e}")
+            return []
 
 class ConsoleWidget(QTextEdit):
     def __init__(self):
@@ -412,10 +535,12 @@ class ImageUploadWidget(QWidget):
 
 class ProductFormWidget(QWidget):
     product_added = pyqtSignal()
+    product_updated = pyqtSignal()
     
-    def __init__(self, api_client):
+    def __init__(self, api_client, console_widget):
         super().__init__()
         self.api_client = api_client
+        self.console = console_widget  # Store console widget reference
         self.current_product = None
         self.setup_ui()
         self.load_categories()
@@ -543,23 +668,26 @@ class ProductFormWidget(QWidget):
                 'originalPrice': self.original_price_input.value(),
                 'stock': self.stock_input.value(),
                 'category': self.category_input.currentData(),
-                'images': self.image_upload.images  # Add images to product data
+                'images': self.image_upload.images  # This will now contain the image paths
             }
             
             if self.current_product:  # Update existing product
                 product_id = self.current_product['_id']
                 response = self.api_client.update_product(product_id, product_data)
-                print(f"Product updated: {response}")
-                self.product_updated.emit()
-                self.set_add_mode()
+                if response:
+                    self.console.log(f"Product updated: {response['name']}", "SUCCESS")
+                    self.product_updated.emit()
+                    self.set_add_mode()
             else:  # Add new product
                 response = self.api_client.create_product(product_data)
-                print(f"Product created: {response}")
-                self.product_added.emit()
-                self.clear_form()
+                if response:
+                    self.console.log(f"Product created: {response['name']}", "SUCCESS")
+                    self.product_added.emit()
+                    self.clear_form()
                 
         except Exception as e:
-            print(f"Error submitting product: {e}")
+            self.console.log(f"Error submitting product: {str(e)}", "ERROR")
+            logger.error(f"Product submission error: {str(e)}")
     
     # Signals
     product_added = pyqtSignal()
@@ -984,7 +1112,7 @@ class ProductManager(QMainWindow):
         left_layout.addWidget(self.console)
         
         # Right side (product form)
-        self.product_form = ProductFormWidget(self.api_client)
+        self.product_form = ProductFormWidget(self.api_client, self.console)
         self.product_form.product_added.connect(self.refresh_products)
         self.product_form.product_updated.connect(self.refresh_products)
         

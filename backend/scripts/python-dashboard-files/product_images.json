@@ -1,0 +1,33 @@
+{
+  "products": {
+    "67524aa7a7d7de22322a6e48": {
+      "images": [
+        {
+          "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733446309/etrvpvrzqsmqzefffpcx.jpg",
+          "order": 0,
+          "added_at": "2024-12-05T19:51:51"
+        },
+        {
+          "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733446310/yptzlww71xhu4tokxonq.png",
+          "order": 1,
+          "added_at": "2024-12-05T19:51:51"
+        },
+        {
+          "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733446310/jw4jazjtaagcyn7fatqc.png",
+          "order": 2,
+          "added_at": "2024-12-05T19:51:51"
+        },
+        {
+          "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733446311/xiovvjwruvzo26p6ul4z.png",
+          "order": 3,
+          "added_at": "2024-12-05T19:51:51"
+        }
+      ],
+      "created_at": "2024-12-05T19:51:51",
+      "updated_at": "2024-12-05T19:51:51"
+    }
+  },
+  "metadata": {
+    "last_updated": "2024-12-05T19:51:51"
+  }
+}
