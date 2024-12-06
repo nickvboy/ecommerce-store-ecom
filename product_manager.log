@@ -3078,3 +3078,62 @@ npm error A complete log of this run can be found in: C:\Users\nickv\AppData\Loc
 2024-12-05 21:21:09,121 - INFO - Reordered image from position 2 to 0
 2024-12-05 21:21:14,361 - DEBUG - Starting new HTTP connection (1): localhost:5000
 2024-12-05 21:21:14,394 - DEBUG - http://localhost:5000 "GET /api/products/67525f8119c8755f329003e9 HTTP/11" 200 4469
+2024-12-05 21:36:56,698 - DEBUG - Starting new HTTP connection (1): localhost:5000
+2024-12-05 21:36:56,740 - DEBUG - http://localhost:5000 "GET /api/categories HTTP/11" 200 9395
+2024-12-05 21:36:56,764 - DEBUG - Starting new HTTP connection (1): localhost:5000
+2024-12-05 21:36:56,924 - DEBUG - http://localhost:5000 "GET /api/products?page=1&limit=1000 HTTP/11" 200 281612
+2024-12-05 22:21:43,852 - DEBUG - Starting new HTTP connection (1): localhost:5000
+2024-12-05 22:21:47,941 - DEBUG - Starting new HTTP connection (1): localhost:5000
+2024-12-05 22:22:36,999 - DEBUG - Starting new HTTP connection (1): localhost:5000
+2024-12-05 22:22:37,050 - DEBUG - http://localhost:5000 "GET /api/categories HTTP/11" 200 9395
+2024-12-05 22:22:37,073 - DEBUG - Starting new HTTP connection (1): localhost:5000
+2024-12-05 22:22:37,199 - DEBUG - http://localhost:5000 "GET /api/products?page=1&limit=1000 HTTP/11" 200 232537
+2024-12-05 22:23:04,609 - DEBUG - Starting new HTTP connection (1): localhost:5000
+2024-12-05 22:23:04,620 - DEBUG - http://localhost:5000 "GET /api/products/67526d7dddd27e4b3bbb821a HTTP/11" 200 3603
+2024-12-05 22:23:04,623 - DEBUG - Starting new HTTP connection (1): localhost:5000
+2024-12-05 22:23:04,645 - DEBUG - http://localhost:5000 "GET /api/products/67526d7dddd27e4b3bbb821a HTTP/11" 200 3603
+2024-12-05 22:23:04,650 - INFO - Image tracker saved to c:\Users\nickv\Downloads\tester\ecommerce-store-ecom\backend\scripts\python-dashboard-files\product_images.json
+2024-12-05 22:23:04,650 - INFO - Updated images for product 67526d7dddd27e4b3bbb821a
+2024-12-05 22:23:04,759 - DEBUG - Starting new HTTPS connection (1): picsum.photos:443
+2024-12-05 22:23:04,759 - DEBUG - Starting new HTTPS connection (1): picsum.photos:443
+2024-12-05 22:23:04,760 - DEBUG - Starting new HTTPS connection (1): picsum.photos:443
+2024-12-05 22:23:04,761 - DEBUG - Starting new HTTPS connection (1): picsum.photos:443
+2024-12-05 22:23:04,792 - DEBUG - Starting new HTTPS connection (1): picsum.photos:443
+2024-12-05 22:23:04,792 - DEBUG - Starting new HTTPS connection (1): picsum.photos:443
+2024-12-05 22:23:05,977 - DEBUG - https://picsum.photos:443 "GET /seed/67526d7dddd27e4b3bbb821a-2/800/800 HTTP/11" 302 0
+2024-12-05 22:23:05,979 - DEBUG - Starting new HTTPS connection (1): fastly.picsum.photos:443
+2024-12-05 22:23:05,983 - DEBUG - https://picsum.photos:443 "GET /seed/67526d7dddd27e4b3bbb821a-1/800/800 HTTP/11" 302 0
+2024-12-05 22:23:05,984 - DEBUG - Starting new HTTPS connection (1): fastly.picsum.photos:443
+2024-12-05 22:23:06,248 - DEBUG - https://picsum.photos:443 "GET /seed/67526d7dddd27e4b3bbb821a-0/800/800 HTTP/11" 302 0
+2024-12-05 22:23:06,250 - DEBUG - Starting new HTTPS connection (1): fastly.picsum.photos:443
+2024-12-05 22:23:06,266 - DEBUG - https://picsum.photos:443 "GET /seed/67526d7dddd27e4b3bbb821a-5/800/800 HTTP/11" 302 0
+2024-12-05 22:23:06,267 - DEBUG - Starting new HTTPS connection (1): fastly.picsum.photos:443
+2024-12-05 22:23:06,285 - DEBUG - https://picsum.photos:443 "GET /seed/67526d7dddd27e4b3bbb821a-4/800/800 HTTP/11" 302 0
+2024-12-05 22:23:06,286 - DEBUG - Starting new HTTPS connection (1): fastly.picsum.photos:443
+2024-12-05 22:23:06,392 - DEBUG - https://picsum.photos:443 "GET /seed/67526d7dddd27e4b3bbb821a-3/800/800 HTTP/11" 302 0
+2024-12-05 22:23:06,394 - DEBUG - Starting new HTTPS connection (1): fastly.picsum.photos:443
+2024-12-05 22:23:06,841 - DEBUG - https://fastly.picsum.photos:443 "GET /id/295/800/800.jpg?hmac=ER-0_yHK3qj-27Zd-E1yBc2C71UeRbBHaG4IhkdMUag HTTP/11" 200 104878
+2024-12-05 22:23:07,166 - DEBUG - https://fastly.picsum.photos:443 "GET /id/774/800/800.jpg?hmac=vWhWKPGAYiaruPoUfRi86YCFwgyiEjsusZogjpmKMzk HTTP/11" 200 26611
+2024-12-05 22:23:07,189 - DEBUG - https://fastly.picsum.photos:443 "GET /id/731/800/800.jpg?hmac=LN5QQ1BdVyEAMZKdC-Z8FTBJndlsrMG6TXM5UHyKNP0 HTTP/11" 200 69168
+2024-12-05 22:23:07,239 - DEBUG - https://fastly.picsum.photos:443 "GET /id/215/800/800.jpg?hmac=wmSax7YfZTHVZvpD9RIWChQJZZ7FGWHNkhAGnD65lss HTTP/11" 200 36008
+2024-12-05 22:23:07,713 - DEBUG - https://fastly.picsum.photos:443 "GET /id/1015/800/800.jpg?hmac=sVQ48xj7Mwk9qWhaAQEM863_az4rr-UeOTiMG4WuUao HTTP/11" 200 96802
+2024-12-05 22:23:07,840 - DEBUG - https://fastly.picsum.photos:443 "GET /id/152/800/800.jpg?hmac=Txrw_aYCbsTOqrwLSe2OTr6uDGPBNtpo-3pmDQo9_pk HTTP/11" 200 49406
+2024-12-05 22:23:58,656 - DEBUG - Starting new HTTP connection (1): localhost:5000
+2024-12-05 22:23:58,715 - DEBUG - http://localhost:5000 "PATCH /api/products/67526d7dddd27e4b3bbb821a/images/reorder HTTP/11" 200 691
+2024-12-05 22:23:58,718 - INFO - Image tracker saved to c:\Users\nickv\Downloads\tester\ecommerce-store-ecom\backend\scripts\python-dashboard-files\product_images.json
+2024-12-05 22:23:58,718 - INFO - Updated images for product 67526d7dddd27e4b3bbb821a
+2024-12-05 22:23:58,719 - INFO - Successfully reordered images for product 67526d7dddd27e4b3bbb821a
+2024-12-05 22:23:58,720 - INFO - Reordered image from position 2 to 0
+2024-12-05 22:25:56,138 - INFO - Reordered image from position 5 to 2
+2024-12-05 22:25:57,487 - INFO - Reordered image from position 2 to 1
+2024-12-05 22:25:58,428 - INFO - Reordered image from position 1 to 0
+2024-12-05 22:26:04,444 - DEBUG - Starting new HTTP connection (1): localhost:5000
+2024-12-05 22:26:04,466 - DEBUG - http://localhost:5000 "PUT /api/products/67526d7dddd27e4b3bbb821a HTTP/11" 200 3398
+2024-12-05 22:26:04,523 - DEBUG - Starting new HTTPS connection (1): api.cloudinary.com:443
+2024-12-05 22:26:05,691 - DEBUG - https://api.cloudinary.com:443 "POST /v1_1/dwnf5wg7w/image/upload HTTP/11" 200 None
+2024-12-05 22:26:05,692 - DEBUG - Starting new HTTP connection (1): localhost:5000
+2024-12-05 22:26:05,698 - DEBUG - http://localhost:5000 "PATCH /api/products/67526d7dddd27e4b3bbb821a/images/reorder HTTP/11" 400 32
+2024-12-05 22:26:05,698 - ERROR - Failed to reorder images: 400 - {"message":"Invalid image URLs"}
+2024-12-05 22:26:05,699 - ERROR - Failed to reorder images for product 67526d7dddd27e4b3bbb821a
+2024-12-05 22:26:05,701 - DEBUG - Starting new HTTP connection (1): localhost:5000
+2024-12-05 22:26:05,814 - DEBUG - http://localhost:5000 "GET /api/products?page=1&limit=1000 HTTP/11" 200 232532
