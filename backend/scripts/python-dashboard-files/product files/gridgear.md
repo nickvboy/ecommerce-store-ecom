@@ -218,16 +218,16 @@ A young, slender male tech entrepreneur wearing a long-sleeved base layer shirt 
 6. Kinetic Compression Leggings  -
 A young, slender male tech entrepreneur wearing sleek compression leggings in deep graphite. Subtle conductive filaments form faint geometric trails along the thighs, promising gentle heat. Even studio lighting, neutral backdrop, photorealistic, –ar 1:1
 
-7. Vantage Cargo Pants  
+7. Vantage Cargo Pants  - 
 A young, slender male tech entrepreneur wearing rugged cargo pants in dark charcoal. Reinforced seams, hidden LED strips along inner seams, RFID-blocking compartments. High-resolution photograph, soft neutral light, –ar 1:1
 
-8. Solace Utility Trousers  
+8. Solace Utility Trousers  -
 A young, slender male tech entrepreneur wearing modern utility trousers in matte slate. Thin solar panels integrated above the knee, a discreet hidden sleeve for secure drives. Crisp digital photography, gentle diffused light, plain backdrop, –ar 1:1
 
-9. Astra Smart Flask  
+9. Astra Smart Flask  -
 A sleek, cylindrical insulated flask in brushed steel finish on a matte black surface. A tiny solar cell near the lid, a small UV purification window. Soft, diffused overhead light, hyperrealistic macro detail, plain gray background, –ar 1:1
 
-10. Aurion Reservoir  
+10. Aurion Reservoir  -
 A transparent hydration reservoir with faint embedded sensors, tubes coiled neatly beside it. Slight amber tint to the fluid, a small sealed data port. High-resolution photography, soft overhead lighting, white tabletop, –ar 1:1
 
 11. Xenon Grid Hoodie  
