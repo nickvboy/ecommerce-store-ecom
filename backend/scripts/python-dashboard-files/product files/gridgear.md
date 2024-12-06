@@ -200,59 +200,59 @@ GridgeGear stands at the intersection of technology, sustainability, and off-gri
 
 **All Prompts –ar 1:1**
 
-1. Aegis Base Tee  
-A single, athletic figure wearing a slim, neutral-toned technical T-shirt woven with fine conductive fibers visible as subtle geometric lines across the chest. Moisture-wicking fabric with a matte finish, slightly fitted sleeves, standing against a soft, diffused studio backdrop in warm neutral light. Hyperrealistic digital rendering, sharp focus, –ar 1:1
+1. Aegis Base Tee  -
+A young, slender male tech entrepreneur wearing a slim, neutral-toned technical T-shirt woven with fine conductive fibers forming subtle geometric lines across the chest. Moisture-wicking fabric with a matte finish, slightly fitted sleeves. Soft, diffused studio backdrop in warm neutral light. Hyperrealistic digital rendering, sharp focus, –ar 1:1
 
-2. Nexus Travel Polo  
-A standing figure wearing a tailored polo shirt in muted charcoal gray, a thin solar strip hidden along the collar’s edge, an RFID-shielded chest pocket barely noticeable. Smooth, wrinkle-resistant fabric with a quiet sheen. Photorealistic studio lighting, clean neutral background, –ar 1:1
+2. Nexus Travel Polo  -
+A young, slender male tech entrepreneur wearing a tailored polo shirt in muted charcoal gray, a thin solar strip hidden along the collar’s edge, a nearly invisible RFID-shielded chest pocket. Smooth, wrinkle-resistant fabric with a quiet sheen. Photorealistic studio lighting, clean neutral background, –ar 1:1
 
-3. Axon Utility Duffel  
-A compact, rectangular duffel bag in slate-gray self-healing fabric, set on a flat, matte-gray tabletop. A discreet solar panel flap folded flush along one side, a built-in power port just visible under a small protective cover. High-resolution digital photograph, soft side lighting casting delicate shadows, –ar 1:1
+3. Axon Utility Duffel -
+A compact, rectangular duffel bag in slate-gray self-healing fabric resting on a flat, matte-gray tabletop. A discreet solar panel flap folded flush along one side, a built-in power port just visible under a protective cover. High-resolution digital photograph, soft side lighting, –ar 1:1
 
-4. Helix Beltpack  
-A low-profile waist pack made of matte black abrasion-resistant material, resting on a simple wooden tabletop. A subtle zippered compartment revealing an encrypted USB slot, a hidden GPS beacon panel faintly outlined. Sharp macro lens photography, minimal background, warm side lighting, –ar 1:1
+4. Helix Beltpack  -
+A low-profile waist pack made of matte black abrasion-resistant material resting on a simple wooden tabletop. A subtle zippered compartment revealing an encrypted USB slot, a hidden GPS beacon panel faintly outlined. Sharp macro lens photography, minimal background, warm side lighting, –ar 1:1
 
-5. Synapse Base Top  
-A long-sleeved base layer shirt in a muted olive hue, draped on a simple dress form. Slight sheen indicating moisture regulation, tiny embedded temperature sensors hinted at by subtle textural patterns. Gentle, softbox lighting revealing fine texture, hyperrealistic digital rendering, neutral gray background, –ar 1:1
+5. Synapse Base Top  -
+A young, slender male tech entrepreneur wearing a long-sleeved base layer shirt in muted olive. A slight sheen suggests moisture regulation, tiny embedded temperature sensors hinted at by subtle texture. Gentle softbox lighting reveals fine details, hyperrealistic digital rendering, neutral gray background, –ar 1:1
 
-6. Kinetic Compression Leggings  
-Sleek compression leggings in deep graphite, displayed on a mannequin’s lower half. Subtle conductive filaments form faint geometric trails along the thighs, promising gentle heat. Even studio lighting to emphasize texture and fit, neutral backdrop, photorealistic, –ar 1:1
+6. Kinetic Compression Leggings  -
+A young, slender male tech entrepreneur wearing sleek compression leggings in deep graphite. Subtle conductive filaments form faint geometric trails along the thighs, promising gentle heat. Even studio lighting, neutral backdrop, photorealistic, –ar 1:1
 
 7. Vantage Cargo Pants  
-A pair of rugged cargo pants in dark charcoal, suspended as if weightless against a neutral gray background. Reinforced seams, LED strips hidden along inner seams, RFID-blocking compartments. High-resolution photograph, soft neutral light, –ar 1:1
+A young, slender male tech entrepreneur wearing rugged cargo pants in dark charcoal. Reinforced seams, hidden LED strips along inner seams, RFID-blocking compartments. High-resolution photograph, soft neutral light, –ar 1:1
 
 8. Solace Utility Trousers  
-Modern utility trousers in a matte slate fabric, shown on a standing figure. Thin solar panels integrated above the knee, a discreet hidden sleeve for secure drives. Crisp digital photography, gentle diffused light, plain backdrop, –ar 1:1
+A young, slender male tech entrepreneur wearing modern utility trousers in matte slate. Thin solar panels integrated above the knee, a discreet hidden sleeve for secure drives. Crisp digital photography, gentle diffused light, plain backdrop, –ar 1:1
 
 9. Astra Smart Flask  
-A sleek, cylindrical insulated flask in brushed steel finish, resting on a matte black surface. A tiny solar cell near the lid, a small UV purification window. Soft, diffused overhead light, hyperrealistic macro detail, plain gray background, –ar 1:1
+A sleek, cylindrical insulated flask in brushed steel finish on a matte black surface. A tiny solar cell near the lid, a small UV purification window. Soft, diffused overhead light, hyperrealistic macro detail, plain gray background, –ar 1:1
 
 10. Aurion Reservoir  
-A transparent hydration reservoir with faint embedded sensors along its surface, tubes coiled neatly beside it. Slight amber tint to fluid inside, a small sealed data port. High-resolution photography, soft overhead lighting, white tabletop, –ar 1:1
+A transparent hydration reservoir with faint embedded sensors, tubes coiled neatly beside it. Slight amber tint to the fluid, a small sealed data port. High-resolution photography, soft overhead lighting, white tabletop, –ar 1:1
 
 11. Xenon Grid Hoodie  
-A charcoal-toned hoodie on a torso form, subtle conductive threads forming a faint grid pattern on the chest. A thin solar patch on the shoulder. Soft, diffused studio lighting revealing fabric texture, neutral gray background, hyperrealistic digital render, –ar 1:1
+A young, slender male tech entrepreneur wearing a charcoal-toned hoodie with subtle conductive threads forming a faint grid pattern on the chest. A thin solar patch on the shoulder. Soft, diffused studio lighting, neutral gray background, hyperrealistic digital render, –ar 1:1
 
 12. Arclite Insulated Vest  
-A high-loft vest in deep forest green, quilted texture with hidden heating elements. A small device pocket at the chest. Gentle top lighting to show depth, neutral background, photorealistic digital rendering, –ar 1:1
+A young, slender male tech entrepreneur wearing a high-loft vest in deep forest green, quilted texture with hidden heating elements. A small device pocket at the chest. Gentle top lighting, neutral background, photorealistic digital rendering, –ar 1:1
 
 13. Aegis Field Jacket  
-A weatherproof field jacket in muted olive draped on a mannequin. Waterproof zippers, a discreet GPS beacon flap at the collar, an SOS transmitter tab along one sleeve. Slightly harsher side lighting to reveal rugged texture, plain background, high-resolution photography, –ar 1:1
+A young, slender male tech entrepreneur wearing a weatherproof field jacket in muted olive. Waterproof zippers, a discreet GPS beacon flap at the collar, an SOS transmitter tab on one sleeve. Slightly harsher side lighting reveals rugged texture, plain background, high-resolution photography, –ar 1:1
 
 14. TerraShell Parka  
-A heavy-duty parka in dark slate gray, displayed on a standing figure. Biometric sensors concealed inside its lining, thick insulation suggested by gentle loft. Warm, controlled studio light, minimal background, hyperrealistic digital rendering, –ar 1:1
+A young, slender male tech entrepreneur wearing a heavy-duty parka in dark slate gray. Concealed biometric sensors in the lining, thick insulation hinted by gentle loft. Warm, controlled studio light, minimal background, hyperrealistic digital rendering, –ar 1:1
 
 15. Solaris Panel Mat  
-A flexible, roll-out solar panel mat in charcoal fabric laid flat on a clean, neutral-toned tabletop. Thin panels aligned in neat rows, slender connectors at one edge. Soft natural light, slight shadow for depth, high-resolution photograph, –ar 1:1
+A flexible, roll-out solar panel mat in charcoal fabric lying flat on a neutral-toned tabletop. Thin panels aligned in neat rows, slender connectors at one edge. Soft natural light, slight shadow for depth, high-resolution photograph, –ar 1:1
 
 16. Cipher Relay Hub  
-A palm-sized, matte black wireless hub resting on a simple wooden table. A tiny solar cell panel on top, discreet data ports along the side edges. Gentle overhead lighting, ultra-sharp focus, neutral background, photorealistic macro view, –ar 1:1
+A palm-sized matte black wireless hub resting on a simple wooden table. A tiny solar cell panel on top, discreet data ports along the sides. Gentle overhead lighting, ultra-sharp focus, neutral background, photorealistic macro view, –ar 1:1
 
 17. Veridian Micro Shelter  
-A compact bivy-style shelter pitched on dry, light-brown rocky ground. Smooth, gray-green self-healing fabric, thin solar strips near the apex powering a soft internal glow. Late-afternoon sunlight casting mild shadows, high-resolution outdoor photography, –ar 1:1
+A compact bivy-style shelter pitched on dry, light-brown rocky ground. Gray-green self-healing fabric, thin solar strips near the apex powering a soft internal glow. Late-afternoon sunlight, mild shadows, high-resolution outdoor photography, –ar 1:1
 
 18. Cryptic Multi-Tool  
-A precision-crafted titanium multi-tool with a brushed metal finish, resting on a weathered wooden plank. A small encrypted storage port visible near the hinge, a tiny solar cell embedded in one side. Soft, raking side light highlighting textures, macro photograph, –ar 1:1
+A precision-crafted titanium multi-tool with a brushed metal finish resting on a weathered wooden plank. A small encrypted storage port near the hinge, a tiny solar cell embedded in one side. Soft, raking side light revealing textures, macro photograph, –ar 1:1
 
 Real world analouge:
 
