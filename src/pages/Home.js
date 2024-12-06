@@ -15,7 +15,6 @@ function Home() {
   const [stories, setStories] = useState([]);
 
   useEffect(() => {
-    const images = [];
     for (let i = 1; i <= 3; i++) {
       const imagePath = `/Supplementalassests/banner-images/banner${i}.png`;
       const img = new Image();

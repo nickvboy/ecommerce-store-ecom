@@ -4,7 +4,6 @@ import { StarIcon as StarIconSolid } from '@heroicons/react/24/solid';
 import ReviewCard from './ReviewCard';
 import { API_BASE_URL } from '../lib/utils';
 import { ChevronLeftIcon, ChevronRightIcon, ChevronDoubleLeftIcon, ChevronDoubleRightIcon } from '@heroicons/react/24/solid';
-import { Select } from "./ui/select";
 
 function ReviewSummary({ productId }) {
   const [reviews, setReviews] = useState([]);

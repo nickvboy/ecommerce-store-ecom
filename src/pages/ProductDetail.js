@@ -3,13 +3,11 @@ import { useParams, Link } from 'react-router-dom';
 import {
   ArrowLeftIcon,
   StarIcon,
-  ChevronUpIcon,
   ChevronDownIcon,
   ChevronLeftIcon,
   ChevronRightIcon
 } from '@heroicons/react/24/solid';
 import { Button } from "../components/ui/button";
-import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "../components/ui/collapsible";
 import ReviewSummary from '../components/ReviewSummary';
 import { API_BASE_URL } from '../lib/utils';
 import SizeSelector from '../components/SizeSelector';
@@ -143,7 +141,7 @@ function ProductDetail() {
                   {loadedImages.includes(product.images[currentImageIndex]?.url) ? (
                     <img 
                       src={product.images[currentImageIndex]?.url}
-                      alt={`${product.name} - Image ${currentImageIndex + 1}`}
+                      alt={`${product.name} #${currentImageIndex + 1}`}
                       className="w-full aspect-square object-cover rounded-lg"
                     />
                   ) : (

@@ -35,7 +35,7 @@ export function ApiStatusProvider({ children }) {
     checkApiConnection();
     const interval = setInterval(checkApiConnection, 30000); // Check every 30 seconds
     return () => clearInterval(interval);
-  }, []);
+  }, [checkApiConnection]);
 
   return (
     <ApiStatusContext.Provider value={{ ...apiStatus, checkApiConnection }}>

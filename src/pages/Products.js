@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import ProductCard from '../components/ProductCard';
 import PriceRangeSlider from '../components/PriceRangeSlider';
-import { Button } from "../components/ui/button";
 import { Checkbox } from "../components/ui/checkbox";
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "../components/ui/collapsible";
 import { ChevronDownIcon } from '@heroicons/react/24/solid';
