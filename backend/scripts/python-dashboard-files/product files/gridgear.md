@@ -230,83 +230,83 @@ A sleek, cylindrical insulated flask in brushed steel finish on a matte black su
 10. Aurion Reservoir  -
 A transparent hydration reservoir with faint embedded sensors, tubes coiled neatly beside it. Slight amber tint to the fluid, a small sealed data port. High-resolution photography, soft overhead lighting, white tabletop, –ar 1:1
 
-11. Xenon Grid Hoodie  
+11. Xenon Grid Hoodie  -
 A young, slender male tech entrepreneur wearing a charcoal-toned hoodie with subtle conductive threads forming a faint grid pattern on the chest. A thin solar patch on the shoulder. Soft, diffused studio lighting, neutral gray background, hyperrealistic digital render, –ar 1:1
 
-12. Arclite Insulated Vest  
+12. Arclite Insulated Vest  -
 A young, slender male tech entrepreneur wearing a high-loft vest in deep forest green, quilted texture with hidden heating elements. A small device pocket at the chest. Gentle top lighting, neutral background, photorealistic digital rendering, –ar 1:1
 
-13. Aegis Field Jacket  
+13. Aegis Field Jacket  -
 A young, slender male tech entrepreneur wearing a weatherproof field jacket in muted olive. Waterproof zippers, a discreet GPS beacon flap at the collar, an SOS transmitter tab on one sleeve. Slightly harsher side lighting reveals rugged texture, plain background, high-resolution photography, –ar 1:1
 
-14. TerraShell Parka  
+14. TerraShell Parka  -
 A young, slender male tech entrepreneur wearing a heavy-duty parka in dark slate gray. Concealed biometric sensors in the lining, thick insulation hinted by gentle loft. Warm, controlled studio light, minimal background, hyperrealistic digital rendering, –ar 1:1
 
-15. Solaris Panel Mat  
+15. Solaris Panel Mat  -
 A flexible, roll-out solar panel mat in charcoal fabric lying flat on a neutral-toned tabletop. Thin panels aligned in neat rows, slender connectors at one edge. Soft natural light, slight shadow for depth, high-resolution photograph, –ar 1:1
 
-16. Cipher Relay Hub  
+16. Cipher Relay Hub  -
 A palm-sized matte black wireless hub resting on a simple wooden table. A tiny solar cell panel on top, discreet data ports along the sides. Gentle overhead lighting, ultra-sharp focus, neutral background, photorealistic macro view, –ar 1:1
 
-17. Veridian Micro Shelter  
+17. Veridian Micro Shelter  -
 A compact bivy-style shelter pitched on dry, light-brown rocky ground. Gray-green self-healing fabric, thin solar strips near the apex powering a soft internal glow. Late-afternoon sunlight, mild shadows, high-resolution outdoor photography, –ar 1:1
 
-18. Cryptic Multi-Tool  
+18. Cryptic Multi-Tool  -
 A precision-crafted titanium multi-tool with a brushed metal finish resting on a weathered wooden plank. A small encrypted storage port near the hinge, a tiny solar cell embedded in one side. Soft, raking side light revealing textures, macro photograph, –ar 1:1
 
 Real world analouge:
 
-**Aegis Base Tee**  
+**Aegis Base Tee**  -
 - Under Armour HeatGear Compression Tee  
 - Lululemon Metal Vent Tech Short Sleeve  
 - Nike Dri-FIT ADV Tee
 
-**Nexus Travel Polo**  
+**Nexus Travel Polo**  -
 - Ministry of Supply Apollo Polo  
 - Vuori Strato Tech Polo  
 - Arc’teryx Captive Polo Shirt
 
-**Axon Utility Duffel**  
+**Axon Utility Duffel**  -
 - Patagonia Black Hole Duffel  
 - Peak Design Travel Duffel  
 - The North Face Base Camp Duffel
 
-**Helix Beltpack**  
+**Helix Beltpack**  -
 - Pacsafe Vibe Anti-Theft Hip Pack  
 - Peak Design Everyday Sling (small)  
 - Heimplanet Transit Line Sling Pocket
 
-**Synapse Base Top**  
+**Synapse Base Top**  -
 - Smartwool Merino 150 Base Layer  
 - Icebreaker Merino Oasis Crew  
 - Under Armour ColdGear Base Layer
 
-**Kinetic Compression Leggings**  
+**Kinetic Compression Leggings**  -
 - Nike Pro Compression Tights  
 - Under Armour RUSH Compression Leggings  
 - 2XU Light Speed Compression Tights
 
-**Vantage Cargo Pants**  
+**Vantage Cargo Pants**  -
 - 5.11 Tactical Stryke Pants  
 - Fjällräven Keb Trousers  
 - Prana Stretch Zion Pants
 
-**Solace Utility Trousers**  
+**Solace Utility Trousers**  -
 - Arc’teryx Gamma LT Pants  
 - Triple Aught Design Force 10 Cargo Pants  
 - Outdoor Research Ferrosi Pants
 
-**Astra Smart Flask**  
+**Astra Smart Flask**  -
 - LARQ Self-Cleaning Water Bottle  
 - HidrateSpark PRO Smart Bottle  
 - Grayl UltraPress Purifier Bottle
 
-**Aurion Reservoir**  
+**Aurion Reservoir**  -
 - CamelBak Crux Reservoir  
 - Osprey Hydraulics Reservoir  
 - Platypus Big Zip EVO
 
-**Xenon Grid Hoodie**  
+**Xenon Grid Hoodie**  -
 - Vollebak Solar Charged Hoodie  
 - Patagonia R1 TechFace Hoody  
 - Blackyak Hariana Hoody
