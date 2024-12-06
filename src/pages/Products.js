@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import ProductCard from '../components/ProductCard';
 import PriceRangeSlider from '../components/PriceRangeSlider';
 import { Button } from "../components/ui/button";
@@ -8,6 +8,9 @@ import { ChevronDownIcon } from '@heroicons/react/24/solid';
 import { useInView } from 'react-intersection-observer';
 import { useApiStatus } from '../contexts/ApiStatusContext';
 import { API_BASE_URL } from '../lib/utils';
+import debounce from 'lodash/debounce';
+import ErrorBoundary from '../components/ErrorBoundary';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -104,36 +107,59 @@ function Products() {
     }
   }, [inView, loading, hasMore, fetchProducts]);
 
+  // Memoize the filtered products computation
+  const memoizedProducts = useMemo(() => products, [products]);
+
+  // Debounce the filter changes
+  const debouncedFilterChange = useMemo(
+    () =>
+      debounce((newFilters) => {
+        setFilters(newFilters);
+        setPage(1);
+      }, 300),
+    []
+  );
+
   const handlePriceRangeChange = (newRange) => {
-    setFilters(prev => ({
-      ...prev,
+    const newFilters = {
+      ...filters,
       priceRange: {
         min: newRange[0],
         max: newRange[1]
       }
-    }));
+    };
+    debouncedFilterChange(newFilters);
   };
 
   const handleCategoryChange = (categoryId) => {
-    setFilters(prev => ({
-      ...prev,
-      categories: prev.categories.includes(categoryId)
-        ? prev.categories.filter(c => c !== categoryId)
-        : [...prev.categories, categoryId]
-    }));
+    const newFilters = {
+      ...filters,
+      categories: filters.categories.includes(categoryId)
+        ? filters.categories.filter(c => c !== categoryId)
+        : [...filters.categories, categoryId]
+    };
+    debouncedFilterChange(newFilters);
   };
 
   const handleAttributeChange = (attributeName, value) => {
-    setFilters(prev => ({
-      ...prev,
+    const newFilters = {
+      ...filters,
       attributes: {
-        ...prev.attributes,
-        [attributeName]: prev.attributes[attributeName]?.includes(value)
-          ? prev.attributes[attributeName].filter(v => v !== value)
-          : [...(prev.attributes[attributeName] || []), value]
+        ...filters.attributes,
+        [attributeName]: filters.attributes[attributeName]?.includes(value)
+          ? filters.attributes[attributeName].filter(v => v !== value)
+          : [...(filters.attributes[attributeName] || []), value]
       }
-    }));
+    };
+    debouncedFilterChange(newFilters);
   };
+
+  // Cleanup debounce on unmount
+  useEffect(() => {
+    return () => {
+      debouncedFilterChange.cancel();
+    };
+  }, [debouncedFilterChange]);
 
   const renderCategoryTree = (categories, level = 0) => {
     return categories.map((category) => (
@@ -157,85 +183,126 @@ function Products() {
     ));
   };
 
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center p-8">
+        <p className="text-red-500 mb-4">{error}</p>
+        <button 
+          onClick={() => {
+            setError(null);
+            setPage(1);
+            fetchProducts();
+          }}
+          className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark"
+        >
+          Try Again
+        </button>
+      </div>
+    );
+  }
+
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
-      {error && (
-        <div className="mb-8 p-4 bg-red-100 text-red-700 rounded-lg">
-          {error}
-        </div>
-      )}
-      
-      <div className="flex gap-8">
-        {/* Filter Sidebar */}
-        <aside className="w-64 space-y-6">
-          {/* Price Range Filter */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-bold">Price Range</h3>
-            <PriceRangeSlider
-              min={0}
-              max={500}
-              onChange={handlePriceRangeChange}
-            />
-          </div>
-
-          {/* Categories Filter - Always expanded */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-bold">Categories</h3>
-            <div className="space-y-1 max-h-[400px] overflow-y-auto pr-2">
-              {renderCategoryTree(categories)}
-            </div>
-          </div>
-
-          {/* Dynamic Attribute Filters */}
-          {Object.entries(availableAttributes).map(([attributeName, values]) => (
-            <Collapsible key={attributeName}>
-              <div className="space-y-4">
-                <CollapsibleTrigger className="flex items-center justify-between w-full">
-                  <h3 className="text-lg font-bold capitalize">{attributeName}</h3>
-                  <ChevronDownIcon className="h-5 w-5" />
+    <ErrorBoundary>
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex flex-col md:flex-row gap-8">
+          {/* Filter Sidebar */}
+          <aside className="w-full md:w-64 flex-shrink-0">
+            <div className="sticky top-4 space-y-6">
+              {/* Categories Filter */}
+              <Collapsible defaultOpen>
+                <CollapsibleTrigger className="flex items-center justify-between w-full group">
+                  <h2 className="text-lg font-semibold text-text-100">Categories</h2>
+                  <ChevronDownIcon className="h-5 w-5 text-text-200 transition-transform duration-200 group-data-[state=open]:rotate-180" />
                 </CollapsibleTrigger>
-                <CollapsibleContent>
-                  <div className="space-y-2">
-                    {values.map(({ value, count }) => (
-                      <label key={value} className="flex items-center space-x-2">
-                        <Checkbox
-                          checked={filters.attributes[attributeName]?.includes(value)}
-                          onCheckedChange={() => handleAttributeChange(attributeName, value)}
-                        />
-                        <span className="text-text-200">{value}</span>
-                        <span className="text-text-300 text-sm">({count})</span>
-                      </label>
-                    ))}
+                <CollapsibleContent className="transition-all duration-200 ease-in-out">
+                  <div className="mt-4 space-y-1 max-h-[400px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300">
+                    {renderCategoryTree(categories)}
                   </div>
                 </CollapsibleContent>
+              </Collapsible>
+
+              {/* Price Range Filter */}
+              <Collapsible defaultOpen>
+                <CollapsibleTrigger className="flex items-center justify-between w-full group">
+                  <h2 className="text-lg font-semibold text-text-100">Price Range</h2>
+                  <ChevronDownIcon className="h-5 w-5 text-text-200 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                </CollapsibleTrigger>
+                <CollapsibleContent className="transition-all duration-200 ease-in-out">
+                  <div className="mt-4">
+                    <PriceRangeSlider
+                      min={0}
+                      max={500}
+                      value={[filters.priceRange.min, filters.priceRange.max]}
+                      onChange={handlePriceRangeChange}
+                    />
+                  </div>
+                </CollapsibleContent>
+              </Collapsible>
+
+              {/* Attribute Filters */}
+              {Object.keys(availableAttributes).length > 0 && (
+                Object.entries(availableAttributes).map(([name, values]) => (
+                  <Collapsible key={name}>
+                    <CollapsibleTrigger className="flex items-center justify-between w-full group">
+                      <h2 className="text-lg font-semibold capitalize text-text-100">{name}</h2>
+                      <ChevronDownIcon className="h-5 w-5 text-text-200 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                    </CollapsibleTrigger>
+                    <CollapsibleContent className="transition-all duration-200 ease-in-out">
+                      <div className="mt-4 space-y-2">
+                        {values.map(({ value, count }) => (
+                          <label key={value} className="flex items-center space-x-2 cursor-pointer hover:bg-gray-50 p-1 rounded">
+                            <Checkbox
+                              checked={filters.attributes[name]?.includes(value) || false}
+                              onCheckedChange={() => handleAttributeChange(name, value)}
+                              className="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+                            />
+                            <span className="text-sm text-text-200">{value}</span>
+                            <span className="text-sm text-text-300">({count})</span>
+                          </label>
+                        ))}
+                      </div>
+                    </CollapsibleContent>
+                  </Collapsible>
+                ))
+              )}
+            </div>
+          </aside>
+
+          {/* Product Grid */}
+          <main className="flex-1">
+            {loading && page === 1 ? (
+              <div className="flex justify-center items-center min-h-[400px]">
+                <LoadingSpinner />
               </div>
-            </Collapsible>
-          ))}
-        </aside>
-
-        {/* Product Grid */}
-        <div className="flex-1">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {products.map((product) => (
-              <ProductCard key={product._id} product={product} />
-            ))}
-          </div>
-
-          <div ref={loadMoreRef} className="mt-8 text-center">
-            {loading && (
-              <div className="flex justify-center items-center space-x-2">
-                <div className="w-4 h-4 rounded-full bg-primary-100 animate-bounce" />
-                <div className="w-4 h-4 rounded-full bg-primary-100 animate-bounce [animation-delay:-.3s]" />
-                <div className="w-4 h-4 rounded-full bg-primary-100 animate-bounce [animation-delay:-.5s]" />
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {memoizedProducts.map((product) => (
+                  <ProductCard key={product._id} product={product} />
+                ))}
               </div>
             )}
-            {!hasMore && products.length > 0 && (
-              <p className="text-text-200">No more products to load</p>
+
+            {loading && page > 1 && (
+              <div className="flex justify-center items-center py-4">
+                <LoadingSpinner />
+              </div>
             )}
-          </div>
+
+            {!loading && !hasMore && memoizedProducts.length > 0 && (
+              <p className="text-center text-gray-500 mt-4">No more products to load</p>
+            )}
+
+            {!loading && memoizedProducts.length === 0 && (
+              <div className="text-center py-8">
+                <p className="text-gray-500">No products found matching your criteria</p>
+              </div>
+            )}
+
+            <div ref={loadMoreRef} className="h-10" aria-hidden="true" />
+          </main>
         </div>
       </div>
-    </div>
+    </ErrorBoundary>
   );
 }
 

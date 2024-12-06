@@ -2240,3 +2240,13 @@ npm error A complete log of this run can be found in: C:\Users\nickv\AppData\Loc
 2024-12-05 19:28:53,222 - DEBUG - http://localhost:5000 "DELETE /api/products/675239a6e1035924af506a1f HTTP/11" 200 42
 2024-12-05 19:28:53,424 - DEBUG - Starting new HTTP connection (1): localhost:5000
 2024-12-05 19:28:53,428 - DEBUG - http://localhost:5000 "DELETE /api/products/675239a5e1035924af506a12 HTTP/11" 200 42
+2024-12-05 19:29:14,656 - DEBUG - Starting new HTTP connection (1): localhost:5000
+2024-12-05 19:29:14,662 - DEBUG - http://localhost:5000 "GET /api/products?page=1&limit=1000 HTTP/11" 200 68
+2024-12-05 19:35:17,221 - DEBUG - Starting new HTTP connection (1): localhost:5000
+2024-12-05 19:35:17,237 - DEBUG - http://localhost:5000 "GET /api/categories HTTP/11" 200 9395
+2024-12-05 19:35:17,263 - DEBUG - Starting new HTTP connection (1): localhost:5000
+2024-12-05 19:35:17,271 - DEBUG - http://localhost:5000 "GET /api/products?page=1&limit=1000 HTTP/11" 200 68
+2024-12-05 19:35:21,626 - DEBUG - Starting new HTTP connection (1): localhost:5000
+2024-12-05 19:35:21,633 - DEBUG - http://localhost:5000 "GET /api/products?page=1&limit=1000 HTTP/11" 200 68
+2024-12-05 19:35:58,076 - DEBUG - Starting new HTTP connection (1): localhost:5000
+2024-12-05 19:35:58,164 - DEBUG - http://localhost:5000 "GET /api/products?page=1&limit=1000 HTTP/11" 200 234226
