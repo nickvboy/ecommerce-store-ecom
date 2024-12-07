@@ -2,9 +2,12 @@ import React, { useState, useEffect, useCallback } from 'react';
 import api from '../lib/api';
 import { useDropzone } from 'react-dropzone';
 import Papa from 'papaparse';
+import ImageUpload from '../components/ImageUpload';
+import { uploadMultipleImages } from '../utils/cloudinary';
 
 const SiteDashboard = () => {
   const [products, setProducts] = useState([]);
+  const [selectedProducts, setSelectedProducts] = useState(new Set());
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
@@ -16,7 +19,8 @@ const SiteDashboard = () => {
     description: '',
     price: '',
     stock: '',
-    category: ''
+    category: '',
+    images: []
   });
   const [isLoading, setIsLoading] = useState(false);
   const [totalProducts, setTotalProducts] = useState(0);
@@ -67,6 +71,13 @@ const SiteDashboard = () => {
     }));
   };
 
+  const handleImagesChange = (newImages) => {
+    setFormData(prev => ({
+      ...prev,
+      images: newImages
+    }));
+  };
+
   const calculateOriginalPrice = (price) => {
     return (parseFloat(price) * (1 + markupPercentage / 100)).toFixed(2);
   };
@@ -74,17 +85,53 @@ const SiteDashboard = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = {
+      const productData = {
         ...formData,
         price: parseFloat(formData.price),
         originalPrice: parseFloat(calculateOriginalPrice(formData.price)),
         stock: parseInt(formData.stock)
       };
 
+      let savedProduct;
+      
       if (editingProduct) {
-        await api.put(`/products/${editingProduct._id}`, data);
+        // Update existing product
+        savedProduct = await api.put(`/products/${editingProduct._id}`, productData);
+        
+        // Handle image changes if any
+        const newImages = formData.images.filter(img => img.isNew);
+        const existingImages = formData.images.filter(img => img.isExisting);
+        
+        if (newImages.length > 0) {
+          // Upload new images to Cloudinary
+          const uploadedImages = await uploadMultipleImages(newImages.map(img => img.file));
+          
+          // Add new images to the product
+          await api.post(`/products/${savedProduct._id}/images`, {
+            images: uploadedImages
+          });
+        }
+        
+        // If order changed or images were removed, update the order
+        if (newImages.length > 0 || existingImages.length !== editingProduct.images?.length) {
+          await api.patch(`/products/${savedProduct._id}/images/reorder`, {
+            imageOrder: formData.images.map(img => img.isNew ? img.url : img.publicId)
+          });
+        }
       } else {
-        await api.post('/products', data);
+        // Create new product
+        savedProduct = await api.post('/products', productData);
+        
+        // Handle new images
+        if (formData.images.length > 0) {
+          // Upload images to Cloudinary
+          const uploadedImages = await uploadMultipleImages(formData.images.map(img => img.file));
+          
+          // Add images to the product
+          await api.post(`/products/${savedProduct._id}/images`, {
+            images: uploadedImages
+          });
+        }
       }
 
       setFormData({
@@ -92,11 +139,11 @@ const SiteDashboard = () => {
         description: '',
         price: '',
         stock: '',
-        category: ''
+        category: '',
+        images: []
       });
       setEditingProduct(null);
       
-      setCurrentPage(1);
       fetchProducts();
       
       alert(editingProduct ? 'Product updated successfully' : 'Product added successfully');
@@ -113,7 +160,8 @@ const SiteDashboard = () => {
       description: product.description,
       price: product.price.toString(),
       stock: product.stock.toString(),
-      category: product.category?._id || ''
+      category: product.category?._id || '',
+      images: product.images || []
     });
   };
 
@@ -189,12 +237,63 @@ const SiteDashboard = () => {
     ${isUploading ? 'opacity-50' : 'hover:border-primary-100'}
   `;
 
+  const handleProductSelect = (productId, event) => {
+    const newSelected = new Set(selectedProducts);
+    
+    if (event.shiftKey && selectedProducts.size > 0) {
+      // Get the last selected product index
+      const productIds = products.map(p => p._id);
+      const lastSelected = Array.from(selectedProducts)[selectedProducts.size - 1];
+      const lastIndex = productIds.indexOf(lastSelected);
+      const currentIndex = productIds.indexOf(productId);
+      
+      // Select all products between last selected and current
+      const start = Math.min(lastIndex, currentIndex);
+      const end = Math.max(lastIndex, currentIndex);
+      
+      for (let i = start; i <= end; i++) {
+        newSelected.add(productIds[i]);
+      }
+    } else if (event.ctrlKey || event.metaKey) {
+      // Toggle selection
+      if (newSelected.has(productId)) {
+        newSelected.delete(productId);
+      } else {
+        newSelected.add(productId);
+      }
+    } else {
+      // Single select
+      newSelected.clear();
+      newSelected.add(productId);
+    }
+    
+    setSelectedProducts(newSelected);
+  };
+
+  const handleBulkDelete = async () => {
+    if (selectedProducts.size === 0) return;
+    
+    if (window.confirm(`Are you sure you want to delete ${selectedProducts.size} selected products?`)) {
+      try {
+        const deletePromises = Array.from(selectedProducts).map(productId =>
+          api.delete(`/products/${productId}`)
+        );
+        
+        await Promise.all(deletePromises);
+        setSelectedProducts(new Set());
+        fetchProducts();
+      } catch (error) {
+        console.error('Error deleting products:', error);
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen bg-bg-100 p-6">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold text-text-100 mb-8">Site Dashboard</h1>
 
-        {/* Add CSV Drop Zone */}
+        {/* CSV Drop Zone */}
         <div
           {...getRootProps()}
           className={dropzoneStyles}
@@ -288,6 +387,16 @@ const SiteDashboard = () => {
               className="w-full px-4 py-2 rounded bg-bg-300 text-text-100 border border-text-200 focus:border-primary-100 focus:outline-none h-32"
               required
             />
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-text-200">
+                Product Images
+              </label>
+              <ImageUpload 
+                images={formData.images}
+                existingImages={editingProduct?.images || []}
+                onImagesChange={handleImagesChange}
+              />
+            </div>
             {formData.price && (
               <div className="text-text-200">
                 Original Price (with {markupPercentage}% markup): ${calculateOriginalPrice(formData.price)}
@@ -304,7 +413,8 @@ const SiteDashboard = () => {
                       description: '',
                       price: '',
                       stock: '',
-                      category: ''
+                      category: '',
+                      images: []
                     });
                   }}
                   className="px-6 py-2 rounded bg-bg-300 text-text-100 hover:bg-bg-200"
@@ -326,19 +436,42 @@ const SiteDashboard = () => {
         <div className="bg-bg-200 p-6 rounded-lg">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-semibold text-text-100">Products</h2>
-            <select
-              value={itemsPerPage}
-              onChange={(e) => {
-                setItemsPerPage(Number(e.target.value));
-                setCurrentPage(1);
-              }}
-              className="px-4 py-2 rounded bg-bg-300 text-text-100 border border-text-200 focus:border-primary-100 focus:outline-none"
-            >
-              <option value="5">5 per page</option>
-              <option value="10">10 per page</option>
-              <option value="25">25 per page</option>
-              <option value="50">50 per page</option>
-            </select>
+            <div className="flex items-center space-x-4">
+              {selectedProducts.size > 0 && (
+                <button
+                  onClick={handleBulkDelete}
+                  className="px-4 py-1 rounded bg-red-600 text-text-100 hover:bg-red-700 flex items-center space-x-2"
+                >
+                  <svg 
+                    className="w-4 h-4" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round" 
+                      strokeWidth={2} 
+                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" 
+                    />
+                  </svg>
+                  <span>Delete Selected ({selectedProducts.size})</span>
+                </button>
+              )}
+              <select
+                value={itemsPerPage}
+                onChange={(e) => {
+                  setItemsPerPage(Number(e.target.value));
+                  setCurrentPage(1);
+                }}
+                className="px-4 py-2 rounded bg-bg-300 text-text-100 border border-text-200 focus:border-primary-100 focus:outline-none"
+              >
+                <option value="5">5 per page</option>
+                <option value="10">10 per page</option>
+                <option value="25">25 per page</option>
+                <option value="50">50 per page</option>
+              </select>
+            </div>
           </div>
           
           <div className="overflow-x-auto">
@@ -360,25 +493,84 @@ const SiteDashboard = () => {
                 </thead>
                 <tbody>
                   {products.map(product => (
-                    <tr key={product._id} className="border-b border-bg-300">
+                    <tr 
+                      key={product._id} 
+                      className={`
+                        border-b border-bg-300 cursor-pointer hover:bg-bg-300/50 transition-colors select-none
+                        ${selectedProducts.has(product._id) ? 'bg-primary-100/10' : ''}
+                      `}
+                      onClick={(e) => handleProductSelect(product._id, e)}
+                    >
                       <td className="py-3 px-4 text-text-100">{product.name}</td>
                       <td className="py-3 px-4 text-text-100">${product.price}</td>
                       <td className="py-3 px-4 text-text-100">${product.originalPrice}</td>
                       <td className="py-3 px-4 text-text-100">{product.stock}</td>
                       <td className="py-3 px-4 text-text-100">{product.category?.name || 'N/A'}</td>
                       <td className="py-3 px-4 text-right">
-                        <button
-                          onClick={() => handleEdit(product)}
-                          className="px-4 py-1 rounded bg-primary-100 text-text-100 hover:bg-primary-200 mr-2"
-                        >
-                          Edit
-                        </button>
-                        <button
-                          onClick={() => handleDelete(product._id)}
-                          className="px-4 py-1 rounded bg-red-600 text-text-100 hover:bg-red-700"
-                        >
-                          Delete
-                        </button>
+                        <div className="flex items-center justify-end space-x-2">
+                          {/* Image indicator */}
+                          {product.images?.length > 0 ? (
+                            <span 
+                              className="inline-flex items-center px-2 py-1 rounded bg-bg-300 text-text-200"
+                              title={`${product.images.length} image${product.images.length === 1 ? '' : 's'}`}
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <svg 
+                                className="w-5 h-5" 
+                                fill="none" 
+                                stroke="currentColor" 
+                                viewBox="0 0 24 24"
+                              >
+                                <path 
+                                  strokeLinecap="round" 
+                                  strokeLinejoin="round" 
+                                  strokeWidth={2} 
+                                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" 
+                                />
+                              </svg>
+                              <span className="ml-1">{product.images.length}</span>
+                            </span>
+                          ) : (
+                            <span 
+                              className="inline-flex items-center px-2 py-1 rounded bg-bg-300/50 text-text-200/50"
+                              title="No images"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <svg 
+                                className="w-5 h-5" 
+                                fill="none" 
+                                stroke="currentColor" 
+                                viewBox="0 0 24 24"
+                              >
+                                <path 
+                                  strokeLinecap="round" 
+                                  strokeLinejoin="round" 
+                                  strokeWidth={2} 
+                                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" 
+                                />
+                              </svg>
+                              <span className="ml-1">0</span>
+                            </span>
+                          )}
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleEdit(product);
+                            }}
+                            className="px-4 py-1 rounded bg-primary-100 text-text-100 hover:bg-primary-200"
+                          >
+                            Edit
+                          </button>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleDelete(product._id);
+                            }}
+                            className="px-4 py-1 rounded bg-red-600 text-text-100 hover:bg-red-700"
+                          >
+                            Delete
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))}
