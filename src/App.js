@@ -20,6 +20,7 @@ import FactSheet from './pages/about/FactSheet';
 import Team from './pages/about/Team';
 import ContactUs from './pages/ContactUs';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import SiteDashboard from './pages/SiteDashboard';
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/checkout" element={<Checkout />} />
                     <Route path="/order-success" element={<OrderSuccess />} />
+                    <Route path="/admin-dashboard" element={<SiteDashboard />} />
                   </Routes>
                 </div>
               </Layout>

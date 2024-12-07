@@ -8,90 +8,31 @@ exports.getProducts = async (req, res) => {
       page = 1, 
       limit = 10, 
       sort = '-createdAt',
-      categoryId,
-      minPrice,
-      maxPrice,
-      search,
-      attributes
+      search
     } = req.query;
 
     const query = {};
 
-    // Handle category filtering including subcategories
-    if (categoryId) {
-      const category = await Category.findById(categoryId);
-      if (category) {
-        const children = await category.getAllChildren();
-        const categoryIds = [categoryId, ...children.map(c => c._id)];
-        query.category = { $in: categoryIds };
-      }
-    }
-
-    // Price range filter
-    if (minPrice || maxPrice) {
-      query.price = {};
-      if (minPrice) query.price.$gte = Number(minPrice);
-      if (maxPrice) query.price.$lte = Number(maxPrice);
-    }
-
-    // Text search
+    // Text search if provided
     if (search) {
       query.$text = { $search: search };
     }
 
-    // Attribute filters
-    if (attributes) {
-      const attributeFilters = JSON.parse(attributes);
-      Object.entries(attributeFilters).forEach(([name, value]) => {
-        if (Array.isArray(value)) {
-          // For checkbox/radio attributes with multiple values
-          query['attributes'] = {
-            $elemMatch: {
-              name,
-              value: { $in: value }
-            }
-          };
-        } else if (typeof value === 'object' && (value.min !== undefined || value.max !== undefined)) {
-          // For range attributes
-          const rangeFilter = {
-            'attributes': {
-              $elemMatch: {
-                name,
-                value: {}
-              }
-            }
-          };
-          if (value.min !== undefined) rangeFilter.attributes.$elemMatch.value.$gte = value.min;
-          if (value.max !== undefined) rangeFilter.attributes.$elemMatch.value.$lte = value.max;
-          Object.assign(query, rangeFilter);
-        } else {
-          // For single value attributes
-          query['attributes'] = {
-            $elemMatch: {
-              name,
-              value
-            }
-          };
-        }
-      });
-    }
-
+    // Execute query with pagination
     const products = await Product.find(query)
-      .populate('category', 'name alias')
+      .populate('category', 'name')
       .sort(sort)
-      .limit(limit * 1)
-      .skip((page - 1) * limit);
+      .limit(parseInt(limit))
+      .skip((parseInt(page) - 1) * parseInt(limit));
 
-    const count = await Product.countDocuments(query);
-
-    // Get available attribute values for filtering
-    const attributeStats = await getAttributeStats(query);
+    // Get total count for pagination
+    const total = await Product.countDocuments(query);
 
     res.json({
       products,
-      totalPages: Math.ceil(count / limit),
-      currentPage: page,
-      attributeStats
+      totalPages: Math.ceil(total / limit),
+      currentPage: parseInt(page),
+      totalProducts: total
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
