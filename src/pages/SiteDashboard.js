@@ -28,6 +28,9 @@ const SiteDashboard = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [notification, setNotification] = useState({ show: false, message: '', type: 'success' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [newImages, setNewImages] = useState([]);
+  const [deletedImages, setDeletedImages] = useState([]);
 
   useEffect(() => {
     fetchProducts();
@@ -73,10 +76,24 @@ const SiteDashboard = () => {
     }));
   };
 
-  const handleImagesChange = (newImages) => {
+  const handleImagesChange = (images) => {
+    // Filter out new images (those with files attached)
+    const newImageFiles = images.filter(img => img.isNew);
+    setNewImages(newImageFiles);
+
+    // If we're editing a product, track deleted images
+    if (editingProduct) {
+      const existingImages = editingProduct.images || [];
+      const remainingImages = images.filter(img => !img.isNew).map(img => img.publicId);
+      const deletedImageIds = existingImages
+        .filter(img => !remainingImages.includes(img.publicId))
+        .map(img => img.publicId);
+      setDeletedImages(deletedImageIds);
+    }
+
     setFormData(prev => ({
       ...prev,
-      images: newImages
+      images: images
     }));
   };
 
@@ -86,112 +103,101 @@ const SiteDashboard = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    
     try {
-      const productData = {
-        name: formData.name,
-        description: formData.description,
-        price: parseFloat(formData.price),
-        originalPrice: parseFloat(calculateOriginalPrice(formData.price)),
-        stock: parseInt(formData.stock),
-        category: formData.category
-      };
-
-      let savedProduct;
+      const productData = { ...formData };
+      delete productData.images; // Remove images from initial product data
+      
+      let productId = editingProduct?._id;
       
       if (editingProduct) {
         // Update existing product
-        savedProduct = await api.put(`/products/${editingProduct._id}`, productData);
-        
-        // Handle image changes if any
-        const newImages = formData.images.filter(img => img.isNew);
-        const existingImages = formData.images.filter(img => img.isExisting);
-        
-        // Find deleted images
-        const deletedImages = editingProduct.images
-          ?.filter(originalImg => !existingImages.some(img => img.publicId === originalImg.publicId))
-          .map(img => img.publicId) || [];
-        
-        try {
-          // Handle image operations in sequence
-          if (deletedImages.length > 0) {
-            console.log('Deleting images:', deletedImages);
-            await api.delete(`/products/${editingProduct._id}/images`, {
-              data: { imageIds: deletedImages }
-            });
-          }
-
-          if (newImages.length > 0) {
-            console.log('Uploading new images:', newImages);
-            // Upload new images to Cloudinary
-            const uploadedImages = await uploadMultipleImages(newImages.map(img => img.file));
-            console.log('Uploaded images:', uploadedImages);
-            
-            // Add new images to the product
-            await api.post(`/products/${editingProduct._id}/images`, {
-              images: uploadedImages
-            });
-          }
-
-          // Get the latest product data with updated images
-          const updatedProduct = await api.get(`/products/${editingProduct._id}`);
-          const currentImages = updatedProduct.data.images || [];
-          
-          // Only reorder if we have images
-          if (currentImages.length > 0) {
-            console.log('Reordering images:', currentImages);
-            await api.patch(`/products/${editingProduct._id}/images/reorder`, {
-              imageOrders: currentImages.map((img, index) => ({
-                url: img.url,
-                order: index
-              }))
-            });
-          }
-
-          showNotification('Product updated successfully');
-        } catch (error) {
-          console.error('Error handling images:', error);
-          throw error;
-        }
+        await api.put(`/products/${productId}`, productData);
       } else {
         // Create new product
-        savedProduct = await api.post('/products', productData);
-        
-        // Handle new images
-        if (formData.images.length > 0) {
-          try {
-            // Upload images to Cloudinary
-            const uploadedImages = await uploadMultipleImages(formData.images.map(img => img.file));
+        const response = await api.post('/products', productData);
+        productId = response.data._id;
+      }
+      
+      // Handle image operations in sequence
+      try {
+        // 1. Delete old images if any were marked for deletion
+        if (deletedImages.length > 0) {
+          console.log('Deleting images:', deletedImages);
+          await api.delete(`/products/${productId}/images`, {
+            data: { imageIds: deletedImages }
+          });
+        }
+
+        // 2. Upload and add new images if any
+        if (newImages.length > 0) {
+          console.log('Processing new images:', newImages.length);
+          
+          // Filter out only files that need to be uploaded
+          const filesToUpload = newImages.filter(img => img.file).map(img => img.file);
+          
+          if (filesToUpload.length > 0) {
+            console.log('Uploading new images to Cloudinary:', filesToUpload.length);
+            const uploadedImages = await uploadMultipleImages(filesToUpload);
+            console.log('Successfully uploaded images:', uploadedImages);
             
-            // Add images to the product
-            await api.post(`/products/${savedProduct._id}/images`, {
+            // Add new images to the product
+            await api.post(`/products/${productId}/images`, {
               images: uploadedImages
             });
-          } catch (error) {
-            console.error('Error handling new product images:', error);
-            throw error;
+            console.log('Added images to product');
           }
         }
 
-        showNotification('Product created successfully');
-      }
+        // 3. Get the latest product data with updated images
+        const updatedProduct = await api.get(`/products/${productId}`);
+        const currentImages = updatedProduct.data.images || [];
+        
+        // 4. Reorder images if needed
+        if (currentImages.length > 0) {
+          console.log('Reordering images:', currentImages);
+          await api.patch(`/products/${productId}/images/reorder`, {
+            imageOrders: currentImages.map((img, index) => ({
+              url: img.url,
+              order: index
+            }))
+          });
+        }
 
-      setFormData({
-        name: '',
-        description: '',
-        price: '',
-        stock: '',
-        category: '',
-        images: []
-      });
-      setEditingProduct(null);
-      
-      fetchProducts();
+        showNotification('Product updated successfully');
+        resetForm();
+        fetchProducts();
+      } catch (imageError) {
+        console.error('Error handling images:', imageError);
+        showNotification('Product saved but there was an error handling images: ' + imageError.message, 'error');
+      }
     } catch (error) {
-      console.error('Error saving product:', error);
-      const errorMessage = error.response?.data?.message || 'Failed to save product';
-      console.error('Error details:', errorMessage);
-      showNotification(errorMessage, 'error');
+      console.error('Error submitting product:', error);
+      showNotification(error.message || 'Error updating product', 'error');
+    } finally {
+      setIsSubmitting(false);
     }
+  };
+
+  const resetForm = () => {
+    setEditingProduct(null);
+    setFormData({
+      name: '',
+      description: '',
+      price: '',
+      stock: '',
+      category: '',
+      images: []
+    });
+    setNewImages([]);
+    setDeletedImages([]);
+    // Clear any existing image URLs
+    formData.images.forEach(img => {
+      if (img.isNew && img.url) {
+        URL.revokeObjectURL(img.url);
+      }
+    });
   };
 
   // Helper function to compare arrays
@@ -493,6 +499,12 @@ const SiteDashboard = () => {
                       stock: '',
                       category: '',
                       images: []
+                    });
+                    // Clear any existing image URLs
+                    formData.images.forEach(img => {
+                      if (img.isNew && img.url) {
+                        URL.revokeObjectURL(img.url);
+                      }
                     });
                   }}
                   className="px-6 py-2 rounded bg-bg-300 text-text-100 hover:bg-bg-200"

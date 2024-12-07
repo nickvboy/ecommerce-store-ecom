@@ -22,7 +22,16 @@ exports.createReview = async (req, res) => {
     const product = await Product.findById(productId);
     if (!product) return res.status(404).json({ message: 'Product not found' });
 
-    const review = new Review({ product: productId, userName, location, rating, title, content });
+    const review = new Review({ 
+      product: productId, 
+      userName, 
+      location, 
+      rating, 
+      title, 
+      content,
+      likes: 0,
+      dislikes: 0
+    });
     await review.save();
 
     // Update product's review statistics

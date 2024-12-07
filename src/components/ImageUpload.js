@@ -1,13 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 
 const ImageUpload = ({ images = [], onImagesChange, existingImages = [] }) => {
   const [previewImages, setPreviewImages] = useState([]);
   const [draggedItem, setDraggedItem] = useState(null);
   const [hoveredImage, setHoveredImage] = useState(null);
+  const [uploadError, setUploadError] = useState(null);
   
+  const cleanupPreviewUrls = useCallback(() => {
+    previewImages.forEach(img => {
+      if (img.isNew && img.url) {
+        URL.revokeObjectURL(img.url);
+      }
+    });
+  }, []);
+
   useEffect(() => {
-    if (existingImages.length > 0) {
+    if (existingImages.length > 0 && images.length === 0) {
       const formattedExisting = existingImages.map(img => ({
         id: img.publicId || Math.random().toString(36).substr(2, 9),
         url: img.url,
@@ -15,8 +24,11 @@ const ImageUpload = ({ images = [], onImagesChange, existingImages = [] }) => {
         publicId: img.publicId
       }));
       setPreviewImages(formattedExisting);
+    } else if (images.length === 0 && previewImages.length > 0) {
+      cleanupPreviewUrls();
+      setPreviewImages([]);
     }
-  }, [existingImages]);
+  }, [existingImages, images.length, cleanupPreviewUrls]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: {
@@ -24,6 +36,17 @@ const ImageUpload = ({ images = [], onImagesChange, existingImages = [] }) => {
     },
     multiple: true,
     onDrop: (acceptedFiles) => {
+      setUploadError(null);
+      
+      // Validate file sizes (max 5MB per file)
+      const maxSize = 5 * 1024 * 1024; // 5MB
+      const invalidFiles = acceptedFiles.filter(file => file.size > maxSize);
+      
+      if (invalidFiles.length > 0) {
+        setUploadError(`Some files exceed the 5MB limit: ${invalidFiles.map(f => f.name).join(', ')}`);
+        return;
+      }
+
       const newImages = acceptedFiles.map(file => ({
         id: Math.random().toString(36).substr(2, 9),
         url: URL.createObjectURL(file),
@@ -83,7 +106,6 @@ const ImageUpload = ({ images = [], onImagesChange, existingImages = [] }) => {
 
   return (
     <div className="space-y-4">
-      {/* Drop Zone for File Upload */}
       <div
         {...getRootProps()}
         className={`
@@ -119,12 +141,17 @@ const ImageUpload = ({ images = [], onImagesChange, existingImages = [] }) => {
             }
           </p>
           <p className="text-sm text-text-200">
-            Supports PNG, JPG, JPEG, WEBP
+            Supports PNG, JPG, JPEG, WEBP (max 5MB per file)
           </p>
         </div>
       </div>
 
-      {/* Image Previews with Drag and Drop Reordering */}
+      {uploadError && (
+        <div className="text-red-500 text-sm mt-2">
+          {uploadError}
+        </div>
+      )}
+
       {previewImages.length > 0 && (
         <div className="flex flex-wrap gap-4 min-h-[8rem] p-2 rounded-lg">
           {previewImages.map((image, index) => (

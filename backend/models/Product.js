@@ -45,6 +45,14 @@ const productSchema = new mongoose.Schema({
   featured: {
     type: Boolean,
     default: false
+  },
+  averageRating: {
+    type: Number,
+    default: 0
+  },
+  totalReviews: {
+    type: Number,
+    default: 0
   }
 }, {
   timestamps: true,
@@ -136,6 +144,23 @@ productSchema.methods.validateAttributes = async function() {
       }
     }
   }
+};
+
+// Add method to update review stats
+productSchema.methods.updateReviewStats = async function() {
+  const Review = mongoose.model('Review');
+  const reviews = await Review.find({ product: this._id });
+  
+  if (reviews.length === 0) {
+    this.averageRating = 0;
+    this.totalReviews = 0;
+  } else {
+    const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+    this.averageRating = totalRating / reviews.length;
+    this.totalReviews = reviews.length;
+  }
+  
+  await this.save();
 };
 
 module.exports = mongoose.model('Product', productSchema); 

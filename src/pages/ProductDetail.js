@@ -241,8 +241,8 @@ function ProductDetail() {
                   {[1, 2, 3, 4, 5].map((star) => (
                     <StarIcon 
                       key={star}
-                      className={`h-5 w-5 ${star <= Math.floor(product.reviewStats.averageRating) ? 'fill-transparent' : 'text-bg-300'}`}
-                      style={star <= Math.floor(product.reviewStats.averageRating) ? {
+                      className={`h-5 w-5 ${star <= Math.floor(product.averageRating) ? 'fill-transparent' : 'text-bg-300'}`}
+                      style={star <= Math.floor(product.averageRating) ? {
                         fill: 'url(#star-gradient)'
                       } : {}}
                     />
@@ -257,8 +257,8 @@ function ProductDetail() {
                     </defs>
                   </svg>
                 </div>
-                <span className="text-text-200">{product.reviewStats.averageRating} out of 5</span>
-                <span className="text-text-200">({product.reviewStats.totalReviews} reviews)</span>
+                <span className="text-text-200">{product.averageRating.toFixed(1)} out of 5</span>
+                <span className="text-text-200">({product.totalReviews} reviews)</span>
               </div>
 
               {/* Price */}
