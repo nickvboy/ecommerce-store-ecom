@@ -1061,7 +1061,7 @@ class ProductFormWidget(QWidget):
             price = self.price_input.value()
             markup = self.markup_input.value() / 100.0
             if markup != 0:
-                original_price = price / (1 + markup)
+                original_price = price * (1 + markup)
                 self.original_price_input.setValue(original_price)
     
     def handle_original_price_change(self):

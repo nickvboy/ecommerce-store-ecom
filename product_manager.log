@@ -6032,3 +6032,194 @@ AttributeError: 'ImageUploadWidget' object has no attribute 'get_image_urls'. Di
 2024-12-07 09:35:40,421 - DEBUG - Starting new HTTP connection (1): localhost:5001
 2024-12-07 09:35:40,429 - DEBUG - http://localhost:5001 "GET /api/products/675455676e5670f29f9e1084 HTTP/11" 200 737
 2024-12-07 09:35:40,431 - INFO - Setting images: []
+2024-12-07 09:50:56,171 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:51:00,277 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:51:04,353 - INFO - Setting images: []
+2024-12-07 09:54:36,327 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,343 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 09:54:36,345 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,371 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 577
+2024-12-07 09:54:36,400 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,409 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 09:54:36,411 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,428 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 604
+2024-12-07 09:54:36,438 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,457 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 09:54:36,459 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,479 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 554
+2024-12-07 09:54:36,485 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,495 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 09:54:36,496 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,513 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 535
+2024-12-07 09:54:36,517 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,526 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 09:54:36,528 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,541 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 527
+2024-12-07 09:54:36,548 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,558 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 09:54:36,559 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,576 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 523
+2024-12-07 09:54:36,581 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,590 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 09:54:36,592 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,602 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 538
+2024-12-07 09:54:36,606 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,617 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 09:54:36,619 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,627 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 542
+2024-12-07 09:54:36,632 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,641 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 09:54:36,643 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,654 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 548
+2024-12-07 09:54:36,658 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,666 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 09:54:36,668 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,679 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 544
+2024-12-07 09:54:36,682 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,692 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 09:54:36,694 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,704 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 549
+2024-12-07 09:54:36,708 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,716 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 09:54:36,718 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,727 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 540
+2024-12-07 09:54:36,732 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,742 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 09:54:36,744 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,763 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 526
+2024-12-07 09:54:36,769 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,777 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 09:54:36,778 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,788 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 524
+2024-12-07 09:54:36,794 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,805 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 09:54:36,807 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,818 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 535
+2024-12-07 09:54:36,821 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,829 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 09:54:36,830 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,841 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 525
+2024-12-07 09:54:36,844 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,871 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 09:54:36,873 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,880 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 553
+2024-12-07 09:54:36,883 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,915 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 09:54:36,918 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:36,936 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 544
+2024-12-07 09:54:38,071 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:38,101 - DEBUG - http://localhost:5001 "GET /api/products?page=1&limit=1000 HTTP/11" 200 21986
+2024-12-07 09:54:38,154 - INFO - Setting images: []
+2024-12-07 09:54:40,200 - INFO - Editing product: {'_id': '675461acad79589bb6fa60fb', 'name': 'Cryptic SpiritDrive Tool', 'price': 19.8, 'stock': 77, 'category': 'Tools & Smart Accessories'}
+2024-12-07 09:54:40,202 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:40,212 - DEBUG - http://localhost:5001 "GET /api/products/675461acad79589bb6fa60fb HTTP/11" 200 706
+2024-12-07 09:54:40,213 - INFO - Fetched full product data: {'_id': '675461acad79589bb6fa60fb', 'name': 'Cryptic SpiritDrive Tool', 'price': 19.8, 'stock': 77, 'category': {'_id': '67545219db2aa43c852e2ada', 'name': 'Tools & Smart Accessories', 'alias': 'tools'}, 'specifications': {'materials': []}, 'reviewStats': {'ratingDistribution': {'1': 0, '2': 0, '3': 0, '4': 0, '5': 0}, 'averageRating': 0, 'totalReviews': 0}, 'description': 'Titanium multi-tool with encrypted storage, mini solar charger, digital compass.', 'attributes': [], 'rating': 0, 'reviews': [], 'tags': [], 'featured': False, 'images': [], 'variants': [], 'createdAt': '2024-12-07T14:54:36.922Z', 'updatedAt': '2024-12-07T14:54:36.922Z', '__v': 0, 'categoryPath': [{'_id': '67545219db2aa43c852e2ada', 'name': 'Tools & Smart Accessories', 'alias': 'tools'}]}
+2024-12-07 09:54:40,216 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:40,224 - DEBUG - http://localhost:5001 "GET /api/products/675461acad79589bb6fa60fb HTTP/11" 200 706
+2024-12-07 09:54:40,225 - INFO - Setting images: []
+2024-12-07 09:54:42,377 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:42,401 - DEBUG - http://localhost:5001 "GET /api/products?page=1&limit=1000 HTTP/11" 200 21986
+2024-12-07 09:54:42,453 - INFO - Setting images: []
+2024-12-07 09:54:49,835 - INFO - Editing product: {'_id': '675461acad79589bb6fa60c4', 'name': 'Veridian Storm Escape', 'price': 185.6, 'stock': 21, 'category': 'Shelter & Environmental Protection'}
+2024-12-07 09:54:49,836 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:49,846 - DEBUG - http://localhost:5001 "GET /api/products/675461acad79589bb6fa60c4 HTTP/11" 200 737
+2024-12-07 09:54:49,847 - INFO - Fetched full product data: {'_id': '675461acad79589bb6fa60c4', 'name': 'Veridian Storm Escape', 'price': 185.6, 'stock': 21, 'category': {'_id': '67545219db2aa43c852e2ad4', 'name': 'Shelter & Environmental Protection', 'alias': 'shelter'}, 'specifications': {'materials': []}, 'reviewStats': {'ratingDistribution': {'1': 0, '2': 0, '3': 0, '4': 0, '5': 0}, 'averageRating': 0, 'totalReviews': 0}, 'description': 'Compact bivy shelter from self-healing fabric, passive solar strips, internal LED lighting.', 'attributes': [], 'rating': 0, 'reviews': [], 'tags': [], 'featured': False, 'images': [], 'variants': [], 'createdAt': '2024-12-07T14:54:36.876Z', 'updatedAt': '2024-12-07T14:54:36.876Z', '__v': 0, 'categoryPath': [{'_id': '67545219db2aa43c852e2ad4', 'name': 'Shelter & Environmental Protection', 'alias': 'shelter'}]}
+2024-12-07 09:54:49,849 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:54:49,857 - DEBUG - http://localhost:5001 "GET /api/products/675461acad79589bb6fa60c4 HTTP/11" 200 737
+2024-12-07 09:54:49,858 - INFO - Setting images: []
+2024-12-07 09:59:58,268 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:00:03,353 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:00:07,475 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:00:11,584 - INFO - Setting images: []
+2024-12-07 10:05:26,991 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:05:31,057 - INFO - Setting images: []
+2024-12-07 10:05:32,055 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:05:36,132 - INFO - Setting images: []
+2024-12-07 10:05:45,022 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:05:49,121 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:05:53,180 - INFO - Setting images: []
+2024-12-07 10:05:59,736 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:03,831 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:07,913 - INFO - Setting images: []
+2024-12-07 10:06:36,370 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,388 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 10:06:36,390 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,413 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 577
+2024-12-07 10:06:36,445 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,455 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 10:06:36,458 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,468 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 604
+2024-12-07 10:06:36,476 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,485 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 10:06:36,488 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,498 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 554
+2024-12-07 10:06:36,504 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,514 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 10:06:36,516 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,528 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 535
+2024-12-07 10:06:36,533 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,544 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 10:06:36,546 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,560 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 527
+2024-12-07 10:06:36,567 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,576 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 10:06:36,579 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,590 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 523
+2024-12-07 10:06:36,596 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,611 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 10:06:36,613 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,625 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 538
+2024-12-07 10:06:36,629 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,641 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 10:06:36,642 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,655 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 542
+2024-12-07 10:06:36,662 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,672 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 10:06:36,674 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,685 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 548
+2024-12-07 10:06:36,691 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,701 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 10:06:36,705 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,716 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 544
+2024-12-07 10:06:36,723 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,731 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 10:06:36,734 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,744 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 549
+2024-12-07 10:06:36,750 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,761 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 10:06:36,763 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,776 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 540
+2024-12-07 10:06:36,780 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,792 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 10:06:36,794 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,804 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 526
+2024-12-07 10:06:36,811 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,824 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 10:06:36,827 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,841 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 524
+2024-12-07 10:06:36,849 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,860 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 10:06:36,862 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,874 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 535
+2024-12-07 10:06:36,880 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,891 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 10:06:36,893 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,902 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 525
+2024-12-07 10:06:36,910 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,920 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 10:06:36,922 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,932 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 553
+2024-12-07 10:06:36,937 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,949 - DEBUG - http://localhost:5001 "GET /api/categories HTTP/11" 200 6196
+2024-12-07 10:06:36,951 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:36,962 - DEBUG - http://localhost:5001 "POST /api/products HTTP/11" 201 544
+2024-12-07 10:06:38,144 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:38,248 - DEBUG - http://localhost:5001 "GET /api/products?page=1&limit=1000 HTTP/11" 200 259180
+2024-12-07 10:06:38,522 - INFO - Setting images: []
+2024-12-07 10:06:39,272 - INFO - Editing product: {'_id': '6754647c838b7757698f35c9', 'name': 'Aegis BetaShell Jacket', 'price': 176.4, 'stock': 41, 'category': 'Protective Outerwear'}
+2024-12-07 10:06:39,274 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:39,285 - DEBUG - http://localhost:5001 "GET /api/products/6754647c838b7757698f35c9 HTTP/11" 200 686
+2024-12-07 10:06:39,286 - INFO - Fetched full product data: {'_id': '6754647c838b7757698f35c9', 'name': 'Aegis BetaShell Jacket', 'price': 176.4, 'stock': 41, 'category': {'_id': '6754642dd85ec60813676701', 'name': 'Protective Outerwear', 'alias': 'outerwear'}, 'specifications': {'materials': []}, 'reviewStats': {'ratingDistribution': {'1': 0, '2': 0, '3': 0, '4': 0, '5': 0}, 'averageRating': 0, 'totalReviews': 0}, 'description': 'Weatherproof shell with integrated GPS beacon, SOS transmitter.', 'attributes': [], 'rating': 0, 'reviews': [], 'tags': [], 'featured': False, 'images': [], 'variants': [], 'createdAt': '2024-12-07T15:06:36.799Z', 'updatedAt': '2024-12-07T15:06:36.799Z', '__v': 0, 'categoryPath': [{'_id': '6754642dd85ec60813676701', 'name': 'Protective Outerwear', 'alias': 'outerwear'}]}
+2024-12-07 10:06:39,289 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 10:06:39,296 - DEBUG - http://localhost:5001 "GET /api/products/6754647c838b7757698f35c9 HTTP/11" 200 686
+2024-12-07 10:06:39,297 - INFO - Setting images: []
