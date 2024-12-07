@@ -8,7 +8,8 @@ const {
   deleteProduct,
   filterProducts,
   addProductImages,
-  reorderProductImages
+  reorderProductImages,
+  clearProductImages
 } = require('../../controllers/productController');
 const reviewController = require('../../controllers/reviewController');
 
@@ -27,6 +28,7 @@ router.route('/:id')
 // Image routes
 router.post('/:productId/images', addProductImages);
 router.patch('/:productId/images/reorder', reorderProductImages);
+router.delete('/:productId/images', clearProductImages);
 
 // Review routes
 router.get('/:productId/reviews', reviewController.getProductReviews);

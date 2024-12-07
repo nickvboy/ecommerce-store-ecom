@@ -234,37 +234,85 @@ class ApiClient:
             print(f"Error fetching product {product_id}: {e}")
             return None
     
+    def upload_images(self, image_paths):
+        """Upload images to Cloudinary and return the URLs"""
+        uploaded_urls = []
+        try:
+            for path in image_paths:
+                if os.path.exists(path):  # Only upload if it's a local file
+                    logger.info(f"Uploading image: {path}")
+                    response = cloudinary.uploader.upload(path)
+                    url = response['secure_url']
+                    uploaded_urls.append(url)
+                    logger.info(f"Successfully uploaded to: {url}")
+                elif path.startswith('http'):  # If it's already a URL, keep it
+                    uploaded_urls.append(path)
+            return uploaded_urls
+        except Exception as e:
+            logger.error(f"Error uploading images to Cloudinary: {e}")
+            logger.error(traceback.format_exc())
+            return []
+    
+    def update_product_images(self, product_id, image_paths):
+        """Update product images, handling both local files and existing URLs"""
+        try:
+            # First clear existing images
+            response = requests.delete(f"{self.base_url}/products/{product_id}/images")
+            if not response.ok:
+                logger.error(f"Failed to clear existing images: {response.text}")
+                return False
+            
+            logger.info(f"Cleared existing images for product {product_id}")
+            
+            # Upload any new local images to Cloudinary
+            new_urls = self.upload_images(image_paths)
+            
+            if new_urls:
+                # Create image orders with current sequence
+                image_data = {
+                    'images': [
+                        {'url': url, 'order': idx} 
+                        for idx, url in enumerate(new_urls)
+                    ]
+                }
+                
+                # Add new images using dedicated endpoint
+                response = requests.post(
+                    f"{self.base_url}/products/{product_id}/images",
+                    json=image_data
+                )
+                
+                if response.ok:
+                    # Update local tracker
+                    self.image_tracker.update_product_images(product_id, new_urls)
+                    logger.info(f"Successfully updated images for product {product_id}")
+                    return True
+                else:
+                    logger.error(f"Failed to update product images: {response.text}")
+                    return False
+                
+            return True  # Return true if no images to update
+        except Exception as e:
+            logger.error(f"Error updating product images: {e}")
+            return False
+    
     def create_product(self, product_data):
         try:
-            # Handle image uploads if present
+            # Extract images for separate handling
             image_paths = product_data.pop('images', [])
             
             # First create the product without images
             response = requests.post(f"{self.base_url}/products", json=product_data)
+            
             if response.ok:
                 result = response.json()
                 product_id = result['_id']
                 
-                # Then upload and add images if present
+                # Handle image uploads if present
                 if image_paths:
-                    image_urls = self.upload_images(image_paths)
-                    if image_urls:
-                        # Format image data with order information
-                        image_data = {
-                            'images': [
-                                {'url': url, 'order': idx} 
-                                for idx, url in enumerate(image_urls)
-                            ]
-                        }
-                        
-                        # Use the dedicated image endpoint
-                        img_response = requests.post(
-                            f"{self.base_url}/products/{product_id}/images",
-                            json=image_data
-                        )
-                        if img_response.ok:
-                            # Update image tracker
-                            self.image_tracker.update_product_images(product_id, image_urls)
+                    success = self.update_product_images(product_id, image_paths)
+                    if not success:
+                        logger.error(f"Failed to upload images for new product {product_id}")
                 
                 return result
             return None
@@ -274,47 +322,77 @@ class ApiClient:
     
     def update_product(self, product_id, product_data):
         try:
-            # Get local paths and remote URLs separately
-            local_paths = [path for path in product_data['images'] 
-                          if os.path.exists(path)]  # Check if it's a local file
-            remote_urls = [url for url in product_data['images'] 
-                          if not os.path.exists(url)]  # Assume it's a remote URL
-            
-            # Remove images from product data
-            product_data.pop('images', None)
+            # Extract images for separate handling
+            image_paths = product_data.pop('images', [])
+            logger.info(f"Updating product {product_id} with images: {image_paths}")
             
             # First update the product without images
             response = requests.put(f"{self.base_url}/products/{product_id}", 
-                                 json=product_data)
+                                json=product_data)
             
             if response.ok:
                 result = response.json()
                 
-                # Upload new images if any
-                new_image_urls = []
-                if local_paths:
-                    new_image_urls = self.upload_images(local_paths)
-                
-                # Combine existing remote URLs with new uploaded URLs
-                all_image_urls = remote_urls + new_image_urls
-                
-                if all_image_urls:
-                    # Create image orders with current sequence
-                    image_orders = [
-                        {'url': url, 'order': idx} 
-                        for idx, url in enumerate(all_image_urls)
-                    ]
+                # Handle images if present
+                if image_paths is not None:  # Changed condition to handle empty lists
+                    logger.info("Processing images for update...")
                     
-                    # Update image orders
-                    reorder_success = self.reorder_product_images(product_id, image_orders)
-                    if not reorder_success:
-                        logger.error(f"Failed to reorder images for product {product_id}")
+                    # First clear existing images
+                    clear_response = requests.delete(f"{self.base_url}/products/{product_id}/images")
+                    if not clear_response.ok:
+                        logger.error(f"Failed to clear existing images: {clear_response.text}")
+                        return None
+                    
+                    final_urls = []
+                    
+                    # Process each image path
+                    for path in image_paths:
+                        if path.startswith('http'):  # It's an existing URL
+                            logger.info(f"Using existing URL: {path}")
+                            final_urls.append(path)
+                        elif os.path.exists(path):  # It's a new local file
+                            try:
+                                logger.info(f"Uploading new image: {path}")
+                                response = cloudinary.uploader.upload(path)
+                                new_url = response['secure_url']
+                                final_urls.append(new_url)
+                                logger.info(f"Successfully uploaded to: {new_url}")
+                            except Exception as e:
+                                logger.error(f"Failed to upload image {path}: {e}")
+                    
+                    if final_urls:
+                        logger.info(f"Updating product with {len(final_urls)} images")
+                        # Create image orders with current sequence
+                        image_data = {
+                            'images': [
+                                {'url': url, 'order': idx} 
+                                for idx, url in enumerate(final_urls)
+                            ]
+                        }
+                        
+                        # Update images
+                        img_response = requests.post(
+                            f"{self.base_url}/products/{product_id}/images",
+                            json=image_data
+                        )
+                        
+                        if img_response.ok:
+                            logger.info("Successfully updated product images")
+                            # Update local tracker with new image set
+                            self.image_tracker.update_product_images(product_id, final_urls)
+                        else:
+                            logger.error(f"Failed to update images: {img_response.text}")
+                    else:
+                        # If no images to update, clear the local tracker for this product
+                        self.image_tracker.update_product_images(product_id, [])
+                        logger.warning("No valid images to update")
                 
                 return result
             return None
             
         except Exception as e:
             logger.error(f"Error updating product {product_id}: {e}")
+            logger.error(traceback.format_exc())
             return None
     
     def delete_products(self, product_ids):
@@ -327,17 +405,6 @@ class ApiClient:
             except Exception as e:
                 print(f"Error deleting product {product_id}: {e}")
         return deleted
-    
-    def upload_images(self, image_paths):
-        uploaded_urls = []
-        try:
-            for path in image_paths:
-                response = cloudinary.uploader.upload(path)
-                uploaded_urls.append(response['secure_url'])
-            return uploaded_urls
-        except Exception as e:
-            logger.error(f"Error uploading images to Cloudinary: {e}")
-            return []
     
     def reorder_product_images(self, product_id, image_orders):
         """Reorder product images using the dedicated endpoint"""
@@ -649,6 +716,28 @@ class ImageUploadWidget(QWidget):
         layout = QVBoxLayout(self)
         layout.setSpacing(10)
         
+        # Add button container at the top
+        button_container = QHBoxLayout()
+        
+        # Add clear button
+        self.clear_btn = QPushButton("Clear All Images")
+        self.clear_btn.clicked.connect(self.clear_images)
+        self.clear_btn.setStyleSheet("""
+            QPushButton {
+                background-color: #d32f2f;  /* Red color */
+            }
+            QPushButton:hover {
+                background-color: #f44336;
+            }
+            QPushButton:pressed {
+                background-color: #b71c1c;
+            }
+        """)
+        button_container.addWidget(self.clear_btn)
+        button_container.addStretch()  # Push button to the left
+        
+        layout.addLayout(button_container)
+        
         # Drop area
         self.drop_area = QLabel("Drop images here or click to upload")
         self.drop_area.setMinimumHeight(80)
@@ -671,6 +760,8 @@ class ImageUploadWidget(QWidget):
         self.drop_area.dropEvent = self.dropEvent
         self.drop_area.mousePressEvent = self.open_file_dialog
         
+        layout.addWidget(self.drop_area)
+        
         # Thumbnails scroll area
         self.scroll_area = QScrollArea()
         self.scroll_area.setWidgetResizable(True)
@@ -685,11 +776,26 @@ class ImageUploadWidget(QWidget):
         self.thumbnail_layout.addStretch()
         
         self.scroll_area.setWidget(self.thumbnail_container)
-        
-        layout.addWidget(self.drop_area)
         layout.addWidget(self.scroll_area)
         layout.addStretch()
-        
+    
+    def clear_images(self):
+        """Clear all images after confirmation"""
+        if self.image_urls:
+            reply = QMessageBox.question(
+                self,
+                "Confirm Clear",
+                "Are you sure you want to clear all images?",
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+                QMessageBox.StandardButton.No
+            )
+            
+            if reply == QMessageBox.StandardButton.Yes:
+                self.image_urls.clear()
+                self.is_local.clear()
+                self.update_thumbnails()
+                self.images_updated.emit(self.image_urls)
+    
     def dragEnterEvent(self, event):
         if event.mimeData().hasUrls() or event.mimeData().hasText():
             event.acceptProposedAction()
@@ -744,31 +850,30 @@ class ImageUploadWidget(QWidget):
         """Add new images from local files"""
         for file_path in file_paths:
             if file_path not in self.image_urls:
+                logger.info(f"Adding new image: {file_path}")
                 self.image_urls.append(file_path)
                 self.is_local[file_path] = True  # Mark as local file
         self.update_thumbnails()
         self.images_updated.emit(self.image_urls)
         
     def update_thumbnails(self):
+        """Update the thumbnail display"""
         # Clear existing thumbnails
         while self.thumbnail_layout.count() > 1:
             item = self.thumbnail_layout.takeAt(0)
             if item.widget():
                 item.widget().deleteLater()
         
-        # Add thumbnails in batches
-        batch_size = 4  # Load 4 thumbnails at a time
-        for i in range(0, len(self.image_urls), batch_size):
-            batch = self.image_urls[i:i + batch_size]
-            for j, image_url in enumerate(batch):
-                is_local = self.is_local.get(image_url, False)
-                thumbnail = ImageThumbnail(image_url, i + j, is_local)
-                thumbnail.removed.connect(self.remove_image)
-                thumbnail.reordered.connect(self.reorder_image)
-                self.thumbnail_layout.insertWidget(i + j, thumbnail)
+        # Add thumbnails for each image
+        for i, image_url in enumerate(self.image_urls):
+            is_local = self.is_local.get(image_url, False)
+            thumbnail = ImageThumbnail(image_url, i, is_local)
+            thumbnail.removed.connect(self.remove_image)
+            thumbnail.reordered.connect(self.reorder_image)
+            self.thumbnail_layout.insertWidget(i, thumbnail)
             
-            # Process events to keep UI responsive
-            QApplication.processEvents()
+        # Process events to keep UI responsive
+        QApplication.processEvents()
     
     def remove_image(self, image_url):
         if image_url in self.image_urls:
@@ -798,6 +903,7 @@ class ImageUploadWidget(QWidget):
     
     def set_images(self, image_urls):
         """Set images from URLs (for existing products)"""
+        logger.info(f"Setting images: {image_urls}")
         self.image_urls = image_urls.copy() if image_urls else []
         self.is_local = {url: False for url in self.image_urls}  # Mark all as remote URLs
         self.update_thumbnails()
@@ -806,10 +912,6 @@ class ImageUploadWidget(QWidget):
     def get_local_paths(self):
         """Get list of local file paths only"""
         return [path for path in self.image_urls if self.is_local.get(path, False)]
-    
-    def get_remote_urls(self):
-        """Get list of remote URLs only"""
-        return [url for url in self.image_urls if not self.is_local.get(url, False)]
 
 class ProductFormWidget(QWidget):
     product_added = pyqtSignal()
@@ -820,6 +922,7 @@ class ProductFormWidget(QWidget):
         self.api_client = api_client
         self.console = console_widget
         self.current_product = None
+        self.is_original_price_auto = True  # Track if original price is auto-calculated
         self.setup_ui()
         self.load_categories()
         
@@ -889,10 +992,37 @@ class ProductFormWidget(QWidget):
         self.name_input = QLineEdit()
         self.description_input = QTextEdit()
         self.description_input.setMinimumHeight(100)
+        
+        # Price input with markup controls
+        price_container = QWidget()
+        price_layout = QHBoxLayout(price_container)
+        price_layout.setContentsMargins(0, 0, 0, 0)
+        
         self.price_input = QDoubleSpinBox()
         self.price_input.setMaximum(99999.99)
+        self.price_input.valueChanged.connect(self.update_original_price)
+        
+        markup_label = QLabel("Markup %:")
+        self.markup_input = QDoubleSpinBox()
+        self.markup_input.setMaximum(1000.00)
+        self.markup_input.setValue(40.0)  # Default 40% markup
+        self.markup_input.valueChanged.connect(self.update_original_price)
+        
+        price_layout.addWidget(self.price_input)
+        price_layout.addWidget(markup_label)
+        price_layout.addWidget(self.markup_input)
+        
+        # Original price input with auto-calculation
+        original_price_container = QWidget()
+        original_price_layout = QHBoxLayout(original_price_container)
+        original_price_layout.setContentsMargins(0, 0, 0, 0)
+        
         self.original_price_input = QDoubleSpinBox()
         self.original_price_input.setMaximum(99999.99)
+        self.original_price_input.valueChanged.connect(self.handle_original_price_change)
+        
+        original_price_layout.addWidget(self.original_price_input)
+        
         self.stock_input = QSpinBox()
         self.stock_input.setMaximum(999999)
         self.category_input = QComboBox()
@@ -902,8 +1032,8 @@ class ProductFormWidget(QWidget):
         
         form_layout.addRow("Name:", self.name_input)
         form_layout.addRow("Description:", self.description_input)
-        form_layout.addRow("Price:", self.price_input)
-        form_layout.addRow("Original Price:", self.original_price_input)
+        form_layout.addRow("Price:", price_container)
+        form_layout.addRow("Original Price:", original_price_container)
         form_layout.addRow("Stock:", self.stock_input)
         form_layout.addRow("Category:", self.category_input)
         form_layout.addRow("Images:", self.image_upload)
@@ -925,6 +1055,27 @@ class ProductFormWidget(QWidget):
         # Add stretch to push everything to the top
         layout.addStretch()
     
+    def update_original_price(self):
+        """Calculate original price based on price and markup percentage"""
+        if self.is_original_price_auto:
+            price = self.price_input.value()
+            markup = self.markup_input.value() / 100.0
+            if markup != 0:
+                original_price = price / (1 + markup)
+                self.original_price_input.setValue(original_price)
+    
+    def handle_original_price_change(self):
+        """Handle manual changes to original price"""
+        self.is_original_price_auto = False
+        
+        # Calculate and update actual markup percentage
+        price = self.price_input.value()
+        original_price = self.original_price_input.value()
+        
+        if original_price > 0:
+            actual_markup = ((price - original_price) / original_price) * 100
+            self.markup_input.setValue(actual_markup)
+    
     def set_edit_mode(self, product):
         """Set the form to edit mode and populate with product data"""
         try:
@@ -934,21 +1085,29 @@ class ProductFormWidget(QWidget):
             
             # Fill form with product data
             self.name_input.setText(product.get('name', ''))
-            self.description_input.setText(product.get('description', ''))
+            self.description_input.setPlainText(product.get('description', ''))
             
             # Handle price values safely
             try:
-                self.price_input.setValue(float(product.get('price', 0)))
+                price = float(product.get('price', 0))
+                self.price_input.setValue(price)
+                
+                if 'originalPrice' in product and product['originalPrice'] is not None:
+                    original_price = float(product['originalPrice'])
+                    self.original_price_input.setValue(original_price)
+                    
+                    # Calculate and set markup
+                    if original_price > 0:
+                        markup = ((price - original_price) / original_price) * 100
+                        self.markup_input.setValue(markup)
+                        self.is_original_price_auto = False
+                else:
+                    self.is_original_price_auto = True
+                    self.update_original_price()
             except (TypeError, ValueError):
                 self.price_input.setValue(0)
-            
-            try:
-                if 'originalPrice' in product and product['originalPrice'] is not None:
-                    self.original_price_input.setValue(float(product['originalPrice']))
-                else:
-                    self.original_price_input.setValue(0)
-            except (TypeError, ValueError):
                 self.original_price_input.setValue(0)
+                self.is_original_price_auto = True
             
             # Handle stock value safely
             try:
@@ -967,15 +1126,13 @@ class ProductFormWidget(QWidget):
             if product.get('_id'):
                 image_urls = self.api_client.get_product_preview_images(product['_id'])
                 if image_urls:
-                    self.console.log(f"Loading {len(image_urls)} images for product", "INFO")
                     self.image_upload.set_images(image_urls)
                 else:
-                    self.console.log("No images found for product", "WARNING")
                     self.image_upload.set_images([])
             
         except Exception as e:
-            self.console.log(f"Error setting edit mode: {str(e)}", "ERROR")
             logger.error(f"Error in set_edit_mode: {str(e)}")
+            logger.error(traceback.format_exc())
     
     def set_add_mode(self):
         self.current_product = None
@@ -1001,19 +1158,18 @@ class ProductFormWidget(QWidget):
                 'originalPrice': self.original_price_input.value(),
                 'stock': self.stock_input.value(),
                 'category': self.category_input.currentData(),
-                'images': self.image_upload.image_urls  # Use current order of images
+                'images': self.image_upload.image_urls  # Use the direct image_urls attribute
             }
             
             if self.current_product:  # Update existing product
                 product_id = self.current_product['_id']
+                logger.info(f"Updating product {product_id} with images: {product_data['images']}")
                 response = self.api_client.update_product(product_id, product_data)
                 if response:
                     self.console.log(f"Product updated: {response['name']}", "SUCCESS")
                     self.product_updated.emit()
                     self.set_add_mode()
             else:  # Add new product
-                # For new products, only send local file paths
-                product_data['images'] = self.image_upload.get_local_paths()
                 response = self.api_client.create_product(product_data)
                 if response:
                     self.console.log(f"Product created: {response['name']}", "SUCCESS")
@@ -1023,6 +1179,7 @@ class ProductFormWidget(QWidget):
         except Exception as e:
             self.console.log(f"Error submitting product: {str(e)}", "ERROR")
             logger.error(f"Product submission error: {str(e)}")
+            logger.error(traceback.format_exc())
     
     # Signals
     product_added = pyqtSignal()
@@ -1679,9 +1836,15 @@ class ProductManager(QMainWindow):
             if not file_path:
                 return
                 
-            # Read CSV file
-            with open(file_path, 'r') as file:
-                reader = csv.DictReader(file)
+            # Read CSV file with proper quote handling
+            with open(file_path, 'r', encoding='utf-8') as file:
+                reader = csv.DictReader(
+                    file,
+                    quoting=csv.QUOTE_ALL,  # Changed to QUOTE_ALL to handle all quoted fields
+                    quotechar='"',
+                    skipinitialspace=True
+                )
+                
                 rows = list(reader)
                 
                 # Create progress dialog
@@ -1691,7 +1854,7 @@ class ProductManager(QMainWindow):
                 
                 successful = 0
                 failed = 0
-                failed_products = []  # List to store details of failed products
+                failed_products = []
                 
                 self.console.log(f"Starting CSV upload from: {file_path}", "INFO")
                 
@@ -1704,14 +1867,18 @@ class ProductManager(QMainWindow):
                     QApplication.processEvents()
                     
                     try:
-                        # Prepare product data
+                        # Clean and prepare product data
                         product_data = {
-                            'name': row['name'].strip(),
-                            'description': row['description'].strip(),
-                            'price': float(row['price']),
-                            'stock': int(row['stock']),
-                            'category': row['category'].strip()
+                            'name': row.get('name', '').strip(),
+                            'description': row.get('description', '').strip(),
+                            'price': float(row.get('price', '0').strip()),
+                            'stock': int(row.get('stock', '0').strip()),
+                            'category': row.get('category', '').strip()
                         }
+                        
+                        # Validate required fields
+                        if not product_data['name']:
+                            raise ValueError("Product name is required")
                         
                         # Find category ID by name
                         categories = self.api_client.get_categories()
@@ -1733,10 +1900,10 @@ class ProductManager(QMainWindow):
                         
                         # Add optional fields if present
                         if 'originalPrice' in row:
-                            product_data['originalPrice'] = float(row['originalPrice'])
-                        
-                        # Simulate delay between requests
-                        time.sleep(0.5)  # Add a small delay to prevent overwhelming the API
+                            try:
+                                product_data['originalPrice'] = float(row['originalPrice'].strip())
+                            except (ValueError, AttributeError):
+                                pass
                         
                         # Create product
                         response = self.api_client.create_product(product_data)
@@ -1764,7 +1931,7 @@ class ProductManager(QMainWindow):
                 progress.setValue(len(rows))
                 
                 # Log final summary
-                self.console.log(f"Upload completed - Successful: {successful}, Failed: {failed}, Total: {len(rows)}", "INFO")
+                self.console.log(f"Upload completed - Successful: {successful}, Failed: {failed}", "INFO")
                 
                 # Prepare detailed result message
                 result_message = f"Upload completed!\n\nSuccessful: {successful}\nFailed: {failed}\nTotal processed: {len(rows)}"
@@ -1922,12 +2089,29 @@ class ProductManager(QMainWindow):
                 print(f"Error preparing product for edit: {e}")
     
     def edit_product(self, product):
-        self.product_form.set_edit_mode(product)
+        """Handle editing a product"""
+        try:
+            # Debug log the product being edited
+            logger.info(f"Editing product: {product}")
+            
+            # If we only have basic data from the table, fetch full product details
+            if product.get('_id') and not product.get('description'):
+                full_product = self.api_client.get_product_by_id(product['_id'])
+                if full_product:
+                    # Merge the full product data while keeping any local changes
+                    product.update(full_product)
+                    logger.info(f"Fetched full product data: {product}")
+            
+            self.product_form.set_edit_mode(product)
+        except Exception as e:
+            logger.error(f"Error preparing product for edit: {e}")
+            logger.error(traceback.format_exc())
     
     def update_button_states(self):
         selected_count = len(self.product_table.get_selected_products())
         self.delete_btn.setEnabled(selected_count > 0)
         self.edit_selected_btn.setEnabled(selected_count == 1)
+        print(f"Selection changed: {selected_count} products selected")  # Debug print
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

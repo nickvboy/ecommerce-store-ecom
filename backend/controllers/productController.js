@@ -348,19 +348,45 @@ exports.addProductImages = async (req, res) => {
       return res.status(404).json({ message: 'Product not found' });
     }
 
+    // Validate images array
+    if (!Array.isArray(images)) {
+      return res.status(400).json({ message: 'Images must be an array' });
+    }
+
     // Add new images with orders
-    const currentMaxOrder = Math.max(...product.images.map(img => img.order), -1);
+    const currentMaxOrder = product.images.length > 0 
+      ? Math.max(...product.images.map(img => img.order || 0))
+      : -1;
+
     const newImages = images.map((img, idx) => ({
       url: img.url,
-      order: img.order ?? currentMaxOrder + idx + 1
+      order: typeof img.order === 'number' ? img.order : currentMaxOrder + idx + 1
     }));
 
+    // Sort images by order before adding
+    newImages.sort((a, b) => a.order - b.order);
+
+    // Add new images to product
     product.images.push(...newImages);
+
+    // Ensure all images have unique orders
+    product.images = product.images.map((img, idx) => ({
+      ...img,
+      order: idx
+    }));
+
     await product.save();
 
-    res.json(product.images);
+    res.json({
+      message: 'Images added successfully',
+      images: product.images
+    });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error('Error adding product images:', error);
+    res.status(500).json({ 
+      message: error.message,
+      error: 'Failed to add product images'
+    });
   }
 };
 
@@ -395,6 +421,43 @@ exports.reorderProductImages = async (req, res) => {
   } catch (error) {
     console.error('Error reordering images:', error);
     res.status(500).json({ message: error.message });
+  }
+};
+
+// Clear all product images
+exports.clearProductImages = async (req, res) => {
+  try {
+    const { productId } = req.params;
+    
+    const product = await Product.findById(productId);
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
+    // Store previous images in case we need to rollback
+    const previousImages = [...product.images];
+
+    try {
+      // Clear the images array
+      product.images = [];
+      await product.save();
+
+      res.json({ 
+        message: 'All product images cleared successfully',
+        previousImages // Return previous images in case needed for rollback
+      });
+    } catch (saveError) {
+      // If save fails, try to restore previous state
+      product.images = previousImages;
+      await product.save();
+      throw saveError;
+    }
+  } catch (error) {
+    console.error('Error clearing product images:', error);
+    res.status(500).json({ 
+      message: error.message,
+      error: 'Failed to clear product images'
+    });
   }
 };
 
