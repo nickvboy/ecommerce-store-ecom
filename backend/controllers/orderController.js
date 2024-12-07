@@ -5,16 +5,29 @@ const Product = require('../models/Product');
 exports.createOrder = async (req, res) => {
   try {
     console.log('Received order data:', req.body);
-    const { email, customerName, items, shippingAddress, totalAmount } = req.body;
+    const { email, firstName, lastName, customerName, items, shippingAddress, totalAmount } = req.body;
+
+    // Handle both separate fields and combined customerName
+    let customerFirstName = firstName;
+    let customerLastName = lastName;
+    
+    // If firstName/lastName not provided but customerName is, split it
+    if (!firstName && !lastName && customerName) {
+      const nameParts = customerName.split(' ');
+      customerFirstName = nameParts[0];
+      customerLastName = nameParts.slice(1).join(' ');
+    }
 
     // Validate required fields
-    if (!email || !customerName || !items || !shippingAddress || !totalAmount) {
+    if (!email || !customerFirstName || !customerLastName || !items || !shippingAddress || !totalAmount) {
       return res.status(400).json({
         message: 'Missing required fields',
-        required: ['email', 'customerName', 'items', 'shippingAddress', 'totalAmount'],
+        required: ['email', 'firstName/customerName', 'lastName', 'items', 'shippingAddress', 'totalAmount'],
         received: Object.keys(req.body)
       });
     }
+
+    console.log('Parsed Order Data:', { email, customerFirstName, customerLastName, items, shippingAddress, totalAmount });
 
     // Calculate total amount and create order items
     const orderItems = [];
@@ -38,7 +51,8 @@ exports.createOrder = async (req, res) => {
     // Create the order
     const order = new Order({
       email,
-      customerName,
+      customerFirstName,
+      customerLastName,
       items: orderItems,
       totalAmount: calculatedTotal,
       shippingAddress,
@@ -61,7 +75,8 @@ exports.createOrder = async (req, res) => {
     res.status(201).json({
       _id: savedOrder._id,
       email: savedOrder.email,
-      customerName: savedOrder.customerName,
+      customerFirstName: savedOrder.customerFirstName,
+      customerLastName: savedOrder.customerLastName,
       items: savedOrder.items,
       totalAmount: savedOrder.totalAmount,
       status: savedOrder.status,
