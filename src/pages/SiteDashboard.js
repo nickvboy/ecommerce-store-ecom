@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import api from '../lib/api';
+import { useDropzone } from 'react-dropzone';
+import Papa from 'papaparse';
 
 const SiteDashboard = () => {
   const [products, setProducts] = useState([]);
@@ -18,6 +20,8 @@ const SiteDashboard = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [totalProducts, setTotalProducts] = useState(0);
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
 
   useEffect(() => {
     fetchProducts();
@@ -124,11 +128,97 @@ const SiteDashboard = () => {
     }
   };
 
+  const onDrop = useCallback(async (acceptedFiles) => {
+    const file = acceptedFiles[0];
+    if (file) {
+      setIsUploading(true);
+      setUploadProgress(0);
+      
+      Papa.parse(file, {
+        header: true,
+        complete: async (results) => {
+          const totalRows = results.data.length;
+          let processed = 0;
+          
+          for (const row of results.data) {
+            try {
+              // Skip empty rows
+              if (!row.name || !row.price) continue;
+
+              const productData = {
+                name: row.name,
+                description: row.description,
+                price: parseFloat(row.price),
+                originalPrice: parseFloat(row.price) * (1 + markupPercentage / 100),
+                stock: parseInt(row.stock),
+                category: categories.find(c => c.name === row.category)?._id
+              };
+
+              await api.post('/products', productData);
+              processed++;
+              setUploadProgress((processed / totalRows) * 100);
+            } catch (error) {
+              console.error(`Error adding product ${row.name}:`, error);
+            }
+          }
+          
+          setIsUploading(false);
+          fetchProducts();
+          alert(`Successfully imported ${processed} products`);
+        },
+        error: (error) => {
+          console.error('Error parsing CSV:', error);
+          setIsUploading(false);
+          alert('Error parsing CSV file');
+        }
+      });
+    }
+  }, [categories, markupPercentage]);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: {
+      'text/csv': ['.csv']
+    },
+    multiple: false
+  });
+
+  const dropzoneStyles = `
+    border-2 border-dashed rounded-lg p-4 mb-8 text-center
+    ${isDragActive ? 'border-primary-100 bg-primary-100/10' : 'border-text-200'}
+    ${isUploading ? 'opacity-50' : 'hover:border-primary-100'}
+  `;
+
   return (
     <div className="min-h-screen bg-bg-100 p-6">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold text-text-100 mb-8">Site Dashboard</h1>
-        
+
+        {/* Add CSV Drop Zone */}
+        <div
+          {...getRootProps()}
+          className={dropzoneStyles}
+        >
+          <input {...getInputProps()} />
+          {isUploading ? (
+            <div>
+              <p className="text-text-100 mb-2">Uploading products...</p>
+              <div className="w-full bg-bg-300 rounded-full h-2.5">
+                <div 
+                  className="bg-primary-100 h-2.5 rounded-full transition-all duration-300"
+                  style={{ width: `${uploadProgress}%` }}
+                ></div>
+              </div>
+            </div>
+          ) : isDragActive ? (
+            <p className="text-text-100">Drop your CSV file here...</p>
+          ) : (
+            <p className="text-text-100">
+              Drag and drop a CSV file here, or click to select a file
+            </p>
+          )}
+        </div>
+
         {/* Product Form */}
         <div className="bg-bg-200 p-6 rounded-lg mb-8">
           <h2 className="text-xl font-semibold text-text-100 mb-4">
