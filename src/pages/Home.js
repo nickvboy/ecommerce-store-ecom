@@ -12,7 +12,6 @@ function Home() {
   const [loadedImages, setLoadedImages] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [newsletterBg, setNewsletterBg] = useState(null);
   const [stories, setStories] = useState([]);
 
   useEffect(() => {
@@ -104,7 +103,7 @@ function Home() {
     return () => clearInterval(timer);
   }, [nextSlide, bannerImages.length]);
 
-  // Get random product image for newsletter background with daily rotation
+  // Get random products for newsletter section
   useEffect(() => {
     const fetchNewsletterContent = async () => {
       try {
@@ -124,9 +123,6 @@ function Home() {
         const data = await response.json();
         if (!data.products?.length) return;
 
-        const productsWithImages = data.products.filter(p => p.images?.[0]?.url);
-        if (!productsWithImages.length) return;
-
         // Use date as seed for consistent daily selection
         const today = new Date().toDateString();
         const seedValue = today.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
@@ -137,32 +133,25 @@ function Home() {
           return counter / 233280;
         };
 
-        // Select background image
-        const shuffledForBg = [...productsWithImages].sort(() => seededRandom() - 0.5);
-        setNewsletterBg(shuffledForBg[0].images[0].url);
-
-        // Select stories
-        const storyProducts = shuffledForBg.slice(1, 4);
         const storyContent = [
           { 
             title: "Survival Tech Spotlight", 
-            tagline: "Next-gen gear for when it matters most"
+            tagline: "Next-gen gear for when it matters most",
+            category: "Tech Innovation"
           },
           { 
             title: "Field-Tested Excellence", 
-            tagline: "Real preppers, real challenges, real results"
+            tagline: "Real preppers, real challenges, real results",
+            category: "Field Reports"
           },
           { 
             title: "Off-Grid Innovation", 
-            tagline: "Tomorrow's survival tech, available today"
+            tagline: "Tomorrow's survival tech, available today",
+            category: "Product Research"
           }
         ];
 
-        setStories(storyProducts.map((product, index) => ({
-          ...storyContent[index],
-          image: product.images[0].url,
-          productName: product.name
-        })));
+        setStories(storyContent);
 
       } catch (error) {
         console.error('Error fetching newsletter content:', error);
@@ -283,21 +272,7 @@ function Home() {
         </div>
 
         {/* Newsletter Section */}
-        <div className="relative overflow-hidden rounded-2xl">
-          {/* Background Image with Overlay */}
-          <div className="absolute inset-0">
-            {newsletterBg ? (
-              <img 
-                src={newsletterBg} 
-                alt="Newsletter background" 
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <div className="w-full h-full bg-bg-300 animate-pulse" />
-            )}
-            <div className="absolute inset-0 bg-gradient-to-r from-bg-100/95 to-bg-100/80" />
-          </div>
-
+        <div className="relative overflow-hidden rounded-2xl bg-bg-200">
           {/* Newsletter Content */}
           <div className="relative">
             {/* Stories Grid */}
@@ -305,20 +280,19 @@ function Home() {
               {stories.map((story, index) => (
                 <div 
                   key={index}
-                  className="relative aspect-[16/9] group overflow-hidden rounded-lg"
+                  className="relative aspect-[16/9] group overflow-hidden rounded-lg bg-bg-300 shadow-lg 
+                    hover:shadow-xl transition-all duration-500 transform hover:-translate-y-1
+                    cursor-pointer"
                 >
-                  <img 
-                    src={story.image} 
-                    alt={story.title}
-                    className="absolute inset-0 w-full h-full object-cover 
-                      transition-transform duration-500 group-hover:scale-110"
-                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-bg-100/90 via-bg-100/50 to-transparent" />
-                  <div className="absolute inset-0 flex flex-col justify-end p-4">
-                    <h3 className="text-xl font-bold text-white mb-1">
+                  <div className="absolute inset-0 flex flex-col justify-end p-4 transition-transform duration-500 group-hover:translate-y-0 translate-y-4">
+                    <span className="text-sm font-medium text-primary-100 mb-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      {story.category}
+                    </span>
+                    <h3 className="text-xl font-bold text-white mb-1 transform transition-transform duration-500 group-hover:-translate-y-1">
                       {story.title}
                     </h3>
-                    <p className="text-text-200">
+                    <p className="text-text-200 transform transition-all duration-500 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0">
                       {story.tagline}
                     </p>
                   </div>
@@ -337,7 +311,7 @@ function Home() {
                       placeholder="Enter your email for exclusive updates"
                       className="w-full pl-10 pr-4 py-3 rounded-lg bg-bg-200/50 border border-bg-300 
                         text-text-100 placeholder-text-200 focus:outline-none focus:border-primary-100
-                        backdrop-blur-sm"
+                        backdrop-blur-sm transition-all duration-300 focus:ring-2 focus:ring-primary-100/20"
                     />
                   </div>
                   <button
@@ -356,58 +330,6 @@ function Home() {
           </div>
         </div>
       </div>
-
-      {/* Footer */}
-      <footer className="bg-bg-200 mt-16">
-        <div className="max-w-7xl mx-auto px-4 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {/* Company Info */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-bold text-text-100">Company</h3>
-              <ul className="space-y-2 text-text-200">
-                <li><Link to="/about" className="hover:text-primary-100">About Us</Link></li>
-                <li><Link to="/contact" className="hover:text-primary-100">Contact</Link></li>
-                <li><Link to="/careers" className="hover:text-primary-100">Careers</Link></li>
-              </ul>
-            </div>
-
-            {/* Shop */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-bold text-text-100">Shop</h3>
-              <ul className="space-y-2 text-text-200">
-                <li><Link to="/products" className="hover:text-primary-100">All Products</Link></li>
-                <li><Link to="/new-arrivals" className="hover:text-primary-100">New Arrivals</Link></li>
-                <li><Link to="/bestsellers" className="hover:text-primary-100">Bestsellers</Link></li>
-              </ul>
-            </div>
-
-            {/* Support */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-bold text-text-100">Support</h3>
-              <ul className="space-y-2 text-text-200">
-                <li><Link to="/faq" className="hover:text-primary-100">FAQ</Link></li>
-                <li><Link to="/shipping" className="hover:text-primary-100">Shipping Info</Link></li>
-                <li><Link to="/returns" className="hover:text-primary-100">Returns</Link></li>
-              </ul>
-            </div>
-
-            {/* Legal */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-bold text-text-100">Legal</h3>
-              <ul className="space-y-2 text-text-200">
-                <li><Link to="/privacy" className="hover:text-primary-100">Privacy Policy</Link></li>
-                <li><Link to="/terms" className="hover:text-primary-100">Terms of Service</Link></li>
-                <li><Link to="/warranty" className="hover:text-primary-100">Warranty</Link></li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Bottom Bar */}
-          <div className="mt-12 pt-8 border-t border-bg-300 text-center text-text-200">
-            <p>&copy; {new Date().getFullYear()} Your Store Name. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
     </>
   );
 }

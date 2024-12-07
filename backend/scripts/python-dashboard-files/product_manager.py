@@ -196,7 +196,7 @@ class ImagePreviewWidget(QWidget):
                 row += 1
 
 class ApiClient:
-    def __init__(self, base_url="http://localhost:5000/api"):
+    def __init__(self, base_url="http://localhost:5001/api"):
         self.base_url = base_url
         self.image_tracker = ImageTracker()
     
@@ -444,6 +444,9 @@ class ProductTableWidget(QTableWidget):
         self.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
         self.setSelectionMode(QTableWidget.SelectionMode.SingleSelection)
         
+        # Add double click handler
+        self.cellDoubleClicked.connect(self.handle_double_click)
+        
         # Set column widths
         self.setColumnWidth(0, 200)  # ID
         self.setColumnWidth(2, 100)  # Price
@@ -473,6 +476,13 @@ class ProductTableWidget(QTableWidget):
             edit_btn = QPushButton("Edit")
             edit_btn.clicked.connect(lambda checked, p=product: self.edit_clicked.emit(p))
             self.setCellWidget(row, 5, edit_btn)
+            
+            # Set background color based on whether product has images
+            if product.get('images') and len(product['images']) > 0:
+                for col in range(self.columnCount()):
+                    item = self.item(row, col)
+                    if item:  # Skip cells with widgets (like the edit button)
+                        item.setBackground(QColor(200, 255, 200))  # Light green
     
     def get_selected_products(self):
         selected_rows = set(item.row() for item in self.selectedItems())
@@ -481,6 +491,18 @@ class ProductTableWidget(QTableWidget):
             product_id = self.item(row, 0).text()
             selected_products.append(product_id)
         return selected_products
+    
+    def handle_double_click(self, row, column):
+        """Handle double click on table row"""
+        product_id = self.item(row, 0).text()
+        product = {
+            '_id': product_id,
+            'name': self.item(row, 1).text(),
+            'price': float(self.item(row, 2).text().replace('$', '')),
+            'stock': int(self.item(row, 3).text()),
+            'category': self.item(row, 4).text()
+        }
+        self.edit_clicked.emit(product)
     
     # Signals
     selection_changed_signal = pyqtSignal()

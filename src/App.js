@@ -1,15 +1,16 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ApiStatusProvider } from './contexts/ApiStatusContext';
 import { UserProvider } from './contexts/UserContext';
+import { CartProvider } from './contexts/CartContext';
+import Layout from './components/Layout';
 import Navbar from './components/Navbar';
+import OfflineBanner from './components/OfflineBanner';
 import Home from './pages/Home';
 import Products from './pages/Products';
 import ProductDetail from './pages/ProductDetail';
-import OfflineBanner from './components/OfflineBanner';
 import Settings from './pages/Settings';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
-import { CartProvider } from './contexts/CartContext';
 import Checkout from './pages/Checkout';
 import OrderSuccess from './pages/OrderSuccess';
 import AboutUs from './pages/about/AboutUs';
@@ -29,27 +30,29 @@ function App() {
             <div className="min-h-screen bg-bg-100 text-text-100">
               <OfflineBanner />
               <Navbar />
-              <div className="pt-20">
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/products" element={<Products />} />
-                  <Route path="/products/:id" element={<ProductDetail />} />
-                  <Route path="/gear" element={<Navigate to="/products" replace />} />
-                  <Route path="/clothing" element={<Navigate to="/products" replace />} />
-                  <Route path="/about" element={<AboutUs />} />
-                  <Route path="/about/tagline" element={<Tagline />} />
-                  <Route path="/about/story" element={<Story />} />
-                  <Route path="/about/factsheet" element={<FactSheet />} />
-                  <Route path="/about/team" element={<Team />} />
-                  <Route path="/contact" element={<ContactUs />} />
-                  <Route path="/privacy" element={<PrivacyPolicy />} />
-                  <Route path="/settings" element={<Settings />} />
-                  <Route path="/signup" element={<SignUp />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/checkout" element={<Checkout />} />
-                  <Route path="/order-success" element={<OrderSuccess />} />
-                </Routes>
-              </div>
+              <Layout>
+                <div className="pt-20">
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/products" element={<Products />} />
+                    <Route path="/products/:id" element={<ProductDetail />} />
+                    <Route path="/gear" element={<Navigate to="/products" replace />} />
+                    <Route path="/clothing" element={<Navigate to="/products" replace />} />
+                    <Route path="/about" element={<AboutUs />} />
+                    <Route path="/about/tagline" element={<Tagline />} />
+                    <Route path="/about/story" element={<Story />} />
+                    <Route path="/about/factsheet" element={<FactSheet />} />
+                    <Route path="/about/team" element={<Team />} />
+                    <Route path="/contact" element={<ContactUs />} />
+                    <Route path="/privacy" element={<PrivacyPolicy />} />
+                    <Route path="/settings" element={<Settings />} />
+                    <Route path="/signup" element={<SignUp />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/checkout" element={<Checkout />} />
+                    <Route path="/order-success" element={<OrderSuccess />} />
+                  </Routes>
+                </div>
+              </Layout>
             </div>
           </Router>
         </CartProvider>
