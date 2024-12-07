@@ -3,6 +3,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
 import ProductCard from '../components/ProductCard';
 import { Link } from 'react-router-dom';
 import { EnvelopeIcon } from '@heroicons/react/24/outline';
+import { API_BASE_URL } from '../lib/utils';
 
 function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -26,21 +27,21 @@ function Home() {
     }
   }, []);
 
-  // Get daily rotating products
+  // Get hourly rotating products
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         setIsLoading(true);
         setError(null);
 
-        const response = await fetch('http://localhost:5000/api/products/filter', {
+        const response = await fetch(`${API_BASE_URL}/products/filter`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             page: 1,
-            limit: 10 // Fetch more than we need to have variety
+            limit: 10
           }),
         });
 
@@ -55,9 +56,10 @@ function Home() {
           return;
         }
 
-        // This will ensure the same products are shown for the entire day
-        const today = new Date().toDateString();
-        const seedValue = today.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+        // This will ensure the same products are shown for the entire hour
+        const now = new Date();
+        const currentHour = `${now.toDateString()}-${now.getHours()}`;
+        const seedValue = currentHour.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
         let counter = seedValue;
 
         // Create a seeded random number generator
@@ -79,6 +81,8 @@ function Home() {
     };
 
     fetchProducts();
+    const interval = setInterval(fetchProducts, 60 * 60 * 1000);
+    return () => clearInterval(interval);
   }, []);
 
   const nextSlide = useCallback(() => {
@@ -104,7 +108,7 @@ function Home() {
   useEffect(() => {
     const fetchNewsletterContent = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/products/filter', {
+        const response = await fetch(`${API_BASE_URL}/products/filter`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -233,10 +237,10 @@ function Home() {
           <div className="text-center">
             <h2 className="text-3xl font-bold text-text-100">
               <span className="bg-gradient-to-r from-primary-100 to-primary-200 bg-clip-text text-transparent">
-                Today's Bestsellers
+                Featured Products
               </span>
             </h2>
-            <p className="mt-2 text-text-200">Handpicked favorites refreshed daily</p>
+            <p className="mt-2 text-text-200">Handpicked favorites refreshed hourly</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
