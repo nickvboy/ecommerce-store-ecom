@@ -84,10 +84,14 @@ const SiteDashboard = () => {
     // If we're editing a product, track deleted images
     if (editingProduct) {
       const existingImages = editingProduct.images || [];
-      const remainingImages = images.filter(img => !img.isNew).map(img => img.publicId);
+      const remainingImages = images
+        .filter(img => !img.isNew && img.publicId) // Only consider existing images with publicId
+        .map(img => img.publicId);
+      
       const deletedImageIds = existingImages
         .filter(img => !remainingImages.includes(img.publicId))
         .map(img => img.publicId);
+      
       setDeletedImages(deletedImageIds);
     }
 
@@ -135,6 +139,8 @@ const SiteDashboard = () => {
         }
 
         // 2. Upload and add new images if any
+        let allImages = formData.images.filter(img => !img.isNew); // Keep existing images
+        
         if (newImages.length > 0) {
           console.log('Processing new images:', newImages.length);
           
@@ -149,24 +155,24 @@ const SiteDashboard = () => {
             // Add new images to the product with order
             const newImagesWithOrder = uploadedImages.map((img, index) => ({
               ...img,
-              order: formData.images.length + index // Add after existing images
+              order: allImages.length + index // Add after existing images
             }));
             
+            // Add to backend
             await api.post(`/products/${productId}/images`, {
               images: newImagesWithOrder
             });
+            
+            // Add to our local array for reordering
+            allImages = [...allImages, ...newImagesWithOrder];
             console.log('Added images to product');
           }
         }
 
-        // 3. Get the latest product data with updated images
-        const updatedProduct = await api.get(`/products/${productId}`);
-        const currentImages = updatedProduct.data.images || [];
-        
-        // 4. Reorder all images based on current order
-        if (currentImages.length > 0) {
-          console.log('Reordering images:', currentImages);
-          const orderedImages = formData.images.map((img, index) => ({
+        // 3. Reorder all images based on current order
+        if (allImages.length > 0) {
+          console.log('Reordering images:', allImages);
+          const orderedImages = allImages.map((img, index) => ({
             url: img.url,
             publicId: img.publicId,
             order: index
