@@ -79,6 +79,9 @@ exports.getProductById = async (req, res) => {
     const category = await Category.findById(product.category);
     const categoryPath = await category.getPath();
 
+    // Sort images by order
+    product.images.sort((a, b) => a.order - b.order);
+
     res.json({
       ...product.toObject(),
       categoryPath: categoryPath.map(cat => ({
@@ -136,6 +139,15 @@ exports.updateProduct = async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (!product) {
       return res.status(404).json({ message: 'Product not found' });
+    }
+
+    // If images are included in the update, ensure they maintain their order
+    if (req.body.images) {
+      const orderedImages = req.body.images.map((img, idx) => ({
+        url: img.url,
+        order: idx
+      }));
+      req.body.images = orderedImages;
     }
 
     Object.assign(product, req.body);
@@ -335,7 +347,7 @@ exports.addProductImages = async (req, res) => {
 exports.reorderProductImages = async (req, res) => {
   try {
     const { productId } = req.params;
-    const { imageOrders } = req.body; // Array of { url, order }
+    const { imageOrders } = req.body;
     
     const product = await Product.findById(productId);
     if (!product) {
@@ -354,10 +366,13 @@ exports.reorderProductImages = async (req, res) => {
       return res.status(400).json({ message: 'Invalid image URLs' });
     }
 
-    // Reorder images
-    product.images = product.reorderImages(imageOrders);
-    await product.save();
+    // Update image orders
+    product.images = imageOrders.map((img, idx) => ({
+      url: img.url,
+      order: idx
+    }));
 
+    await product.save();
     res.json(product.images);
   } catch (error) {
     console.error('Error reordering images:', error);

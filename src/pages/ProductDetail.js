@@ -84,10 +84,15 @@ function ProductDetail() {
   // Add reordering function
   const handleReorderImages = async (newOrder) => {
     try {
+      const imageOrders = newOrder.map((image, index) => ({
+        url: image.url,
+        order: index
+      }));
+
       const response = await fetch(`${API_BASE_URL}/products/${productId}/images/reorder`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ imageOrders: newOrder })
+        body: JSON.stringify({ imageOrders })
       });
       
       if (!response.ok) throw new Error('Failed to reorder images');

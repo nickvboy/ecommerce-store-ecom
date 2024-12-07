@@ -4,6 +4,7 @@ import { useDropzone } from 'react-dropzone';
 import Papa from 'papaparse';
 import ImageUpload from '../components/ImageUpload';
 import { uploadMultipleImages } from '../utils/cloudinary';
+import Notification from '../components/Notification';
 
 const SiteDashboard = () => {
   const [products, setProducts] = useState([]);
@@ -26,6 +27,7 @@ const SiteDashboard = () => {
   const [totalProducts, setTotalProducts] = useState(0);
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [notification, setNotification] = useState({ show: false, message: '', type: 'success' });
 
   useEffect(() => {
     fetchProducts();
@@ -86,10 +88,12 @@ const SiteDashboard = () => {
     e.preventDefault();
     try {
       const productData = {
-        ...formData,
+        name: formData.name,
+        description: formData.description,
         price: parseFloat(formData.price),
         originalPrice: parseFloat(calculateOriginalPrice(formData.price)),
-        stock: parseInt(formData.stock)
+        stock: parseInt(formData.stock),
+        category: formData.category
       };
 
       let savedProduct;
@@ -102,21 +106,51 @@ const SiteDashboard = () => {
         const newImages = formData.images.filter(img => img.isNew);
         const existingImages = formData.images.filter(img => img.isExisting);
         
-        if (newImages.length > 0) {
-          // Upload new images to Cloudinary
-          const uploadedImages = await uploadMultipleImages(newImages.map(img => img.file));
-          
-          // Add new images to the product
-          await api.post(`/products/${savedProduct._id}/images`, {
-            images: uploadedImages
-          });
-        }
+        // Find deleted images
+        const deletedImages = editingProduct.images
+          ?.filter(originalImg => !existingImages.some(img => img.publicId === originalImg.publicId))
+          .map(img => img.publicId) || [];
         
-        // If order changed or images were removed, update the order
-        if (newImages.length > 0 || existingImages.length !== editingProduct.images?.length) {
-          await api.patch(`/products/${savedProduct._id}/images/reorder`, {
-            imageOrder: formData.images.map(img => img.isNew ? img.url : img.publicId)
-          });
+        try {
+          // Handle image operations in sequence
+          if (deletedImages.length > 0) {
+            console.log('Deleting images:', deletedImages);
+            await api.delete(`/products/${editingProduct._id}/images`, {
+              data: { imageIds: deletedImages }
+            });
+          }
+
+          if (newImages.length > 0) {
+            console.log('Uploading new images:', newImages);
+            // Upload new images to Cloudinary
+            const uploadedImages = await uploadMultipleImages(newImages.map(img => img.file));
+            console.log('Uploaded images:', uploadedImages);
+            
+            // Add new images to the product
+            await api.post(`/products/${editingProduct._id}/images`, {
+              images: uploadedImages
+            });
+          }
+
+          // Get the latest product data with updated images
+          const updatedProduct = await api.get(`/products/${editingProduct._id}`);
+          const currentImages = updatedProduct.data.images || [];
+          
+          // Only reorder if we have images
+          if (currentImages.length > 0) {
+            console.log('Reordering images:', currentImages);
+            await api.patch(`/products/${editingProduct._id}/images/reorder`, {
+              imageOrders: currentImages.map((img, index) => ({
+                url: img.url,
+                order: index
+              }))
+            });
+          }
+
+          showNotification('Product updated successfully');
+        } catch (error) {
+          console.error('Error handling images:', error);
+          throw error;
         }
       } else {
         // Create new product
@@ -124,14 +158,21 @@ const SiteDashboard = () => {
         
         // Handle new images
         if (formData.images.length > 0) {
-          // Upload images to Cloudinary
-          const uploadedImages = await uploadMultipleImages(formData.images.map(img => img.file));
-          
-          // Add images to the product
-          await api.post(`/products/${savedProduct._id}/images`, {
-            images: uploadedImages
-          });
+          try {
+            // Upload images to Cloudinary
+            const uploadedImages = await uploadMultipleImages(formData.images.map(img => img.file));
+            
+            // Add images to the product
+            await api.post(`/products/${savedProduct._id}/images`, {
+              images: uploadedImages
+            });
+          } catch (error) {
+            console.error('Error handling new product images:', error);
+            throw error;
+          }
         }
+
+        showNotification('Product created successfully');
       }
 
       setFormData({
@@ -145,11 +186,39 @@ const SiteDashboard = () => {
       setEditingProduct(null);
       
       fetchProducts();
-      
-      alert(editingProduct ? 'Product updated successfully' : 'Product added successfully');
     } catch (error) {
       console.error('Error saving product:', error);
-      alert('Error saving product: ' + error.message);
+      const errorMessage = error.response?.data?.message || 'Failed to save product';
+      console.error('Error details:', errorMessage);
+      showNotification(errorMessage, 'error');
+    }
+  };
+
+  // Helper function to compare arrays
+  const arraysEqual = (a, b) => {
+    if (a === b) return true;
+    if (a == null || b == null) return false;
+    if (a.length !== b.length) return false;
+    return a.every((val, index) => val === b[index]);
+  };
+
+  const showNotification = (message, type = 'success') => {
+    setNotification({ show: true, message, type });
+    setTimeout(() => {
+      setNotification(prev => ({ ...prev, show: false }));
+    }, 3000);
+  };
+
+  const handleImageDelete = async (productId, imageId) => {
+    try {
+      await api.delete(`/products/${productId}/images`, {
+        data: { imageIds: [imageId] }
+      });
+      showNotification('Image deleted successfully');
+      fetchProducts();
+    } catch (error) {
+      console.error('Error deleting image:', error);
+      showNotification('Failed to delete image', 'error');
     }
   };
 
@@ -290,6 +359,12 @@ const SiteDashboard = () => {
 
   return (
     <div className="min-h-screen bg-bg-100 p-6">
+      <Notification 
+        show={notification.show}
+        message={notification.message}
+        type={notification.type}
+        onClose={() => setNotification(prev => ({ ...prev, show: false }))}
+      />
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold text-text-100 mb-8">Site Dashboard</h1>
 
@@ -395,6 +470,9 @@ const SiteDashboard = () => {
                 images={formData.images}
                 existingImages={editingProduct?.images || []}
                 onImagesChange={handleImagesChange}
+                onImageDelete={editingProduct ? 
+                  (imageId) => handleImageDelete(editingProduct._id, imageId) : 
+                  undefined}
               />
             </div>
             {formData.price && (

@@ -4,6 +4,7 @@ import { useDropzone } from 'react-dropzone';
 const ImageUpload = ({ images = [], onImagesChange, existingImages = [] }) => {
   const [previewImages, setPreviewImages] = useState([]);
   const [draggedItem, setDraggedItem] = useState(null);
+  const [hoveredImage, setHoveredImage] = useState(null);
   
   useEffect(() => {
     if (existingImages.length > 0) {
@@ -58,19 +59,18 @@ const ImageUpload = ({ images = [], onImagesChange, existingImages = [] }) => {
     
     setPreviewImages(items);
     setDraggedItem(index);
-    onImagesChange(items);
+    
+    const reorderedImages = items.map((img, idx) => ({
+      ...img,
+      order: idx
+    }));
+    onImagesChange(reorderedImages);
   };
 
   const removeImage = (index, e) => {
     e.stopPropagation();
     const newImages = [...previewImages];
     const removedImage = newImages[index];
-    
-    if (removedImage.isExisting) {
-      if (!window.confirm('Are you sure you want to remove this image?')) {
-        return;
-      }
-    }
     
     if (removedImage.isNew) {
       URL.revokeObjectURL(removedImage.url);
@@ -134,6 +134,8 @@ const ImageUpload = ({ images = [], onImagesChange, existingImages = [] }) => {
               onDragStart={(e) => handleDragStart(e, index)}
               onDragEnd={handleDragEnd}
               onDragOver={(e) => handleDragOver(e, index)}
+              onMouseEnter={() => setHoveredImage(index)}
+              onMouseLeave={() => setHoveredImage(null)}
               className={`
                 relative group cursor-move
                 ${draggedItem === index ? 'opacity-50' : 'opacity-100'}
@@ -149,31 +151,34 @@ const ImageUpload = ({ images = [], onImagesChange, existingImages = [] }) => {
                   alt={`Preview ${index + 1}`}
                   className="w-full h-full object-cover pointer-events-none select-none"
                 />
-                <div className="
-                  absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100
-                  transition-opacity duration-200 flex items-center justify-center
-                ">
-                  <button
-                    onClick={(e) => removeImage(index, e)}
-                    className="p-2 rounded-full bg-red-500 hover:bg-red-600 text-white
-                      transform transition-transform duration-200 hover:scale-110"
-                    title="Remove image"
-                  >
-                    <svg 
-                      className="w-5 h-5" 
-                      fill="none" 
-                      stroke="currentColor" 
-                      viewBox="0 0 24 24"
+                {hoveredImage === index && (
+                  <div className="
+                    absolute inset-0 bg-black/50
+                    transition-opacity duration-200 
+                    flex items-center justify-center
+                  ">
+                    <button
+                      onClick={(e) => removeImage(index, e)}
+                      className="p-2 rounded-full bg-red-500 hover:bg-red-600 text-white
+                        transform transition-all duration-200 hover:scale-110"
+                      title="Remove image"
                     >
-                      <path 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round" 
-                        strokeWidth={2} 
-                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" 
-                      />
-                    </svg>
-                  </button>
-                </div>
+                      <svg 
+                        className="w-5 h-5" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path 
+                          strokeLinecap="round" 
+                          strokeLinejoin="round" 
+                          strokeWidth={2} 
+                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" 
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                )}
               </div>
               {index === 0 && (
                 <div className="
