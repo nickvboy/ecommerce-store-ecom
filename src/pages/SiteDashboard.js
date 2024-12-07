@@ -91,9 +91,13 @@ const SiteDashboard = () => {
       setDeletedImages(deletedImageIds);
     }
 
+    // Update form data with ordered images
     setFormData(prev => ({
       ...prev,
-      images: images
+      images: images.map((img, index) => ({
+        ...img,
+        order: index // Ensure order is updated based on current position
+      }))
     }));
   };
 
@@ -142,9 +146,14 @@ const SiteDashboard = () => {
             const uploadedImages = await uploadMultipleImages(filesToUpload);
             console.log('Successfully uploaded images:', uploadedImages);
             
-            // Add new images to the product
+            // Add new images to the product with order
+            const newImagesWithOrder = uploadedImages.map((img, index) => ({
+              ...img,
+              order: formData.images.length + index // Add after existing images
+            }));
+            
             await api.post(`/products/${productId}/images`, {
-              images: uploadedImages
+              images: newImagesWithOrder
             });
             console.log('Added images to product');
           }
@@ -154,14 +163,17 @@ const SiteDashboard = () => {
         const updatedProduct = await api.get(`/products/${productId}`);
         const currentImages = updatedProduct.data.images || [];
         
-        // 4. Reorder images if needed
+        // 4. Reorder all images based on current order
         if (currentImages.length > 0) {
           console.log('Reordering images:', currentImages);
+          const orderedImages = formData.images.map((img, index) => ({
+            url: img.url,
+            publicId: img.publicId,
+            order: index
+          }));
+          
           await api.patch(`/products/${productId}/images/reorder`, {
-            imageOrders: currentImages.map((img, index) => ({
-              url: img.url,
-              order: index
-            }))
+            imageOrders: orderedImages
           });
         }
 

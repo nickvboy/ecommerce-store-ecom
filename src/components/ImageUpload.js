@@ -7,6 +7,21 @@ const ImageUpload = ({ images = [], onImagesChange, existingImages = [] }) => {
   const [hoveredImage, setHoveredImage] = useState(null);
   const [uploadError, setUploadError] = useState(null);
   
+  // Initialize or update preview images when existingImages changes
+  useEffect(() => {
+    if (existingImages.length > 0) {
+      const formattedExisting = existingImages.map(img => ({
+        id: img.publicId || Math.random().toString(36).substr(2, 9),
+        url: img.url,
+        isExisting: true,
+        publicId: img.publicId,
+        order: img.order || 0
+      }));
+      setPreviewImages(formattedExisting);
+      onImagesChange(formattedExisting); // Update parent with formatted images
+    }
+  }, [existingImages]);
+
   const cleanupPreviewUrls = useCallback(() => {
     previewImages.forEach(img => {
       if (img.isNew && img.url) {
@@ -15,49 +30,38 @@ const ImageUpload = ({ images = [], onImagesChange, existingImages = [] }) => {
     });
   }, []);
 
-  useEffect(() => {
-    if (existingImages.length > 0 && images.length === 0) {
-      const formattedExisting = existingImages.map(img => ({
-        id: img.publicId || Math.random().toString(36).substr(2, 9),
-        url: img.url,
-        isExisting: true,
-        publicId: img.publicId
-      }));
-      setPreviewImages(formattedExisting);
-    } else if (images.length === 0 && previewImages.length > 0) {
-      cleanupPreviewUrls();
-      setPreviewImages([]);
+  // Handle file drops
+  const onDrop = useCallback((acceptedFiles) => {
+    setUploadError(null);
+    
+    // Validate file sizes (max 5MB per file)
+    const maxSize = 5 * 1024 * 1024; // 5MB
+    const invalidFiles = acceptedFiles.filter(file => file.size > maxSize);
+    
+    if (invalidFiles.length > 0) {
+      setUploadError(`Some files exceed the 5MB limit: ${invalidFiles.map(f => f.name).join(', ')}`);
+      return;
     }
-  }, [existingImages, images.length, cleanupPreviewUrls]);
+
+    const newImages = acceptedFiles.map(file => ({
+      id: Math.random().toString(36).substr(2, 9),
+      url: URL.createObjectURL(file),
+      file,
+      isNew: true,
+      order: previewImages.length // Add order based on current length
+    }));
+    
+    const updatedImages = [...previewImages, ...newImages];
+    setPreviewImages(updatedImages);
+    onImagesChange(updatedImages);
+  }, [previewImages, onImagesChange]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: {
       'image/*': ['.png', '.jpg', '.jpeg', '.webp']
     },
     multiple: true,
-    onDrop: (acceptedFiles) => {
-      setUploadError(null);
-      
-      // Validate file sizes (max 5MB per file)
-      const maxSize = 5 * 1024 * 1024; // 5MB
-      const invalidFiles = acceptedFiles.filter(file => file.size > maxSize);
-      
-      if (invalidFiles.length > 0) {
-        setUploadError(`Some files exceed the 5MB limit: ${invalidFiles.map(f => f.name).join(', ')}`);
-        return;
-      }
-
-      const newImages = acceptedFiles.map(file => ({
-        id: Math.random().toString(36).substr(2, 9),
-        url: URL.createObjectURL(file),
-        file,
-        isNew: true
-      }));
-      
-      const updatedImages = [...previewImages, ...newImages];
-      setPreviewImages(updatedImages);
-      onImagesChange(updatedImages);
-    }
+    onDrop
   });
 
   const handleDragStart = (e, index) => {
@@ -80,14 +84,15 @@ const ImageUpload = ({ images = [], onImagesChange, existingImages = [] }) => {
     items.splice(draggedItem, 1);
     items.splice(index, 0, draggedItemContent);
     
-    setPreviewImages(items);
-    setDraggedItem(index);
-    
-    const reorderedImages = items.map((img, idx) => ({
-      ...img,
+    // Update order property for all items
+    const reorderedItems = items.map((item, idx) => ({
+      ...item,
       order: idx
     }));
-    onImagesChange(reorderedImages);
+    
+    setPreviewImages(reorderedItems);
+    setDraggedItem(index);
+    onImagesChange(reorderedItems);
   };
 
   const removeImage = (index, e) => {
@@ -100,8 +105,15 @@ const ImageUpload = ({ images = [], onImagesChange, existingImages = [] }) => {
     }
     
     newImages.splice(index, 1);
-    setPreviewImages(newImages);
-    onImagesChange(newImages);
+    
+    // Update order for remaining images
+    const reorderedImages = newImages.map((img, idx) => ({
+      ...img,
+      order: idx
+    }));
+    
+    setPreviewImages(reorderedImages);
+    onImagesChange(reorderedImages);
   };
 
   return (
