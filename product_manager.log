@@ -6016,3 +6016,19 @@ AttributeError: 'ImageUploadWidget' object has no attribute 'get_image_urls'. Di
 2024-12-07 09:03:06,915 - DEBUG - http://localhost:5001 "GET /api/products?page=1&limit=1000 HTTP/11" 200 11169
 2024-12-07 09:03:06,936 - INFO - Setting images: []
 2024-12-07 09:03:06,958 - INFO - Setting images: []
+2024-12-07 09:34:47,049 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:34:51,148 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:34:55,234 - INFO - Setting images: []
+2024-12-07 09:35:04,625 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:35:08,730 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:35:12,793 - INFO - Setting images: []
+2024-12-07 09:35:38,856 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:35:38,877 - DEBUG - http://localhost:5001 "GET /api/products?page=1&limit=1000 HTTP/11" 200 11169
+2024-12-07 09:35:38,900 - INFO - Setting images: []
+2024-12-07 09:35:40,408 - INFO - Editing product: {'_id': '675455676e5670f29f9e1084', 'name': 'Veridian Storm Escape', 'price': 185.6, 'stock': 21, 'category': 'Shelter & Environmental Protection'}
+2024-12-07 09:35:40,410 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:35:40,416 - DEBUG - http://localhost:5001 "GET /api/products/675455676e5670f29f9e1084 HTTP/11" 200 737
+2024-12-07 09:35:40,417 - INFO - Fetched full product data: {'_id': '675455676e5670f29f9e1084', 'name': 'Veridian Storm Escape', 'price': 185.6, 'stock': 21, 'category': {'_id': '67545219db2aa43c852e2ad4', 'name': 'Shelter & Environmental Protection', 'alias': 'shelter'}, 'specifications': {'materials': []}, 'reviewStats': {'ratingDistribution': {'1': 0, '2': 0, '3': 0, '4': 0, '5': 0}, 'averageRating': 0, 'totalReviews': 0}, 'description': 'Compact bivy shelter from self-healing fabric, passive solar strips, internal LED lighting.', 'attributes': [], 'rating': 0, 'reviews': [], 'tags': [], 'featured': False, 'images': [], 'variants': [], 'createdAt': '2024-12-07T14:02:15.451Z', 'updatedAt': '2024-12-07T14:02:15.451Z', '__v': 0, 'categoryPath': [{'_id': '67545219db2aa43c852e2ad4', 'name': 'Shelter & Environmental Protection', 'alias': 'shelter'}]}
+2024-12-07 09:35:40,421 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-07 09:35:40,429 - DEBUG - http://localhost:5001 "GET /api/products/675455676e5670f29f9e1084 HTTP/11" 200 737
+2024-12-07 09:35:40,431 - INFO - Setting images: []

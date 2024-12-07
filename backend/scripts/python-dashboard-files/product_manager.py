@@ -1816,7 +1816,7 @@ class ProductManager(QMainWindow):
                 
                 # Refresh the product list
                 self.refresh_products()
-                
+            
             except Exception as e:
                 QMessageBox.critical(
                     self,
