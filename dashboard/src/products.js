@@ -60,6 +60,39 @@ export async function setupProducts() {
         }
     });
 
+    // Add export button handler
+    const exportBtn = document.getElementById('exportDbButton');
+    exportBtn.addEventListener('click', async () => {
+        try {
+            exportBtn.disabled = true;
+            exportBtn.textContent = 'Exporting...';
+
+            // Run the export script directly
+            const { exec } = require('child_process');
+            const path = require('path');
+            
+            const scriptPath = path.join(__dirname, '../../backend/scripts/exportCollections.js');
+            exec(`node ${scriptPath}`, (error, stdout, stderr) => {
+                if (error) {
+                    console.error(`Error: ${error}`);
+                    alert('Error exporting database: ' + error.message);
+                    return;
+                }
+                if (stderr) {
+                    console.error(`Stderr: ${stderr}`);
+                    return;
+                }
+                alert('Database exported successfully! Check the backend folder for the JSON file.');
+            });
+
+        } catch (error) {
+            alert('Error exporting database: ' + error.message);
+        } finally {
+            exportBtn.disabled = false;
+            exportBtn.textContent = 'Export Database';
+        }
+    });
+
     // Load initial products
     await loadProducts();
 
