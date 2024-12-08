@@ -1,0 +1,1153 @@
+[{
+  "_id": {
+    "$oid": "6753d647a4fcf05df4328cb6"
+  },
+  "firstName": "Admin",
+  "lastName": "User",
+  "email": "admin@example.com",
+  "password": "$2a$10$Pm8EK9/EArhwniVzTxenE.BzbCJNJ04/ha8uggpHzoSgdQJGHgleq",
+  "role": "admin",
+  "avatar": "https://avatars.githubusercontent.com/u/54757402",
+  "addresses": [
+    {
+      "street": "69605c808c71b23ff5422d26b1580b4e:c0679e526e5d32939e45a083463e01b644d41434f7f1c5aa337c97098f4aa6d5",
+      "city": "b0e8e944164402f3bb9630d382e7a54a:64bff6934971b2aabab285e96b532f9f82d481854245bb80cbb01fcfda244851",
+      "state": "689dda9bf9cf283c9cfb5c5d6396d40d:312e5c38d525d81f1f2011ff0f362ec5",
+      "zipCode": "5e75feff802e1f39317e3e8b6b2619d5:dfb4bb03d6c40b6d80eedf7e0687c867",
+      "country": "2ab0d1bcc189f26fba631a4f63ee7c6a:47c063ee1611d16b0fc0e5e51e3059aa",
+      "isDefault": true
+    }
+  ],
+  "orders": [],
+  "wishlist": [],
+  "createdAt": {
+    "$date": "2024-12-07T04:59:51.123Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T04:59:51.123Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d647a4fcf05df4328cbf"
+  },
+  "firstName": "Gabriella",
+  "lastName": "Hettinger",
+  "email": "gabriella_hettinger54@hotmail.com",
+  "password": "$2a$10$lWsBp85Uxax6PbUTOW3.7u1rYDU/aj05udKSoyAouXmyHD0xLNuGO",
+  "role": "user",
+  "avatar": "https://avatars.githubusercontent.com/u/57463218",
+  "addresses": [
+    {
+      "street": "3bced835eb173fc9b9575ca35ec21a90:71158bdf542357baaaf6c413ebcb39659eb1bcc86b078e9d31f773fc88b2073f",
+      "city": "b7d5dab517557bfb1546eecfbc900d0f:31f1dbba2f5e42aedfd81088dc882ede",
+      "state": "587a128a55c2e8713779dba6387ccebd:5cf554add233f860e3576f0f62e91234",
+      "zipCode": "fffe282d3ff584b40b6debab7f6e809e:e2924abb8dfc50632f99f9a152d0a799",
+      "country": "6425b4a3786ddb187a21d150aababf07:912ee898f44479d6abbe21ff8664b16c",
+      "isDefault": true
+    }
+  ],
+  "orders": [],
+  "wishlist": [],
+  "createdAt": {
+    "$date": "2024-12-07T04:59:51.916Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T04:59:51.916Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d648a4fcf05df4328cc1"
+  },
+  "firstName": "Berry",
+  "lastName": "Cummings",
+  "email": "berry_cummings@hotmail.com",
+  "password": "$2a$10$3ZxXIJjqMSjvWz8pRVcfZupLZBHVbdX9TNt1i/7v6I0k29QWOHtwK",
+  "role": "user",
+  "avatar": "https://avatars.githubusercontent.com/u/2651977",
+  "addresses": [
+    {
+      "street": "5778225edb7fd952c40a5344badd123f:e21b7e07421549daa64f2a879323be5d693e638886ec2c860a17b544613158ed",
+      "city": "70875c2fdd6fdc5cbaf479baf12eb5c7:4ef65ef237937b662bbe2c479636487d",
+      "state": "07370d3ef2050ec234eaeb8678ec19ea:68f88c0a58b646f886d120a0f423bb7f",
+      "zipCode": "033f1d96a72f2003333568d03fc13243:5ba82230ff17ad38784056b0e92bfe1c",
+      "country": "e928f7afd38278b37726d7773c5b8161:8d08339563cbe7e1ba3c4eda889e0e2c",
+      "isDefault": true
+    }
+  ],
+  "orders": [],
+  "wishlist": [],
+  "createdAt": {
+    "$date": "2024-12-07T04:59:52.200Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T04:59:52.200Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d648a4fcf05df4328cc3"
+  },
+  "firstName": "Royal",
+  "lastName": "Labadie",
+  "email": "royal.labadie@gmail.com",
+  "password": "$2a$10$q43YRPXkTk2amXxqMYjTP.LQcOJc4ceTEYayRvUa8pyCw8x6hYRSa",
+  "role": "user",
+  "avatar": "https://avatars.githubusercontent.com/u/47082719",
+  "addresses": [
+    {
+      "street": "a1f3fcc73fb1293b86a00dd8ae9b11dc:8df2a998df38813cac540424851d3c8bbc10b82a7fb8ddf6dad9a2dbb4c64cd5",
+      "city": "be85364a9219eeb06618e1aa6fcf0a3d:13c0e9d984a4d0d44579f61b65a25f9f",
+      "state": "cd45a20d3a07a4613368db0d7525ea8e:b09087d9fc06460ad5be035886f94a19",
+      "zipCode": "6a1083cfcef0ea17cffd50043bd398a8:4fb20f57afa2853e0594bfce6e99bc97",
+      "country": "474f33fbe153baeed853a70375bcfcd9:c17bafb22e533b51c089fa42f6d6cf5c",
+      "isDefault": true
+    },
+    {
+      "street": "02103b423e8bb240befce3794ce1e98a:dd31c266a6667dc3936a8cc75cde9fc61e783a269122d1fe55455576ba1ee319",
+      "city": "04a32ce278c2b012bbe72d915a8fb0de:8e12fbd05bb77508292b88c6ffb70951",
+      "state": "bca9e60ce52b277d9294200849f0e5c6:793ddf4d491d095634aa29e22c424c71",
+      "zipCode": "ed605ae21009714320b24094a6dcce47:2e8ff3137b71ccab437ccfffb1597013",
+      "country": "2f028ee033821923426e5a80d19d655f:83a84ac2b20e2a657e2d309ac89caa71",
+      "isDefault": false
+    }
+  ],
+  "orders": [],
+  "wishlist": [],
+  "createdAt": {
+    "$date": "2024-12-07T04:59:52.527Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T04:59:52.527Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d648a4fcf05df4328cc5"
+  },
+  "firstName": "Louvenia",
+  "lastName": "O'Kon",
+  "email": "louvenia.okon@hotmail.com",
+  "password": "$2a$10$ruIUDEIGsvyqPYbNe/Uku.sJsCdxVDnRQR9IIpZHOojacyU9EkWE2",
+  "role": "user",
+  "avatar": "https://avatars.githubusercontent.com/u/66443953",
+  "addresses": [
+    {
+      "street": "cbb50d95bd58fd8bb959f742156a89c7:e72ef4c3f7d91091afa3e6c2e6d594d3f2819756aaedc1fb2d0e50f4fff8be31",
+      "city": "719ca05406208127c57a7651374fc5f8:722265f2119f7a439750faced71019bf",
+      "state": "efee66c83bd365def784b49c4ac344e1:fe541fae839e58bcfc0199dca248aafc",
+      "zipCode": "b8bfae2c87cc1509200efdfc4cdcd14f:6221cd8a019a88aa07d303d5ffd11269",
+      "country": "2163bb8291729f2580d34236e1da75fa:6b383255638a0f889988367a225dc0ab",
+      "isDefault": true
+    },
+    {
+      "street": "49bff617a0b6a56a7226738198a1b9b7:410ee53787d60f9d1fa64fccb14716e4bde8a6e60735b135036787731bd2816f",
+      "city": "1c722876225f32c8d693d7154aaf0a12:3a5d0efdcc2e328daf640720c5cc6b37",
+      "state": "729a75492220fc64316d84cf3f15a2e4:4d54c2e01f5aa464cbac273271895185",
+      "zipCode": "edc9c09ae7a969a9786c4d6e91a3226a:1e696cc2aa8d1e12216fa0b1ca8773d7",
+      "country": "a13a0229b9f674862c0b33cdbb49b2b8:28453976014d39730b3dd66a1c1e152b",
+      "isDefault": false
+    },
+    {
+      "street": "a2f91270cac53634997d60fae7d6ccbf:255eca10663bb21626c9ebafae8f1c9b6008cee806a042af886281315da6e230",
+      "city": "ce67c4b383865b008b808924918b95fd:5f62282cc735d680546d6b91db2047ab",
+      "state": "3925ca612cc9b76d568afc578c96d8d4:2279968495b8e320f38d4587b415b4fa",
+      "zipCode": "e86790c3f01433d043601821bc587b42:a7f78234cb19fee3aad433720cb80f41",
+      "country": "38c792f9d45cc6c8ec1de8d39b7cb961:6f87f4463fd24f33ba6aac3d469de98b",
+      "isDefault": false
+    }
+  ],
+  "orders": [],
+  "wishlist": [],
+  "createdAt": {
+    "$date": "2024-12-07T04:59:52.932Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T04:59:52.932Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d649a4fcf05df4328cc7"
+  },
+  "firstName": "Glenna",
+  "lastName": "Boehm",
+  "email": "glenna_boehm@yahoo.com",
+  "password": "$2a$10$RVuN0r2FZRRPIMpWm5sCyu3WOpoXF8MOJDKBUuksLU7bFhZBHfaEW",
+  "role": "user",
+  "avatar": "https://avatars.githubusercontent.com/u/9170392",
+  "addresses": [
+    {
+      "street": "a4f783cd96d3ba2e973d4b8a3241681d:e233f10da2cdb944a1c6902079e1f01d73cf7a9275cddd5ae4dab058cc57c3a2",
+      "city": "860f58df9f55966cb69d4ab2c8280fa4:43d58e9c3d562b812ad956735c37fe56",
+      "state": "c4e213cd3fd764c9e484b998431db684:9bf2735af9d37d194294e876ceb206ff",
+      "zipCode": "821c5762978f98f90a673cca9819a2ef:2863ad2fd4c0eeecbdeba20a78936520",
+      "country": "2458ae38aa6549779e3c99b133b1f226:198074d802024a9b937ebe6d58cdbaf3",
+      "isDefault": true
+    },
+    {
+      "street": "86f5766e48897a792ff48cf1149fe1b3:b16178394a1554cfb64e0d1780583945",
+      "city": "2e80743d79c0718516bc7582b2d39160:e67354abd72ba85391327cf4faba16b7360e8fa333cbc5c11e15cccc0db02ecd",
+      "state": "dc28922eca8ad4e9bcac61e0db5f289f:c99f22f2d1701d72678e854c88bac005",
+      "zipCode": "525277afd460cdeb665e1be0365f54b3:2ec72960a511a5ed966e9f952bcdf89c",
+      "country": "1d023c27f5ec3e131aaf011fabd84d1a:9312ddf0c97347511171681b2f1ff798",
+      "isDefault": false
+    },
+    {
+      "street": "e68bed71c91141a5a2d4506a41be3cfc:4bc331a866666cb68d12c917fe026400cd084c3ebae3bd576597d3890f5eca81",
+      "city": "49ff1c9534473fa6450e9010e7ee5866:3dc48a7118bfdb782d85860e0c71d662d8b733a13a5c1c325c4b3bec6caa9666",
+      "state": "57a4d5d44e816e32b513ef8316b3d7d1:e2042cab08ce811b477905128e00df8b",
+      "zipCode": "3faf5d15a99c569ba87e84ac69e75b9c:877757ac6f32230866a085dd2e5fb802",
+      "country": "c4b64a0ee253aba824742a158fcdb97e:4d4244fb9f6d7f7208e77ac89c1ffb7d",
+      "isDefault": false
+    }
+  ],
+  "orders": [],
+  "wishlist": [],
+  "createdAt": {
+    "$date": "2024-12-07T04:59:53.202Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T04:59:53.202Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d649a4fcf05df4328cc9"
+  },
+  "firstName": "Stan",
+  "lastName": "Stehr",
+  "email": "stan_stehr@yahoo.com",
+  "password": "$2a$10$/PWh.k28lWhECAt0agz8bOtEXi4fhhZIT2QPrS3Q6v8mMbgJ.sI4a",
+  "role": "user",
+  "avatar": "https://avatars.githubusercontent.com/u/28988342",
+  "addresses": [
+    {
+      "street": "de654d3bec3bfce49477dd28d1d15818:f310939fff5c90c16dfb2872c6e809f59c040734ad95101817ea159f5d43fe9d",
+      "city": "9ef0a128d8dae73a3fa22f310ddbcbf1:cf56cc0e915e0b481669ebe866bb652b",
+      "state": "23a943c52b63ade90ae51c765ba06c78:d6ba7adbfb5e070aedc0ed2e7afe9ebf",
+      "zipCode": "dff37e06a28aea324bcac7ca87c51a23:d12f2fc76f85a73c015941e44bdd2242",
+      "country": "e528a3859b4b75ca185e95a22b181dd9:71d59ec859029392e0f77d2b8f7177bf",
+      "isDefault": true
+    },
+    {
+      "street": "8766b23b3e4b625521da5f3c51835cb3:b5f5cf0d9e15ebdbfd1819bdf43968b7d6f1cee4f1312bcf994bdde44ce6b717",
+      "city": "ae39d01f5b8ff7a7e08664dcdfe4f8e8:84a61177467da77df1414c560aaddffb",
+      "state": "0220bfcedddca58d9c486c43b72b41b8:42c708428ac39bad4fe8c6ffe009dee7",
+      "zipCode": "9a7d3c1d9092156b6ef80beb418a4cf5:e6ac7c29a9f56a412ff6be53ff92eb34",
+      "country": "cafb04aa3ddc55b7f74f3fca8d184d5c:4fd27315cb15a2e3792cf5877bd7024a",
+      "isDefault": false
+    }
+  ],
+  "orders": [],
+  "wishlist": [],
+  "createdAt": {
+    "$date": "2024-12-07T04:59:53.461Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T04:59:53.461Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d649a4fcf05df4328ccb"
+  },
+  "firstName": "Lester",
+  "lastName": "Reinger",
+  "email": "lester.reinger@gmail.com",
+  "password": "$2a$10$O5y6v/4/spmm9xsd/s35g.PIoUqKsSU8xzR2FhcuyLEutCTQ7TjHy",
+  "role": "user",
+  "avatar": "https://avatars.githubusercontent.com/u/71927984",
+  "addresses": [
+    {
+      "street": "2c2ad16044f751d1284432c36d02dd58:21cd492d2bdca565dd785cdc789db98d2afd5ff67dc77760bbcbc94ecdd18bd7",
+      "city": "f8fc7c172b1277f3215cff19cb3e3111:e4f66f6c829260d74a184bb070316d9c",
+      "state": "d516e8dac82ef4422ba71eed1d7a8c92:2dd223c849df53164a584753c72a80e0",
+      "zipCode": "4faf09f1cc8f4dc08a8eb91410992967:e5d95d8bd122db0935c788c0e86ba242",
+      "country": "92e03c2711f7681963f5a89c13d0e806:1c47fd9b6cf9c4463023f9cb55832589",
+      "isDefault": true
+    }
+  ],
+  "orders": [],
+  "wishlist": [],
+  "createdAt": {
+    "$date": "2024-12-07T04:59:53.791Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T04:59:53.791Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d64aa4fcf05df4328ccd"
+  },
+  "firstName": "Cicero",
+  "lastName": "Emmerich",
+  "email": "cicero_emmerich30@hotmail.com",
+  "password": "$2a$10$cLrzW12cj4zpMvUu8BY8zO4.7wXDQ93YBvc9gONw62qBd6BWkbLa2",
+  "role": "user",
+  "avatar": "https://avatars.githubusercontent.com/u/16410461",
+  "addresses": [
+    {
+      "street": "76f4c1dabcb5c7ef66388fe08fa2328d:5641cfb8094a949805dc09d041796023ddbfb532506db04ba1809191e812ddee",
+      "city": "f577c852cdb22d22589d271175f2974b:685f7ec5b376dbd450897ef997c88ed2",
+      "state": "607bde4b0298ab73163400192fa8c8f3:f42f49cd6a6923a7af690d2f7957b9af",
+      "zipCode": "ef67bc93928769750c6f31ae9d0dd864:e203e454c0dbb0e2c4c12ec46c5760cd",
+      "country": "f77ac0ceae68cf1447f248d31611f518:df93e2dfd834c3faf7e535effd6bc33a",
+      "isDefault": true
+    },
+    {
+      "street": "e6f5e6cc19398e02d6503897b08d1cab:f78320c14c4083ad8a9726917ffb178ca9ea81a8c5ba0b98f60112ca4c33530b",
+      "city": "0586c6b99c149166378009145d8d4aa9:5b24658a0c3d140e2a226e220f55a536",
+      "state": "e2f264bd63060c2a28b5961e8e2c29a0:bd7e6f165b7bd0dd286324d4778acc8d",
+      "zipCode": "0b367ca974f636d698c292e30c8c7ef2:498386c8584655e4857045a80eecabe8",
+      "country": "b6db7d910b8945b7acc902e5fced073a:915b68904e122b78daba13e5dbfff7d3",
+      "isDefault": false
+    }
+  ],
+  "orders": [],
+  "wishlist": [],
+  "createdAt": {
+    "$date": "2024-12-07T04:59:54.101Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T04:59:54.101Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d64aa4fcf05df4328ccf"
+  },
+  "firstName": "Paxton",
+  "lastName": "Jacobson",
+  "email": "paxton.jacobson@yahoo.com",
+  "password": "$2a$10$ZQBEGCd.tpXu5mjRZZSGTe812GVtHv893E6V96vIuCqkAb1v1IFAy",
+  "role": "user",
+  "avatar": "https://avatars.githubusercontent.com/u/28919318",
+  "addresses": [
+    {
+      "street": "15667ad0135ad089eb9d5db2dd08f910:ed17dcc00a3bded51c64169d7bc7b691abe947ee261f7b3f965b35ea293c5de8",
+      "city": "6e0392a117bb4c50c62116de38d32957:5479982dd914561a8e7e5d4c599b1044",
+      "state": "fd50d765d0c6c3a80aac5a092046ad0c:f83de039dd2e40742014ba3f83eb3cea",
+      "zipCode": "e17b00d57c1a176d78d131bd4bbad5c3:dee1e592ef881cb3bc8111b0a67d3a3a",
+      "country": "384aa7e99eeef9811489530140f8fa36:93ddb1b05cdb9e6c7ad5d54d418ea1fe",
+      "isDefault": true
+    },
+    {
+      "street": "27f3e4156f9022b521b8f5c37b86766b:fec7f3315b747a1154a24c0ff816c787",
+      "city": "03e02d42dcbce03f4f43abedb46c7cad:3fed3adb30d95c8bbcd3f6116b58371e",
+      "state": "85f5ed6e997d126ed68bfbba3ec92877:1085e2e1f44faa8c8ee0249ff8f557d3",
+      "zipCode": "3200344aed7e00129bb81f538a7097ff:4f8c3512a9a79d003853354095470d9f",
+      "country": "a18f8dfde5430f3f675b67678c9d2086:3c9d14be3ea42a9620d5eaab93d0c93c",
+      "isDefault": false
+    }
+  ],
+  "orders": [],
+  "wishlist": [],
+  "createdAt": {
+    "$date": "2024-12-07T04:59:54.357Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T04:59:54.357Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d64aa4fcf05df4328cd1"
+  },
+  "firstName": "Vena",
+  "lastName": "Yundt",
+  "email": "vena.yundt32@hotmail.com",
+  "password": "$2a$10$JFaKkWqunQM6UWQkxCBYZ.xoErP4LN4F17sF2oBCbCcZeLHgdWKLq",
+  "role": "user",
+  "avatar": "https://avatars.githubusercontent.com/u/33535874",
+  "addresses": [
+    {
+      "street": "e9f60a1aab1a8c968f24240f32b86eda:a5710b326f482c9da4d2bcd923dd937d5e1bad0a20ffee6888b5eed58ca0e818",
+      "city": "26c6ebed354bd4c5b7bde6c096723b49:3a6b8d05c1fc707269e5c17c7bb2f546",
+      "state": "96e8925bcedd23f44dd6168741ec0e30:2741cb39859edc93c739d9988d13c266",
+      "zipCode": "bcd7fd2ceaaec0301ab69569ab47daf2:91fbe8e995bbe7973a666700090dcc9b",
+      "country": "c604cf65ab19d9997bf3c4fd2a2b85a2:3be5635701931b65c1f3dec110a2950b",
+      "isDefault": true
+    },
+    {
+      "street": "a47d95754e7f0b64379a7bad82334209:d0c100fb2da7d298c427ea0dae15993499e22ad12e462678e50a261095ef6f33",
+      "city": "65c25513d5fd1252c43cfa7ebbfdcacb:bf170e9f249d6407411ddfba61a32074",
+      "state": "88e6c5aa4c30502d7f6d811d8ebeff87:a7fb9eadb2cf4c0b2d9047d498e91655",
+      "zipCode": "b2d95ebc32277f068266cb853ddd7c1f:22c3b6433823bf9e22cbbd5352e40d13",
+      "country": "7b659f37ef0fa70604de78087337808c:2a1e61ba6974d11b3283094a752c4fb5",
+      "isDefault": false
+    },
+    {
+      "street": "7e821842d3499b14635ffe616941f0ad:ccd20b04affbfe03f7e81609c8834d5970b74b76074f1b3d3af10a9415517e23",
+      "city": "3a7880813b4ac0bc57c19450d851978d:19186d65fa6595909b19df0ee490afcb",
+      "state": "5db698b783427c9e43a42711834aea00:8c1ce021f85cb1793da7e4a7b937082c",
+      "zipCode": "0fee56ae5b2486b9c66c7868c30057db:6bfa1777230c3efbe7d8e3b6097f5419",
+      "country": "ef9e3071fea01ad945fa96a872ad48d5:32886738248ca53716c153798090bc06",
+      "isDefault": false
+    }
+  ],
+  "orders": [],
+  "wishlist": [],
+  "createdAt": {
+    "$date": "2024-12-07T04:59:54.647Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T04:59:54.647Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d64aa4fcf05df4328cd3"
+  },
+  "firstName": "Libbie",
+  "lastName": "Zulauf",
+  "email": "libbie.zulauf28@gmail.com",
+  "password": "$2a$10$OaGE9o.a/0V54nUhPoOIVu/37YzBJnRVEwamlpJrPmLMxdgRMIAcC",
+  "role": "user",
+  "avatar": "https://avatars.githubusercontent.com/u/27660620",
+  "addresses": [
+    {
+      "street": "4561fd306e4464e8f7c49271a7b876c1:6f1771d802d58a40f5fc7f87a5f0d53d6690f6cee22477a2f8a1602ddc2636fb",
+      "city": "25b805534696c5c014b438aeddf79dc1:16d609a3dc7cdbb1ed357f598e00da88",
+      "state": "15cb8fe11a66f598a011232d7d8cd900:3d59ccf79a99e73929f36798f23bbc7d",
+      "zipCode": "dc4d46536492bef7e52035eb8454e046:7df5b7a0f09265db88fd8625093cba75",
+      "country": "70ef28037f7744221d83e7620a28a3af:a0b9776660a4f47c68369fa600167389",
+      "isDefault": true
+    }
+  ],
+  "orders": [],
+  "wishlist": [],
+  "createdAt": {
+    "$date": "2024-12-07T04:59:54.994Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T04:59:54.994Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d64ba4fcf05df4328cd5"
+  },
+  "firstName": "Mona",
+  "lastName": "Bailey",
+  "email": "mona.bailey@gmail.com",
+  "password": "$2a$10$FRv5JhB0tWkzKvcD6kr6ce94hbEWEFJX0IQEVTRKVhCxJFivNiyFO",
+  "role": "user",
+  "avatar": "https://avatars.githubusercontent.com/u/26775044",
+  "addresses": [
+    {
+      "street": "2b41c769635c5d145b9945b70365b016:d2b848bd4d2779764130062eb45022ec3d07b2b3d65c77489f289e09a684f399",
+      "city": "7cdc9478e93c522272b4d7316e6263e6:7b3029aa8c042bf9dbb0fd89cd15b20c",
+      "state": "5cd22fece91de85fff0d6c8e60385969:b8456f96a759555ce3a781f0d7b2f00e",
+      "zipCode": "b5b53fd46d22921061c939b4fc643c3c:e3fb0bee64d4ce3bc753d6bcf12d426f",
+      "country": "01ce91280dbc8f005ddedd5d91fc61aa:6a4ef338f784bec613fd7f0c50e0f10c",
+      "isDefault": true
+    },
+    {
+      "street": "cdd28c620ba66091e82ff324ed19d31a:b23eec8ddb2738b8bc0bbff2bafe31eef4b797f05f67583a55d8d1a874f952fd",
+      "city": "62f4667ffcedc65de28077f3667c6bbd:3ef0f43006f5def21b1e360b41158a66e75e683903dca3705b3aeccddb73e841",
+      "state": "79550df30269e21d8bc185dc73bebf7f:8168716bb6c15790196c257b90d538e9",
+      "zipCode": "a9ab88264e30f8e151d173c20111625a:23e2ff532b031847d9437b90272bf8eb",
+      "country": "831208e5cfd074733a717568d41e5076:7ff93b0feb59a4fae4dc7323693d5d44",
+      "isDefault": false
+    },
+    {
+      "street": "465b9f4bbe6eb6bc3d94b0f964268a19:937114199fcd24ef1883b8941a61858d4823bf7a0944e0907f89340113ecf7d5",
+      "city": "13553b706552125b41a7f5bff469889e:690fc914e07e72c0f2c066ece1354146",
+      "state": "84ffcafb4c8c9c38f64516b65f28973f:0d8108f8883cae85094c0f8163f51ec2",
+      "zipCode": "55be3d8b7a70917cf6a6e81d1401d128:bc812a35c4f8434d65dc36f457a04bb1",
+      "country": "e1c3e24cf78e617bc9a3dcbbb7c512cc:39513d799c61b23ad0a21168959dc874",
+      "isDefault": false
+    }
+  ],
+  "orders": [],
+  "wishlist": [],
+  "createdAt": {
+    "$date": "2024-12-07T04:59:55.295Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T04:59:55.295Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d64ba4fcf05df4328cd7"
+  },
+  "firstName": "Edwina",
+  "lastName": "Nader",
+  "email": "edwina.nader@gmail.com",
+  "password": "$2a$10$qMxdpAxNZXDuf3VB8LtFae/FiKLrO.38B9vjVOmUeFcMwXq7r9VB.",
+  "role": "user",
+  "avatar": "https://avatars.githubusercontent.com/u/33939251",
+  "addresses": [
+    {
+      "street": "c1fd4b6020cffc78c8ef06e8ff47583d:36a9a6146bc49a8029337dfc43f9c58538ee500809743b33e52c9151d7bce368",
+      "city": "e47dc8c1bff5cfa6f2fd15ee4267545a:31ad1d99e6fc406f826ea63faa9aaf11a880c5709fa41f341f417dda8c1b0431",
+      "state": "35506ef775f8702a4a1272e43f49fa9e:03394c1860fd8ff498004108fab15e79",
+      "zipCode": "ba4bf098cd949d12994991b36f37ff5a:bca8e8d162f1ae0290e5402037beadd8",
+      "country": "846c1186983799f6626da62ddbd82165:2f21d67619552a4e4a5ab40a7cc00023",
+      "isDefault": true
+    },
+    {
+      "street": "62326e576219ea3c279d3259368fc92e:424e75bc7c5114231f5ea56dbd4d5736092b3407683066e517d7e7a3941217d5",
+      "city": "da6d1daaf31b2a36a75085b9e8a75470:1ea27cee61e9fe1ab59fe1b1ed63ae5e",
+      "state": "2a1fc3e03c6a365b1dd0a9369aec6833:e9f3a60f695731704c923e04882dcfa7",
+      "zipCode": "4022b766b11c64d348e3da7e1c196002:68d2f673b7b0c53236beea164e4ce3c9",
+      "country": "82cc4ec65454bd028a1d8567192ef9ec:c2ae8b6c2a3185530147b72403a442d5",
+      "isDefault": false
+    }
+  ],
+  "orders": [],
+  "wishlist": [],
+  "createdAt": {
+    "$date": "2024-12-07T04:59:55.565Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T04:59:55.565Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d64ba4fcf05df4328cd9"
+  },
+  "firstName": "Guy",
+  "lastName": "Parisian",
+  "email": "guy_parisian@hotmail.com",
+  "password": "$2a$10$GBLW5uAcUA2yRTACI70LWOXtDs0Om2K6Bs/S6fDL5Tr.xeRBgCVay",
+  "role": "user",
+  "avatar": "https://avatars.githubusercontent.com/u/38677455",
+  "addresses": [
+    {
+      "street": "19d02bb2780a95583e458c688c747a52:29c6cf83781e68dc61ee5c917eb889cc",
+      "city": "b5b5d6b13b1d7b2cf571a8495c421ceb:ea5e6a2dc86300867e327456394ed52a",
+      "state": "be0c94129e3b3def13c1616c86ea64ff:98d762ebfc3489221534d849acc1169a",
+      "zipCode": "5f4692ea8dd483dfa9dc6d68894b8d3e:c20a3c3718069c6b32bb16c0e6fbb323",
+      "country": "bc956bb969f6c1acb493b64d6a63a3b5:216d0fd995298ae39a9ce83f97f37870",
+      "isDefault": true
+    }
+  ],
+  "orders": [],
+  "wishlist": [],
+  "createdAt": {
+    "$date": "2024-12-07T04:59:55.887Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T04:59:55.887Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d64ca4fcf05df4328cdb"
+  },
+  "firstName": "Jamar",
+  "lastName": "Batz",
+  "email": "jamar_batz@gmail.com",
+  "password": "$2a$10$Ek0svl1h6U3Da3BDIT1jEukTj.sKc2Qxip4x51rZW6baF/AG1/A5S",
+  "role": "user",
+  "avatar": "https://avatars.githubusercontent.com/u/95537290",
+  "addresses": [
+    {
+      "street": "39db380fbcb1345e27eb944904087804:dbe1172070d7f3317195c15146696a9a",
+      "city": "3f39ca4c3269675d62e4b1f68d6327f1:e855b3a3c12e5206287d7fe265fc5911",
+      "state": "b1a396bf1eee0574758583f1c078fd9d:cf12f6254739ae7128ff1a4c28055781",
+      "zipCode": "cae2c4991269c6194dc82fee79eb4956:bffc6b5ff43a18d77ef29a1a74d90e2d",
+      "country": "a1cd3e63e3a3e7e9b39e17e369b3eb07:0efdb17d9fedacc3131e964d5d6aca51",
+      "isDefault": true
+    }
+  ],
+  "orders": [],
+  "wishlist": [],
+  "createdAt": {
+    "$date": "2024-12-07T04:59:56.183Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T04:59:56.183Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d64ca4fcf05df4328cdd"
+  },
+  "firstName": "Hector",
+  "lastName": "Will",
+  "email": "hector.will@yahoo.com",
+  "password": "$2a$10$2GRjQzbmPgyNIFyVjWnpWOY5yeBphWtqSpaFhaZQIYHCzeI1jp3Tq",
+  "role": "user",
+  "avatar": "https://avatars.githubusercontent.com/u/83053591",
+  "addresses": [
+    {
+      "street": "d0c9d6cea45eeab5985f6b78070b56eb:c47803d4d9bdd11d18ab8b357ef4daa58e35d056bd11b656e63834a6ec9cbc73",
+      "city": "e0f04d79ef4a79b2f7aeecf2f9436184:345cb74fca0f253f164f69ecf225fa44",
+      "state": "9be8c96f620f039e063eb23cf758d1db:5b41d4e6124a2bfcb49a6b41a1e81e63",
+      "zipCode": "b1b141852de9c388be3e7989d8f9c5ee:68baff68d4702c6e98ea483a731c206b",
+      "country": "46e846c5d90a6b5b5210510e7250e5c2:cb1a6ce7da67bee0be879e37ede9fe33",
+      "isDefault": true
+    },
+    {
+      "street": "d0740a2bca35316ada29b9e5f9fbe52b:61d8b9a934b7522a45e08038b29d6f26076b017a3296193ddc71f81e5971aab2",
+      "city": "56c527be034678050d09ed7bd75163b9:c56048d492582dd0a67e307a7602eed7eb8f037f112e8a46141e3324089fc516",
+      "state": "8932f61ad52aa281fffaee69b2acb9ce:4796262a680970a2bd3271672bbf8cb3",
+      "zipCode": "4a2589e93e2ebc8a6608fa71e4cb707d:7bf4b9acda41b64cb7abcce2d82ca016",
+      "country": "416aa74f4e764ba3d16b9755143afa8d:d2ebb1c6af9ee6d1fc0fa0cd5c6c7819",
+      "isDefault": false
+    }
+  ],
+  "orders": [],
+  "wishlist": [],
+  "createdAt": {
+    "$date": "2024-12-07T04:59:56.439Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T04:59:56.439Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d64ca4fcf05df4328cdf"
+  },
+  "firstName": "Yazmin",
+  "lastName": "Harvey",
+  "email": "yazmin_harvey@hotmail.com",
+  "password": "$2a$10$dfa5pyoVIoDYiR4QVorHEefDhiXFiyyxq4RhqeoMGxXYktJdbGwre",
+  "role": "user",
+  "avatar": "https://avatars.githubusercontent.com/u/39743228",
+  "addresses": [
+    {
+      "street": "18716ca2d5edda88c2b6a7242f4a34c7:45e18a3814c0f0c02d66b3f47e3f088e68bf0e28ee0a89f0866d6580bfc7fa4e",
+      "city": "2b2620deff790f5e21b8ffa9dbe73602:9b1296f00287466a8be142dfc8c7aba6",
+      "state": "f4f6e6b9e9aa63f190bb4705fee727eb:6cc1a3c51060b0676fb9a5e6d69d45e7",
+      "zipCode": "cf8220d2fb2272153ca285363b47c7f4:e181799a8ed720217df75e33a16fa609",
+      "country": "328df79702c7d5695693a630ccdf8c1f:c6af4b92571f3983fac32c6ac1ae7fc7",
+      "isDefault": true
+    },
+    {
+      "street": "d880e89c3eb4ff9b996aef2e6fbe2050:e9569bfe9a53361813b1e576cd8b3ba1a86e27fe42d4c417b93381b6ca7e506a",
+      "city": "e0ccbfd3184b7dd2aee2a16e83bf042a:b7e9f601da7f39de51aafca8b57c242e",
+      "state": "6a7a98a0aefa60810dcc0432b2f64529:77a6e5f335c8473eb6bb5822717728d6",
+      "zipCode": "c8b34cd74c5d36b87258bf74bb6814d6:ef2edd84b4a644abc229f3aabe20b842",
+      "country": "6b07fdaaa6bce06a8dc47835d06e44a9:119c22014b505612d3d803b3e7b1f265",
+      "isDefault": false
+    },
+    {
+      "street": "c64fee2ba96c4797b575024750f12add:1b8e93aafe700b44c9a4a3dbfec50e08cce27f0ab830226b86717e21a9e75418",
+      "city": "92041e000da15132409a3af70179f18c:0031894a5f5ac9e2341138ea6c04509a",
+      "state": "9ff9743da62df146ee73de3f619fc82b:95b23014922093bcb8e8e2076a239e99",
+      "zipCode": "8c129ccf0007f8339bcb20a52e7009d6:54cfe4beeb2032bdd992e679b4b103a1",
+      "country": "06575996e93f1e119a6afbeda7b87919:ac83fb6ba056005e8f51262afa4ccb72",
+      "isDefault": false
+    }
+  ],
+  "orders": [],
+  "wishlist": [],
+  "createdAt": {
+    "$date": "2024-12-07T04:59:56.738Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T04:59:56.738Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d64da4fcf05df4328ce1"
+  },
+  "firstName": "Tomas",
+  "lastName": "Weber",
+  "email": "tomas_weber69@yahoo.com",
+  "password": "$2a$10$/Wu3q9m67LPmA6kCM8CYv.j6pn3SboT8MZc4Bq8riHapdy1MMzhC6",
+  "role": "user",
+  "avatar": "https://avatars.githubusercontent.com/u/12239094",
+  "addresses": [
+    {
+      "street": "4676069b874e850eb1ab6e247ac6aab3:d711256a2960d4e79c0440d60d33c4c7a50129d9d9cd1cdeda0fd9501a360c60",
+      "city": "12c6d40ca01156f0134adf9519bbdde3:06c241ce135d0e137ec7331cb855baa2",
+      "state": "c44fb9e579ed539e2da82c2e15abb447:6d33da7531459fad5e97609b9630abbb",
+      "zipCode": "0e1e95eeedb29f372c5edca2e801d87e:9e9e324d0e83e214626966ec26aa5ef4",
+      "country": "9ab906753a0b1ebf71782c8e4f27e69e:71351f819b57c40b0231f11a2a1cd654",
+      "isDefault": true
+    },
+    {
+      "street": "7319f5241e28dcb17e91064f84127c2e:2a45dc3e65a06a43136ac05b07f86f106bca9c51a2405073244306d054285aec",
+      "city": "8e0803a58c10dd6debbcf04076cab6a6:9a4b8caf4dd6a129ab65013d806b3e5c",
+      "state": "470b1ddb3b0027fd57d4eeedb2083cb8:cd70ae9d1444715d93ee221cefcaea45",
+      "zipCode": "b607020475d94536f2244149568afbfe:d9d0c7d2ac7a69ca00e9b0269cd5c4d1",
+      "country": "294c61f48fdecd903521d3aa37cd8be9:5f8d14b27a0651cabb1eddfc605c10bf",
+      "isDefault": false
+    },
+    {
+      "street": "81bdb532a10e63bbf851c891882b119f:ebb49c601e961728ab309b93260f20af1d14aad41f38cd5ac2dea36fa37f94f3",
+      "city": "ccba8ee16e320f7c38418b44176135c0:a5d7e074160393d0d564646707d6fbac",
+      "state": "791a96af3c71f22398a406e6ffb3835f:e7a44ba8980d13887c570b8ae0e77be7",
+      "zipCode": "03e5af23bac3fe36e0146b7bfb57e451:01ab09e1f1ce471dee94a94530967120",
+      "country": "767005465aab2d9fbcb467b6c921e570:190006899e890ad93a2906b4da0706c6",
+      "isDefault": false
+    }
+  ],
+  "orders": [],
+  "wishlist": [],
+  "createdAt": {
+    "$date": "2024-12-07T04:59:57.067Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T04:59:57.067Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d64da4fcf05df4328ce3"
+  },
+  "firstName": "Griffin",
+  "lastName": "Abernathy",
+  "email": "griffin_abernathy@gmail.com",
+  "password": "$2a$10$zIpHO7PJPGvDleKwys4c9OMENx7qh1nQUzHehKRHKIlTohPnNjl92",
+  "role": "user",
+  "avatar": "https://avatars.githubusercontent.com/u/3088581",
+  "addresses": [
+    {
+      "street": "f5b38f8f23aae9f1f1a60d321ece430c:b1e37d1d41caf7847314ab1968cdb239c68c2695a1730c43a6ba259e71115a72",
+      "city": "355ba1906eb5875092be019b2f40ce8e:e9af1ef4598c6761271ecb40123a929663daa72a8adf9711d745ae641571e880",
+      "state": "54b31fb0ed723a5ad267d78b61ef7205:2081ea47d4c7d31d54d4a7a82709346d",
+      "zipCode": "7fa6016f94b7195238d451e1805faf6b:50df79ab8959a60a3cef6d2e4b7d1eb5",
+      "country": "0d00b53f979ce8f9a3de2268b63c54a2:d5710a5271c3c6239d6c89f85b550a85",
+      "isDefault": true
+    }
+  ],
+  "orders": [],
+  "wishlist": [],
+  "createdAt": {
+    "$date": "2024-12-07T04:59:57.330Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T04:59:57.330Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d64da4fcf05df4328ce5"
+  },
+  "firstName": "Lukas",
+  "lastName": "Herzog",
+  "email": "lukas.herzog@gmail.com",
+  "password": "$2a$10$imc93aZzte/WaN4jzJGkge.hB/n7CAo7jV8KDkWwE8fc6z0NfVaBS",
+  "role": "user",
+  "avatar": "https://avatars.githubusercontent.com/u/65334433",
+  "addresses": [
+    {
+      "street": "17b2dc441761f6c1581eb6a684916004:56ae4fe4679fb0d37e1a63ecbd078299",
+      "city": "80c1acf9653a4f0b06f802deb030f8b3:f3cb63addec0f8306578d1d51e4388c9",
+      "state": "48b0dea03a5bf6dbb6e8073fbea22350:090a2ffe4a528b240d2c7d6210bf5215",
+      "zipCode": "bda5bff1c7a1ce64c167aefb967585a7:19afd31111c75323f09f89033d9bf8de",
+      "country": "d0314f2e2c72b7272004837ec512c27f:960394e919913d9c9a817519296d0b38",
+      "isDefault": true
+    },
+    {
+      "street": "d9672ed9cc260255145d10e30c000da2:c4b9392c96b4bf49c3e9a13784be83c4612fc18a1fe837dfa1bda5d6f29f8e17",
+      "city": "16460a3ca6d1c204bd52694a4482ff99:5b978bf612c676f5fc32956e9f3a8560",
+      "state": "4c14cf57419f79249a96ee2ece4ad1ab:aacb2af79e578c4aa2267df7683c3a69",
+      "zipCode": "7105b48d3096a725272439af45d36b04:74870f5e84482003c6f8a37c9d2ba177",
+      "country": "28bea29761649a3a6c1ab8187cc36364:cdea92158a68e749d809aa87dcdd820f",
+      "isDefault": false
+    },
+    {
+      "street": "f4c6d2097c1ce764ef03a40b009c4d86:f03e131a175b71a31ed8016ab8431e5074fa6299950aaa4ed14438952c93c0e9",
+      "city": "526f22840105000da8e7876dce975a1c:e0513a143771cfaf4ec5123c890de5f5",
+      "state": "83b7d6ca6280090ba49cb8a2cbc63950:2cd82053014452e0ef7b7deafec5c941",
+      "zipCode": "441562fc27d6785e97206e7325c12b88:4bb8be6d1840dc836feb315373dfda5d",
+      "country": "f98095814a31a25e0c60610e92c1645f:15aa96f1237fb1cbf7ad14d0b53aa23c",
+      "isDefault": false
+    }
+  ],
+  "orders": [],
+  "wishlist": [],
+  "createdAt": {
+    "$date": "2024-12-07T04:59:57.603Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T04:59:57.603Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d64da4fcf05df4328ce7"
+  },
+  "firstName": "Gilbert",
+  "lastName": "Lakin",
+  "email": "gilbert_lakin38@gmail.com",
+  "password": "$2a$10$CB0IYyeLn7FTF3ttGkptT.udNYbgVjOjv6k8PY3PccVL8NUDAckdK",
+  "role": "user",
+  "avatar": "https://avatars.githubusercontent.com/u/17674747",
+  "addresses": [
+    {
+      "street": "9be93c8bdc821bee396303f4ce2cabd6:e1963d4e6426edaf83416d0861bbc953",
+      "city": "e631737affbdabd1c62cdf504a0a4413:1fe111b750a2ef25461d7f9a1e885a3c",
+      "state": "07e50cd4f0ad3b0dab59cd6c6286e809:8f2577cdc85923667c04b794b81159d2",
+      "zipCode": "53197452d25f40a6e3e3bce010b0d8e6:65d2d9cc380879c300879d100398e39c",
+      "country": "5248a581095be84ad3c9a5812cb07f59:74cfac3d502b9c9ca137c57c0d11efb8",
+      "isDefault": true
+    }
+  ],
+  "orders": [],
+  "wishlist": [],
+  "createdAt": {
+    "$date": "2024-12-07T04:59:57.974Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T04:59:57.974Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d64ea4fcf05df4328ce9"
+  },
+  "firstName": "Mia",
+  "lastName": "Hintz",
+  "email": "mia.hintz31@yahoo.com",
+  "password": "$2a$10$C7d0QEcCshwUMVHrzKZBEeGt0/NNN7llwxP9SPn692jvBih/MQDOy",
+  "role": "user",
+  "avatar": "https://avatars.githubusercontent.com/u/73540597",
+  "addresses": [
+    {
+      "street": "1310b36f3cd51349c4fa7d949bc95945:d553478a3ee8add2f6c79fec204b4857422a65e50ae8bd07e9f1a70e676d6491",
+      "city": "067122b782f2c0a4b907b614acbf242e:9b6e326be0f9730f7ebb1f67d5fd8c7e",
+      "state": "4964f2de324e7e2aacfc977d193b5134:a1bda380e1897eeba669d0ef029e81f3",
+      "zipCode": "6fa6b3b15801ffec8f65962681180cdc:2eca0289820482f4c435cc342f296539",
+      "country": "af4af9e09a440cd9ed0424da8b83d32f:79da59701c7a43f7f9872cbc3065510d",
+      "isDefault": true
+    },
+    {
+      "street": "c5c7b36bfff9012a191a400372e3c2e1:7329708f7ac678a37ddd281bc00ed421",
+      "city": "6a9b5a7827a6d97b17c70720b8ea92f0:11c3da322a2743bf0b879c95fdc8201b",
+      "state": "4c1dd6741e236511474b1cd6258bff8f:c3ba5f2493a21f780b447be1797d988b",
+      "zipCode": "65f500bb74091229592b001633c98f6a:5084678fe2836dcc8b6c1a7377ea536a",
+      "country": "870493fbabc6ba129e11b0d2b1ba53ba:024f6c5108c9d244a66f8cd77a0ff3a5",
+      "isDefault": false
+    }
+  ],
+  "orders": [],
+  "wishlist": [],
+  "createdAt": {
+    "$date": "2024-12-07T04:59:58.307Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T04:59:58.307Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d64ea4fcf05df4328ceb"
+  },
+  "firstName": "Waldo",
+  "lastName": "Wiegand",
+  "email": "waldo_wiegand2@yahoo.com",
+  "password": "$2a$10$.1BAt9X0XLl4qZaVDqDXruFQr4bEGdP60tYTUiAXzeYcsgOeccsVK",
+  "role": "user",
+  "avatar": "https://avatars.githubusercontent.com/u/16866996",
+  "addresses": [
+    {
+      "street": "3f6d11a2c401466b51e9fc3483bebb0a:7f91678e3532ffbfd6ba7ac98938608a46e41161a66031dc3c927697275df532",
+      "city": "2f0593c6077f181fb3375d6505c26f5c:86b837b8a99707b4ce92ec6245172317",
+      "state": "4d9c610aa1c8c71f82b897ab92c636ba:1efe15fe0bc181a2ef3f6fdea35890f2",
+      "zipCode": "5c409621af7c4fa661c45d369722c514:5db1373d4327d799520e8e40cc1180e2",
+      "country": "98f4031306ba7d14b177bf76bb8f0155:914378d4189bdf3a92e91b97d16f1748",
+      "isDefault": true
+    },
+    {
+      "street": "ac8eb00181eb4b104cfda15bc0fc248a:e6dd2721018affe915a5a2e2bb54cfb64985edd1638c1528c8eadcab049a4b5b",
+      "city": "561f50ecb5147081dfbcfb67fb3d2960:4678b149936da157b831e53d52b7b9b4ad396555e01f2404aa07777a3fd4c826",
+      "state": "8ba8741478c6aa4684269d96d99d7a93:5a653cb4dfba069730e0363642b637cc",
+      "zipCode": "c61344909dfd6383075ef5b60d8d7974:b4937e0f028ba078e1a128d92b728b8d",
+      "country": "0ef9cb6b6a1df2ec2eab2244c2d4452d:766078fa22e807e656c1941575440163",
+      "isDefault": false
+    }
+  ],
+  "orders": [],
+  "wishlist": [],
+  "createdAt": {
+    "$date": "2024-12-07T04:59:58.580Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T04:59:58.580Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d64ea4fcf05df4328ced"
+  },
+  "firstName": "Sanford",
+  "lastName": "Ziemann",
+  "email": "sanford.ziemann51@yahoo.com",
+  "password": "$2a$10$ro8FbebzafrXCZsb/vQ4iuensHMnLvNm9D96z3Cnh/.N361N9Hh7a",
+  "role": "user",
+  "avatar": "https://avatars.githubusercontent.com/u/9497478",
+  "addresses": [
+    {
+      "street": "80bddf520cd7d5d3051fb31c059ef1fe:23f84b8d76e5bac58d00e01a31a3753ff0dbda3afad0b15189610b5bd029bbee",
+      "city": "710f8aad3ca21c921a66d19753707698:98345773d7c68c5549019ba3a06d7630",
+      "state": "a0a574f0a0beabc563e22a02c404a084:d4161841cb7acba49a91fee32196716c",
+      "zipCode": "c36dcbcc7d12ed560246bcce45a309dd:8c6cd7795b398b80a3965467dfc10c6e",
+      "country": "a707c457a3a49fa2d94631543388b375:75936eeb7b831c5f1c040c12b06edc78",
+      "isDefault": true
+    }
+  ],
+  "orders": [],
+  "wishlist": [],
+  "createdAt": {
+    "$date": "2024-12-07T04:59:58.866Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T04:59:58.866Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d64fa4fcf05df4328cef"
+  },
+  "firstName": "Marcellus",
+  "lastName": "Parker-Lubowitz",
+  "email": "marcellus_parker-lubowitz15@hotmail.com",
+  "password": "$2a$10$IH3T.MPoiQ3JzpEuYuIsV.cWLD.fBOStk3NqSpplXJhVkmv8AuTd6",
+  "role": "user",
+  "avatar": "https://avatars.githubusercontent.com/u/1975295",
+  "addresses": [
+    {
+      "street": "def79d025bec3fbf3333c351c7d5eba0:7acf406cbec40ce5951775509fce5df6f2e479f4fadc51d82c2607d5e40651df",
+      "city": "19a4b0066f46541493518c5ea5b4ed9e:316a4203f65a1191600691b3db6588e6940c495023ac4b2d3cabfab66ea367c0",
+      "state": "56f985578a78b68c6cbfbd1bc225be06:f36a5779e2b78fcf68bd9d86aa78e74f",
+      "zipCode": "e14547f8ce6c4be6dcd435908df31cb2:8b437ba37e7fe5adf3665d0843a7a756",
+      "country": "99ca873089926fb40ecde8f019a7afd3:6a735c70860cfa3f66dc111f6d8dd703",
+      "isDefault": true
+    },
+    {
+      "street": "4110c914433fd469a180233d72152dfe:f5e4b609fb75396eefa64f382e72f63b23e1fb7f8b0999068a5ced980eb882c8",
+      "city": "e807d0c2edd011850d07338b715a45ab:82cb267c8cd290f4b64ebd641d18c1ff",
+      "state": "ca430ed732429b524ec2d98a3564a429:3c6da2c7b460217c140508fe7e96c934",
+      "zipCode": "95a96c76ff40a221a7afa9134cb6de53:e02f99e165b2231232b4875168b188a2",
+      "country": "1932ac6dd5d991eed2d40384c27e6abb:e27a3a86dc02831b86044bf33c290ee5",
+      "isDefault": false
+    }
+  ],
+  "orders": [],
+  "wishlist": [],
+  "createdAt": {
+    "$date": "2024-12-07T04:59:59.174Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T04:59:59.174Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d64fa4fcf05df4328cf1"
+  },
+  "firstName": "Effie",
+  "lastName": "Adams",
+  "email": "effie.adams@gmail.com",
+  "password": "$2a$10$0V6uSiQSkbMmNHZDeAwUgeXGCtpV9B5NBfsD7dMKxEYRsr4dBuNy.",
+  "role": "user",
+  "avatar": "https://avatars.githubusercontent.com/u/32814746",
+  "addresses": [
+    {
+      "street": "99cb835610ae4837551f417fe175a307:77b14dea687ac3f45358d1ba1f3ba3df1539027776105508966a0045f87a3b9f",
+      "city": "165ea3263b762f128b38abafcee23345:c82401c54b24b7d820fc0a1fc3e00bf4",
+      "state": "38bcb9a76194c76295a5c5f6800766c2:d760ee21b7e54767728dfe76edc2675e",
+      "zipCode": "86615f2792a531793f14e840768c179a:8e5501cd65ef0d0215612c5df15e68e2",
+      "country": "ce5e7f0b972717b0ac5258616742f5da:1e28fe563ffcfab3cf538936dfc49121",
+      "isDefault": true
+    },
+    {
+      "street": "0b495a4458dfa1b5a7fb35547e422452:1d7976193c8b04155a95477a6360a7d884971c314931f46b1618acb6749b2b6c",
+      "city": "85c1090fe95bf0eb0a5d5d4260c0c8be:8c8a79b55cec75ff4502f3c2e5a4e7a6",
+      "state": "f81fd96322dfa1510b41e557014b31ed:36f599a0c7117bd68f053c101c4f0107",
+      "zipCode": "24423fc9278b5ed968067c20f5daabbd:8e7a4afc4d46187f3f01f7b3d47b12b4",
+      "country": "10faee2fd5398164e794cf857424a9e0:5ae32e2ffb96b3f006a58acad1da38bf",
+      "isDefault": false
+    },
+    {
+      "street": "88d4bf3692cfce1357c560d0f01bd2c9:afc13ffb21c1777d7e0ab93c40cc4e1fc092f0be4c733db50f3def5d7223b14f",
+      "city": "23d9e67e998472aa81dc5cbfc3186afe:385b291960f1b080eb59cb8430f2e1b1",
+      "state": "b36f67ee6bef3d1b86539372b7d4e7ba:7a5836acff48814ae52a32c3e2755b2b",
+      "zipCode": "79c51e0d2e9a2e9e9344e555dbff4506:bffea76dbe0140c4899f0b879c60c5a5",
+      "country": "7b6c42ff351f965b9ce990027258639a:a033b9d64d9525623a423729332cf67f",
+      "isDefault": false
+    }
+  ],
+  "orders": [],
+  "wishlist": [],
+  "createdAt": {
+    "$date": "2024-12-07T04:59:59.440Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T04:59:59.440Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d64fa4fcf05df4328cf3"
+  },
+  "firstName": "Keeley",
+  "lastName": "Abbott",
+  "email": "keeley.abbott@gmail.com",
+  "password": "$2a$10$GTDI6hRUj8AZbZn.y3awTeOsnJMmqVMXiXqkoRrgkcCds6Fo9UmaO",
+  "role": "user",
+  "avatar": "https://avatars.githubusercontent.com/u/36802680",
+  "addresses": [
+    {
+      "street": "63e40d0273a7a1191853468bef8c7d09:701bc20345d8f5fcc710a4cbaae65d838bfffe8243cc41701da23bcd1b7d1d1e",
+      "city": "004f28903e368ee5cbf0983d8f57689f:e4a51a2f8b181d16def4fb9b5ea4614c",
+      "state": "83309f89508bf8de276640e2b9bf6267:d5ab12f4c8ae01d02e09d6999549f66d",
+      "zipCode": "049e11d93f5fee36fe20ca195c5ead72:85ce0f0325cd0e1201a26f016fbbc629",
+      "country": "0b4d90c80a16f6631ded04950993ece1:e7fc5af4f98ff53091826bf1ca51d89f",
+      "isDefault": true
+    },
+    {
+      "street": "687613e4156f31b4b757e026ce3d465e:3880f347feeb3d6ae83ee496446c659141aa90ce77e61f9e0902af6ac0d434bc",
+      "city": "ed6d57fd7ef61535ffb41116d0d22a1c:3a3c8a5aea4b479e3e0e0a7c79bad9cb",
+      "state": "c6fe1e80b0e363ddcb9d2d7b66e751aa:c0a1c49ce2fa53ad4e93a25ee93bd30a",
+      "zipCode": "6d9c14b673ee706e408b7215c6bff65d:01f9a79336b89c58b9b4bbda3dfdf57b",
+      "country": "d17419fab423814074c1fd463b1527c0:aca7ee259668c73cafa6a43903c5456f",
+      "isDefault": false
+    }
+  ],
+  "orders": [],
+  "wishlist": [],
+  "createdAt": {
+    "$date": "2024-12-07T04:59:59.750Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T04:59:59.750Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d650a4fcf05df4328cf5"
+  },
+  "firstName": "Ellie",
+  "lastName": "Krajcik",
+  "email": "ellie_krajcik@gmail.com",
+  "password": "$2a$10$fjhrC2EfL2Wrujia8nExqOmznXSzjF.1jF7dOBiiJVYvu3AnbWmYG",
+  "role": "user",
+  "avatar": "https://avatars.githubusercontent.com/u/407205",
+  "addresses": [
+    {
+      "street": "ebdb71ae69016773c3a6daf68a5f0a74:c5c7ed1002150e72b625b926657008b4db09ae2588b611249e84e2d9e6cbe040",
+      "city": "8170a20243d7c6ff8f48c9cd27be19ac:0feed120220815899c6212e2431e63d1",
+      "state": "f21af0a0f08466bae9cb5748d9dc2ad0:d9eda02ac7550b00569dbc89adb9ed50",
+      "zipCode": "342dc2c87371c1b698dee64a22597ad7:19ac8d93d0e14214e7abe4ec2290c87f",
+      "country": "5638746ae9614f364a5aaf5c727c3eab:639a2140e87b60be932cb9ed5dcee29f",
+      "isDefault": true
+    },
+    {
+      "street": "7e712ad06fbb809ad7c9856179d3a09b:e9fa837e7326e65854974e5fed1306440b9f98d8a6e09ebd5aff11da7463be54",
+      "city": "5f35ea4e3afc84a86eafb1507a811c9a:547e0016bc8a51610db00366d168a1b4",
+      "state": "fc22353a463badda0658b4f9bc134155:b3e78a4647c9996b3f344e93e1ef2f5c",
+      "zipCode": "44b2bf12cb3f188e1a618e96d8c16767:c66a01462a68e24c608f9a36adacad46",
+      "country": "e56d91a73562552f7b71ebb97c0cec20:1e81c9c3509c68a1f2539ff3806521fe",
+      "isDefault": false
+    },
+    {
+      "street": "160dc12ed8d36584217946088ef071f6:155720fa5003cc82ecf657a19fa3de1a0ca640c0a0f8486a84d41edf7e0cd8a3",
+      "city": "943bb4bd16b4eba4b59563cd954c9c3d:8e9b88976ff706583f228eeccf2b4ed1",
+      "state": "4411d53c3bff9371047182f08a798b4a:409112d07fa6f63819ad954bb5a0efe4",
+      "zipCode": "f5767fe737fc470d5389eeb32b8de393:4b84bdc9bed1a0c0b5f910aac6730bb4",
+      "country": "b92a1ab5fee6365df227cd900c4a94bd:f9a95fdd84838201e4b0e85e31261c14",
+      "isDefault": false
+    }
+  ],
+  "orders": [],
+  "wishlist": [],
+  "createdAt": {
+    "$date": "2024-12-07T05:00:00.066Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T05:00:00.066Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d650a4fcf05df4328cf7"
+  },
+  "firstName": "Jerrold",
+  "lastName": "Gusikowski",
+  "email": "jerrold.gusikowski81@hotmail.com",
+  "password": "$2a$10$6qGgRcJYcSl9pMomvCCnYukyXgLCdezqb44O3S2uJY8i1Q6nGqp8K",
+  "role": "user",
+  "avatar": "https://avatars.githubusercontent.com/u/48974561",
+  "addresses": [
+    {
+      "street": "2ad8b5b67c1e4d99b5d4b7e5b1641e7e:2b2f1d5a5742bf0b0678eb620177ede43b8b9046883d0f44641e2a9cb652405b",
+      "city": "01681867421c36eea1fea7f74a0f87ac:ae4eb1e0e8aa7b6a300361fdff954223",
+      "state": "4f0df303d1aca57fa22088b931146094:d6a3d13a3e19dea24c054d5838f9535e",
+      "zipCode": "586eebec8407b609267086314cf5e49f:972caf8012e387531d0681505a6ac1a6",
+      "country": "123bea577e72f3d188504e9ad7cefbbf:58c4c551ab62b269b8ff2fed396532bd",
+      "isDefault": true
+    },
+    {
+      "street": "5f58bc0d8403a9249136f13abd7d754f:2acbaa8cdd69f1a9e0079aa2cc126f05",
+      "city": "c6683e82bda4a47a77ad2e9655e9e2e9:13a423179cb371836365e08d6299ab28",
+      "state": "10350e679158f54c458905f16bf71103:1248b2199955eb86ef05c3bf3762b017",
+      "zipCode": "af35a0ff2f23a08c51c3ad3417b8862c:e8260a117bafae6ef229593c038a460d",
+      "country": "9fd54bf5e786785d3e8361b7176c78ff:403a05e55aec544d1b4d96ef95bee019",
+      "isDefault": false
+    }
+  ],
+  "orders": [],
+  "wishlist": [],
+  "createdAt": {
+    "$date": "2024-12-07T05:00:00.366Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T05:00:00.366Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755a800d826ad2ec701e0ae"
+  },
+  "firstName": "Nicholas",
+  "lastName": "Villiers",
+  "email": "nickvboy@gmail.com",
+  "password": "$2a$10$3EPQ/TNbnnanfltPuHXvxulNrbPT5SZN.2erTLBhGluUmf0mnAma6",
+  "role": "user",
+  "avatar": "",
+  "orders": [],
+  "wishlist": [],
+  "addresses": [],
+  "createdAt": {
+    "$date": "2024-12-08T14:06:56.297Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T14:06:56.297Z"
+  },
+  "__v": 0
+}]

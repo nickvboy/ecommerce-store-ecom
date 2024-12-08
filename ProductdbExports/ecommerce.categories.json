@@ -1,0 +1,524 @@
+[{
+  "_id": {
+    "$oid": "6753d650a4fcf05df4328cfa"
+  },
+  "name": "Apparel",
+  "alias": "apparel",
+  "description": "High-performance tactical and survival apparel",
+  "parent": null,
+  "level": 0,
+  "attributes": [
+    {
+      "name": "Size",
+      "type": "radio",
+      "values": [
+        {
+          "label": "Small",
+          "value": "S",
+          "_id": {
+            "$oid": "6753d650a4fcf05df4328cfc"
+          }
+        },
+        {
+          "label": "Medium",
+          "value": "M",
+          "_id": {
+            "$oid": "6753d650a4fcf05df4328cfd"
+          }
+        },
+        {
+          "label": "Large",
+          "value": "L",
+          "_id": {
+            "$oid": "6753d650a4fcf05df4328cfe"
+          }
+        },
+        {
+          "label": "X-Large",
+          "value": "XL",
+          "_id": {
+            "$oid": "6753d650a4fcf05df4328cff"
+          }
+        },
+        {
+          "label": "2X-Large",
+          "value": "XXL",
+          "_id": {
+            "$oid": "6753d650a4fcf05df4328d00"
+          }
+        }
+      ],
+      "required": false,
+      "_id": {
+        "$oid": "6753d650a4fcf05df4328cfb"
+      }
+    }
+  ],
+  "isActive": true,
+  "createdAt": {
+    "$date": "2024-12-07T05:00:00.742Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T05:00:00.742Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d650a4fcf05df4328d02"
+  },
+  "name": "Core Gear",
+  "alias": "core-gear",
+  "description": "Essential survival and tactical equipment",
+  "parent": null,
+  "level": 0,
+  "attributes": [
+    {
+      "name": "Durability Rating",
+      "type": "radio",
+      "values": [
+        {
+          "label": "Standard",
+          "value": "standard",
+          "_id": {
+            "$oid": "6753d650a4fcf05df4328d04"
+          }
+        },
+        {
+          "label": "Professional",
+          "value": "professional",
+          "_id": {
+            "$oid": "6753d650a4fcf05df4328d05"
+          }
+        },
+        {
+          "label": "Military-Grade",
+          "value": "military",
+          "_id": {
+            "$oid": "6753d650a4fcf05df4328d06"
+          }
+        }
+      ],
+      "required": false,
+      "_id": {
+        "$oid": "6753d650a4fcf05df4328d03"
+      }
+    }
+  ],
+  "isActive": true,
+  "createdAt": {
+    "$date": "2024-12-07T05:00:00.762Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T05:00:00.762Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d650a4fcf05df4328d08"
+  },
+  "name": "Performance Base Layers",
+  "alias": "base-layers",
+  "description": "Technical base layer clothing for optimal performance",
+  "parent": null,
+  "level": 0,
+  "attributes": [
+    {
+      "name": "Material",
+      "type": "radio",
+      "values": [
+        {
+          "label": "Merino Wool",
+          "value": "merino",
+          "_id": {
+            "$oid": "6753d650a4fcf05df4328d0a"
+          }
+        },
+        {
+          "label": "Synthetic Blend",
+          "value": "synthetic",
+          "_id": {
+            "$oid": "6753d650a4fcf05df4328d0b"
+          }
+        },
+        {
+          "label": "Bamboo Tech",
+          "value": "bamboo",
+          "_id": {
+            "$oid": "6753d650a4fcf05df4328d0c"
+          }
+        }
+      ],
+      "required": false,
+      "_id": {
+        "$oid": "6753d650a4fcf05df4328d09"
+      }
+    }
+  ],
+  "isActive": true,
+  "createdAt": {
+    "$date": "2024-12-07T05:00:00.782Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T05:00:00.782Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d650a4fcf05df4328d0e"
+  },
+  "name": "Tactical Bottoms",
+  "alias": "tactical-bottoms",
+  "description": "Tactical pants and shorts with advanced features",
+  "parent": null,
+  "level": 0,
+  "attributes": [
+    {
+      "name": "Style",
+      "type": "radio",
+      "values": [
+        {
+          "label": "Cargo Pants",
+          "value": "cargo",
+          "_id": {
+            "$oid": "6753d650a4fcf05df4328d10"
+          }
+        },
+        {
+          "label": "Combat Pants",
+          "value": "combat",
+          "_id": {
+            "$oid": "6753d650a4fcf05df4328d11"
+          }
+        },
+        {
+          "label": "Tactical Shorts",
+          "value": "shorts",
+          "_id": {
+            "$oid": "6753d650a4fcf05df4328d12"
+          }
+        }
+      ],
+      "required": false,
+      "_id": {
+        "$oid": "6753d650a4fcf05df4328d0f"
+      }
+    }
+  ],
+  "isActive": true,
+  "createdAt": {
+    "$date": "2024-12-07T05:00:00.810Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T05:00:00.810Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d650a4fcf05df4328d14"
+  },
+  "name": "Hydration Systems",
+  "alias": "hydration",
+  "description": "Advanced hydration solutions and water management systems",
+  "parent": null,
+  "level": 0,
+  "attributes": [
+    {
+      "name": "Capacity",
+      "type": "radio",
+      "values": [
+        {
+          "label": "1L",
+          "value": "1l",
+          "_id": {
+            "$oid": "6753d650a4fcf05df4328d16"
+          }
+        },
+        {
+          "label": "2L",
+          "value": "2l",
+          "_id": {
+            "$oid": "6753d650a4fcf05df4328d17"
+          }
+        },
+        {
+          "label": "3L",
+          "value": "3l",
+          "_id": {
+            "$oid": "6753d650a4fcf05df4328d18"
+          }
+        }
+      ],
+      "required": false,
+      "_id": {
+        "$oid": "6753d650a4fcf05df4328d15"
+      }
+    }
+  ],
+  "isActive": true,
+  "createdAt": {
+    "$date": "2024-12-07T05:00:00.830Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T05:00:00.830Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d650a4fcf05df4328d1a"
+  },
+  "name": "Insulating Mid Layers",
+  "alias": "mid-layers",
+  "description": "Thermal regulation and insulating garments",
+  "parent": null,
+  "level": 0,
+  "attributes": [
+    {
+      "name": "Insulation Type",
+      "type": "radio",
+      "values": [
+        {
+          "label": "Synthetic",
+          "value": "synthetic",
+          "_id": {
+            "$oid": "6753d650a4fcf05df4328d1c"
+          }
+        },
+        {
+          "label": "Down",
+          "value": "down",
+          "_id": {
+            "$oid": "6753d650a4fcf05df4328d1d"
+          }
+        },
+        {
+          "label": "Fleece",
+          "value": "fleece",
+          "_id": {
+            "$oid": "6753d650a4fcf05df4328d1e"
+          }
+        }
+      ],
+      "required": false,
+      "_id": {
+        "$oid": "6753d650a4fcf05df4328d1b"
+      }
+    }
+  ],
+  "isActive": true,
+  "createdAt": {
+    "$date": "2024-12-07T05:00:00.842Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T05:00:00.842Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d650a4fcf05df4328d20"
+  },
+  "name": "Protective Outerwear",
+  "alias": "outerwear",
+  "description": "Weather protection and tactical outer layers",
+  "parent": null,
+  "level": 0,
+  "attributes": [
+    {
+      "name": "Weather Rating",
+      "type": "radio",
+      "values": [
+        {
+          "label": "Water Resistant",
+          "value": "water-resistant",
+          "_id": {
+            "$oid": "6753d650a4fcf05df4328d22"
+          }
+        },
+        {
+          "label": "Waterproof",
+          "value": "waterproof",
+          "_id": {
+            "$oid": "6753d650a4fcf05df4328d23"
+          }
+        },
+        {
+          "label": "All-Weather",
+          "value": "all-weather",
+          "_id": {
+            "$oid": "6753d650a4fcf05df4328d24"
+          }
+        }
+      ],
+      "required": false,
+      "_id": {
+        "$oid": "6753d650a4fcf05df4328d21"
+      }
+    }
+  ],
+  "isActive": true,
+  "createdAt": {
+    "$date": "2024-12-07T05:00:00.887Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T05:00:00.887Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d650a4fcf05df4328d26"
+  },
+  "name": "Power & Connectivity",
+  "alias": "power",
+  "description": "Portable power solutions and connectivity gear",
+  "parent": null,
+  "level": 0,
+  "attributes": [
+    {
+      "name": "Power Output",
+      "type": "radio",
+      "values": [
+        {
+          "label": "Standard",
+          "value": "standard",
+          "_id": {
+            "$oid": "6753d650a4fcf05df4328d28"
+          }
+        },
+        {
+          "label": "High Output",
+          "value": "high",
+          "_id": {
+            "$oid": "6753d650a4fcf05df4328d29"
+          }
+        },
+        {
+          "label": "Ultra Capacity",
+          "value": "ultra",
+          "_id": {
+            "$oid": "6753d650a4fcf05df4328d2a"
+          }
+        }
+      ],
+      "required": false,
+      "_id": {
+        "$oid": "6753d650a4fcf05df4328d27"
+      }
+    }
+  ],
+  "isActive": true,
+  "createdAt": {
+    "$date": "2024-12-07T05:00:00.910Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T05:00:00.910Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d650a4fcf05df4328d2c"
+  },
+  "name": "Shelter & Environmental Protection",
+  "alias": "shelter",
+  "description": "Survival shelters and environmental protection equipment",
+  "parent": null,
+  "level": 0,
+  "attributes": [
+    {
+      "name": "Shelter Type",
+      "type": "radio",
+      "values": [
+        {
+          "label": "Emergency",
+          "value": "emergency",
+          "_id": {
+            "$oid": "6753d650a4fcf05df4328d2e"
+          }
+        },
+        {
+          "label": "Tactical",
+          "value": "tactical",
+          "_id": {
+            "$oid": "6753d650a4fcf05df4328d2f"
+          }
+        },
+        {
+          "label": "Long-Term",
+          "value": "long-term",
+          "_id": {
+            "$oid": "6753d650a4fcf05df4328d30"
+          }
+        }
+      ],
+      "required": false,
+      "_id": {
+        "$oid": "6753d650a4fcf05df4328d2d"
+      }
+    }
+  ],
+  "isActive": true,
+  "createdAt": {
+    "$date": "2024-12-07T05:00:00.922Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T05:00:00.922Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753d650a4fcf05df4328d32"
+  },
+  "name": "Tools & Smart Accessories",
+  "alias": "tools",
+  "description": "Tactical tools and smart survival accessories",
+  "parent": null,
+  "level": 0,
+  "attributes": [
+    {
+      "name": "Tool Class",
+      "type": "radio",
+      "values": [
+        {
+          "label": "Basic",
+          "value": "basic",
+          "_id": {
+            "$oid": "6753d650a4fcf05df4328d34"
+          }
+        },
+        {
+          "label": "Advanced",
+          "value": "advanced",
+          "_id": {
+            "$oid": "6753d650a4fcf05df4328d35"
+          }
+        },
+        {
+          "label": "Professional",
+          "value": "professional",
+          "_id": {
+            "$oid": "6753d650a4fcf05df4328d36"
+          }
+        }
+      ],
+      "required": false,
+      "_id": {
+        "$oid": "6753d650a4fcf05df4328d33"
+      }
+    }
+  ],
+  "isActive": true,
+  "createdAt": {
+    "$date": "2024-12-07T05:00:00.944Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T05:00:00.944Z"
+  },
+  "__v": 0
+}]

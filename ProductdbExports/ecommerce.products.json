@@ -1,0 +1,990 @@
+[{
+  "_id": {
+    "$oid": "6755b7f9ab5bffe6e382a04f"
+  },
+  "name": "Aegis VentFit Press Tee",
+  "description": "A moisture-wicking technical tee woven with conductive fibers to track biometric data. Neutral design and tailored fit.",
+  "price": 34.4,
+  "originalPrice": 41.28,
+  "category": {
+    "$oid": "6753d650a4fcf05df4328cfa"
+  },
+  "attributes": [],
+  "stock": 59,
+  "tags": [],
+  "featured": false,
+  "averageRating": 4.159420289855072,
+  "totalReviews": 69,
+  "images": [
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733670879/f0lxpbac6dqnbryqvplp.png",
+      "order": 0,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb3077"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733670868/j1tqwjbxhgzudkqcxqac.png",
+      "order": 1,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb3078"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733670863/qj9bdxcgfloonwggvafl.webp",
+      "order": 2,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb3079"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733670863/sxldneuzxaxj0vptpzvu.webp",
+      "order": 3,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb307a"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733670863/geomopyzufe3feahjpia.webp",
+      "order": 4,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb307b"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-12-08T15:15:05.556Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.417Z"
+  },
+  "__v": 22
+},
+{
+  "_id": {
+    "$oid": "6755b8acab5bffe6e382a20e"
+  },
+  "name": "Nexus StratoMesh Polo",
+  "description": "A versatile polo with an RFID-shielded pocket and a slim solar strip along the collar. Understated styling, easy office-to-outdoor transition.",
+  "price": 46.75,
+  "originalPrice": 56.1,
+  "category": {
+    "$oid": "6753d650a4fcf05df4328cfa"
+  },
+  "attributes": [],
+  "stock": 0,
+  "tags": [],
+  "featured": false,
+  "averageRating": 3.7794117647058822,
+  "totalReviews": 68,
+  "images": [
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733671048/gsdjzruk1aveyv5wlwrl.png",
+      "order": 0,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb3065"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733671052/qwx8ewg0frjctok7klrl.png",
+      "order": 1,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb3066"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733671047/oaylpopn7roacxntlty5.webp",
+      "order": 2,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb3067"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733671047/r2czw7kyyfnxcazsvnvg.webp",
+      "order": 3,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb3068"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-12-08T15:18:04.249Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.404Z"
+  },
+  "__v": 26
+},
+{
+  "_id": {
+    "$oid": "6755bf6aab5bffe6e382a332"
+  },
+  "name": "Axon CampHaul Duffel",
+  "description": "A water-resistant duffel from self-healing fabric, hidden solar panel, integrated power bank.",
+  "price": 163.2,
+  "originalPrice": 195.84,
+  "category": {
+    "$oid": "6753d650a4fcf05df4328d02"
+  },
+  "attributes": [],
+  "stock": 0,
+  "tags": [],
+  "featured": false,
+  "averageRating": 3.9859154929577465,
+  "totalReviews": 71,
+  "images": [
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733672773/jhgpadyt4w5dkttqudk9.png",
+      "order": 0,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb3025"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733672758/ucvdymlcn91kij1ndooc.png",
+      "order": 1,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb3026"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733672751/xvxv9ochvmqlvmckbf7t.jpg",
+      "order": 2,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb3027"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733672751/yt7btdsqjpvatwc3ltjz.jpg",
+      "order": 3,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb3028"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733672758/salsickyhxgor2ebemt3.jpg",
+      "order": 4,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb3029"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-12-08T15:46:50.871Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.356Z"
+  },
+  "__v": 22
+},
+{
+  "_id": {
+    "$oid": "6755c0afab5bffe6e382a43a"
+  },
+  "name": "Helix Transit Sling",
+  "description": "A matte black waist pack with encrypted USB storage, low-profile GPS beacon.",
+  "price": 72.5,
+  "originalPrice": 87,
+  "category": {
+    "$oid": "6753d650a4fcf05df4328d02"
+  },
+  "attributes": [],
+  "stock": 40,
+  "tags": [],
+  "featured": false,
+  "averageRating": 4.178571428571429,
+  "totalReviews": 84,
+  "images": [
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733672976/ub1xpcmu4hqynjjpochy.png",
+      "order": 0,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb304d"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733672998/fd31aja89dx8fcaiv6d9.png",
+      "order": 1,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb304e"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733672994/bvbcbgpfhylupskjriio.png",
+      "order": 2,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb304f"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733672973/wwugseqafmnjquiiszox.png",
+      "order": 3,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb3050"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-12-08T15:52:15.560Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.386Z"
+  },
+  "__v": 9
+},
+{
+  "_id": {
+    "$oid": "6755c17bab5bffe6e382a49a"
+  },
+  "name": "Synapse Oasis Layer",
+  "description": "A moisture-regulating long-sleeve with embedded temperature sensors.",
+  "price": 58.4,
+  "originalPrice": 70.08,
+  "category": {
+    "$oid": "6753d650a4fcf05df4328d08"
+  },
+  "attributes": [],
+  "stock": 0,
+  "tags": [],
+  "featured": false,
+  "averageRating": 4.111111111111111,
+  "totalReviews": 72,
+  "images": [
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733673306/zga7ucn1hytc3oprt1zh.png",
+      "order": 0,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb2fd6"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733673307/aj3bpx5zu5lydburhovu.png",
+      "order": 1,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb2fd7"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733673301/k7evupzqnpkk0bhgppqm.webp",
+      "order": 2,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb2fd8"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733673301/t9552uobjazmcmcgg5w4.webp",
+      "order": 3,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb2fd9"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733673301/nla3rykvsbmiiraj6lor.webp",
+      "order": 4,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb2fda"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-12-08T15:55:39.065Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.301Z"
+  },
+  "__v": 14
+},
+{
+  "_id": {
+    "$oid": "6755c67eab5bffe6e382ab1d"
+  },
+  "name": "Kinetic Rush Tights",
+  "description": "Sleek leggings with conductive filaments gently warming muscles.",
+  "price": 62.7,
+  "originalPrice": 75.24,
+  "category": {
+    "$oid": "6753d650a4fcf05df4328d08"
+  },
+  "attributes": [],
+  "stock": 27,
+  "tags": [],
+  "featured": false,
+  "averageRating": 4.122448979591836,
+  "totalReviews": 98,
+  "images": [
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733674581/mhboutx4db1mhxfp22xr.png",
+      "order": 0,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb3009"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733674580/yljxeecfvxnncflfp8fj.png",
+      "order": 1,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb300a"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733674573/keusmfvg0cxgvbfwfby8.webp",
+      "order": 2,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb300b"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733674573/iobnyuz0w3c1xezswvnc.webp",
+      "order": 3,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb300c"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733674573/puogg5eox3gfrpwniew6.webp",
+      "order": 4,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb300d"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-12-08T16:17:02.424Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.335Z"
+  },
+  "__v": 19
+},
+{
+  "_id": {
+    "$oid": "6755c72cab5bffe6e382ab89"
+  },
+  "name": "Vantage Keb Cargo Pants",
+  "description": "Rugged cargo pants with hidden LED strips and RFID-blocking compartments.",
+  "price": 81.6,
+  "originalPrice": 97.92,
+  "category": {
+    "$oid": "6753d650a4fcf05df4328d0e"
+  },
+  "attributes": [],
+  "stock": 30,
+  "tags": [],
+  "featured": false,
+  "averageRating": 4.269230769230769,
+  "totalReviews": 52,
+  "images": [
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733674766/joesuj99fzvcpg17ydnw.png",
+      "order": 0,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb302f"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733674764/fvzbh8vnydrjdwzbbno8.png",
+      "order": 1,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb3030"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733674755/cwqkcooojktkdjx6px1d.webp",
+      "order": 2,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb3031"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733674755/oynyg3kxwfhiwqpxdl2p.webp",
+      "order": 3,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb3032"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733674756/etudkxbfllvagilfpbzt.webp",
+      "order": 4,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb3033"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-12-08T16:19:57.001Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.363Z"
+  },
+  "__v": 19
+},
+{
+  "_id": {
+    "$oid": "6755c7b2ab5bffe6e382abfa"
+  },
+  "name": "Solace Gamma Cargo",
+  "description": "Utility trousers with discreet solar panels and hidden sleeves for encrypted drives.",
+  "price": 93.8,
+  "originalPrice": 112.56,
+  "category": {
+    "$oid": "6753d650a4fcf05df4328d0e"
+  },
+  "attributes": [],
+  "stock": 4,
+  "tags": [],
+  "featured": false,
+  "averageRating": 4.144736842105263,
+  "totalReviews": 76,
+  "images": [
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733674888/hm7glfigdzlolzktbjhi.png",
+      "order": 0,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb3060"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733674879/buerjlgwb4i54avtut86.png",
+      "order": 1,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb3061"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733674879/jzfkhu6nqfkxlplxksjw.jpg",
+      "order": 2,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb3062"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733674882/uhbqwbrfsp7f59kmevde.jpg",
+      "order": 3,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb3063"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-12-08T16:22:10.441Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.400Z"
+  },
+  "__v": 21
+},
+{
+  "_id": {
+    "$oid": "6755c899ab5bffe6e382ac6d"
+  },
+  "name": "Astra UltraSpark Flask",
+  "description": "Insulated flask with UV purification, micro solar cell, app-synced hydration metrics.",
+  "price": 17.5,
+  "originalPrice": 21,
+  "category": {
+    "$oid": "6753d650a4fcf05df4328d14"
+  },
+  "attributes": [],
+  "stock": 0,
+  "tags": [],
+  "featured": false,
+  "averageRating": 4.0394736842105265,
+  "totalReviews": 76,
+  "images": [
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733675076/yoz5h4cixya5twcyrjhk.png",
+      "order": 0,
+      "_id": {
+        "$oid": "6755dc24194d413f3dcb2c20"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733675072/wfsimpk47bif4vpkgbti.png",
+      "order": 1,
+      "_id": {
+        "$oid": "6755dc24194d413f3dcb2c21"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733675065/dtqeirxkd6efam1vtefb.jpg",
+      "order": 2,
+      "_id": {
+        "$oid": "6755dc24194d413f3dcb2c22"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733675065/idbh5pkw40licvg1g8yu.jpg",
+      "order": 3,
+      "_id": {
+        "$oid": "6755dc24194d413f3dcb2c23"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733675066/qkvo5covg1nqj6pgki7h.jpg",
+      "order": 4,
+      "_id": {
+        "$oid": "6755dc24194d413f3dcb2c24"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-12-08T16:26:01.517Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:24.550Z"
+  },
+  "__v": 4
+},
+{
+  "_id": {
+    "$oid": "6755c9bbab5bffe6e382ace7"
+  },
+  "name": "Aurion HydroZip Reservoir",
+  "description": "2.5 L Hydration bladder with volume and temperature sensors, self-sealing marble membranes",
+  "price": 35.1,
+  "originalPrice": 42.12,
+  "category": {
+    "$oid": "6753d650a4fcf05df4328d14"
+  },
+  "attributes": [],
+  "stock": 77,
+  "tags": [],
+  "featured": false,
+  "averageRating": 4.090909090909091,
+  "totalReviews": 99,
+  "images": [
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733675261/u1r10lhzfkdwv3b2owhr.png",
+      "order": 0,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb3073"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733675256/ancakaq6xpblkl34xewg.webp",
+      "order": 1,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb3074"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733675256/jwqu399thqiqmqqi2smc.webp",
+      "order": 2,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb3075"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-12-08T16:30:51.211Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.414Z"
+  },
+  "__v": 24
+},
+{
+  "_id": {
+    "$oid": "6755ca87ab5bffe6e382ad60"
+  },
+  "name": "Xenon Grid Hoodie",
+  "description": "Hoodie distributing warmth through conductive threads, powered by a small solar patch.",
+  "price": 105.2,
+  "originalPrice": 126.24,
+  "category": {
+    "$oid": "6753d650a4fcf05df4328d1a"
+  },
+  "attributes": [],
+  "stock": 0,
+  "tags": [],
+  "featured": false,
+  "averageRating": 4.3076923076923075,
+  "totalReviews": 13,
+  "images": [
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733675605/wtp7epazjypihxnmitow.png",
+      "order": 0,
+      "_id": {
+        "$oid": "6755dc24194d413f3dcb2c6e"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733675600/sq3wuaijn6kyrude0j3e.png",
+      "order": 1,
+      "_id": {
+        "$oid": "6755dc24194d413f3dcb2c6f"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733675598/txuuh7gtgobriewj4kio.webp",
+      "order": 2,
+      "_id": {
+        "$oid": "6755dc24194d413f3dcb2c70"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733675598/iv559mwnfkwjiznbet1t.webp",
+      "order": 3,
+      "_id": {
+        "$oid": "6755dc24194d413f3dcb2c71"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733675599/qc2lrycuuk357ztgak6a.webp",
+      "order": 4,
+      "_id": {
+        "$oid": "6755dc24194d413f3dcb2c72"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-12-08T16:34:15.724Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:24.617Z"
+  },
+  "__v": 5
+},
+{
+  "_id": {
+    "$oid": "6755cbbc56cfb3cff746bb11"
+  },
+  "name": "Arclite NanoTherm Vest\"",
+  "description": "High-loft vest with passive heating elements, app-driven climate suggestions.",
+  "price": 116.5,
+  "originalPrice": 139.8,
+  "category": {
+    "$oid": "6753d650a4fcf05df4328d1a"
+  },
+  "attributes": [],
+  "stock": 16,
+  "tags": [],
+  "featured": false,
+  "averageRating": 4.166666666666667,
+  "totalReviews": 60,
+  "images": [
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733675913/up4nauanafr3mvnmd3ux.png",
+      "order": 0,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb305b"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733675929/wcdgkuuuakur7an6aytf.png",
+      "order": 1,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb305c"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733675907/joujsavyhu65kqxvrfgk.webp",
+      "order": 2,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb305d"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733675908/psqawefbw7jarbhea8sy.webp",
+      "order": 3,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb305e"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-12-08T16:39:24.239Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.397Z"
+  },
+  "__v": 15
+},
+{
+  "_id": {
+    "$oid": "6755cca956cfb3cff746bb8c"
+  },
+  "name": "Aegis BetaShell Jacket",
+  "description": "Weatherproof shell jacket with integrated GPS beacon, SOS transmitter",
+  "price": 115,
+  "originalPrice": 138,
+  "category": {
+    "$oid": "6753d650a4fcf05df4328d20"
+  },
+  "attributes": [],
+  "stock": 0,
+  "tags": [],
+  "featured": false,
+  "averageRating": 3.8275862068965516,
+  "totalReviews": 29,
+  "images": [
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733676143/vkoloi5476x11iuvvr6a.png",
+      "order": 0,
+      "_id": {
+        "$oid": "6755dc24194d413f3dcb2c8e"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733676149/qvu7kgoyyrer31fx7dmx.png",
+      "order": 1,
+      "_id": {
+        "$oid": "6755dc24194d413f3dcb2c8f"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733676136/fmy2x4e03kzf3vt9hnvj.webp",
+      "order": 2,
+      "_id": {
+        "$oid": "6755dc24194d413f3dcb2c90"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733676137/msnl1ycg9hqgt039xkt6.webp",
+      "order": 3,
+      "_id": {
+        "$oid": "6755dc24194d413f3dcb2c91"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733676137/btelvvj5vt9bwxk1mzko.webp",
+      "order": 4,
+      "_id": {
+        "$oid": "6755dc24194d413f3dcb2c92"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-12-08T16:43:22.001Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:24.644Z"
+  },
+  "__v": 5
+},
+{
+  "_id": {
+    "$oid": "6755cd7956cfb3cff746bc09"
+  },
+  "name": "Terra Expedition Parka",
+  "description": "Heavy-duty parka with biometric sensors adjusting insulation.",
+  "price": 218.7,
+  "originalPrice": 262.44,
+  "category": {
+    "$oid": "6753d650a4fcf05df4328d20"
+  },
+  "attributes": [],
+  "stock": 0,
+  "tags": [],
+  "featured": false,
+  "averageRating": 4.407407407407407,
+  "totalReviews": 27,
+  "images": [
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733676366/vzz6z6lofviz6jcaodgq.webp",
+      "order": 0,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb302b"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733676366/uuzjmxqiqqlrzz74fc68.webp",
+      "order": 1,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb302c"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733676366/csyehlrviy0nxslvqhii.webp",
+      "order": 2,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb302d"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-12-08T16:46:49.296Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.360Z"
+  },
+  "__v": 18
+},
+{
+  "_id": {
+    "$oid": "6755cdf956cfb3cff746bc81"
+  },
+  "name": "Solaris Nomad Charger",
+  "description": "Flexible solar panel mat charging multiple devices, portable and durable.",
+  "price": 136,
+  "originalPrice": 163.2,
+  "category": {
+    "$oid": "6753d650a4fcf05df4328d26"
+  },
+  "attributes": [],
+  "stock": 13,
+  "tags": [],
+  "featured": false,
+  "averageRating": 3.9714285714285715,
+  "totalReviews": 35,
+  "images": [
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733676517/ajabeyki0vyqripkmuwi.webp",
+      "order": 0,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb3017"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-12-08T16:48:57.996Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.345Z"
+  },
+  "__v": 18
+},
+{
+  "_id": {
+    "$oid": "6755d74e56cfb3cff746bd51"
+  },
+  "name": "Cipher Solis Hub Relay",
+  "description": "Palm-sized wireless hotspot with encrypted storage, micro solar cell.",
+  "price": 64.4,
+  "originalPrice": 77.28,
+  "category": {
+    "$oid": "6753d650a4fcf05df4328d26"
+  },
+  "attributes": [],
+  "stock": 17,
+  "tags": [],
+  "featured": false,
+  "averageRating": 4.064935064935065,
+  "totalReviews": 77,
+  "images": [
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733678901/oty30q4cfi8sqlvcaosu.png",
+      "order": 0,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb3055"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733678902/p2jpibkxygdlhvzvz45i.png",
+      "order": 1,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb3056"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733678889/jrshptkvyknblqrurpr6.webp",
+      "order": 2,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb3057"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733678889/lcjhg8ocfmfdxpazuwdf.jpg",
+      "order": 3,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb3058"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733678889/vblwsi4wxlkjkid26xil.jpg",
+      "order": 4,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb3059"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-12-08T17:28:46.917Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.393Z"
+  },
+  "__v": 19
+},
+{
+  "_id": {
+    "$oid": "6755d82456cfb3cff746bdc9"
+  },
+  "name": "Veridian Storm Escape Shelter",
+  "description": "Compact bivy shelter from self-healing fabric, passive solar strips, internal LED lighting.",
+  "price": 185.6,
+  "originalPrice": 222.72,
+  "category": {
+    "$oid": "6753d650a4fcf05df4328d2c"
+  },
+  "attributes": [],
+  "stock": 0,
+  "tags": [],
+  "featured": false,
+  "averageRating": 4.013513513513513,
+  "totalReviews": 74,
+  "images": [
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733679124/g47vthm1dmy3quydmtoi.png",
+      "order": 0,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb2f34"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733679129/pl7u0tc4ugibsxwlsycs.png",
+      "order": 1,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb2f35"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-12-08T17:32:20.996Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.180Z"
+  },
+  "__v": 11
+},
+{
+  "_id": {
+    "$oid": "6755d8c956cfb3cff746be38"
+  },
+  "name": "Cryptic SpiritDrive Multi Tool",
+  "description": "Titanium multi-tool with encrypted storage, mini solar charger, digital compass.",
+  "price": 19.8,
+  "originalPrice": 23.76,
+  "category": {
+    "$oid": "6753d650a4fcf05df4328d32"
+  },
+  "attributes": [],
+  "stock": 30,
+  "tags": [],
+  "featured": false,
+  "averageRating": 3.9361702127659575,
+  "totalReviews": 47,
+  "images": [
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733679285/ecgottjtpjaodw42swcy.png",
+      "order": 0,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb306a"
+      }
+    },
+    {
+      "url": "https://res.cloudinary.com/dwnf5wg7w/image/upload/v1733679294/m4gp02zk1rpwp7txujqu.png",
+      "order": 1,
+      "_id": {
+        "$oid": "6755dc25194d413f3dcb306b"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-12-08T17:35:05.627Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.407Z"
+  },
+  "__v": 16
+}]

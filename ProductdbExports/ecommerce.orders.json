@@ -1,0 +1,3891 @@
+[{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb307d"
+  },
+  "email": "admin@example.com",
+  "customerFirstName": "Admin",
+  "customerLastName": "User",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755d74e56cfb3cff746bd51"
+      },
+      "quantity": 5,
+      "price": 64.4
+    },
+    {
+      "product": {
+        "$oid": "6755c72cab5bffe6e382ab89"
+      },
+      "quantity": 4,
+      "price": 81.6
+    },
+    {
+      "product": {
+        "$oid": "6755b8acab5bffe6e382a20e"
+      },
+      "quantity": 3,
+      "price": 46.75
+    }
+  ],
+  "totalAmount": 788.65,
+  "status": "pending",
+  "shippingAddress": {
+    "street": "69605c808c71b23ff5422d26b1580b4e:c0679e526e5d32939e45a083463e01b644d41434f7f1c5aa337c97098f4aa6d5",
+    "city": "b0e8e944164402f3bb9630d382e7a54a:64bff6934971b2aabab285e96b532f9f82d481854245bb80cbb01fcfda244851",
+    "state": "689dda9bf9cf283c9cfb5c5d6396d40d:312e5c38d525d81f1f2011ff0f362ec5",
+    "zipCode": "5e75feff802e1f39317e3e8b6b2619d5:dfb4bb03d6c40b6d80eedf7e0687c867",
+    "country": "2ab0d1bcc189f26fba631a4f63ee7c6a:47c063ee1611d16b0fc0e5e51e3059aa"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.426Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.426Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb307f"
+  },
+  "email": "admin@example.com",
+  "customerFirstName": "Admin",
+  "customerLastName": "User",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755b8acab5bffe6e382a20e"
+      },
+      "quantity": 2,
+      "price": 46.75
+    },
+    {
+      "product": {
+        "$oid": "6755d82456cfb3cff746bdc9"
+      },
+      "quantity": 3,
+      "price": 185.6
+    }
+  ],
+  "totalAmount": 650.3,
+  "status": "completed",
+  "shippingAddress": {
+    "street": "69605c808c71b23ff5422d26b1580b4e:c0679e526e5d32939e45a083463e01b644d41434f7f1c5aa337c97098f4aa6d5",
+    "city": "b0e8e944164402f3bb9630d382e7a54a:64bff6934971b2aabab285e96b532f9f82d481854245bb80cbb01fcfda244851",
+    "state": "689dda9bf9cf283c9cfb5c5d6396d40d:312e5c38d525d81f1f2011ff0f362ec5",
+    "zipCode": "5e75feff802e1f39317e3e8b6b2619d5:dfb4bb03d6c40b6d80eedf7e0687c867",
+    "country": "2ab0d1bcc189f26fba631a4f63ee7c6a:47c063ee1611d16b0fc0e5e51e3059aa"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.432Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.432Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb3081"
+  },
+  "email": "gabriella_hettinger54@hotmail.com",
+  "customerFirstName": "Gabriella",
+  "customerLastName": "Hettinger",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755cdf956cfb3cff746bc81"
+      },
+      "quantity": 2,
+      "price": 136
+    },
+    {
+      "product": {
+        "$oid": "6755c899ab5bffe6e382ac6d"
+      },
+      "quantity": 4,
+      "price": 17.5
+    },
+    {
+      "product": {
+        "$oid": "6755bf6aab5bffe6e382a332"
+      },
+      "quantity": 1,
+      "price": 163.2
+    },
+    {
+      "product": {
+        "$oid": "6755ca87ab5bffe6e382ad60"
+      },
+      "quantity": 1,
+      "price": 105.2
+    }
+  ],
+  "totalAmount": 610.4,
+  "status": "cancelled",
+  "shippingAddress": {
+    "street": "3bced835eb173fc9b9575ca35ec21a90:71158bdf542357baaaf6c413ebcb39659eb1bcc86b078e9d31f773fc88b2073f",
+    "city": "b7d5dab517557bfb1546eecfbc900d0f:31f1dbba2f5e42aedfd81088dc882ede",
+    "state": "587a128a55c2e8713779dba6387ccebd:5cf554add233f860e3576f0f62e91234",
+    "zipCode": "fffe282d3ff584b40b6debab7f6e809e:e2924abb8dfc50632f99f9a152d0a799",
+    "country": "6425b4a3786ddb187a21d150aababf07:912ee898f44479d6abbe21ff8664b16c"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.436Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.436Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb3083"
+  },
+  "email": "gabriella_hettinger54@hotmail.com",
+  "customerFirstName": "Gabriella",
+  "customerLastName": "Hettinger",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c17bab5bffe6e382a49a"
+      },
+      "quantity": 2,
+      "price": 58.4
+    },
+    {
+      "product": {
+        "$oid": "6755c72cab5bffe6e382ab89"
+      },
+      "quantity": 3,
+      "price": 81.6
+    },
+    {
+      "product": {
+        "$oid": "6755b8acab5bffe6e382a20e"
+      },
+      "quantity": 5,
+      "price": 46.75
+    },
+    {
+      "product": {
+        "$oid": "6755b7f9ab5bffe6e382a04f"
+      },
+      "quantity": 1,
+      "price": 34.4
+    },
+    {
+      "product": {
+        "$oid": "6755cdf956cfb3cff746bc81"
+      },
+      "quantity": 3,
+      "price": 136
+    }
+  ],
+  "totalAmount": 1037.75,
+  "status": "cancelled",
+  "shippingAddress": {
+    "street": "3bced835eb173fc9b9575ca35ec21a90:71158bdf542357baaaf6c413ebcb39659eb1bcc86b078e9d31f773fc88b2073f",
+    "city": "b7d5dab517557bfb1546eecfbc900d0f:31f1dbba2f5e42aedfd81088dc882ede",
+    "state": "587a128a55c2e8713779dba6387ccebd:5cf554add233f860e3576f0f62e91234",
+    "zipCode": "fffe282d3ff584b40b6debab7f6e809e:e2924abb8dfc50632f99f9a152d0a799",
+    "country": "6425b4a3786ddb187a21d150aababf07:912ee898f44479d6abbe21ff8664b16c"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.442Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.442Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb3085"
+  },
+  "email": "gabriella_hettinger54@hotmail.com",
+  "customerFirstName": "Gabriella",
+  "customerLastName": "Hettinger",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c72cab5bffe6e382ab89"
+      },
+      "quantity": 1,
+      "price": 81.6
+    }
+  ],
+  "totalAmount": 81.6,
+  "status": "pending",
+  "shippingAddress": {
+    "street": "3bced835eb173fc9b9575ca35ec21a90:71158bdf542357baaaf6c413ebcb39659eb1bcc86b078e9d31f773fc88b2073f",
+    "city": "b7d5dab517557bfb1546eecfbc900d0f:31f1dbba2f5e42aedfd81088dc882ede",
+    "state": "587a128a55c2e8713779dba6387ccebd:5cf554add233f860e3576f0f62e91234",
+    "zipCode": "fffe282d3ff584b40b6debab7f6e809e:e2924abb8dfc50632f99f9a152d0a799",
+    "country": "6425b4a3786ddb187a21d150aababf07:912ee898f44479d6abbe21ff8664b16c"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.447Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.447Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb3087"
+  },
+  "email": "gabriella_hettinger54@hotmail.com",
+  "customerFirstName": "Gabriella",
+  "customerLastName": "Hettinger",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755b8acab5bffe6e382a20e"
+      },
+      "quantity": 4,
+      "price": 46.75
+    },
+    {
+      "product": {
+        "$oid": "6755c9bbab5bffe6e382ace7"
+      },
+      "quantity": 5,
+      "price": 35.1
+    },
+    {
+      "product": {
+        "$oid": "6755b7f9ab5bffe6e382a04f"
+      },
+      "quantity": 5,
+      "price": 34.4
+    },
+    {
+      "product": {
+        "$oid": "6755bf6aab5bffe6e382a332"
+      },
+      "quantity": 1,
+      "price": 163.2
+    },
+    {
+      "product": {
+        "$oid": "6755d8c956cfb3cff746be38"
+      },
+      "quantity": 5,
+      "price": 19.8
+    }
+  ],
+  "totalAmount": 796.7,
+  "status": "cancelled",
+  "shippingAddress": {
+    "street": "3bced835eb173fc9b9575ca35ec21a90:71158bdf542357baaaf6c413ebcb39659eb1bcc86b078e9d31f773fc88b2073f",
+    "city": "b7d5dab517557bfb1546eecfbc900d0f:31f1dbba2f5e42aedfd81088dc882ede",
+    "state": "587a128a55c2e8713779dba6387ccebd:5cf554add233f860e3576f0f62e91234",
+    "zipCode": "fffe282d3ff584b40b6debab7f6e809e:e2924abb8dfc50632f99f9a152d0a799",
+    "country": "6425b4a3786ddb187a21d150aababf07:912ee898f44479d6abbe21ff8664b16c"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.454Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.454Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb3089"
+  },
+  "email": "gabriella_hettinger54@hotmail.com",
+  "customerFirstName": "Gabriella",
+  "customerLastName": "Hettinger",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755cbbc56cfb3cff746bb11"
+      },
+      "quantity": 4,
+      "price": 116.5
+    },
+    {
+      "product": {
+        "$oid": "6755ca87ab5bffe6e382ad60"
+      },
+      "quantity": 1,
+      "price": 105.2
+    },
+    {
+      "product": {
+        "$oid": "6755b8acab5bffe6e382a20e"
+      },
+      "quantity": 2,
+      "price": 46.75
+    }
+  ],
+  "totalAmount": 664.7,
+  "status": "completed",
+  "shippingAddress": {
+    "street": "3bced835eb173fc9b9575ca35ec21a90:71158bdf542357baaaf6c413ebcb39659eb1bcc86b078e9d31f773fc88b2073f",
+    "city": "b7d5dab517557bfb1546eecfbc900d0f:31f1dbba2f5e42aedfd81088dc882ede",
+    "state": "587a128a55c2e8713779dba6387ccebd:5cf554add233f860e3576f0f62e91234",
+    "zipCode": "fffe282d3ff584b40b6debab7f6e809e:e2924abb8dfc50632f99f9a152d0a799",
+    "country": "6425b4a3786ddb187a21d150aababf07:912ee898f44479d6abbe21ff8664b16c"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.460Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.460Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb308b"
+  },
+  "email": "berry_cummings@hotmail.com",
+  "customerFirstName": "Berry",
+  "customerLastName": "Cummings",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c67eab5bffe6e382ab1d"
+      },
+      "quantity": 4,
+      "price": 62.7
+    },
+    {
+      "product": {
+        "$oid": "6755cca956cfb3cff746bb8c"
+      },
+      "quantity": 1,
+      "price": 115
+    },
+    {
+      "product": {
+        "$oid": "6755d8c956cfb3cff746be38"
+      },
+      "quantity": 4,
+      "price": 19.8
+    },
+    {
+      "product": {
+        "$oid": "6755c9bbab5bffe6e382ace7"
+      },
+      "quantity": 1,
+      "price": 35.1
+    }
+  ],
+  "totalAmount": 480.1,
+  "status": "cancelled",
+  "shippingAddress": {
+    "street": "5778225edb7fd952c40a5344badd123f:e21b7e07421549daa64f2a879323be5d693e638886ec2c860a17b544613158ed",
+    "city": "70875c2fdd6fdc5cbaf479baf12eb5c7:4ef65ef237937b662bbe2c479636487d",
+    "state": "07370d3ef2050ec234eaeb8678ec19ea:68f88c0a58b646f886d120a0f423bb7f",
+    "zipCode": "033f1d96a72f2003333568d03fc13243:5ba82230ff17ad38784056b0e92bfe1c",
+    "country": "e928f7afd38278b37726d7773c5b8161:8d08339563cbe7e1ba3c4eda889e0e2c"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.463Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.463Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb308d"
+  },
+  "email": "berry_cummings@hotmail.com",
+  "customerFirstName": "Berry",
+  "customerLastName": "Cummings",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755cdf956cfb3cff746bc81"
+      },
+      "quantity": 2,
+      "price": 136
+    },
+    {
+      "product": {
+        "$oid": "6755cca956cfb3cff746bb8c"
+      },
+      "quantity": 2,
+      "price": 115
+    },
+    {
+      "product": {
+        "$oid": "6755cd7956cfb3cff746bc09"
+      },
+      "quantity": 1,
+      "price": 218.7
+    }
+  ],
+  "totalAmount": 720.7,
+  "status": "completed",
+  "shippingAddress": {
+    "street": "5778225edb7fd952c40a5344badd123f:e21b7e07421549daa64f2a879323be5d693e638886ec2c860a17b544613158ed",
+    "city": "70875c2fdd6fdc5cbaf479baf12eb5c7:4ef65ef237937b662bbe2c479636487d",
+    "state": "07370d3ef2050ec234eaeb8678ec19ea:68f88c0a58b646f886d120a0f423bb7f",
+    "zipCode": "033f1d96a72f2003333568d03fc13243:5ba82230ff17ad38784056b0e92bfe1c",
+    "country": "e928f7afd38278b37726d7773c5b8161:8d08339563cbe7e1ba3c4eda889e0e2c"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.468Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.468Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb308f"
+  },
+  "email": "royal.labadie@gmail.com",
+  "customerFirstName": "Royal",
+  "customerLastName": "Labadie",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c72cab5bffe6e382ab89"
+      },
+      "quantity": 5,
+      "price": 81.6
+    },
+    {
+      "product": {
+        "$oid": "6755b7f9ab5bffe6e382a04f"
+      },
+      "quantity": 5,
+      "price": 34.4
+    }
+  ],
+  "totalAmount": 580,
+  "status": "completed",
+  "shippingAddress": {
+    "street": "a1f3fcc73fb1293b86a00dd8ae9b11dc:8df2a998df38813cac540424851d3c8bbc10b82a7fb8ddf6dad9a2dbb4c64cd5",
+    "city": "be85364a9219eeb06618e1aa6fcf0a3d:13c0e9d984a4d0d44579f61b65a25f9f",
+    "state": "cd45a20d3a07a4613368db0d7525ea8e:b09087d9fc06460ad5be035886f94a19",
+    "zipCode": "6a1083cfcef0ea17cffd50043bd398a8:4fb20f57afa2853e0594bfce6e99bc97",
+    "country": "474f33fbe153baeed853a70375bcfcd9:c17bafb22e533b51c089fa42f6d6cf5c"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.472Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.472Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb3091"
+  },
+  "email": "royal.labadie@gmail.com",
+  "customerFirstName": "Royal",
+  "customerLastName": "Labadie",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755d8c956cfb3cff746be38"
+      },
+      "quantity": 3,
+      "price": 19.8
+    },
+    {
+      "product": {
+        "$oid": "6755c67eab5bffe6e382ab1d"
+      },
+      "quantity": 4,
+      "price": 62.7
+    }
+  ],
+  "totalAmount": 310.20000000000005,
+  "status": "completed",
+  "shippingAddress": {
+    "street": "02103b423e8bb240befce3794ce1e98a:dd31c266a6667dc3936a8cc75cde9fc61e783a269122d1fe55455576ba1ee319",
+    "city": "04a32ce278c2b012bbe72d915a8fb0de:8e12fbd05bb77508292b88c6ffb70951",
+    "state": "bca9e60ce52b277d9294200849f0e5c6:793ddf4d491d095634aa29e22c424c71",
+    "zipCode": "ed605ae21009714320b24094a6dcce47:2e8ff3137b71ccab437ccfffb1597013",
+    "country": "2f028ee033821923426e5a80d19d655f:83a84ac2b20e2a657e2d309ac89caa71"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.477Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.477Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb3093"
+  },
+  "email": "royal.labadie@gmail.com",
+  "customerFirstName": "Royal",
+  "customerLastName": "Labadie",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c72cab5bffe6e382ab89"
+      },
+      "quantity": 1,
+      "price": 81.6
+    },
+    {
+      "product": {
+        "$oid": "6755cd7956cfb3cff746bc09"
+      },
+      "quantity": 4,
+      "price": 218.7
+    }
+  ],
+  "totalAmount": 956.4,
+  "status": "pending",
+  "shippingAddress": {
+    "street": "02103b423e8bb240befce3794ce1e98a:dd31c266a6667dc3936a8cc75cde9fc61e783a269122d1fe55455576ba1ee319",
+    "city": "04a32ce278c2b012bbe72d915a8fb0de:8e12fbd05bb77508292b88c6ffb70951",
+    "state": "bca9e60ce52b277d9294200849f0e5c6:793ddf4d491d095634aa29e22c424c71",
+    "zipCode": "ed605ae21009714320b24094a6dcce47:2e8ff3137b71ccab437ccfffb1597013",
+    "country": "2f028ee033821923426e5a80d19d655f:83a84ac2b20e2a657e2d309ac89caa71"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.481Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.481Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb3095"
+  },
+  "email": "louvenia.okon@hotmail.com",
+  "customerFirstName": "Louvenia",
+  "customerLastName": "O'Kon",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755d8c956cfb3cff746be38"
+      },
+      "quantity": 3,
+      "price": 19.8
+    },
+    {
+      "product": {
+        "$oid": "6755cd7956cfb3cff746bc09"
+      },
+      "quantity": 2,
+      "price": 218.7
+    },
+    {
+      "product": {
+        "$oid": "6755d74e56cfb3cff746bd51"
+      },
+      "quantity": 4,
+      "price": 64.4
+    }
+  ],
+  "totalAmount": 754.4,
+  "status": "cancelled",
+  "shippingAddress": {
+    "street": "a2f91270cac53634997d60fae7d6ccbf:255eca10663bb21626c9ebafae8f1c9b6008cee806a042af886281315da6e230",
+    "city": "ce67c4b383865b008b808924918b95fd:5f62282cc735d680546d6b91db2047ab",
+    "state": "3925ca612cc9b76d568afc578c96d8d4:2279968495b8e320f38d4587b415b4fa",
+    "zipCode": "e86790c3f01433d043601821bc587b42:a7f78234cb19fee3aad433720cb80f41",
+    "country": "38c792f9d45cc6c8ec1de8d39b7cb961:6f87f4463fd24f33ba6aac3d469de98b"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.486Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.486Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb3097"
+  },
+  "email": "louvenia.okon@hotmail.com",
+  "customerFirstName": "Louvenia",
+  "customerLastName": "O'Kon",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c72cab5bffe6e382ab89"
+      },
+      "quantity": 3,
+      "price": 81.6
+    },
+    {
+      "product": {
+        "$oid": "6755d82456cfb3cff746bdc9"
+      },
+      "quantity": 2,
+      "price": 185.6
+    },
+    {
+      "product": {
+        "$oid": "6755bf6aab5bffe6e382a332"
+      },
+      "quantity": 2,
+      "price": 163.2
+    },
+    {
+      "product": {
+        "$oid": "6755b8acab5bffe6e382a20e"
+      },
+      "quantity": 5,
+      "price": 46.75
+    }
+  ],
+  "totalAmount": 1176.15,
+  "status": "pending",
+  "shippingAddress": {
+    "street": "cbb50d95bd58fd8bb959f742156a89c7:e72ef4c3f7d91091afa3e6c2e6d594d3f2819756aaedc1fb2d0e50f4fff8be31",
+    "city": "719ca05406208127c57a7651374fc5f8:722265f2119f7a439750faced71019bf",
+    "state": "efee66c83bd365def784b49c4ac344e1:fe541fae839e58bcfc0199dca248aafc",
+    "zipCode": "b8bfae2c87cc1509200efdfc4cdcd14f:6221cd8a019a88aa07d303d5ffd11269",
+    "country": "2163bb8291729f2580d34236e1da75fa:6b383255638a0f889988367a225dc0ab"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.491Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.491Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb3099"
+  },
+  "email": "glenna_boehm@yahoo.com",
+  "customerFirstName": "Glenna",
+  "customerLastName": "Boehm",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c7b2ab5bffe6e382abfa"
+      },
+      "quantity": 1,
+      "price": 93.8
+    },
+    {
+      "product": {
+        "$oid": "6755cdf956cfb3cff746bc81"
+      },
+      "quantity": 4,
+      "price": 136
+    }
+  ],
+  "totalAmount": 637.8,
+  "status": "pending",
+  "shippingAddress": {
+    "street": "86f5766e48897a792ff48cf1149fe1b3:b16178394a1554cfb64e0d1780583945",
+    "city": "2e80743d79c0718516bc7582b2d39160:e67354abd72ba85391327cf4faba16b7360e8fa333cbc5c11e15cccc0db02ecd",
+    "state": "dc28922eca8ad4e9bcac61e0db5f289f:c99f22f2d1701d72678e854c88bac005",
+    "zipCode": "525277afd460cdeb665e1be0365f54b3:2ec72960a511a5ed966e9f952bcdf89c",
+    "country": "1d023c27f5ec3e131aaf011fabd84d1a:9312ddf0c97347511171681b2f1ff798"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.495Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.495Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb309b"
+  },
+  "email": "glenna_boehm@yahoo.com",
+  "customerFirstName": "Glenna",
+  "customerLastName": "Boehm",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c9bbab5bffe6e382ace7"
+      },
+      "quantity": 1,
+      "price": 35.1
+    }
+  ],
+  "totalAmount": 35.1,
+  "status": "completed",
+  "shippingAddress": {
+    "street": "e68bed71c91141a5a2d4506a41be3cfc:4bc331a866666cb68d12c917fe026400cd084c3ebae3bd576597d3890f5eca81",
+    "city": "49ff1c9534473fa6450e9010e7ee5866:3dc48a7118bfdb782d85860e0c71d662d8b733a13a5c1c325c4b3bec6caa9666",
+    "state": "57a4d5d44e816e32b513ef8316b3d7d1:e2042cab08ce811b477905128e00df8b",
+    "zipCode": "3faf5d15a99c569ba87e84ac69e75b9c:877757ac6f32230866a085dd2e5fb802",
+    "country": "c4b64a0ee253aba824742a158fcdb97e:4d4244fb9f6d7f7208e77ac89c1ffb7d"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.499Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.499Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb309d"
+  },
+  "email": "glenna_boehm@yahoo.com",
+  "customerFirstName": "Glenna",
+  "customerLastName": "Boehm",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755cd7956cfb3cff746bc09"
+      },
+      "quantity": 2,
+      "price": 218.7
+    }
+  ],
+  "totalAmount": 437.4,
+  "status": "completed",
+  "shippingAddress": {
+    "street": "e68bed71c91141a5a2d4506a41be3cfc:4bc331a866666cb68d12c917fe026400cd084c3ebae3bd576597d3890f5eca81",
+    "city": "49ff1c9534473fa6450e9010e7ee5866:3dc48a7118bfdb782d85860e0c71d662d8b733a13a5c1c325c4b3bec6caa9666",
+    "state": "57a4d5d44e816e32b513ef8316b3d7d1:e2042cab08ce811b477905128e00df8b",
+    "zipCode": "3faf5d15a99c569ba87e84ac69e75b9c:877757ac6f32230866a085dd2e5fb802",
+    "country": "c4b64a0ee253aba824742a158fcdb97e:4d4244fb9f6d7f7208e77ac89c1ffb7d"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.504Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.504Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb309f"
+  },
+  "email": "glenna_boehm@yahoo.com",
+  "customerFirstName": "Glenna",
+  "customerLastName": "Boehm",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c7b2ab5bffe6e382abfa"
+      },
+      "quantity": 4,
+      "price": 93.8
+    },
+    {
+      "product": {
+        "$oid": "6755d74e56cfb3cff746bd51"
+      },
+      "quantity": 3,
+      "price": 64.4
+    }
+  ],
+  "totalAmount": 568.4,
+  "status": "completed",
+  "shippingAddress": {
+    "street": "a4f783cd96d3ba2e973d4b8a3241681d:e233f10da2cdb944a1c6902079e1f01d73cf7a9275cddd5ae4dab058cc57c3a2",
+    "city": "860f58df9f55966cb69d4ab2c8280fa4:43d58e9c3d562b812ad956735c37fe56",
+    "state": "c4e213cd3fd764c9e484b998431db684:9bf2735af9d37d194294e876ceb206ff",
+    "zipCode": "821c5762978f98f90a673cca9819a2ef:2863ad2fd4c0eeecbdeba20a78936520",
+    "country": "2458ae38aa6549779e3c99b133b1f226:198074d802024a9b937ebe6d58cdbaf3"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.508Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.508Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30a1"
+  },
+  "email": "stan_stehr@yahoo.com",
+  "customerFirstName": "Stan",
+  "customerLastName": "Stehr",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755cbbc56cfb3cff746bb11"
+      },
+      "quantity": 2,
+      "price": 116.5
+    },
+    {
+      "product": {
+        "$oid": "6755c7b2ab5bffe6e382abfa"
+      },
+      "quantity": 3,
+      "price": 93.8
+    },
+    {
+      "product": {
+        "$oid": "6755c0afab5bffe6e382a43a"
+      },
+      "quantity": 5,
+      "price": 72.5
+    },
+    {
+      "product": {
+        "$oid": "6755d82456cfb3cff746bdc9"
+      },
+      "quantity": 5,
+      "price": 185.6
+    }
+  ],
+  "totalAmount": 1804.9,
+  "status": "completed",
+  "shippingAddress": {
+    "street": "de654d3bec3bfce49477dd28d1d15818:f310939fff5c90c16dfb2872c6e809f59c040734ad95101817ea159f5d43fe9d",
+    "city": "9ef0a128d8dae73a3fa22f310ddbcbf1:cf56cc0e915e0b481669ebe866bb652b",
+    "state": "23a943c52b63ade90ae51c765ba06c78:d6ba7adbfb5e070aedc0ed2e7afe9ebf",
+    "zipCode": "dff37e06a28aea324bcac7ca87c51a23:d12f2fc76f85a73c015941e44bdd2242",
+    "country": "e528a3859b4b75ca185e95a22b181dd9:71d59ec859029392e0f77d2b8f7177bf"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.513Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.513Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30a3"
+  },
+  "email": "stan_stehr@yahoo.com",
+  "customerFirstName": "Stan",
+  "customerLastName": "Stehr",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755b8acab5bffe6e382a20e"
+      },
+      "quantity": 2,
+      "price": 46.75
+    },
+    {
+      "product": {
+        "$oid": "6755c67eab5bffe6e382ab1d"
+      },
+      "quantity": 5,
+      "price": 62.7
+    },
+    {
+      "product": {
+        "$oid": "6755cdf956cfb3cff746bc81"
+      },
+      "quantity": 5,
+      "price": 136
+    }
+  ],
+  "totalAmount": 1087,
+  "status": "completed",
+  "shippingAddress": {
+    "street": "8766b23b3e4b625521da5f3c51835cb3:b5f5cf0d9e15ebdbfd1819bdf43968b7d6f1cee4f1312bcf994bdde44ce6b717",
+    "city": "ae39d01f5b8ff7a7e08664dcdfe4f8e8:84a61177467da77df1414c560aaddffb",
+    "state": "0220bfcedddca58d9c486c43b72b41b8:42c708428ac39bad4fe8c6ffe009dee7",
+    "zipCode": "9a7d3c1d9092156b6ef80beb418a4cf5:e6ac7c29a9f56a412ff6be53ff92eb34",
+    "country": "cafb04aa3ddc55b7f74f3fca8d184d5c:4fd27315cb15a2e3792cf5877bd7024a"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.517Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.517Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30a5"
+  },
+  "email": "lester.reinger@gmail.com",
+  "customerFirstName": "Lester",
+  "customerLastName": "Reinger",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c17bab5bffe6e382a49a"
+      },
+      "quantity": 3,
+      "price": 58.4
+    }
+  ],
+  "totalAmount": 175.2,
+  "status": "cancelled",
+  "shippingAddress": {
+    "street": "2c2ad16044f751d1284432c36d02dd58:21cd492d2bdca565dd785cdc789db98d2afd5ff67dc77760bbcbc94ecdd18bd7",
+    "city": "f8fc7c172b1277f3215cff19cb3e3111:e4f66f6c829260d74a184bb070316d9c",
+    "state": "d516e8dac82ef4422ba71eed1d7a8c92:2dd223c849df53164a584753c72a80e0",
+    "zipCode": "4faf09f1cc8f4dc08a8eb91410992967:e5d95d8bd122db0935c788c0e86ba242",
+    "country": "92e03c2711f7681963f5a89c13d0e806:1c47fd9b6cf9c4463023f9cb55832589"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.521Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.521Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30a7"
+  },
+  "email": "lester.reinger@gmail.com",
+  "customerFirstName": "Lester",
+  "customerLastName": "Reinger",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c7b2ab5bffe6e382abfa"
+      },
+      "quantity": 1,
+      "price": 93.8
+    },
+    {
+      "product": {
+        "$oid": "6755c67eab5bffe6e382ab1d"
+      },
+      "quantity": 3,
+      "price": 62.7
+    },
+    {
+      "product": {
+        "$oid": "6755c9bbab5bffe6e382ace7"
+      },
+      "quantity": 3,
+      "price": 35.1
+    },
+    {
+      "product": {
+        "$oid": "6755c17bab5bffe6e382a49a"
+      },
+      "quantity": 3,
+      "price": 58.4
+    }
+  ],
+  "totalAmount": 562.4000000000001,
+  "status": "pending",
+  "shippingAddress": {
+    "street": "2c2ad16044f751d1284432c36d02dd58:21cd492d2bdca565dd785cdc789db98d2afd5ff67dc77760bbcbc94ecdd18bd7",
+    "city": "f8fc7c172b1277f3215cff19cb3e3111:e4f66f6c829260d74a184bb070316d9c",
+    "state": "d516e8dac82ef4422ba71eed1d7a8c92:2dd223c849df53164a584753c72a80e0",
+    "zipCode": "4faf09f1cc8f4dc08a8eb91410992967:e5d95d8bd122db0935c788c0e86ba242",
+    "country": "92e03c2711f7681963f5a89c13d0e806:1c47fd9b6cf9c4463023f9cb55832589"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.526Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.526Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30a9"
+  },
+  "email": "lester.reinger@gmail.com",
+  "customerFirstName": "Lester",
+  "customerLastName": "Reinger",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755d8c956cfb3cff746be38"
+      },
+      "quantity": 2,
+      "price": 19.8
+    },
+    {
+      "product": {
+        "$oid": "6755c0afab5bffe6e382a43a"
+      },
+      "quantity": 5,
+      "price": 72.5
+    }
+  ],
+  "totalAmount": 402.1,
+  "status": "pending",
+  "shippingAddress": {
+    "street": "2c2ad16044f751d1284432c36d02dd58:21cd492d2bdca565dd785cdc789db98d2afd5ff67dc77760bbcbc94ecdd18bd7",
+    "city": "f8fc7c172b1277f3215cff19cb3e3111:e4f66f6c829260d74a184bb070316d9c",
+    "state": "d516e8dac82ef4422ba71eed1d7a8c92:2dd223c849df53164a584753c72a80e0",
+    "zipCode": "4faf09f1cc8f4dc08a8eb91410992967:e5d95d8bd122db0935c788c0e86ba242",
+    "country": "92e03c2711f7681963f5a89c13d0e806:1c47fd9b6cf9c4463023f9cb55832589"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.530Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.530Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30ab"
+  },
+  "email": "cicero_emmerich30@hotmail.com",
+  "customerFirstName": "Cicero",
+  "customerLastName": "Emmerich",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c9bbab5bffe6e382ace7"
+      },
+      "quantity": 1,
+      "price": 35.1
+    },
+    {
+      "product": {
+        "$oid": "6755cbbc56cfb3cff746bb11"
+      },
+      "quantity": 5,
+      "price": 116.5
+    },
+    {
+      "product": {
+        "$oid": "6755c72cab5bffe6e382ab89"
+      },
+      "quantity": 3,
+      "price": 81.6
+    }
+  ],
+  "totalAmount": 862.4,
+  "status": "completed",
+  "shippingAddress": {
+    "street": "e6f5e6cc19398e02d6503897b08d1cab:f78320c14c4083ad8a9726917ffb178ca9ea81a8c5ba0b98f60112ca4c33530b",
+    "city": "0586c6b99c149166378009145d8d4aa9:5b24658a0c3d140e2a226e220f55a536",
+    "state": "e2f264bd63060c2a28b5961e8e2c29a0:bd7e6f165b7bd0dd286324d4778acc8d",
+    "zipCode": "0b367ca974f636d698c292e30c8c7ef2:498386c8584655e4857045a80eecabe8",
+    "country": "b6db7d910b8945b7acc902e5fced073a:915b68904e122b78daba13e5dbfff7d3"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.535Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.535Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30ad"
+  },
+  "email": "paxton.jacobson@yahoo.com",
+  "customerFirstName": "Paxton",
+  "customerLastName": "Jacobson",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755b8acab5bffe6e382a20e"
+      },
+      "quantity": 3,
+      "price": 46.75
+    },
+    {
+      "product": {
+        "$oid": "6755d8c956cfb3cff746be38"
+      },
+      "quantity": 5,
+      "price": 19.8
+    },
+    {
+      "product": {
+        "$oid": "6755d82456cfb3cff746bdc9"
+      },
+      "quantity": 3,
+      "price": 185.6
+    },
+    {
+      "product": {
+        "$oid": "6755c7b2ab5bffe6e382abfa"
+      },
+      "quantity": 5,
+      "price": 93.8
+    }
+  ],
+  "totalAmount": 1265.05,
+  "status": "pending",
+  "shippingAddress": {
+    "street": "15667ad0135ad089eb9d5db2dd08f910:ed17dcc00a3bded51c64169d7bc7b691abe947ee261f7b3f965b35ea293c5de8",
+    "city": "6e0392a117bb4c50c62116de38d32957:5479982dd914561a8e7e5d4c599b1044",
+    "state": "fd50d765d0c6c3a80aac5a092046ad0c:f83de039dd2e40742014ba3f83eb3cea",
+    "zipCode": "e17b00d57c1a176d78d131bd4bbad5c3:dee1e592ef881cb3bc8111b0a67d3a3a",
+    "country": "384aa7e99eeef9811489530140f8fa36:93ddb1b05cdb9e6c7ad5d54d418ea1fe"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.541Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.541Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30af"
+  },
+  "email": "paxton.jacobson@yahoo.com",
+  "customerFirstName": "Paxton",
+  "customerLastName": "Jacobson",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c0afab5bffe6e382a43a"
+      },
+      "quantity": 1,
+      "price": 72.5
+    }
+  ],
+  "totalAmount": 72.5,
+  "status": "completed",
+  "shippingAddress": {
+    "street": "27f3e4156f9022b521b8f5c37b86766b:fec7f3315b747a1154a24c0ff816c787",
+    "city": "03e02d42dcbce03f4f43abedb46c7cad:3fed3adb30d95c8bbcd3f6116b58371e",
+    "state": "85f5ed6e997d126ed68bfbba3ec92877:1085e2e1f44faa8c8ee0249ff8f557d3",
+    "zipCode": "3200344aed7e00129bb81f538a7097ff:4f8c3512a9a79d003853354095470d9f",
+    "country": "a18f8dfde5430f3f675b67678c9d2086:3c9d14be3ea42a9620d5eaab93d0c93c"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.549Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.549Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30b1"
+  },
+  "email": "vena.yundt32@hotmail.com",
+  "customerFirstName": "Vena",
+  "customerLastName": "Yundt",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c7b2ab5bffe6e382abfa"
+      },
+      "quantity": 2,
+      "price": 93.8
+    },
+    {
+      "product": {
+        "$oid": "6755cbbc56cfb3cff746bb11"
+      },
+      "quantity": 5,
+      "price": 116.5
+    },
+    {
+      "product": {
+        "$oid": "6755b7f9ab5bffe6e382a04f"
+      },
+      "quantity": 5,
+      "price": 34.4
+    }
+  ],
+  "totalAmount": 942.1,
+  "status": "cancelled",
+  "shippingAddress": {
+    "street": "e9f60a1aab1a8c968f24240f32b86eda:a5710b326f482c9da4d2bcd923dd937d5e1bad0a20ffee6888b5eed58ca0e818",
+    "city": "26c6ebed354bd4c5b7bde6c096723b49:3a6b8d05c1fc707269e5c17c7bb2f546",
+    "state": "96e8925bcedd23f44dd6168741ec0e30:2741cb39859edc93c739d9988d13c266",
+    "zipCode": "bcd7fd2ceaaec0301ab69569ab47daf2:91fbe8e995bbe7973a666700090dcc9b",
+    "country": "c604cf65ab19d9997bf3c4fd2a2b85a2:3be5635701931b65c1f3dec110a2950b"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.554Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.554Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30b3"
+  },
+  "email": "vena.yundt32@hotmail.com",
+  "customerFirstName": "Vena",
+  "customerLastName": "Yundt",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755d74e56cfb3cff746bd51"
+      },
+      "quantity": 3,
+      "price": 64.4
+    },
+    {
+      "product": {
+        "$oid": "6755cbbc56cfb3cff746bb11"
+      },
+      "quantity": 3,
+      "price": 116.5
+    },
+    {
+      "product": {
+        "$oid": "6755b8acab5bffe6e382a20e"
+      },
+      "quantity": 5,
+      "price": 46.75
+    },
+    {
+      "product": {
+        "$oid": "6755bf6aab5bffe6e382a332"
+      },
+      "quantity": 2,
+      "price": 163.2
+    }
+  ],
+  "totalAmount": 1102.85,
+  "status": "completed",
+  "shippingAddress": {
+    "street": "a47d95754e7f0b64379a7bad82334209:d0c100fb2da7d298c427ea0dae15993499e22ad12e462678e50a261095ef6f33",
+    "city": "65c25513d5fd1252c43cfa7ebbfdcacb:bf170e9f249d6407411ddfba61a32074",
+    "state": "88e6c5aa4c30502d7f6d811d8ebeff87:a7fb9eadb2cf4c0b2d9047d498e91655",
+    "zipCode": "b2d95ebc32277f068266cb853ddd7c1f:22c3b6433823bf9e22cbbd5352e40d13",
+    "country": "7b659f37ef0fa70604de78087337808c:2a1e61ba6974d11b3283094a752c4fb5"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.560Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.560Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30b5"
+  },
+  "email": "vena.yundt32@hotmail.com",
+  "customerFirstName": "Vena",
+  "customerLastName": "Yundt",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755cdf956cfb3cff746bc81"
+      },
+      "quantity": 1,
+      "price": 136
+    },
+    {
+      "product": {
+        "$oid": "6755c72cab5bffe6e382ab89"
+      },
+      "quantity": 1,
+      "price": 81.6
+    },
+    {
+      "product": {
+        "$oid": "6755d82456cfb3cff746bdc9"
+      },
+      "quantity": 1,
+      "price": 185.6
+    },
+    {
+      "product": {
+        "$oid": "6755b8acab5bffe6e382a20e"
+      },
+      "quantity": 1,
+      "price": 46.75
+    }
+  ],
+  "totalAmount": 449.95,
+  "status": "cancelled",
+  "shippingAddress": {
+    "street": "a47d95754e7f0b64379a7bad82334209:d0c100fb2da7d298c427ea0dae15993499e22ad12e462678e50a261095ef6f33",
+    "city": "65c25513d5fd1252c43cfa7ebbfdcacb:bf170e9f249d6407411ddfba61a32074",
+    "state": "88e6c5aa4c30502d7f6d811d8ebeff87:a7fb9eadb2cf4c0b2d9047d498e91655",
+    "zipCode": "b2d95ebc32277f068266cb853ddd7c1f:22c3b6433823bf9e22cbbd5352e40d13",
+    "country": "7b659f37ef0fa70604de78087337808c:2a1e61ba6974d11b3283094a752c4fb5"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.566Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.566Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30b7"
+  },
+  "email": "vena.yundt32@hotmail.com",
+  "customerFirstName": "Vena",
+  "customerLastName": "Yundt",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755d8c956cfb3cff746be38"
+      },
+      "quantity": 2,
+      "price": 19.8
+    },
+    {
+      "product": {
+        "$oid": "6755c9bbab5bffe6e382ace7"
+      },
+      "quantity": 2,
+      "price": 35.1
+    }
+  ],
+  "totalAmount": 109.80000000000001,
+  "status": "completed",
+  "shippingAddress": {
+    "street": "7e821842d3499b14635ffe616941f0ad:ccd20b04affbfe03f7e81609c8834d5970b74b76074f1b3d3af10a9415517e23",
+    "city": "3a7880813b4ac0bc57c19450d851978d:19186d65fa6595909b19df0ee490afcb",
+    "state": "5db698b783427c9e43a42711834aea00:8c1ce021f85cb1793da7e4a7b937082c",
+    "zipCode": "0fee56ae5b2486b9c66c7868c30057db:6bfa1777230c3efbe7d8e3b6097f5419",
+    "country": "ef9e3071fea01ad945fa96a872ad48d5:32886738248ca53716c153798090bc06"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.571Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.571Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30b9"
+  },
+  "email": "vena.yundt32@hotmail.com",
+  "customerFirstName": "Vena",
+  "customerLastName": "Yundt",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c9bbab5bffe6e382ace7"
+      },
+      "quantity": 1,
+      "price": 35.1
+    },
+    {
+      "product": {
+        "$oid": "6755b8acab5bffe6e382a20e"
+      },
+      "quantity": 4,
+      "price": 46.75
+    },
+    {
+      "product": {
+        "$oid": "6755cbbc56cfb3cff746bb11"
+      },
+      "quantity": 1,
+      "price": 116.5
+    }
+  ],
+  "totalAmount": 338.6,
+  "status": "completed",
+  "shippingAddress": {
+    "street": "e9f60a1aab1a8c968f24240f32b86eda:a5710b326f482c9da4d2bcd923dd937d5e1bad0a20ffee6888b5eed58ca0e818",
+    "city": "26c6ebed354bd4c5b7bde6c096723b49:3a6b8d05c1fc707269e5c17c7bb2f546",
+    "state": "96e8925bcedd23f44dd6168741ec0e30:2741cb39859edc93c739d9988d13c266",
+    "zipCode": "bcd7fd2ceaaec0301ab69569ab47daf2:91fbe8e995bbe7973a666700090dcc9b",
+    "country": "c604cf65ab19d9997bf3c4fd2a2b85a2:3be5635701931b65c1f3dec110a2950b"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.576Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.576Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30bb"
+  },
+  "email": "libbie.zulauf28@gmail.com",
+  "customerFirstName": "Libbie",
+  "customerLastName": "Zulauf",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755d74e56cfb3cff746bd51"
+      },
+      "quantity": 2,
+      "price": 64.4
+    },
+    {
+      "product": {
+        "$oid": "6755d8c956cfb3cff746be38"
+      },
+      "quantity": 4,
+      "price": 19.8
+    },
+    {
+      "product": {
+        "$oid": "6755c17bab5bffe6e382a49a"
+      },
+      "quantity": 3,
+      "price": 58.4
+    }
+  ],
+  "totalAmount": 383.2,
+  "status": "cancelled",
+  "shippingAddress": {
+    "street": "4561fd306e4464e8f7c49271a7b876c1:6f1771d802d58a40f5fc7f87a5f0d53d6690f6cee22477a2f8a1602ddc2636fb",
+    "city": "25b805534696c5c014b438aeddf79dc1:16d609a3dc7cdbb1ed357f598e00da88",
+    "state": "15cb8fe11a66f598a011232d7d8cd900:3d59ccf79a99e73929f36798f23bbc7d",
+    "zipCode": "dc4d46536492bef7e52035eb8454e046:7df5b7a0f09265db88fd8625093cba75",
+    "country": "70ef28037f7744221d83e7620a28a3af:a0b9776660a4f47c68369fa600167389"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.582Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.582Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30bd"
+  },
+  "email": "libbie.zulauf28@gmail.com",
+  "customerFirstName": "Libbie",
+  "customerLastName": "Zulauf",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755b7f9ab5bffe6e382a04f"
+      },
+      "quantity": 5,
+      "price": 34.4
+    },
+    {
+      "product": {
+        "$oid": "6755d74e56cfb3cff746bd51"
+      },
+      "quantity": 2,
+      "price": 64.4
+    },
+    {
+      "product": {
+        "$oid": "6755bf6aab5bffe6e382a332"
+      },
+      "quantity": 2,
+      "price": 163.2
+    }
+  ],
+  "totalAmount": 627.2,
+  "status": "pending",
+  "shippingAddress": {
+    "street": "4561fd306e4464e8f7c49271a7b876c1:6f1771d802d58a40f5fc7f87a5f0d53d6690f6cee22477a2f8a1602ddc2636fb",
+    "city": "25b805534696c5c014b438aeddf79dc1:16d609a3dc7cdbb1ed357f598e00da88",
+    "state": "15cb8fe11a66f598a011232d7d8cd900:3d59ccf79a99e73929f36798f23bbc7d",
+    "zipCode": "dc4d46536492bef7e52035eb8454e046:7df5b7a0f09265db88fd8625093cba75",
+    "country": "70ef28037f7744221d83e7620a28a3af:a0b9776660a4f47c68369fa600167389"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.587Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.587Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30bf"
+  },
+  "email": "libbie.zulauf28@gmail.com",
+  "customerFirstName": "Libbie",
+  "customerLastName": "Zulauf",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755b7f9ab5bffe6e382a04f"
+      },
+      "quantity": 1,
+      "price": 34.4
+    },
+    {
+      "product": {
+        "$oid": "6755cd7956cfb3cff746bc09"
+      },
+      "quantity": 4,
+      "price": 218.7
+    },
+    {
+      "product": {
+        "$oid": "6755bf6aab5bffe6e382a332"
+      },
+      "quantity": 4,
+      "price": 163.2
+    },
+    {
+      "product": {
+        "$oid": "6755c0afab5bffe6e382a43a"
+      },
+      "quantity": 2,
+      "price": 72.5
+    }
+  ],
+  "totalAmount": 1707,
+  "status": "completed",
+  "shippingAddress": {
+    "street": "4561fd306e4464e8f7c49271a7b876c1:6f1771d802d58a40f5fc7f87a5f0d53d6690f6cee22477a2f8a1602ddc2636fb",
+    "city": "25b805534696c5c014b438aeddf79dc1:16d609a3dc7cdbb1ed357f598e00da88",
+    "state": "15cb8fe11a66f598a011232d7d8cd900:3d59ccf79a99e73929f36798f23bbc7d",
+    "zipCode": "dc4d46536492bef7e52035eb8454e046:7df5b7a0f09265db88fd8625093cba75",
+    "country": "70ef28037f7744221d83e7620a28a3af:a0b9776660a4f47c68369fa600167389"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.592Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.592Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30c1"
+  },
+  "email": "mona.bailey@gmail.com",
+  "customerFirstName": "Mona",
+  "customerLastName": "Bailey",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755cdf956cfb3cff746bc81"
+      },
+      "quantity": 3,
+      "price": 136
+    }
+  ],
+  "totalAmount": 408,
+  "status": "pending",
+  "shippingAddress": {
+    "street": "465b9f4bbe6eb6bc3d94b0f964268a19:937114199fcd24ef1883b8941a61858d4823bf7a0944e0907f89340113ecf7d5",
+    "city": "13553b706552125b41a7f5bff469889e:690fc914e07e72c0f2c066ece1354146",
+    "state": "84ffcafb4c8c9c38f64516b65f28973f:0d8108f8883cae85094c0f8163f51ec2",
+    "zipCode": "55be3d8b7a70917cf6a6e81d1401d128:bc812a35c4f8434d65dc36f457a04bb1",
+    "country": "e1c3e24cf78e617bc9a3dcbbb7c512cc:39513d799c61b23ad0a21168959dc874"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.597Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.597Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30c3"
+  },
+  "email": "mona.bailey@gmail.com",
+  "customerFirstName": "Mona",
+  "customerLastName": "Bailey",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755cd7956cfb3cff746bc09"
+      },
+      "quantity": 2,
+      "price": 218.7
+    },
+    {
+      "product": {
+        "$oid": "6755c7b2ab5bffe6e382abfa"
+      },
+      "quantity": 1,
+      "price": 93.8
+    },
+    {
+      "product": {
+        "$oid": "6755c72cab5bffe6e382ab89"
+      },
+      "quantity": 4,
+      "price": 81.6
+    }
+  ],
+  "totalAmount": 857.5999999999999,
+  "status": "cancelled",
+  "shippingAddress": {
+    "street": "465b9f4bbe6eb6bc3d94b0f964268a19:937114199fcd24ef1883b8941a61858d4823bf7a0944e0907f89340113ecf7d5",
+    "city": "13553b706552125b41a7f5bff469889e:690fc914e07e72c0f2c066ece1354146",
+    "state": "84ffcafb4c8c9c38f64516b65f28973f:0d8108f8883cae85094c0f8163f51ec2",
+    "zipCode": "55be3d8b7a70917cf6a6e81d1401d128:bc812a35c4f8434d65dc36f457a04bb1",
+    "country": "e1c3e24cf78e617bc9a3dcbbb7c512cc:39513d799c61b23ad0a21168959dc874"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.602Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.602Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30c5"
+  },
+  "email": "mona.bailey@gmail.com",
+  "customerFirstName": "Mona",
+  "customerLastName": "Bailey",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755bf6aab5bffe6e382a332"
+      },
+      "quantity": 1,
+      "price": 163.2
+    }
+  ],
+  "totalAmount": 163.2,
+  "status": "pending",
+  "shippingAddress": {
+    "street": "cdd28c620ba66091e82ff324ed19d31a:b23eec8ddb2738b8bc0bbff2bafe31eef4b797f05f67583a55d8d1a874f952fd",
+    "city": "62f4667ffcedc65de28077f3667c6bbd:3ef0f43006f5def21b1e360b41158a66e75e683903dca3705b3aeccddb73e841",
+    "state": "79550df30269e21d8bc185dc73bebf7f:8168716bb6c15790196c257b90d538e9",
+    "zipCode": "a9ab88264e30f8e151d173c20111625a:23e2ff532b031847d9437b90272bf8eb",
+    "country": "831208e5cfd074733a717568d41e5076:7ff93b0feb59a4fae4dc7323693d5d44"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.606Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.606Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30c7"
+  },
+  "email": "mona.bailey@gmail.com",
+  "customerFirstName": "Mona",
+  "customerLastName": "Bailey",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755b8acab5bffe6e382a20e"
+      },
+      "quantity": 4,
+      "price": 46.75
+    },
+    {
+      "product": {
+        "$oid": "6755c72cab5bffe6e382ab89"
+      },
+      "quantity": 2,
+      "price": 81.6
+    },
+    {
+      "product": {
+        "$oid": "6755d82456cfb3cff746bdc9"
+      },
+      "quantity": 3,
+      "price": 185.6
+    },
+    {
+      "product": {
+        "$oid": "6755cd7956cfb3cff746bc09"
+      },
+      "quantity": 5,
+      "price": 218.7
+    },
+    {
+      "product": {
+        "$oid": "6755b7f9ab5bffe6e382a04f"
+      },
+      "quantity": 2,
+      "price": 34.4
+    }
+  ],
+  "totalAmount": 2069.3,
+  "status": "pending",
+  "shippingAddress": {
+    "street": "465b9f4bbe6eb6bc3d94b0f964268a19:937114199fcd24ef1883b8941a61858d4823bf7a0944e0907f89340113ecf7d5",
+    "city": "13553b706552125b41a7f5bff469889e:690fc914e07e72c0f2c066ece1354146",
+    "state": "84ffcafb4c8c9c38f64516b65f28973f:0d8108f8883cae85094c0f8163f51ec2",
+    "zipCode": "55be3d8b7a70917cf6a6e81d1401d128:bc812a35c4f8434d65dc36f457a04bb1",
+    "country": "e1c3e24cf78e617bc9a3dcbbb7c512cc:39513d799c61b23ad0a21168959dc874"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.612Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.612Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30c9"
+  },
+  "email": "edwina.nader@gmail.com",
+  "customerFirstName": "Edwina",
+  "customerLastName": "Nader",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c9bbab5bffe6e382ace7"
+      },
+      "quantity": 2,
+      "price": 35.1
+    },
+    {
+      "product": {
+        "$oid": "6755b8acab5bffe6e382a20e"
+      },
+      "quantity": 3,
+      "price": 46.75
+    },
+    {
+      "product": {
+        "$oid": "6755b7f9ab5bffe6e382a04f"
+      },
+      "quantity": 5,
+      "price": 34.4
+    }
+  ],
+  "totalAmount": 382.45,
+  "status": "completed",
+  "shippingAddress": {
+    "street": "c1fd4b6020cffc78c8ef06e8ff47583d:36a9a6146bc49a8029337dfc43f9c58538ee500809743b33e52c9151d7bce368",
+    "city": "e47dc8c1bff5cfa6f2fd15ee4267545a:31ad1d99e6fc406f826ea63faa9aaf11a880c5709fa41f341f417dda8c1b0431",
+    "state": "35506ef775f8702a4a1272e43f49fa9e:03394c1860fd8ff498004108fab15e79",
+    "zipCode": "ba4bf098cd949d12994991b36f37ff5a:bca8e8d162f1ae0290e5402037beadd8",
+    "country": "846c1186983799f6626da62ddbd82165:2f21d67619552a4e4a5ab40a7cc00023"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.617Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.617Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30cb"
+  },
+  "email": "edwina.nader@gmail.com",
+  "customerFirstName": "Edwina",
+  "customerLastName": "Nader",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c17bab5bffe6e382a49a"
+      },
+      "quantity": 4,
+      "price": 58.4
+    },
+    {
+      "product": {
+        "$oid": "6755d74e56cfb3cff746bd51"
+      },
+      "quantity": 3,
+      "price": 64.4
+    }
+  ],
+  "totalAmount": 426.8,
+  "status": "completed",
+  "shippingAddress": {
+    "street": "c1fd4b6020cffc78c8ef06e8ff47583d:36a9a6146bc49a8029337dfc43f9c58538ee500809743b33e52c9151d7bce368",
+    "city": "e47dc8c1bff5cfa6f2fd15ee4267545a:31ad1d99e6fc406f826ea63faa9aaf11a880c5709fa41f341f417dda8c1b0431",
+    "state": "35506ef775f8702a4a1272e43f49fa9e:03394c1860fd8ff498004108fab15e79",
+    "zipCode": "ba4bf098cd949d12994991b36f37ff5a:bca8e8d162f1ae0290e5402037beadd8",
+    "country": "846c1186983799f6626da62ddbd82165:2f21d67619552a4e4a5ab40a7cc00023"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.622Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.622Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30cd"
+  },
+  "email": "edwina.nader@gmail.com",
+  "customerFirstName": "Edwina",
+  "customerLastName": "Nader",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c9bbab5bffe6e382ace7"
+      },
+      "quantity": 4,
+      "price": 35.1
+    },
+    {
+      "product": {
+        "$oid": "6755d8c956cfb3cff746be38"
+      },
+      "quantity": 5,
+      "price": 19.8
+    }
+  ],
+  "totalAmount": 239.4,
+  "status": "completed",
+  "shippingAddress": {
+    "street": "62326e576219ea3c279d3259368fc92e:424e75bc7c5114231f5ea56dbd4d5736092b3407683066e517d7e7a3941217d5",
+    "city": "da6d1daaf31b2a36a75085b9e8a75470:1ea27cee61e9fe1ab59fe1b1ed63ae5e",
+    "state": "2a1fc3e03c6a365b1dd0a9369aec6833:e9f3a60f695731704c923e04882dcfa7",
+    "zipCode": "4022b766b11c64d348e3da7e1c196002:68d2f673b7b0c53236beea164e4ce3c9",
+    "country": "82cc4ec65454bd028a1d8567192ef9ec:c2ae8b6c2a3185530147b72403a442d5"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.628Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.628Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30cf"
+  },
+  "email": "edwina.nader@gmail.com",
+  "customerFirstName": "Edwina",
+  "customerLastName": "Nader",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c9bbab5bffe6e382ace7"
+      },
+      "quantity": 2,
+      "price": 35.1
+    },
+    {
+      "product": {
+        "$oid": "6755d74e56cfb3cff746bd51"
+      },
+      "quantity": 1,
+      "price": 64.4
+    },
+    {
+      "product": {
+        "$oid": "6755cbbc56cfb3cff746bb11"
+      },
+      "quantity": 4,
+      "price": 116.5
+    }
+  ],
+  "totalAmount": 600.6,
+  "status": "completed",
+  "shippingAddress": {
+    "street": "62326e576219ea3c279d3259368fc92e:424e75bc7c5114231f5ea56dbd4d5736092b3407683066e517d7e7a3941217d5",
+    "city": "da6d1daaf31b2a36a75085b9e8a75470:1ea27cee61e9fe1ab59fe1b1ed63ae5e",
+    "state": "2a1fc3e03c6a365b1dd0a9369aec6833:e9f3a60f695731704c923e04882dcfa7",
+    "zipCode": "4022b766b11c64d348e3da7e1c196002:68d2f673b7b0c53236beea164e4ce3c9",
+    "country": "82cc4ec65454bd028a1d8567192ef9ec:c2ae8b6c2a3185530147b72403a442d5"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.632Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.632Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30d1"
+  },
+  "email": "edwina.nader@gmail.com",
+  "customerFirstName": "Edwina",
+  "customerLastName": "Nader",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755b8acab5bffe6e382a20e"
+      },
+      "quantity": 5,
+      "price": 46.75
+    },
+    {
+      "product": {
+        "$oid": "6755cdf956cfb3cff746bc81"
+      },
+      "quantity": 1,
+      "price": 136
+    }
+  ],
+  "totalAmount": 369.75,
+  "status": "pending",
+  "shippingAddress": {
+    "street": "c1fd4b6020cffc78c8ef06e8ff47583d:36a9a6146bc49a8029337dfc43f9c58538ee500809743b33e52c9151d7bce368",
+    "city": "e47dc8c1bff5cfa6f2fd15ee4267545a:31ad1d99e6fc406f826ea63faa9aaf11a880c5709fa41f341f417dda8c1b0431",
+    "state": "35506ef775f8702a4a1272e43f49fa9e:03394c1860fd8ff498004108fab15e79",
+    "zipCode": "ba4bf098cd949d12994991b36f37ff5a:bca8e8d162f1ae0290e5402037beadd8",
+    "country": "846c1186983799f6626da62ddbd82165:2f21d67619552a4e4a5ab40a7cc00023"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.638Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.638Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30d3"
+  },
+  "email": "guy_parisian@hotmail.com",
+  "customerFirstName": "Guy",
+  "customerLastName": "Parisian",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755d82456cfb3cff746bdc9"
+      },
+      "quantity": 3,
+      "price": 185.6
+    },
+    {
+      "product": {
+        "$oid": "6755b8acab5bffe6e382a20e"
+      },
+      "quantity": 4,
+      "price": 46.75
+    }
+  ],
+  "totalAmount": 743.8,
+  "status": "cancelled",
+  "shippingAddress": {
+    "street": "19d02bb2780a95583e458c688c747a52:29c6cf83781e68dc61ee5c917eb889cc",
+    "city": "b5b5d6b13b1d7b2cf571a8495c421ceb:ea5e6a2dc86300867e327456394ed52a",
+    "state": "be0c94129e3b3def13c1616c86ea64ff:98d762ebfc3489221534d849acc1169a",
+    "zipCode": "5f4692ea8dd483dfa9dc6d68894b8d3e:c20a3c3718069c6b32bb16c0e6fbb323",
+    "country": "bc956bb969f6c1acb493b64d6a63a3b5:216d0fd995298ae39a9ce83f97f37870"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.642Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.642Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30d5"
+  },
+  "email": "guy_parisian@hotmail.com",
+  "customerFirstName": "Guy",
+  "customerLastName": "Parisian",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c7b2ab5bffe6e382abfa"
+      },
+      "quantity": 1,
+      "price": 93.8
+    },
+    {
+      "product": {
+        "$oid": "6755c67eab5bffe6e382ab1d"
+      },
+      "quantity": 5,
+      "price": 62.7
+    },
+    {
+      "product": {
+        "$oid": "6755c17bab5bffe6e382a49a"
+      },
+      "quantity": 5,
+      "price": 58.4
+    }
+  ],
+  "totalAmount": 699.3,
+  "status": "pending",
+  "shippingAddress": {
+    "street": "19d02bb2780a95583e458c688c747a52:29c6cf83781e68dc61ee5c917eb889cc",
+    "city": "b5b5d6b13b1d7b2cf571a8495c421ceb:ea5e6a2dc86300867e327456394ed52a",
+    "state": "be0c94129e3b3def13c1616c86ea64ff:98d762ebfc3489221534d849acc1169a",
+    "zipCode": "5f4692ea8dd483dfa9dc6d68894b8d3e:c20a3c3718069c6b32bb16c0e6fbb323",
+    "country": "bc956bb969f6c1acb493b64d6a63a3b5:216d0fd995298ae39a9ce83f97f37870"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.646Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.646Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30d7"
+  },
+  "email": "guy_parisian@hotmail.com",
+  "customerFirstName": "Guy",
+  "customerLastName": "Parisian",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755bf6aab5bffe6e382a332"
+      },
+      "quantity": 1,
+      "price": 163.2
+    },
+    {
+      "product": {
+        "$oid": "6755cd7956cfb3cff746bc09"
+      },
+      "quantity": 3,
+      "price": 218.7
+    }
+  ],
+  "totalAmount": 819.3,
+  "status": "completed",
+  "shippingAddress": {
+    "street": "19d02bb2780a95583e458c688c747a52:29c6cf83781e68dc61ee5c917eb889cc",
+    "city": "b5b5d6b13b1d7b2cf571a8495c421ceb:ea5e6a2dc86300867e327456394ed52a",
+    "state": "be0c94129e3b3def13c1616c86ea64ff:98d762ebfc3489221534d849acc1169a",
+    "zipCode": "5f4692ea8dd483dfa9dc6d68894b8d3e:c20a3c3718069c6b32bb16c0e6fbb323",
+    "country": "bc956bb969f6c1acb493b64d6a63a3b5:216d0fd995298ae39a9ce83f97f37870"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.652Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.652Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30d9"
+  },
+  "email": "jamar_batz@gmail.com",
+  "customerFirstName": "Jamar",
+  "customerLastName": "Batz",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755d74e56cfb3cff746bd51"
+      },
+      "quantity": 1,
+      "price": 64.4
+    },
+    {
+      "product": {
+        "$oid": "6755c7b2ab5bffe6e382abfa"
+      },
+      "quantity": 3,
+      "price": 93.8
+    },
+    {
+      "product": {
+        "$oid": "6755c67eab5bffe6e382ab1d"
+      },
+      "quantity": 3,
+      "price": 62.7
+    },
+    {
+      "product": {
+        "$oid": "6755c9bbab5bffe6e382ace7"
+      },
+      "quantity": 4,
+      "price": 35.1
+    }
+  ],
+  "totalAmount": 674.3,
+  "status": "pending",
+  "shippingAddress": {
+    "street": "39db380fbcb1345e27eb944904087804:dbe1172070d7f3317195c15146696a9a",
+    "city": "3f39ca4c3269675d62e4b1f68d6327f1:e855b3a3c12e5206287d7fe265fc5911",
+    "state": "b1a396bf1eee0574758583f1c078fd9d:cf12f6254739ae7128ff1a4c28055781",
+    "zipCode": "cae2c4991269c6194dc82fee79eb4956:bffc6b5ff43a18d77ef29a1a74d90e2d",
+    "country": "a1cd3e63e3a3e7e9b39e17e369b3eb07:0efdb17d9fedacc3131e964d5d6aca51"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.656Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.656Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30db"
+  },
+  "email": "jamar_batz@gmail.com",
+  "customerFirstName": "Jamar",
+  "customerLastName": "Batz",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755bf6aab5bffe6e382a332"
+      },
+      "quantity": 4,
+      "price": 163.2
+    },
+    {
+      "product": {
+        "$oid": "6755c17bab5bffe6e382a49a"
+      },
+      "quantity": 1,
+      "price": 58.4
+    },
+    {
+      "product": {
+        "$oid": "6755cbbc56cfb3cff746bb11"
+      },
+      "quantity": 5,
+      "price": 116.5
+    }
+  ],
+  "totalAmount": 1293.6999999999998,
+  "status": "cancelled",
+  "shippingAddress": {
+    "street": "39db380fbcb1345e27eb944904087804:dbe1172070d7f3317195c15146696a9a",
+    "city": "3f39ca4c3269675d62e4b1f68d6327f1:e855b3a3c12e5206287d7fe265fc5911",
+    "state": "b1a396bf1eee0574758583f1c078fd9d:cf12f6254739ae7128ff1a4c28055781",
+    "zipCode": "cae2c4991269c6194dc82fee79eb4956:bffc6b5ff43a18d77ef29a1a74d90e2d",
+    "country": "a1cd3e63e3a3e7e9b39e17e369b3eb07:0efdb17d9fedacc3131e964d5d6aca51"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.661Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.661Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30dd"
+  },
+  "email": "jamar_batz@gmail.com",
+  "customerFirstName": "Jamar",
+  "customerLastName": "Batz",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c7b2ab5bffe6e382abfa"
+      },
+      "quantity": 5,
+      "price": 93.8
+    },
+    {
+      "product": {
+        "$oid": "6755b8acab5bffe6e382a20e"
+      },
+      "quantity": 5,
+      "price": 46.75
+    },
+    {
+      "product": {
+        "$oid": "6755b7f9ab5bffe6e382a04f"
+      },
+      "quantity": 4,
+      "price": 34.4
+    }
+  ],
+  "totalAmount": 840.35,
+  "status": "cancelled",
+  "shippingAddress": {
+    "street": "39db380fbcb1345e27eb944904087804:dbe1172070d7f3317195c15146696a9a",
+    "city": "3f39ca4c3269675d62e4b1f68d6327f1:e855b3a3c12e5206287d7fe265fc5911",
+    "state": "b1a396bf1eee0574758583f1c078fd9d:cf12f6254739ae7128ff1a4c28055781",
+    "zipCode": "cae2c4991269c6194dc82fee79eb4956:bffc6b5ff43a18d77ef29a1a74d90e2d",
+    "country": "a1cd3e63e3a3e7e9b39e17e369b3eb07:0efdb17d9fedacc3131e964d5d6aca51"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.665Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.665Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30df"
+  },
+  "email": "jamar_batz@gmail.com",
+  "customerFirstName": "Jamar",
+  "customerLastName": "Batz",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755b7f9ab5bffe6e382a04f"
+      },
+      "quantity": 2,
+      "price": 34.4
+    },
+    {
+      "product": {
+        "$oid": "6755cbbc56cfb3cff746bb11"
+      },
+      "quantity": 2,
+      "price": 116.5
+    },
+    {
+      "product": {
+        "$oid": "6755c67eab5bffe6e382ab1d"
+      },
+      "quantity": 1,
+      "price": 62.7
+    }
+  ],
+  "totalAmount": 364.5,
+  "status": "completed",
+  "shippingAddress": {
+    "street": "39db380fbcb1345e27eb944904087804:dbe1172070d7f3317195c15146696a9a",
+    "city": "3f39ca4c3269675d62e4b1f68d6327f1:e855b3a3c12e5206287d7fe265fc5911",
+    "state": "b1a396bf1eee0574758583f1c078fd9d:cf12f6254739ae7128ff1a4c28055781",
+    "zipCode": "cae2c4991269c6194dc82fee79eb4956:bffc6b5ff43a18d77ef29a1a74d90e2d",
+    "country": "a1cd3e63e3a3e7e9b39e17e369b3eb07:0efdb17d9fedacc3131e964d5d6aca51"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.670Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.670Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30e1"
+  },
+  "email": "jamar_batz@gmail.com",
+  "customerFirstName": "Jamar",
+  "customerLastName": "Batz",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755d74e56cfb3cff746bd51"
+      },
+      "quantity": 4,
+      "price": 64.4
+    },
+    {
+      "product": {
+        "$oid": "6755b8acab5bffe6e382a20e"
+      },
+      "quantity": 3,
+      "price": 46.75
+    },
+    {
+      "product": {
+        "$oid": "6755c17bab5bffe6e382a49a"
+      },
+      "quantity": 4,
+      "price": 58.4
+    }
+  ],
+  "totalAmount": 631.45,
+  "status": "pending",
+  "shippingAddress": {
+    "street": "39db380fbcb1345e27eb944904087804:dbe1172070d7f3317195c15146696a9a",
+    "city": "3f39ca4c3269675d62e4b1f68d6327f1:e855b3a3c12e5206287d7fe265fc5911",
+    "state": "b1a396bf1eee0574758583f1c078fd9d:cf12f6254739ae7128ff1a4c28055781",
+    "zipCode": "cae2c4991269c6194dc82fee79eb4956:bffc6b5ff43a18d77ef29a1a74d90e2d",
+    "country": "a1cd3e63e3a3e7e9b39e17e369b3eb07:0efdb17d9fedacc3131e964d5d6aca51"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.675Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.675Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30e3"
+  },
+  "email": "hector.will@yahoo.com",
+  "customerFirstName": "Hector",
+  "customerLastName": "Will",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c7b2ab5bffe6e382abfa"
+      },
+      "quantity": 5,
+      "price": 93.8
+    },
+    {
+      "product": {
+        "$oid": "6755bf6aab5bffe6e382a332"
+      },
+      "quantity": 2,
+      "price": 163.2
+    }
+  ],
+  "totalAmount": 795.4,
+  "status": "cancelled",
+  "shippingAddress": {
+    "street": "d0c9d6cea45eeab5985f6b78070b56eb:c47803d4d9bdd11d18ab8b357ef4daa58e35d056bd11b656e63834a6ec9cbc73",
+    "city": "e0f04d79ef4a79b2f7aeecf2f9436184:345cb74fca0f253f164f69ecf225fa44",
+    "state": "9be8c96f620f039e063eb23cf758d1db:5b41d4e6124a2bfcb49a6b41a1e81e63",
+    "zipCode": "b1b141852de9c388be3e7989d8f9c5ee:68baff68d4702c6e98ea483a731c206b",
+    "country": "46e846c5d90a6b5b5210510e7250e5c2:cb1a6ce7da67bee0be879e37ede9fe33"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.680Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.680Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30e5"
+  },
+  "email": "yazmin_harvey@hotmail.com",
+  "customerFirstName": "Yazmin",
+  "customerLastName": "Harvey",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c7b2ab5bffe6e382abfa"
+      },
+      "quantity": 4,
+      "price": 93.8
+    },
+    {
+      "product": {
+        "$oid": "6755c17bab5bffe6e382a49a"
+      },
+      "quantity": 3,
+      "price": 58.4
+    }
+  ],
+  "totalAmount": 550.4,
+  "status": "cancelled",
+  "shippingAddress": {
+    "street": "d880e89c3eb4ff9b996aef2e6fbe2050:e9569bfe9a53361813b1e576cd8b3ba1a86e27fe42d4c417b93381b6ca7e506a",
+    "city": "e0ccbfd3184b7dd2aee2a16e83bf042a:b7e9f601da7f39de51aafca8b57c242e",
+    "state": "6a7a98a0aefa60810dcc0432b2f64529:77a6e5f335c8473eb6bb5822717728d6",
+    "zipCode": "c8b34cd74c5d36b87258bf74bb6814d6:ef2edd84b4a644abc229f3aabe20b842",
+    "country": "6b07fdaaa6bce06a8dc47835d06e44a9:119c22014b505612d3d803b3e7b1f265"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.685Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.685Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30e7"
+  },
+  "email": "yazmin_harvey@hotmail.com",
+  "customerFirstName": "Yazmin",
+  "customerLastName": "Harvey",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755b7f9ab5bffe6e382a04f"
+      },
+      "quantity": 3,
+      "price": 34.4
+    }
+  ],
+  "totalAmount": 103.19999999999999,
+  "status": "completed",
+  "shippingAddress": {
+    "street": "c64fee2ba96c4797b575024750f12add:1b8e93aafe700b44c9a4a3dbfec50e08cce27f0ab830226b86717e21a9e75418",
+    "city": "92041e000da15132409a3af70179f18c:0031894a5f5ac9e2341138ea6c04509a",
+    "state": "9ff9743da62df146ee73de3f619fc82b:95b23014922093bcb8e8e2076a239e99",
+    "zipCode": "8c129ccf0007f8339bcb20a52e7009d6:54cfe4beeb2032bdd992e679b4b103a1",
+    "country": "06575996e93f1e119a6afbeda7b87919:ac83fb6ba056005e8f51262afa4ccb72"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.689Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.689Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30e9"
+  },
+  "email": "yazmin_harvey@hotmail.com",
+  "customerFirstName": "Yazmin",
+  "customerLastName": "Harvey",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c67eab5bffe6e382ab1d"
+      },
+      "quantity": 3,
+      "price": 62.7
+    },
+    {
+      "product": {
+        "$oid": "6755c9bbab5bffe6e382ace7"
+      },
+      "quantity": 4,
+      "price": 35.1
+    }
+  ],
+  "totalAmount": 328.5,
+  "status": "completed",
+  "shippingAddress": {
+    "street": "18716ca2d5edda88c2b6a7242f4a34c7:45e18a3814c0f0c02d66b3f47e3f088e68bf0e28ee0a89f0866d6580bfc7fa4e",
+    "city": "2b2620deff790f5e21b8ffa9dbe73602:9b1296f00287466a8be142dfc8c7aba6",
+    "state": "f4f6e6b9e9aa63f190bb4705fee727eb:6cc1a3c51060b0676fb9a5e6d69d45e7",
+    "zipCode": "cf8220d2fb2272153ca285363b47c7f4:e181799a8ed720217df75e33a16fa609",
+    "country": "328df79702c7d5695693a630ccdf8c1f:c6af4b92571f3983fac32c6ac1ae7fc7"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.694Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.694Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30eb"
+  },
+  "email": "yazmin_harvey@hotmail.com",
+  "customerFirstName": "Yazmin",
+  "customerLastName": "Harvey",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755b8acab5bffe6e382a20e"
+      },
+      "quantity": 3,
+      "price": 46.75
+    },
+    {
+      "product": {
+        "$oid": "6755b7f9ab5bffe6e382a04f"
+      },
+      "quantity": 5,
+      "price": 34.4
+    }
+  ],
+  "totalAmount": 312.25,
+  "status": "pending",
+  "shippingAddress": {
+    "street": "c64fee2ba96c4797b575024750f12add:1b8e93aafe700b44c9a4a3dbfec50e08cce27f0ab830226b86717e21a9e75418",
+    "city": "92041e000da15132409a3af70179f18c:0031894a5f5ac9e2341138ea6c04509a",
+    "state": "9ff9743da62df146ee73de3f619fc82b:95b23014922093bcb8e8e2076a239e99",
+    "zipCode": "8c129ccf0007f8339bcb20a52e7009d6:54cfe4beeb2032bdd992e679b4b103a1",
+    "country": "06575996e93f1e119a6afbeda7b87919:ac83fb6ba056005e8f51262afa4ccb72"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.698Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.698Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30ed"
+  },
+  "email": "tomas_weber69@yahoo.com",
+  "customerFirstName": "Tomas",
+  "customerLastName": "Weber",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755d74e56cfb3cff746bd51"
+      },
+      "quantity": 3,
+      "price": 64.4
+    }
+  ],
+  "totalAmount": 193.20000000000002,
+  "status": "completed",
+  "shippingAddress": {
+    "street": "7319f5241e28dcb17e91064f84127c2e:2a45dc3e65a06a43136ac05b07f86f106bca9c51a2405073244306d054285aec",
+    "city": "8e0803a58c10dd6debbcf04076cab6a6:9a4b8caf4dd6a129ab65013d806b3e5c",
+    "state": "470b1ddb3b0027fd57d4eeedb2083cb8:cd70ae9d1444715d93ee221cefcaea45",
+    "zipCode": "b607020475d94536f2244149568afbfe:d9d0c7d2ac7a69ca00e9b0269cd5c4d1",
+    "country": "294c61f48fdecd903521d3aa37cd8be9:5f8d14b27a0651cabb1eddfc605c10bf"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.702Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.702Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30ef"
+  },
+  "email": "tomas_weber69@yahoo.com",
+  "customerFirstName": "Tomas",
+  "customerLastName": "Weber",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755b7f9ab5bffe6e382a04f"
+      },
+      "quantity": 3,
+      "price": 34.4
+    },
+    {
+      "product": {
+        "$oid": "6755bf6aab5bffe6e382a332"
+      },
+      "quantity": 1,
+      "price": 163.2
+    },
+    {
+      "product": {
+        "$oid": "6755cd7956cfb3cff746bc09"
+      },
+      "quantity": 1,
+      "price": 218.7
+    },
+    {
+      "product": {
+        "$oid": "6755c9bbab5bffe6e382ace7"
+      },
+      "quantity": 2,
+      "price": 35.1
+    }
+  ],
+  "totalAmount": 555.3,
+  "status": "cancelled",
+  "shippingAddress": {
+    "street": "7319f5241e28dcb17e91064f84127c2e:2a45dc3e65a06a43136ac05b07f86f106bca9c51a2405073244306d054285aec",
+    "city": "8e0803a58c10dd6debbcf04076cab6a6:9a4b8caf4dd6a129ab65013d806b3e5c",
+    "state": "470b1ddb3b0027fd57d4eeedb2083cb8:cd70ae9d1444715d93ee221cefcaea45",
+    "zipCode": "b607020475d94536f2244149568afbfe:d9d0c7d2ac7a69ca00e9b0269cd5c4d1",
+    "country": "294c61f48fdecd903521d3aa37cd8be9:5f8d14b27a0651cabb1eddfc605c10bf"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.707Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.707Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30f1"
+  },
+  "email": "tomas_weber69@yahoo.com",
+  "customerFirstName": "Tomas",
+  "customerLastName": "Weber",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c9bbab5bffe6e382ace7"
+      },
+      "quantity": 3,
+      "price": 35.1
+    }
+  ],
+  "totalAmount": 105.30000000000001,
+  "status": "cancelled",
+  "shippingAddress": {
+    "street": "4676069b874e850eb1ab6e247ac6aab3:d711256a2960d4e79c0440d60d33c4c7a50129d9d9cd1cdeda0fd9501a360c60",
+    "city": "12c6d40ca01156f0134adf9519bbdde3:06c241ce135d0e137ec7331cb855baa2",
+    "state": "c44fb9e579ed539e2da82c2e15abb447:6d33da7531459fad5e97609b9630abbb",
+    "zipCode": "0e1e95eeedb29f372c5edca2e801d87e:9e9e324d0e83e214626966ec26aa5ef4",
+    "country": "9ab906753a0b1ebf71782c8e4f27e69e:71351f819b57c40b0231f11a2a1cd654"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.711Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.711Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30f3"
+  },
+  "email": "griffin_abernathy@gmail.com",
+  "customerFirstName": "Griffin",
+  "customerLastName": "Abernathy",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c9bbab5bffe6e382ace7"
+      },
+      "quantity": 4,
+      "price": 35.1
+    }
+  ],
+  "totalAmount": 140.4,
+  "status": "cancelled",
+  "shippingAddress": {
+    "street": "f5b38f8f23aae9f1f1a60d321ece430c:b1e37d1d41caf7847314ab1968cdb239c68c2695a1730c43a6ba259e71115a72",
+    "city": "355ba1906eb5875092be019b2f40ce8e:e9af1ef4598c6761271ecb40123a929663daa72a8adf9711d745ae641571e880",
+    "state": "54b31fb0ed723a5ad267d78b61ef7205:2081ea47d4c7d31d54d4a7a82709346d",
+    "zipCode": "7fa6016f94b7195238d451e1805faf6b:50df79ab8959a60a3cef6d2e4b7d1eb5",
+    "country": "0d00b53f979ce8f9a3de2268b63c54a2:d5710a5271c3c6239d6c89f85b550a85"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.714Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.714Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30f5"
+  },
+  "email": "griffin_abernathy@gmail.com",
+  "customerFirstName": "Griffin",
+  "customerLastName": "Abernathy",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c72cab5bffe6e382ab89"
+      },
+      "quantity": 5,
+      "price": 81.6
+    }
+  ],
+  "totalAmount": 408,
+  "status": "cancelled",
+  "shippingAddress": {
+    "street": "f5b38f8f23aae9f1f1a60d321ece430c:b1e37d1d41caf7847314ab1968cdb239c68c2695a1730c43a6ba259e71115a72",
+    "city": "355ba1906eb5875092be019b2f40ce8e:e9af1ef4598c6761271ecb40123a929663daa72a8adf9711d745ae641571e880",
+    "state": "54b31fb0ed723a5ad267d78b61ef7205:2081ea47d4c7d31d54d4a7a82709346d",
+    "zipCode": "7fa6016f94b7195238d451e1805faf6b:50df79ab8959a60a3cef6d2e4b7d1eb5",
+    "country": "0d00b53f979ce8f9a3de2268b63c54a2:d5710a5271c3c6239d6c89f85b550a85"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.718Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.718Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30f7"
+  },
+  "email": "griffin_abernathy@gmail.com",
+  "customerFirstName": "Griffin",
+  "customerLastName": "Abernathy",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c72cab5bffe6e382ab89"
+      },
+      "quantity": 2,
+      "price": 81.6
+    },
+    {
+      "product": {
+        "$oid": "6755cdf956cfb3cff746bc81"
+      },
+      "quantity": 4,
+      "price": 136
+    },
+    {
+      "product": {
+        "$oid": "6755c67eab5bffe6e382ab1d"
+      },
+      "quantity": 2,
+      "price": 62.7
+    }
+  ],
+  "totalAmount": 832.6,
+  "status": "cancelled",
+  "shippingAddress": {
+    "street": "f5b38f8f23aae9f1f1a60d321ece430c:b1e37d1d41caf7847314ab1968cdb239c68c2695a1730c43a6ba259e71115a72",
+    "city": "355ba1906eb5875092be019b2f40ce8e:e9af1ef4598c6761271ecb40123a929663daa72a8adf9711d745ae641571e880",
+    "state": "54b31fb0ed723a5ad267d78b61ef7205:2081ea47d4c7d31d54d4a7a82709346d",
+    "zipCode": "7fa6016f94b7195238d451e1805faf6b:50df79ab8959a60a3cef6d2e4b7d1eb5",
+    "country": "0d00b53f979ce8f9a3de2268b63c54a2:d5710a5271c3c6239d6c89f85b550a85"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.722Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.722Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30f9"
+  },
+  "email": "griffin_abernathy@gmail.com",
+  "customerFirstName": "Griffin",
+  "customerLastName": "Abernathy",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755b7f9ab5bffe6e382a04f"
+      },
+      "quantity": 2,
+      "price": 34.4
+    },
+    {
+      "product": {
+        "$oid": "6755c72cab5bffe6e382ab89"
+      },
+      "quantity": 3,
+      "price": 81.6
+    },
+    {
+      "product": {
+        "$oid": "6755cdf956cfb3cff746bc81"
+      },
+      "quantity": 3,
+      "price": 136
+    },
+    {
+      "product": {
+        "$oid": "6755cd7956cfb3cff746bc09"
+      },
+      "quantity": 4,
+      "price": 218.7
+    },
+    {
+      "product": {
+        "$oid": "6755d82456cfb3cff746bdc9"
+      },
+      "quantity": 1,
+      "price": 185.6
+    }
+  ],
+  "totalAmount": 1781.9999999999998,
+  "status": "pending",
+  "shippingAddress": {
+    "street": "f5b38f8f23aae9f1f1a60d321ece430c:b1e37d1d41caf7847314ab1968cdb239c68c2695a1730c43a6ba259e71115a72",
+    "city": "355ba1906eb5875092be019b2f40ce8e:e9af1ef4598c6761271ecb40123a929663daa72a8adf9711d745ae641571e880",
+    "state": "54b31fb0ed723a5ad267d78b61ef7205:2081ea47d4c7d31d54d4a7a82709346d",
+    "zipCode": "7fa6016f94b7195238d451e1805faf6b:50df79ab8959a60a3cef6d2e4b7d1eb5",
+    "country": "0d00b53f979ce8f9a3de2268b63c54a2:d5710a5271c3c6239d6c89f85b550a85"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.727Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.727Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30fb"
+  },
+  "email": "griffin_abernathy@gmail.com",
+  "customerFirstName": "Griffin",
+  "customerLastName": "Abernathy",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755d74e56cfb3cff746bd51"
+      },
+      "quantity": 1,
+      "price": 64.4
+    }
+  ],
+  "totalAmount": 64.4,
+  "status": "cancelled",
+  "shippingAddress": {
+    "street": "f5b38f8f23aae9f1f1a60d321ece430c:b1e37d1d41caf7847314ab1968cdb239c68c2695a1730c43a6ba259e71115a72",
+    "city": "355ba1906eb5875092be019b2f40ce8e:e9af1ef4598c6761271ecb40123a929663daa72a8adf9711d745ae641571e880",
+    "state": "54b31fb0ed723a5ad267d78b61ef7205:2081ea47d4c7d31d54d4a7a82709346d",
+    "zipCode": "7fa6016f94b7195238d451e1805faf6b:50df79ab8959a60a3cef6d2e4b7d1eb5",
+    "country": "0d00b53f979ce8f9a3de2268b63c54a2:d5710a5271c3c6239d6c89f85b550a85"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.732Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.732Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30fd"
+  },
+  "email": "gilbert_lakin38@gmail.com",
+  "customerFirstName": "Gilbert",
+  "customerLastName": "Lakin",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755bf6aab5bffe6e382a332"
+      },
+      "quantity": 3,
+      "price": 163.2
+    },
+    {
+      "product": {
+        "$oid": "6755c0afab5bffe6e382a43a"
+      },
+      "quantity": 2,
+      "price": 72.5
+    },
+    {
+      "product": {
+        "$oid": "6755c9bbab5bffe6e382ace7"
+      },
+      "quantity": 2,
+      "price": 35.1
+    }
+  ],
+  "totalAmount": 704.8,
+  "status": "pending",
+  "shippingAddress": {
+    "street": "9be93c8bdc821bee396303f4ce2cabd6:e1963d4e6426edaf83416d0861bbc953",
+    "city": "e631737affbdabd1c62cdf504a0a4413:1fe111b750a2ef25461d7f9a1e885a3c",
+    "state": "07e50cd4f0ad3b0dab59cd6c6286e809:8f2577cdc85923667c04b794b81159d2",
+    "zipCode": "53197452d25f40a6e3e3bce010b0d8e6:65d2d9cc380879c300879d100398e39c",
+    "country": "5248a581095be84ad3c9a5812cb07f59:74cfac3d502b9c9ca137c57c0d11efb8"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.739Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.739Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb30ff"
+  },
+  "email": "gilbert_lakin38@gmail.com",
+  "customerFirstName": "Gilbert",
+  "customerLastName": "Lakin",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755bf6aab5bffe6e382a332"
+      },
+      "quantity": 4,
+      "price": 163.2
+    }
+  ],
+  "totalAmount": 652.8,
+  "status": "cancelled",
+  "shippingAddress": {
+    "street": "9be93c8bdc821bee396303f4ce2cabd6:e1963d4e6426edaf83416d0861bbc953",
+    "city": "e631737affbdabd1c62cdf504a0a4413:1fe111b750a2ef25461d7f9a1e885a3c",
+    "state": "07e50cd4f0ad3b0dab59cd6c6286e809:8f2577cdc85923667c04b794b81159d2",
+    "zipCode": "53197452d25f40a6e3e3bce010b0d8e6:65d2d9cc380879c300879d100398e39c",
+    "country": "5248a581095be84ad3c9a5812cb07f59:74cfac3d502b9c9ca137c57c0d11efb8"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.744Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.744Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb3101"
+  },
+  "email": "gilbert_lakin38@gmail.com",
+  "customerFirstName": "Gilbert",
+  "customerLastName": "Lakin",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c17bab5bffe6e382a49a"
+      },
+      "quantity": 1,
+      "price": 58.4
+    }
+  ],
+  "totalAmount": 58.4,
+  "status": "cancelled",
+  "shippingAddress": {
+    "street": "9be93c8bdc821bee396303f4ce2cabd6:e1963d4e6426edaf83416d0861bbc953",
+    "city": "e631737affbdabd1c62cdf504a0a4413:1fe111b750a2ef25461d7f9a1e885a3c",
+    "state": "07e50cd4f0ad3b0dab59cd6c6286e809:8f2577cdc85923667c04b794b81159d2",
+    "zipCode": "53197452d25f40a6e3e3bce010b0d8e6:65d2d9cc380879c300879d100398e39c",
+    "country": "5248a581095be84ad3c9a5812cb07f59:74cfac3d502b9c9ca137c57c0d11efb8"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.748Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.748Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb3103"
+  },
+  "email": "gilbert_lakin38@gmail.com",
+  "customerFirstName": "Gilbert",
+  "customerLastName": "Lakin",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c9bbab5bffe6e382ace7"
+      },
+      "quantity": 1,
+      "price": 35.1
+    },
+    {
+      "product": {
+        "$oid": "6755c67eab5bffe6e382ab1d"
+      },
+      "quantity": 3,
+      "price": 62.7
+    }
+  ],
+  "totalAmount": 223.20000000000002,
+  "status": "pending",
+  "shippingAddress": {
+    "street": "9be93c8bdc821bee396303f4ce2cabd6:e1963d4e6426edaf83416d0861bbc953",
+    "city": "e631737affbdabd1c62cdf504a0a4413:1fe111b750a2ef25461d7f9a1e885a3c",
+    "state": "07e50cd4f0ad3b0dab59cd6c6286e809:8f2577cdc85923667c04b794b81159d2",
+    "zipCode": "53197452d25f40a6e3e3bce010b0d8e6:65d2d9cc380879c300879d100398e39c",
+    "country": "5248a581095be84ad3c9a5812cb07f59:74cfac3d502b9c9ca137c57c0d11efb8"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.752Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.752Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb3105"
+  },
+  "email": "gilbert_lakin38@gmail.com",
+  "customerFirstName": "Gilbert",
+  "customerLastName": "Lakin",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755b8acab5bffe6e382a20e"
+      },
+      "quantity": 3,
+      "price": 46.75
+    },
+    {
+      "product": {
+        "$oid": "6755c7b2ab5bffe6e382abfa"
+      },
+      "quantity": 1,
+      "price": 93.8
+    },
+    {
+      "product": {
+        "$oid": "6755cd7956cfb3cff746bc09"
+      },
+      "quantity": 3,
+      "price": 218.7
+    }
+  ],
+  "totalAmount": 890.1499999999999,
+  "status": "pending",
+  "shippingAddress": {
+    "street": "9be93c8bdc821bee396303f4ce2cabd6:e1963d4e6426edaf83416d0861bbc953",
+    "city": "e631737affbdabd1c62cdf504a0a4413:1fe111b750a2ef25461d7f9a1e885a3c",
+    "state": "07e50cd4f0ad3b0dab59cd6c6286e809:8f2577cdc85923667c04b794b81159d2",
+    "zipCode": "53197452d25f40a6e3e3bce010b0d8e6:65d2d9cc380879c300879d100398e39c",
+    "country": "5248a581095be84ad3c9a5812cb07f59:74cfac3d502b9c9ca137c57c0d11efb8"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.756Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.756Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb3107"
+  },
+  "email": "mia.hintz31@yahoo.com",
+  "customerFirstName": "Mia",
+  "customerLastName": "Hintz",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755d74e56cfb3cff746bd51"
+      },
+      "quantity": 2,
+      "price": 64.4
+    },
+    {
+      "product": {
+        "$oid": "6755c67eab5bffe6e382ab1d"
+      },
+      "quantity": 5,
+      "price": 62.7
+    }
+  ],
+  "totalAmount": 442.3,
+  "status": "completed",
+  "shippingAddress": {
+    "street": "1310b36f3cd51349c4fa7d949bc95945:d553478a3ee8add2f6c79fec204b4857422a65e50ae8bd07e9f1a70e676d6491",
+    "city": "067122b782f2c0a4b907b614acbf242e:9b6e326be0f9730f7ebb1f67d5fd8c7e",
+    "state": "4964f2de324e7e2aacfc977d193b5134:a1bda380e1897eeba669d0ef029e81f3",
+    "zipCode": "6fa6b3b15801ffec8f65962681180cdc:2eca0289820482f4c435cc342f296539",
+    "country": "af4af9e09a440cd9ed0424da8b83d32f:79da59701c7a43f7f9872cbc3065510d"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.760Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.760Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb3109"
+  },
+  "email": "mia.hintz31@yahoo.com",
+  "customerFirstName": "Mia",
+  "customerLastName": "Hintz",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755cd7956cfb3cff746bc09"
+      },
+      "quantity": 3,
+      "price": 218.7
+    },
+    {
+      "product": {
+        "$oid": "6755cdf956cfb3cff746bc81"
+      },
+      "quantity": 1,
+      "price": 136
+    },
+    {
+      "product": {
+        "$oid": "6755c7b2ab5bffe6e382abfa"
+      },
+      "quantity": 2,
+      "price": 93.8
+    }
+  ],
+  "totalAmount": 979.6999999999999,
+  "status": "completed",
+  "shippingAddress": {
+    "street": "1310b36f3cd51349c4fa7d949bc95945:d553478a3ee8add2f6c79fec204b4857422a65e50ae8bd07e9f1a70e676d6491",
+    "city": "067122b782f2c0a4b907b614acbf242e:9b6e326be0f9730f7ebb1f67d5fd8c7e",
+    "state": "4964f2de324e7e2aacfc977d193b5134:a1bda380e1897eeba669d0ef029e81f3",
+    "zipCode": "6fa6b3b15801ffec8f65962681180cdc:2eca0289820482f4c435cc342f296539",
+    "country": "af4af9e09a440cd9ed0424da8b83d32f:79da59701c7a43f7f9872cbc3065510d"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.764Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.764Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb310b"
+  },
+  "email": "mia.hintz31@yahoo.com",
+  "customerFirstName": "Mia",
+  "customerLastName": "Hintz",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c9bbab5bffe6e382ace7"
+      },
+      "quantity": 3,
+      "price": 35.1
+    },
+    {
+      "product": {
+        "$oid": "6755c7b2ab5bffe6e382abfa"
+      },
+      "quantity": 3,
+      "price": 93.8
+    },
+    {
+      "product": {
+        "$oid": "6755c67eab5bffe6e382ab1d"
+      },
+      "quantity": 2,
+      "price": 62.7
+    }
+  ],
+  "totalAmount": 512.1,
+  "status": "pending",
+  "shippingAddress": {
+    "street": "1310b36f3cd51349c4fa7d949bc95945:d553478a3ee8add2f6c79fec204b4857422a65e50ae8bd07e9f1a70e676d6491",
+    "city": "067122b782f2c0a4b907b614acbf242e:9b6e326be0f9730f7ebb1f67d5fd8c7e",
+    "state": "4964f2de324e7e2aacfc977d193b5134:a1bda380e1897eeba669d0ef029e81f3",
+    "zipCode": "6fa6b3b15801ffec8f65962681180cdc:2eca0289820482f4c435cc342f296539",
+    "country": "af4af9e09a440cd9ed0424da8b83d32f:79da59701c7a43f7f9872cbc3065510d"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.769Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.769Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb310d"
+  },
+  "email": "waldo_wiegand2@yahoo.com",
+  "customerFirstName": "Waldo",
+  "customerLastName": "Wiegand",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755d8c956cfb3cff746be38"
+      },
+      "quantity": 4,
+      "price": 19.8
+    }
+  ],
+  "totalAmount": 79.2,
+  "status": "completed",
+  "shippingAddress": {
+    "street": "ac8eb00181eb4b104cfda15bc0fc248a:e6dd2721018affe915a5a2e2bb54cfb64985edd1638c1528c8eadcab049a4b5b",
+    "city": "561f50ecb5147081dfbcfb67fb3d2960:4678b149936da157b831e53d52b7b9b4ad396555e01f2404aa07777a3fd4c826",
+    "state": "8ba8741478c6aa4684269d96d99d7a93:5a653cb4dfba069730e0363642b637cc",
+    "zipCode": "c61344909dfd6383075ef5b60d8d7974:b4937e0f028ba078e1a128d92b728b8d",
+    "country": "0ef9cb6b6a1df2ec2eab2244c2d4452d:766078fa22e807e656c1941575440163"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.777Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.777Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb310f"
+  },
+  "email": "waldo_wiegand2@yahoo.com",
+  "customerFirstName": "Waldo",
+  "customerLastName": "Wiegand",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755b7f9ab5bffe6e382a04f"
+      },
+      "quantity": 3,
+      "price": 34.4
+    },
+    {
+      "product": {
+        "$oid": "6755b8acab5bffe6e382a20e"
+      },
+      "quantity": 5,
+      "price": 46.75
+    },
+    {
+      "product": {
+        "$oid": "6755c67eab5bffe6e382ab1d"
+      },
+      "quantity": 4,
+      "price": 62.7
+    },
+    {
+      "product": {
+        "$oid": "6755cdf956cfb3cff746bc81"
+      },
+      "quantity": 1,
+      "price": 136
+    },
+    {
+      "product": {
+        "$oid": "6755bf6aab5bffe6e382a332"
+      },
+      "quantity": 4,
+      "price": 163.2
+    }
+  ],
+  "totalAmount": 1376.55,
+  "status": "cancelled",
+  "shippingAddress": {
+    "street": "ac8eb00181eb4b104cfda15bc0fc248a:e6dd2721018affe915a5a2e2bb54cfb64985edd1638c1528c8eadcab049a4b5b",
+    "city": "561f50ecb5147081dfbcfb67fb3d2960:4678b149936da157b831e53d52b7b9b4ad396555e01f2404aa07777a3fd4c826",
+    "state": "8ba8741478c6aa4684269d96d99d7a93:5a653cb4dfba069730e0363642b637cc",
+    "zipCode": "c61344909dfd6383075ef5b60d8d7974:b4937e0f028ba078e1a128d92b728b8d",
+    "country": "0ef9cb6b6a1df2ec2eab2244c2d4452d:766078fa22e807e656c1941575440163"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.781Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.781Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb3111"
+  },
+  "email": "waldo_wiegand2@yahoo.com",
+  "customerFirstName": "Waldo",
+  "customerLastName": "Wiegand",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755bf6aab5bffe6e382a332"
+      },
+      "quantity": 2,
+      "price": 163.2
+    }
+  ],
+  "totalAmount": 326.4,
+  "status": "cancelled",
+  "shippingAddress": {
+    "street": "3f6d11a2c401466b51e9fc3483bebb0a:7f91678e3532ffbfd6ba7ac98938608a46e41161a66031dc3c927697275df532",
+    "city": "2f0593c6077f181fb3375d6505c26f5c:86b837b8a99707b4ce92ec6245172317",
+    "state": "4d9c610aa1c8c71f82b897ab92c636ba:1efe15fe0bc181a2ef3f6fdea35890f2",
+    "zipCode": "5c409621af7c4fa661c45d369722c514:5db1373d4327d799520e8e40cc1180e2",
+    "country": "98f4031306ba7d14b177bf76bb8f0155:914378d4189bdf3a92e91b97d16f1748"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.785Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.785Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb3113"
+  },
+  "email": "waldo_wiegand2@yahoo.com",
+  "customerFirstName": "Waldo",
+  "customerLastName": "Wiegand",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c67eab5bffe6e382ab1d"
+      },
+      "quantity": 3,
+      "price": 62.7
+    },
+    {
+      "product": {
+        "$oid": "6755c72cab5bffe6e382ab89"
+      },
+      "quantity": 1,
+      "price": 81.6
+    },
+    {
+      "product": {
+        "$oid": "6755cbbc56cfb3cff746bb11"
+      },
+      "quantity": 5,
+      "price": 116.5
+    }
+  ],
+  "totalAmount": 852.2,
+  "status": "cancelled",
+  "shippingAddress": {
+    "street": "ac8eb00181eb4b104cfda15bc0fc248a:e6dd2721018affe915a5a2e2bb54cfb64985edd1638c1528c8eadcab049a4b5b",
+    "city": "561f50ecb5147081dfbcfb67fb3d2960:4678b149936da157b831e53d52b7b9b4ad396555e01f2404aa07777a3fd4c826",
+    "state": "8ba8741478c6aa4684269d96d99d7a93:5a653cb4dfba069730e0363642b637cc",
+    "zipCode": "c61344909dfd6383075ef5b60d8d7974:b4937e0f028ba078e1a128d92b728b8d",
+    "country": "0ef9cb6b6a1df2ec2eab2244c2d4452d:766078fa22e807e656c1941575440163"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.790Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.790Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb3115"
+  },
+  "email": "waldo_wiegand2@yahoo.com",
+  "customerFirstName": "Waldo",
+  "customerLastName": "Wiegand",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755bf6aab5bffe6e382a332"
+      },
+      "quantity": 4,
+      "price": 163.2
+    },
+    {
+      "product": {
+        "$oid": "6755cdf956cfb3cff746bc81"
+      },
+      "quantity": 5,
+      "price": 136
+    },
+    {
+      "product": {
+        "$oid": "6755c7b2ab5bffe6e382abfa"
+      },
+      "quantity": 5,
+      "price": 93.8
+    },
+    {
+      "product": {
+        "$oid": "6755c17bab5bffe6e382a49a"
+      },
+      "quantity": 5,
+      "price": 58.4
+    }
+  ],
+  "totalAmount": 2093.8,
+  "status": "cancelled",
+  "shippingAddress": {
+    "street": "ac8eb00181eb4b104cfda15bc0fc248a:e6dd2721018affe915a5a2e2bb54cfb64985edd1638c1528c8eadcab049a4b5b",
+    "city": "561f50ecb5147081dfbcfb67fb3d2960:4678b149936da157b831e53d52b7b9b4ad396555e01f2404aa07777a3fd4c826",
+    "state": "8ba8741478c6aa4684269d96d99d7a93:5a653cb4dfba069730e0363642b637cc",
+    "zipCode": "c61344909dfd6383075ef5b60d8d7974:b4937e0f028ba078e1a128d92b728b8d",
+    "country": "0ef9cb6b6a1df2ec2eab2244c2d4452d:766078fa22e807e656c1941575440163"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.794Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.794Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb3117"
+  },
+  "email": "sanford.ziemann51@yahoo.com",
+  "customerFirstName": "Sanford",
+  "customerLastName": "Ziemann",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755b8acab5bffe6e382a20e"
+      },
+      "quantity": 4,
+      "price": 46.75
+    },
+    {
+      "product": {
+        "$oid": "6755c9bbab5bffe6e382ace7"
+      },
+      "quantity": 5,
+      "price": 35.1
+    },
+    {
+      "product": {
+        "$oid": "6755c72cab5bffe6e382ab89"
+      },
+      "quantity": 4,
+      "price": 81.6
+    },
+    {
+      "product": {
+        "$oid": "6755c67eab5bffe6e382ab1d"
+      },
+      "quantity": 1,
+      "price": 62.7
+    },
+    {
+      "product": {
+        "$oid": "6755c7b2ab5bffe6e382abfa"
+      },
+      "quantity": 1,
+      "price": 93.8
+    }
+  ],
+  "totalAmount": 845.4,
+  "status": "pending",
+  "shippingAddress": {
+    "street": "80bddf520cd7d5d3051fb31c059ef1fe:23f84b8d76e5bac58d00e01a31a3753ff0dbda3afad0b15189610b5bd029bbee",
+    "city": "710f8aad3ca21c921a66d19753707698:98345773d7c68c5549019ba3a06d7630",
+    "state": "a0a574f0a0beabc563e22a02c404a084:d4161841cb7acba49a91fee32196716c",
+    "zipCode": "c36dcbcc7d12ed560246bcce45a309dd:8c6cd7795b398b80a3965467dfc10c6e",
+    "country": "a707c457a3a49fa2d94631543388b375:75936eeb7b831c5f1c040c12b06edc78"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.798Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.798Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb3119"
+  },
+  "email": "marcellus_parker-lubowitz15@hotmail.com",
+  "customerFirstName": "Marcellus",
+  "customerLastName": "Parker-Lubowitz",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755cd7956cfb3cff746bc09"
+      },
+      "quantity": 1,
+      "price": 218.7
+    }
+  ],
+  "totalAmount": 218.7,
+  "status": "completed",
+  "shippingAddress": {
+    "street": "def79d025bec3fbf3333c351c7d5eba0:7acf406cbec40ce5951775509fce5df6f2e479f4fadc51d82c2607d5e40651df",
+    "city": "19a4b0066f46541493518c5ea5b4ed9e:316a4203f65a1191600691b3db6588e6940c495023ac4b2d3cabfab66ea367c0",
+    "state": "56f985578a78b68c6cbfbd1bc225be06:f36a5779e2b78fcf68bd9d86aa78e74f",
+    "zipCode": "e14547f8ce6c4be6dcd435908df31cb2:8b437ba37e7fe5adf3665d0843a7a756",
+    "country": "99ca873089926fb40ecde8f019a7afd3:6a735c70860cfa3f66dc111f6d8dd703"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.803Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.803Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb311b"
+  },
+  "email": "marcellus_parker-lubowitz15@hotmail.com",
+  "customerFirstName": "Marcellus",
+  "customerLastName": "Parker-Lubowitz",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755bf6aab5bffe6e382a332"
+      },
+      "quantity": 3,
+      "price": 163.2
+    },
+    {
+      "product": {
+        "$oid": "6755cbbc56cfb3cff746bb11"
+      },
+      "quantity": 2,
+      "price": 116.5
+    },
+    {
+      "product": {
+        "$oid": "6755cd7956cfb3cff746bc09"
+      },
+      "quantity": 3,
+      "price": 218.7
+    }
+  ],
+  "totalAmount": 1378.6999999999998,
+  "status": "cancelled",
+  "shippingAddress": {
+    "street": "def79d025bec3fbf3333c351c7d5eba0:7acf406cbec40ce5951775509fce5df6f2e479f4fadc51d82c2607d5e40651df",
+    "city": "19a4b0066f46541493518c5ea5b4ed9e:316a4203f65a1191600691b3db6588e6940c495023ac4b2d3cabfab66ea367c0",
+    "state": "56f985578a78b68c6cbfbd1bc225be06:f36a5779e2b78fcf68bd9d86aa78e74f",
+    "zipCode": "e14547f8ce6c4be6dcd435908df31cb2:8b437ba37e7fe5adf3665d0843a7a756",
+    "country": "99ca873089926fb40ecde8f019a7afd3:6a735c70860cfa3f66dc111f6d8dd703"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.808Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.808Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb311d"
+  },
+  "email": "marcellus_parker-lubowitz15@hotmail.com",
+  "customerFirstName": "Marcellus",
+  "customerLastName": "Parker-Lubowitz",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c67eab5bffe6e382ab1d"
+      },
+      "quantity": 4,
+      "price": 62.7
+    },
+    {
+      "product": {
+        "$oid": "6755cdf956cfb3cff746bc81"
+      },
+      "quantity": 3,
+      "price": 136
+    }
+  ],
+  "totalAmount": 658.8,
+  "status": "cancelled",
+  "shippingAddress": {
+    "street": "4110c914433fd469a180233d72152dfe:f5e4b609fb75396eefa64f382e72f63b23e1fb7f8b0999068a5ced980eb882c8",
+    "city": "e807d0c2edd011850d07338b715a45ab:82cb267c8cd290f4b64ebd641d18c1ff",
+    "state": "ca430ed732429b524ec2d98a3564a429:3c6da2c7b460217c140508fe7e96c934",
+    "zipCode": "95a96c76ff40a221a7afa9134cb6de53:e02f99e165b2231232b4875168b188a2",
+    "country": "1932ac6dd5d991eed2d40384c27e6abb:e27a3a86dc02831b86044bf33c290ee5"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.811Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.811Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb311f"
+  },
+  "email": "effie.adams@gmail.com",
+  "customerFirstName": "Effie",
+  "customerLastName": "Adams",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755bf6aab5bffe6e382a332"
+      },
+      "quantity": 2,
+      "price": 163.2
+    },
+    {
+      "product": {
+        "$oid": "6755cdf956cfb3cff746bc81"
+      },
+      "quantity": 1,
+      "price": 136
+    },
+    {
+      "product": {
+        "$oid": "6755d74e56cfb3cff746bd51"
+      },
+      "quantity": 4,
+      "price": 64.4
+    },
+    {
+      "product": {
+        "$oid": "6755b7f9ab5bffe6e382a04f"
+      },
+      "quantity": 4,
+      "price": 34.4
+    }
+  ],
+  "totalAmount": 857.6,
+  "status": "pending",
+  "shippingAddress": {
+    "street": "99cb835610ae4837551f417fe175a307:77b14dea687ac3f45358d1ba1f3ba3df1539027776105508966a0045f87a3b9f",
+    "city": "165ea3263b762f128b38abafcee23345:c82401c54b24b7d820fc0a1fc3e00bf4",
+    "state": "38bcb9a76194c76295a5c5f6800766c2:d760ee21b7e54767728dfe76edc2675e",
+    "zipCode": "86615f2792a531793f14e840768c179a:8e5501cd65ef0d0215612c5df15e68e2",
+    "country": "ce5e7f0b972717b0ac5258616742f5da:1e28fe563ffcfab3cf538936dfc49121"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.815Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.815Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb3121"
+  },
+  "email": "keeley.abbott@gmail.com",
+  "customerFirstName": "Keeley",
+  "customerLastName": "Abbott",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755bf6aab5bffe6e382a332"
+      },
+      "quantity": 1,
+      "price": 163.2
+    },
+    {
+      "product": {
+        "$oid": "6755cd7956cfb3cff746bc09"
+      },
+      "quantity": 3,
+      "price": 218.7
+    },
+    {
+      "product": {
+        "$oid": "6755c72cab5bffe6e382ab89"
+      },
+      "quantity": 1,
+      "price": 81.6
+    }
+  ],
+  "totalAmount": 900.9,
+  "status": "pending",
+  "shippingAddress": {
+    "street": "687613e4156f31b4b757e026ce3d465e:3880f347feeb3d6ae83ee496446c659141aa90ce77e61f9e0902af6ac0d434bc",
+    "city": "ed6d57fd7ef61535ffb41116d0d22a1c:3a3c8a5aea4b479e3e0e0a7c79bad9cb",
+    "state": "c6fe1e80b0e363ddcb9d2d7b66e751aa:c0a1c49ce2fa53ad4e93a25ee93bd30a",
+    "zipCode": "6d9c14b673ee706e408b7215c6bff65d:01f9a79336b89c58b9b4bbda3dfdf57b",
+    "country": "d17419fab423814074c1fd463b1527c0:aca7ee259668c73cafa6a43903c5456f"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.821Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.821Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb3123"
+  },
+  "email": "ellie_krajcik@gmail.com",
+  "customerFirstName": "Ellie",
+  "customerLastName": "Krajcik",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755c9bbab5bffe6e382ace7"
+      },
+      "quantity": 1,
+      "price": 35.1
+    },
+    {
+      "product": {
+        "$oid": "6755b8acab5bffe6e382a20e"
+      },
+      "quantity": 4,
+      "price": 46.75
+    }
+  ],
+  "totalAmount": 222.1,
+  "status": "cancelled",
+  "shippingAddress": {
+    "street": "160dc12ed8d36584217946088ef071f6:155720fa5003cc82ecf657a19fa3de1a0ca640c0a0f8486a84d41edf7e0cd8a3",
+    "city": "943bb4bd16b4eba4b59563cd954c9c3d:8e9b88976ff706583f228eeccf2b4ed1",
+    "state": "4411d53c3bff9371047182f08a798b4a:409112d07fa6f63819ad954bb5a0efe4",
+    "zipCode": "f5767fe737fc470d5389eeb32b8de393:4b84bdc9bed1a0c0b5f910aac6730bb4",
+    "country": "b92a1ab5fee6365df227cd900c4a94bd:f9a95fdd84838201e4b0e85e31261c14"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.824Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.824Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb3125"
+  },
+  "email": "ellie_krajcik@gmail.com",
+  "customerFirstName": "Ellie",
+  "customerLastName": "Krajcik",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755d74e56cfb3cff746bd51"
+      },
+      "quantity": 4,
+      "price": 64.4
+    }
+  ],
+  "totalAmount": 257.6,
+  "status": "pending",
+  "shippingAddress": {
+    "street": "160dc12ed8d36584217946088ef071f6:155720fa5003cc82ecf657a19fa3de1a0ca640c0a0f8486a84d41edf7e0cd8a3",
+    "city": "943bb4bd16b4eba4b59563cd954c9c3d:8e9b88976ff706583f228eeccf2b4ed1",
+    "state": "4411d53c3bff9371047182f08a798b4a:409112d07fa6f63819ad954bb5a0efe4",
+    "zipCode": "f5767fe737fc470d5389eeb32b8de393:4b84bdc9bed1a0c0b5f910aac6730bb4",
+    "country": "b92a1ab5fee6365df227cd900c4a94bd:f9a95fdd84838201e4b0e85e31261c14"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.827Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.827Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb3127"
+  },
+  "email": "jerrold.gusikowski81@hotmail.com",
+  "customerFirstName": "Jerrold",
+  "customerLastName": "Gusikowski",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755d8c956cfb3cff746be38"
+      },
+      "quantity": 4,
+      "price": 19.8
+    },
+    {
+      "product": {
+        "$oid": "6755b7f9ab5bffe6e382a04f"
+      },
+      "quantity": 3,
+      "price": 34.4
+    },
+    {
+      "product": {
+        "$oid": "6755c0afab5bffe6e382a43a"
+      },
+      "quantity": 2,
+      "price": 72.5
+    }
+  ],
+  "totalAmount": 327.4,
+  "status": "completed",
+  "shippingAddress": {
+    "street": "5f58bc0d8403a9249136f13abd7d754f:2acbaa8cdd69f1a9e0079aa2cc126f05",
+    "city": "c6683e82bda4a47a77ad2e9655e9e2e9:13a423179cb371836365e08d6299ab28",
+    "state": "10350e679158f54c458905f16bf71103:1248b2199955eb86ef05c3bf3762b017",
+    "zipCode": "af35a0ff2f23a08c51c3ad3417b8862c:e8260a117bafae6ef229593c038a460d",
+    "country": "9fd54bf5e786785d3e8361b7176c78ff:403a05e55aec544d1b4d96ef95bee019"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.831Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.831Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb3129"
+  },
+  "email": "jerrold.gusikowski81@hotmail.com",
+  "customerFirstName": "Jerrold",
+  "customerLastName": "Gusikowski",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755d8c956cfb3cff746be38"
+      },
+      "quantity": 1,
+      "price": 19.8
+    },
+    {
+      "product": {
+        "$oid": "6755d74e56cfb3cff746bd51"
+      },
+      "quantity": 4,
+      "price": 64.4
+    }
+  ],
+  "totalAmount": 277.40000000000003,
+  "status": "pending",
+  "shippingAddress": {
+    "street": "2ad8b5b67c1e4d99b5d4b7e5b1641e7e:2b2f1d5a5742bf0b0678eb620177ede43b8b9046883d0f44641e2a9cb652405b",
+    "city": "01681867421c36eea1fea7f74a0f87ac:ae4eb1e0e8aa7b6a300361fdff954223",
+    "state": "4f0df303d1aca57fa22088b931146094:d6a3d13a3e19dea24c054d5838f9535e",
+    "zipCode": "586eebec8407b609267086314cf5e49f:972caf8012e387531d0681505a6ac1a6",
+    "country": "123bea577e72f3d188504e9ad7cefbbf:58c4c551ab62b269b8ff2fed396532bd"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.836Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.836Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dc25194d413f3dcb312b"
+  },
+  "email": "jerrold.gusikowski81@hotmail.com",
+  "customerFirstName": "Jerrold",
+  "customerLastName": "Gusikowski",
+  "items": [
+    {
+      "product": {
+        "$oid": "6755cbbc56cfb3cff746bb11"
+      },
+      "quantity": 5,
+      "price": 116.5
+    },
+    {
+      "product": {
+        "$oid": "6755c7b2ab5bffe6e382abfa"
+      },
+      "quantity": 3,
+      "price": 93.8
+    },
+    {
+      "product": {
+        "$oid": "6755b8acab5bffe6e382a20e"
+      },
+      "quantity": 4,
+      "price": 46.75
+    }
+  ],
+  "totalAmount": 1050.9,
+  "status": "completed",
+  "shippingAddress": {
+    "street": "5f58bc0d8403a9249136f13abd7d754f:2acbaa8cdd69f1a9e0079aa2cc126f05",
+    "city": "c6683e82bda4a47a77ad2e9655e9e2e9:13a423179cb371836365e08d6299ab28",
+    "state": "10350e679158f54c458905f16bf71103:1248b2199955eb86ef05c3bf3762b017",
+    "zipCode": "af35a0ff2f23a08c51c3ad3417b8862c:e8260a117bafae6ef229593c038a460d",
+    "country": "9fd54bf5e786785d3e8361b7176c78ff:403a05e55aec544d1b4d96ef95bee019"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:49:25.840Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:49:25.840Z"
+  },
+  "__v": 0
+}]
