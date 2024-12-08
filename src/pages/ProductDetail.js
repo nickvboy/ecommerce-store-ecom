@@ -84,10 +84,15 @@ function ProductDetail() {
   // Add reordering function
   const handleReorderImages = async (newOrder) => {
     try {
+      const imageOrders = newOrder.map((image, index) => ({
+        url: image.url,
+        order: index
+      }));
+
       const response = await fetch(`${API_BASE_URL}/products/${productId}/images/reorder`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ imageOrders: newOrder })
+        body: JSON.stringify({ imageOrders })
       });
       
       if (!response.ok) throw new Error('Failed to reorder images');
@@ -236,8 +241,8 @@ function ProductDetail() {
                   {[1, 2, 3, 4, 5].map((star) => (
                     <StarIcon 
                       key={star}
-                      className={`h-5 w-5 ${star <= Math.floor(product.reviewStats.averageRating) ? 'fill-transparent' : 'text-bg-300'}`}
-                      style={star <= Math.floor(product.reviewStats.averageRating) ? {
+                      className={`h-5 w-5 ${star <= Math.floor(product.averageRating) ? 'fill-transparent' : 'text-bg-300'}`}
+                      style={star <= Math.floor(product.averageRating) ? {
                         fill: 'url(#star-gradient)'
                       } : {}}
                     />
@@ -252,8 +257,8 @@ function ProductDetail() {
                     </defs>
                   </svg>
                 </div>
-                <span className="text-text-200">{product.reviewStats.averageRating} out of 5</span>
-                <span className="text-text-200">({product.reviewStats.totalReviews} reviews)</span>
+                <span className="text-text-200">{product.averageRating.toFixed(1)} out of 5</span>
+                <span className="text-text-200">({product.totalReviews} reviews)</span>
               </div>
 
               {/* Price */}

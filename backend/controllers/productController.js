@@ -8,90 +8,31 @@ exports.getProducts = async (req, res) => {
       page = 1, 
       limit = 10, 
       sort = '-createdAt',
-      categoryId,
-      minPrice,
-      maxPrice,
-      search,
-      attributes
+      search
     } = req.query;
 
     const query = {};
 
-    // Handle category filtering including subcategories
-    if (categoryId) {
-      const category = await Category.findById(categoryId);
-      if (category) {
-        const children = await category.getAllChildren();
-        const categoryIds = [categoryId, ...children.map(c => c._id)];
-        query.category = { $in: categoryIds };
-      }
-    }
-
-    // Price range filter
-    if (minPrice || maxPrice) {
-      query.price = {};
-      if (minPrice) query.price.$gte = Number(minPrice);
-      if (maxPrice) query.price.$lte = Number(maxPrice);
-    }
-
-    // Text search
+    // Text search if provided
     if (search) {
       query.$text = { $search: search };
     }
 
-    // Attribute filters
-    if (attributes) {
-      const attributeFilters = JSON.parse(attributes);
-      Object.entries(attributeFilters).forEach(([name, value]) => {
-        if (Array.isArray(value)) {
-          // For checkbox/radio attributes with multiple values
-          query['attributes'] = {
-            $elemMatch: {
-              name,
-              value: { $in: value }
-            }
-          };
-        } else if (typeof value === 'object' && (value.min !== undefined || value.max !== undefined)) {
-          // For range attributes
-          const rangeFilter = {
-            'attributes': {
-              $elemMatch: {
-                name,
-                value: {}
-              }
-            }
-          };
-          if (value.min !== undefined) rangeFilter.attributes.$elemMatch.value.$gte = value.min;
-          if (value.max !== undefined) rangeFilter.attributes.$elemMatch.value.$lte = value.max;
-          Object.assign(query, rangeFilter);
-        } else {
-          // For single value attributes
-          query['attributes'] = {
-            $elemMatch: {
-              name,
-              value
-            }
-          };
-        }
-      });
-    }
-
+    // Execute query with pagination
     const products = await Product.find(query)
-      .populate('category', 'name alias')
+      .populate('category', 'name')
       .sort(sort)
-      .limit(limit * 1)
-      .skip((page - 1) * limit);
+      .limit(parseInt(limit))
+      .skip((parseInt(page) - 1) * parseInt(limit));
 
-    const count = await Product.countDocuments(query);
-
-    // Get available attribute values for filtering
-    const attributeStats = await getAttributeStats(query);
+    // Get total count for pagination
+    const total = await Product.countDocuments(query);
 
     res.json({
       products,
-      totalPages: Math.ceil(count / limit),
-      currentPage: page,
-      attributeStats
+      totalPages: Math.ceil(total / limit),
+      currentPage: parseInt(page),
+      totalProducts: total
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -137,6 +78,9 @@ exports.getProductById = async (req, res) => {
     // Get category path
     const category = await Category.findById(product.category);
     const categoryPath = await category.getPath();
+
+    // Sort images by order
+    product.images.sort((a, b) => a.order - b.order);
 
     res.json({
       ...product.toObject(),
@@ -195,6 +139,15 @@ exports.updateProduct = async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (!product) {
       return res.status(404).json({ message: 'Product not found' });
+    }
+
+    // If images are included in the update, ensure they maintain their order
+    if (req.body.images) {
+      const orderedImages = req.body.images.map((img, idx) => ({
+        url: img.url,
+        order: idx
+      }));
+      req.body.images = orderedImages;
     }
 
     Object.assign(product, req.body);
@@ -394,7 +347,7 @@ exports.addProductImages = async (req, res) => {
 exports.reorderProductImages = async (req, res) => {
   try {
     const { productId } = req.params;
-    const { imageOrders } = req.body; // Array of { url, order }
+    const { imageOrders } = req.body;
     
     const product = await Product.findById(productId);
     if (!product) {
@@ -413,10 +366,13 @@ exports.reorderProductImages = async (req, res) => {
       return res.status(400).json({ message: 'Invalid image URLs' });
     }
 
-    // Reorder images
-    product.images = product.reorderImages(imageOrders);
-    await product.save();
+    // Update image orders
+    product.images = imageOrders.map((img, idx) => ({
+      url: img.url,
+      order: idx
+    }));
 
+    await product.save();
     res.json(product.images);
   } catch (error) {
     console.error('Error reordering images:', error);
