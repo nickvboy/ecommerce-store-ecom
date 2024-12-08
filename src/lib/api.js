@@ -12,7 +12,7 @@ console.log('Remote URL:', process.env.REACT_APP_API_URL_REMOTE); // Debug log
 
 // Create axios instance with base URL
 const api = axios.create({
-  baseURL: API_URL || 'http://localhost:5001/api', // Fallback URL if env vars aren't loaded
+  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5001/api',
   headers: {
     'Content-Type': 'application/json'
   }

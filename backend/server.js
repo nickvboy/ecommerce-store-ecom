@@ -53,6 +53,7 @@ app.use('/api/products', require('./routes/api/products'));
 app.use('/api/orders', require('./routes/api/orders'));
 app.use('/api/categories', require('./routes/api/categories'));
 app.use('/api/upload', require('./routes/api/upload'));
+app.use('/api/database', require('./routes/api/database'));
 
 app.get('/api/health', (req, res) => {
   res.status(200).json({ status: 'ok' });

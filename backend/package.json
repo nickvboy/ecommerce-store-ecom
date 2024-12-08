@@ -14,11 +14,14 @@
     "seed:reviews": "node utils/seedReviews.js",
     "seed:images": "node utils/seedImages.js",
     "seed:orders": "node utils/seedOrders.js",
-    "reset": "npm run clear && npm run seed"
+    "reset": "npm run clear && npm run seed",
+    "import": "node utils/importDatabase.js",
+    "test:db": "node utils/testDatabase.js"
   },
   "dependencies": {
     "@faker-js/faker": "^9.2.0",
     "@headlessui/react": "^2.2.0",
+    "axios": "^1.6.5",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",

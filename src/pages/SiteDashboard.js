@@ -381,6 +381,85 @@ const SiteDashboard = () => {
     }
   };
 
+  const handleExportDatabase = async () => {
+    try {
+      const response = await api.get('/database/export');
+      
+      if (response.data) {
+        // Create a Blob from the JSON data
+        const jsonString = JSON.stringify(response.data, null, 2);
+        const blob = new Blob([jsonString], { type: 'application/json' });
+        
+        // Create download link
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+        link.href = url;
+        link.setAttribute('download', `database-export-${timestamp}.json`);
+        
+        // Trigger download
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        window.URL.revokeObjectURL(url);
+        
+        showNotification('Database exported successfully');
+      }
+    } catch (error) {
+      console.error('Export error:', error);
+      showNotification('Failed to export database', 'error');
+    }
+  };
+
+  const handleImportDatabase = async (acceptedFiles) => {
+    const file = acceptedFiles[0];
+    if (!file) return;
+
+    // Add confirmation dialog
+    if (!window.confirm('Warning: Importing will clear all existing data. Are you sure you want to continue?')) {
+        return;
+    }
+
+    try {
+        const reader = new FileReader();
+        reader.onload = async (e) => {
+            try {
+                const data = JSON.parse(e.target.result);
+                
+                const response = await api.post('/database/import', {
+                    data: data.data
+                });
+                
+                if (response.data.success) {
+                    showNotification('Database imported successfully');
+                    fetchProducts();
+                } else {
+                    throw new Error(response.data.message || 'Import failed');
+                }
+            } catch (error) {
+                console.error('Import error:', error);
+                showNotification(`Failed to import database: ${error.message}`, 'error');
+            }
+        };
+        reader.readAsText(file);
+    } catch (error) {
+        console.error('File reading error:', error);
+        showNotification('Failed to read import file', 'error');
+    }
+  };
+
+  const {
+    getRootProps: getImportProps,
+    getInputProps: getImportInputProps,
+    isDragActive: isImportDragActive
+  } = useDropzone({
+    onDrop: handleImportDatabase,
+    accept: {
+      'application/json': ['.json']
+    },
+    multiple: false
+  });
+
   return (
     <div className="min-h-screen bg-bg-100 p-6">
       <Notification 
@@ -415,6 +494,59 @@ const SiteDashboard = () => {
               Drag and drop a CSV file here, or click to select a file
             </p>
           )}
+        </div>
+
+        <div className="flex gap-4 mb-8">
+          <div
+            {...getImportProps()}
+            className={`
+              flex-1 border-2 border-dashed rounded-lg p-4 text-center cursor-pointer
+              ${isImportDragActive ? 'border-primary-100 bg-primary-100/10' : 'border-text-200'}
+              hover:border-primary-100
+            `}
+          >
+            <input {...getImportInputProps()} />
+            <div className="flex flex-col items-center justify-center">
+              <svg
+                className="w-8 h-8 mb-2 text-text-200"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                />
+              </svg>
+              <p className="text-text-100">
+                {isImportDragActive
+                  ? "Drop the JSON file here..."
+                  : "Import Database (Drag JSON or click)"}
+              </p>
+            </div>
+          </div>
+
+          <button
+            onClick={handleExportDatabase}
+            className="flex-1 flex items-center justify-center space-x-2 p-4 rounded-lg bg-primary-100 text-text-100 hover:bg-primary-200 transition-colors"
+          >
+            <svg
+              className="w-8 h-8"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+              />
+            </svg>
+            <span>Export Database</span>
+          </button>
         </div>
 
         {/* Product Form */}
