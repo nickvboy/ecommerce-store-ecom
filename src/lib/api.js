@@ -1,15 +1,30 @@
 import axios from 'axios';
-import { API_BASE_URL } from '../config/api';
 
+// Get the appropriate API URL based on environment
+const API_URL = process.env.NODE_ENV === 'production' 
+  ? process.env.REACT_APP_API_URL_REMOTE 
+  : process.env.REACT_APP_API_URL_LOCAL;
+
+console.log('Current API URL:', API_URL); // Debug log
+console.log('Environment:', process.env.NODE_ENV); // Debug log
+console.log('Local URL:', process.env.REACT_APP_API_URL_LOCAL); // Debug log
+console.log('Remote URL:', process.env.REACT_APP_API_URL_REMOTE); // Debug log
+
+// Create axios instance with base URL
 const api = axios.create({
-  baseURL: API_BASE_URL,
-  withCredentials: true,
+  baseURL: API_URL || 'http://localhost:5001/api', // Fallback URL if env vars aren't loaded
   headers: {
-    'Content-Type': 'application/json',
+    'Content-Type': 'application/json'
   }
 });
 
-// Add a request interceptor to add auth token
+// Log each request for debugging
+api.interceptors.request.use(config => {
+  console.log('Making request to:', config.baseURL + config.url);
+  return config;
+});
+
+// Add request interceptor for auth token
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token) {
