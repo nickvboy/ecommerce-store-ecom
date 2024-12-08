@@ -1,5 +1,6 @@
 const Product = require('../models/Product');
 const Category = require('../models/Category');
+const mongoose = require('mongoose');
 
 // Get all products with filtering
 exports.getProducts = async (req, res) => {
@@ -414,6 +415,16 @@ exports.clearProductImages = async (req, res) => {
       message: error.message,
       error: 'Failed to clear product images'
     });
+  }
+};
+
+// Delete all products
+exports.deleteAllProducts = async (req, res) => {
+  try {
+    await mongoose.model('Product').deleteMany({});
+    res.json({ message: 'All products deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };
 

@@ -381,6 +381,19 @@ const SiteDashboard = () => {
     }
   };
 
+  const handleDeleteAllProducts = async () => {
+    if (window.confirm('Are you sure you want to delete ALL products? This action cannot be undone.')) {
+      try {
+        await api.delete('/products/delete-all');
+        showNotification('All products deleted successfully');
+        fetchProducts();
+      } catch (error) {
+        console.error('Error deleting all products:', error);
+        showNotification('Failed to delete all products', 'error');
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen bg-bg-100 p-6">
       <Notification 

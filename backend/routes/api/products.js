@@ -9,7 +9,8 @@ const {
   filterProducts,
   addProductImages,
   reorderProductImages,
-  clearProductImages
+  clearProductImages,
+  deleteAllProducts
 } = require('../../controllers/productController');
 const reviewController = require('../../controllers/reviewController');
 
@@ -19,6 +20,9 @@ router.route('/')
 
 router.route('/filter')
   .post(filterProducts);
+
+// Delete all products route
+router.delete('/delete-all', deleteAllProducts);
 
 router.route('/:id')
   .get(getProductById)

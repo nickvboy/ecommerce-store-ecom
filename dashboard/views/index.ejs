@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Dashboard</title>
+    <style>
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 8px; border: 1px solid #ddd; }
+        .form-group { margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>Product Dashboard</h1>
+
+    <!-- Add Product Form -->
+    <div>
+        <h2>Add New Product</h2>
+        <form action="/products" method="POST">
+            <div class="form-group">
+                <label>Name:</label>
+                <input type="text" name="name" required>
+            </div>
+            <div class="form-group">
+                <label>Description:</label>
+                <textarea name="description" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Price:</label>
+                <input type="number" name="price" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label>Stock:</label>
+                <input type="number" name="stock" required>
+            </div>
+            <button type="submit">Add Product</button>
+        </form>
+    </div>
+
+    <!-- Products List -->
+    <h2>Products</h2>
+    <% if (locals.error) { %>
+        <div style="color: red;"><%= error %></div>
+    <% } %>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% products.forEach(product => { %>
+                <tr>
+                    <td><%= product.name %></td>
+                    <td><%= product.description %></td>
+                    <td>$<%= product.price %></td>
+                    <td><%= product.stock %></td>
+                    <td>
+                        <form action="/products/<%= product._id %>/delete" method="POST" style="display: inline;">
+                            <button type="submit">Delete</button>
+                        </form>
+                        <button onclick="showEditForm('<%= product._id %>')">Edit</button>
+                    </td>
+                </tr>
+                <!-- Edit Form (hidden by default) -->
+                <tr id="edit-<%= product._id %>" style="display: none;">
+                    <td colspan="5">
+                        <form action="/products/<%= product._id %>/update" method="POST">
+                            <div class="form-group">
+                                <label>Name:</label>
+                                <input type="text" name="name" value="<%= product.name %>" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Description:</label>
+                                <textarea name="description" required><%= product.description %></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Price:</label>
+                                <input type="number" name="price" step="0.01" value="<%= product.price %>" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Stock:</label>
+                                <input type="number" name="stock" value="<%= product.stock %>" required>
+                            </div>
+                            <button type="submit">Update</button>
+                            <button type="button" onclick="hideEditForm('<%= product._id %>')">Cancel</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+
+    <script>
+        function showEditForm(productId) {
+            document.getElementById(`edit-${productId}`).style.display = 'table-row';
+        }
+
+        function hideEditForm(productId) {
+            document.getElementById(`edit-${productId}`).style.display = 'none';
+        }
+    </script>
+</body>
+</html> 
