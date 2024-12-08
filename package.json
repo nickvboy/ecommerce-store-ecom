@@ -35,7 +35,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "concurrently \"npm start\" \"cd backend && npm run dev\"",
+    "dev": "concurrently \"cd backend && npm run dev\" \"npm start\"",
+    "dash": "cd dashboard && npm run dev",
     "playit": "echo \"1. Download playit.gg from https://playit.gg/download\" && echo \"2. Run playit.exe\" && echo \"3. Create tunnels for ports 3000 (frontend) and 5000 (backend)\" && npm run dev"
   },
   "eslintConfig": {
