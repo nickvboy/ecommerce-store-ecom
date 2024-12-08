@@ -39,7 +39,11 @@ document.querySelector('#app').innerHTML = `
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="form-group">
             <label>Price:</label>
-            <input type="number" name="price" step="0.01" required class="mt-1">
+            <input type="number" name="price" step="0.01" required class="mt-1" id="priceInput">
+          </div>
+          <div class="form-group">
+            <label>Original Price (20% markup):</label>
+            <input type="number" name="originalPrice" step="0.01" class="mt-1" id="originalPriceInput">
           </div>
           <div class="form-group">
             <label>Stock:</label>

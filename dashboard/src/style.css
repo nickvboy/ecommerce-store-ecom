@@ -86,4 +86,8 @@
   .error {
     @apply text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/50 p-4 rounded-md mb-4;
   }
+
+  .form-group input[name="originalPrice"] {
+    @apply bg-gray-50 dark:bg-gray-600;
+  }
 } 

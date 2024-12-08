@@ -32,11 +32,31 @@ export async function setupProducts() {
         }
     });
 
+    // Add price calculation handler
+    const priceInput = document.getElementById('priceInput');
+    const originalPriceInput = document.getElementById('originalPriceInput');
+
+    priceInput.addEventListener('input', (e) => {
+        const price = parseFloat(e.target.value) || 0;
+        const markupPrice = price * 1.2; // 20% markup
+        originalPriceInput.value = markupPrice.toFixed(2);
+    });
+
+    // Allow manual override of original price
+    originalPriceInput.addEventListener('focus', function() {
+        // Remove the readonly attribute when focused
+        this.readOnly = false;
+    });
+
     // Handle form submission
     addProductForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const formData = new FormData(addProductForm);
         const product = Object.fromEntries(formData.entries());
+        
+        // Convert price and originalPrice to numbers
+        product.price = parseFloat(product.price);
+        product.originalPrice = parseFloat(product.originalPrice);
         
         try {
             // First create the product
