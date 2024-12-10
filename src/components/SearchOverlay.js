@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { XMarkIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { API_BASE_URL } from '../lib/utils';
 
 function SearchOverlay({ isOpen, onClose }) {
   const [searchQuery, setSearchQuery] = useState('');
@@ -15,7 +16,16 @@ function SearchOverlay({ isOpen, onClose }) {
       try {
         // Only fetch if we haven't cached the products yet
         if (products === null) {
-          const response = await fetch('http://localhost:5000/api/products');
+          const response = await fetch(`${API_BASE_URL}/products/filter`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              page: 1,
+              limit: 100 // Fetch more products for better search results
+            }),
+          });
           const data = await response.json();
           setProducts(data.products || []); // Store in component state as cache
         }
@@ -60,10 +70,18 @@ function SearchOverlay({ isOpen, onClose }) {
     const searchTerms = searchQuery.toLowerCase().split(' ');
     const filtered = products.filter(product => {
       const productName = product.name.toLowerCase();
-      return searchTerms.every(term => productName.includes(term));
+      const productDescription = product.description?.toLowerCase() || '';
+      const productCategory = product.category?.name?.toLowerCase() || '';
+      
+      // Search across name, description, and category
+      return searchTerms.every(term => 
+        productName.includes(term) || 
+        productDescription.includes(term) || 
+        productCategory.includes(term)
+      );
     });
 
-    setFilteredProducts(filtered);
+    setFilteredProducts(filtered.slice(0, 10)); // Limit displayed results
   }, [searchQuery, products]);
 
   if (!isOpen) return null;

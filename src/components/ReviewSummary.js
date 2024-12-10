@@ -37,7 +37,6 @@ function ReviewSummary({ productId }) {
       const data = await response.json();
       setReviews(data);
       
-      // Calculate stats only if there are reviews
       if (data.length > 0) {
         const avgRating = data.reduce((acc, review) => acc + review.rating, 0) / data.length;
         const distribution = Array(5).fill(0);
@@ -119,9 +118,9 @@ function ReviewSummary({ productId }) {
                 {[1, 2, 3, 4, 5].map((star) => (
                   <span key={star}>
                     {star <= Math.floor(stats.averageRating) ? (
-                      <StarIconSolid className="h-7 w-7 md:h-7 md:w-7 text-primary-100" />
+                      <StarIconSolid className="h-7 w-7 md:h-7 md:w-7 text-primary-200" />
                     ) : (
-                      <StarIcon className="h-7 w-7 md:h-7 md:w-7 text-primary-100" />
+                      <StarIcon className="h-7 w-7 md:h-7 md:w-7 text-primary-200" />
                     )}
                   </span>
                 ))}

@@ -59,7 +59,7 @@ function ReviewCard({ review }) {
               {[1, 2, 3, 4, 5].map((star) => (
                 <StarIcon 
                   key={star}
-                  className={`h-4 w-4 ${star <= review.rating ? 'text-primary-100' : 'text-bg-300'}`}
+                  className={`h-4 w-4 ${star <= review.rating ? 'text-primary-200' : 'text-bg-300'}`}
                 />
               ))}
             </div>

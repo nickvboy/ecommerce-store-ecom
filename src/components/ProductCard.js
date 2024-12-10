@@ -69,15 +69,15 @@ function ProductCard({ product }) {
           {[1, 2, 3, 4, 5].map((star) => (
             <StarIcon 
               key={star}
-              className={`h-4 w-4 ${
-                star <= Math.floor(product.rating) 
-                  ? 'text-primary-100' 
+              className={`h-5 w-5 ${
+                star <= Math.floor(product.averageRating) 
+                  ? 'text-primary-200' 
                   : 'text-bg-300'
               }`}
             />
           ))}
           <span className="text-sm text-text-200 ml-1">
-            ({product.reviews?.length || 0})
+            ({product.totalReviews} reviews)
           </span>
         </div>
 
