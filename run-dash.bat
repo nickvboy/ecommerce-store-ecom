@@ -1,0 +1,2 @@
+npm run dash
+pause 
