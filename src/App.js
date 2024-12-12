@@ -13,6 +13,7 @@ import SignUp from './pages/SignUp';
 import Login from './pages/Login';
 import Checkout from './pages/Checkout';
 import OrderSuccess from './pages/OrderSuccess';
+import Orders from './pages/Orders';
 import AboutUs from './pages/about/AboutUs';
 import Tagline from './pages/about/Tagline';
 import Story from './pages/about/Story';
@@ -51,6 +52,7 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/checkout" element={<Checkout />} />
                     <Route path="/order-success" element={<OrderSuccess />} />
+                    <Route path="/orders" element={<Orders />} />
                     <Route path="/admin-dashboard" element={<SiteDashboard />} />
                   </Routes>
                 </div>
